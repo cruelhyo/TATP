@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController
 {
 	// 두번째 커밋 테스트 
+	// 세번째 커밋 테스트 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	/**

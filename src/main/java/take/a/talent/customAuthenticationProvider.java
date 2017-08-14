@@ -1,6 +1,5 @@
 package take.a.talent;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
@@ -12,36 +11,38 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+public class customAuthenticationProvider implements AuthenticationProvider
+{
 
-public class customAuthenticationProvider implements AuthenticationProvider {
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException 
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException
 	{
-		String user_id = (String)authentication.getPrincipal();		
-		String user_pw = (String)authentication.getCredentials();
-		
-		
+		String user_id = (String) authentication.getPrincipal();
+		String user_pw = (String) authentication.getCredentials();
+
 		logger.info("Welcome authenticate! {}", user_id + "/" + user_pw);
-		
+
 		// check whether user's credentials are valid.
-				// if false, throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
-				
-				
-		//List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-        //roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        
-        //UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(user_id, user_pw, roles);
-        //result.setDetails(new CustomUserDetails(user_id, user_pw));
-		//return result;
-		
+		// if false, throw new
+		// BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials",
+		// "Bad credentials"));
+
+		// List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+		// roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		// UsernamePasswordAuthenticationToken result = new
+		// UsernamePasswordAuthenticationToken(user_id, user_pw, roles);
+		// result.setDetails(new CustomUserDetails(user_id, user_pw));
+		// return result;
+
 		return null;
 	}
 
 	@Override
-	public boolean supports(Class<?> authentication) {
+	public boolean supports(Class<?> authentication)
+	{
 		// TODO Auto-generated method stub
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}

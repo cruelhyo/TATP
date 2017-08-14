@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController
 {
-	// 두번째 커밋 테스트 
-	// 세번째 커밋 테스트 
+	// 두번째 커밋 테스트
+	// 세번째 커밋 테스트
 	// 관리자 계정 확인 커밋 테스트
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -39,7 +39,7 @@ public class HomeController
 
 		return "home";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login()
 	{

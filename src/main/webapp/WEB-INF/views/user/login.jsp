@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form>
+		아이디 : <input type="text" name="userId">
+		<br>
+		<br>
+		비밀번호 : <input type="text" name="userPw">
+		<br>
+		<input type="submit" value="로그인">
+	</form>
 
 </body>
 </html>

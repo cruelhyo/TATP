@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -20,6 +21,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
 		auth.inMemoryAuthentication().withUser("admin").password("admin123").roles("ADMIN");
+	}
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception 
+	{
+	    web.ignoring().antMatchers("/resources/**");
 	}
 	
 	//리소스별 권한 설정과 핸들링 설정

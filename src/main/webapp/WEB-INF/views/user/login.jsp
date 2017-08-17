@@ -11,11 +11,10 @@
 	<c:if test="${param.error != null }">
 		<h2>Username/Password not corrrect</h2>
 	</c:if>
-<<<<<<< HEAD
 	<c:if test="${param.logout != null}">
 		<p>You have been logged out successfully.</p>
 	</c:if>
-	<c:url var="loginUrl" value="/login" />
+	<c:url var="loginUrl" value="/userlogin" />
 	<form action="${loginUrl}" method="post">
 		<p style="margin: 0; padding: 0;">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

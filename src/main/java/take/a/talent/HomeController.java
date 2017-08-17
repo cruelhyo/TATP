@@ -1,7 +1,5 @@
 package take.a.talent;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
-//컨트롤러 부여 취소
-/*@Controller*/
+@Controller
 public class HomeController
 {
 	// 두번째 커밋 테스트
@@ -38,13 +35,7 @@ public class HomeController
 		return "layout/teammember";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login()
-	{
-		return "user/login";
-	}
-	
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainform", method = RequestMethod.GET)
 	public String formtest()
 	{
 		return "layout/form";

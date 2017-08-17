@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController 
 {
-	@RequestMapping(value = {"/", "home"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/userlogin"}, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());

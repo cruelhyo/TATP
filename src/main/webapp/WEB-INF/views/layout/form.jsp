@@ -63,10 +63,28 @@ p.footer-text1 {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Join</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
+				<c:set var="requestUrl" value="${pageContext.request.servletPath}"/>
+				<c:choose>
+					<c:when test="${requestUrl eq '/WEB-INF/views/layout/form.jsp'}">
+						<li>
+							<a href="#">
+								<span class="glyphicon glyphicon-user"></span>
+							Join</a>
+						</li>
+						<li>
+							<a href="<c:url value="/userlogin" />">
+								<span class="glyphicon glyphicon-log-in"></span>
+							Login</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li>
+							<a href="<c:url value="/logout" />">
+								<span class="glyphicon glyphicon-log-in"></span>
+							Logout</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 

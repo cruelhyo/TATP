@@ -11,21 +11,30 @@
 	<c:if test="${param.error != null }">
 		<h2>Username/Password not corrrect</h2>
 	</c:if>
-	<c:url var="loginUrl" value="/login" />
-	<form action="${loginUrl }" method="post">
+	<c:if test="${param.logout != null}">
+		<p>You have been logged out successfully.</p>
+	</c:if>
+	<c:url var="loginUrl" value="/userlogin" />
+	<form action="${loginUrl}" method="post">
 		<p style="margin: 0; padding: 0;">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</p>
 		<table>
 			<tr>
-				<td style="width: 200px;"><spring:message code="user.email" /></td>
-				<td style="width: 390px"><input type="text" name="id"
-					style="width: 99%;" /></td>
+				<td style="width: 200px;">
+					<!-- <spring:message code="user.email" /> -->
+				</td>
+				<td style="width: 390px">
+					<input type="text" name="member_id"	style="width: 99%;" />
+				</td>
 			</tr>
 			<tr>
-				<td><spring:message code="user.password" /></td>
-				<td><input type="password" name="pw" style="width: 99%;" /></td>
+				<td>
+					<!-- <spring:message code="user.password" /> -->
+				</td>
+				<td>
+					<input type="password" name="member_pw" style="width: 99%;" />
+				</td>
 			</tr>
 		</table>
 		<input type="submit" value="로그인">

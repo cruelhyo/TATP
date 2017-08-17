@@ -1,7 +1,5 @@
 package take.a.talent;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -37,13 +35,7 @@ public class HomeController
 		return "layout/teammember";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login()
-	{
-		return "user/login";
-	}
-	
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainform", method = RequestMethod.GET)
 	public String formtest()
 	{
 		return "layout/form";

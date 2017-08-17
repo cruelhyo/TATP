@@ -7,8 +7,12 @@
 				http://www.springframework.org/schema/security
 				http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 				
-				
-	<security:http pattern="/resources/**" security="none"/>
+<!-- 	<security:http auto-config="true">
+		<security:intercept-url pattern="/home" access="ROLE_ANONYMOUS"/>
+		<security:intercept-url pattern="/user/login" access="ROLE_ANONYMOUS"/>
+	</security:http>	 -->			
+	
+	<!-- <security:http pattern="/resources/**" security="none"/>
 	
 	<security:http auto-config='true' use-expressions="true" >
 		<security:intercept-url pattern="/user/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -26,7 +30,7 @@
 			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
 		</security:session-management>
 		
-	</security:http>
-
+	</security:http> -->
 </beans>
+
 	

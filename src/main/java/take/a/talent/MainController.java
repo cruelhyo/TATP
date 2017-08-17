@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController
+public class MainController
 {
 	// 두번째 커밋 테스트
 	// 세번째 커밋 테스트
 	// 관리자 계정 확인 커밋 테스트
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.

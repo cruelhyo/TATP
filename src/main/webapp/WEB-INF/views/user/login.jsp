@@ -11,6 +11,7 @@
 	<c:if test="${param.error != null }">
 		<h2>Username/Password not corrrect</h2>
 	</c:if>
+<<<<<<< HEAD
 	<c:if test="${param.logout != null}">
 		<p>You have been logged out successfully.</p>
 	</c:if>

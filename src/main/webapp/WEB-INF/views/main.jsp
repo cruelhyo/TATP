@@ -1,34 +1,114 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>부트스트랩 101 템플릿</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
+<title>팀 프로젝트 소개</title>
 
-    <!-- 부트스트랩 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
-    <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
-    <!--[if lt IE 9]>
+<!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
+<!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1> 
-  </body>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="<c:url value="/"/>">Take A Talent</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="<c:url value="/"/>">팀 프로젝트 소개</a></li>
+				<li><a href="<c:url value="/teammember"/>">팀멤버</a></li>
+				<li><a href="<c:url value="/form"/>">프로젝트 보러가기</a></li>
+				<li><a href="https://github.com/cruelhyo/TATP">github 보러가기</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-fluid md-3">
+		<div class="row">
+			<div class="col-sm-2  text-center"></div>
+			<div class="col-sm-8">
+				<h3>팀 프로젝트 소개</h3>
+				<br>
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">프로젝트 명</div>
+						<div class="panel-body">Take a Talent</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">프로젝트 목적</div>
+						<div class="panel-body">재능 매칭 교육시스템</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">프로젝트 기대효과</div>
+						<div class="panel-body">
+							교육을 찾기 힘든 생소하거나 취미 등의 분야에 대해서 서비스 제공 <br>각종 재능과 취미에 대해 일자리
+							창출 효과
+						</div>
+					</div>
+				</div>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th><h3>개발 환경</h3></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>OS</td>
+							<td>Windows 7</td>
+						</tr>
+						<tr>
+							<td>WAS</td>
+							<td>apache-tomcat-8.0</td>
+						</tr>
+						<tr>
+							<td>DBMS</td>
+							<td>MySQL 5.5.x </td>
+						</tr>
+						<tr>
+							<td>사용언어</td>
+							<td>Java(JDK1.8.0)</td>
+						</tr>
+						<tr>
+							<td>FrameWork</td>
+							<td>spring 4.3.10, spring-security 4.2.3 </td>
+						</tr>
+						<tr>
+							<td>버전관리, 협업</td>
+							<td>GitHub</td>
+						</tr>
+						<tr>
+							<td>테스트환경</td>
+							<td>Chrome</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
 </html>

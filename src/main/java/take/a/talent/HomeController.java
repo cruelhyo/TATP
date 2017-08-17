@@ -36,7 +36,7 @@ public class HomeController
 	{
 		return "layout/teammember";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login()
 	{

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+//컨트롤러 부여 취소
+/*@Controller*/
 public class HomeController
 {
 	// 두번째 커밋 테스트

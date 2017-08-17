@@ -65,8 +65,8 @@ p.footer-text1 {
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
 						Join</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
+				<li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-in"></span>
+						Logout</a></li>
 			</ul>
 		</div>
 

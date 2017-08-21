@@ -10,12 +10,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "take.a.talent")
-public class ProjectConfiguration extends WebMvcConfigurerAdapter
+//@Configuration
+//@EnableWebMvc
+//@ComponentScan(basePackages = "take.a.talent")
+public class ProjectConfiguration //extends WebMvcConfigurerAdapter
 {
-	@Bean
+	/*@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
@@ -29,5 +29,5 @@ public class ProjectConfiguration extends WebMvcConfigurerAdapter
 	public void addResourceHandlers(ResourceHandlerRegistry registry)
 	{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
+	}*/
 }

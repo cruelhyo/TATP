@@ -28,6 +28,7 @@ public class ProjectConfiguration //extends WebMvcConfigurerAdapter
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry)
 	{
+<<<<<<< HEAD
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}*/
 }

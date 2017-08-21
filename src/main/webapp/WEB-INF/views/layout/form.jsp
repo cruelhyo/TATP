@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,9 +63,7 @@ p.footer-text1 {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<%-- <c:set var="user" value="${pageContext.request.servletPath}"/> --%>
-				<c:choose>
-					<c:when test="${param.roles ne ('ROLE_USER' || 'ROLE_ADMIN')}">
+				<sec:authorize access="isAnonymous()">
 						<li>
 							<a href="#">
 								<span class="glyphicon glyphicon-user"></span>
@@ -75,15 +74,15 @@ p.footer-text1 {
 								<span class="glyphicon glyphicon-log-in"></span>
 							Login</a>
 						</li>
-					</c:when>
-					<c:otherwise>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 						<li>
 							<a href="<c:url value="/logout" />">
 								<span class="glyphicon glyphicon-log-in"></span>
 							Logout</a>
 						</li>
-					</c:otherwise>
-				</c:choose>
+				</sec:authorize>
+				
 			</ul>
 		</div>
 

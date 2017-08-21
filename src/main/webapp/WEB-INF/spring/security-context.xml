@@ -38,6 +38,11 @@
 	</security:authentication-manager>
 	
 	<bean id="customSuccessHandler" class="take.a.talent.configuration.CustomSuccessHandler"/>
+	
+	<bean id="userService" class="take.a.talent.security.mybatis.UserAuthenticationService">
+		<constructor-arg name="sqlSession" ref="sqlSessionTemplate" />
+	</bean> 
+			
 </beans>
 
 	

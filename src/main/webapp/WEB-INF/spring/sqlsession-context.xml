@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">				
+
+<!-- 커넥션 풀 설정 --> 
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!-- war배포할때에 localhost // 원격 작업할때는 takeatalent.cafe24.com  -->
+        <property name="url" value="jdbc:mysql://take.a.talent.cafe24.com?useUnicode=true&amp;characterEncoding=utf8"/>
+        <property name="username" value="takeatalent"/>
+        <property name="password" value="lhkc37711@"/>
+    </bean>
+    
+     <!-- mybatis설정 1. SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- mybatis 세션생성시 사용할 dataSource주입 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
+        <property name="mapperLocations">
+             <list>
+            	<value>classpath:take/a/talent/member/service/MemberMapper.xml</value>
+               
+            </list> 
+        </property>
+    </bean>
+    
+    <!-- mybatis설정 2. SqlSessionTemplate-->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+	<context:component-scan base-package="take.a.talent" />
+	
+	</beans>

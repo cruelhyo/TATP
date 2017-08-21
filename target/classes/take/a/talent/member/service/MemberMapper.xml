@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="take.a.talent.member.service.MemberMapper">
+
+	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
+		insert into member
+		(member_id, member_password, member_name, member_gender, member_age,
+		 member_phone, member_social_number, member_nickname, member_point,
+		 member_authority_no, member_email, member_agreement, member_sns )
+
+		VALUES (#{member_id}, #{member_password},
+		#{member_name},#{member_gender}, #{member_age}, #{member_phone},
+		#{member_social_number},
+		#{member_nickname}, #{member_point}, #{member_authority_no}, #{member_email},
+		#{member_agreement}, #{member_sns});
+	</insert>
+
+	<!-- <resultMap
+		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
+		
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="member_name" column="member_name" />
+		<result property="member_password" column="member_password" />
+		<result property="member_authority_no" column="member_authority_no" />
+		
+	</resultMap> -->
+
+</mapper>
+  

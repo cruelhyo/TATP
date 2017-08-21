@@ -27,6 +27,7 @@ public class MainController
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model)
 	{
+		logger.info("메인요청 테스트");
 		return "main";
 	}
 

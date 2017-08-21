@@ -25,7 +25,6 @@
 		<param-value>
 			/WEB-INF/spring/sqlsession-context.xml
 			/WEB-INF/spring/security-context.xml
-			
 		</param-value>
 	</context-param>
 	

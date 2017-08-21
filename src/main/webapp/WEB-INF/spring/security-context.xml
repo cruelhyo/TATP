@@ -5,28 +5,44 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 				http://www.springframework.org/schema/security
-				http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-				
-				
+				http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+	
 	<security:http pattern="/resources/**" security="none"/>
 	
 	<security:http auto-config='true' use-expressions="true" >
-		<security:intercept-url pattern="/user/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/user/login_duplicate" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
-		<security:form-login login-page="/user/login" 
-					username-parameter="username" 
-					password-parameter="password"		
-					login-processing-url="/loginProcess"
-					default-target-url="/home" 
-					authentication-failure-url="/user/login?error=1"	
-					always-use-default-target='true'
-					/>
-		<security:session-management>
-			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
-		</security:session-management>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/mainform" access="permitAll" />
+		<security:intercept-url pattern="/teammember" access="permitAll" />
+		<security:intercept-url pattern="/userlogin" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/adminlogin" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<security:form-login login-page="/login" 
+					username-parameter="member_id" 
+					password-parameter="member_pw"		
+					login-processing-url="/login"
+					authentication-success-handler-ref="customSuccessHandler"
+                    authentication-failure-url="/Access_Denied"
+                    />
+                    
+		<security:csrf/>
 		
 	</security:http>
-
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="bill" password="abc123" authorities="ROLE_USER"/>
+				<security:user name="admin" password="admin123" authorities="ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<bean id="customSuccessHandler" class="take.a.talent.configuration.CustomSuccessHandler"/>
+	
+	<bean id="userService" class="take.a.talent.security.mybatis.UserAuthenticationService">
+		<constructor-arg name="sqlSession" ref="sqlSessionTemplate" />
+	</bean> 
+			
 </beans>
+
 	

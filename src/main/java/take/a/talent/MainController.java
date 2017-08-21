@@ -1,7 +1,5 @@
 package take.a.talent;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -15,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController
+public class MainController
 {
 	// 두번째 커밋 테스트
 	// 세번째 커밋 테스트
 	// 관리자 계정 확인 커밋 테스트
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -28,6 +26,7 @@ public class HomeController
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model)
 	{
+		logger.info("메인요청 테스트");
 		return "main";
 	}
 
@@ -37,13 +36,7 @@ public class HomeController
 		return "layout/teammember";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login()
-	{
-		return "user/login";
-	}
-	
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainform", method = RequestMethod.GET)
 	public String formtest()
 	{
 		return "layout/form";

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +33,6 @@ p.footer-text1 {
 </style>
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -63,10 +63,26 @@ p.footer-text1 {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Join</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
+				<sec:authorize access="isAnonymous()">
+						<li>
+							<a href="#">
+								<span class="glyphicon glyphicon-user"></span>
+							Join</a>
+						</li>
+						<li>
+							<a href="<c:url value="/userlogin" />">
+								<span class="glyphicon glyphicon-log-in"></span>
+							Login</a>
+						</li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+						<li>
+							<a href="<c:url value="/logout" />">
+								<span class="glyphicon glyphicon-log-in"></span>
+							Logout</a>
+						</li>
+				</sec:authorize>
+				
 			</ul>
 		</div>
 

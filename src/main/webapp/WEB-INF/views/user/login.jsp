@@ -14,7 +14,7 @@
 	<c:if test="${param.logout != null}">
 		<p>You have been logged out successfully.</p>
 	</c:if>
-	<c:url var="loginUrl" value="/userlogin" />
+	<c:url var="loginUrl" value="/login" />
 	<form action="${loginUrl}" method="post">
 		<p style="margin: 0; padding: 0;">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

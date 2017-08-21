@@ -32,7 +32,6 @@ p.footer-text1 {
 </style>
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -63,9 +62,9 @@ p.footer-text1 {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<c:set var="requestUrl" value="${pageContext.request.servletPath}"/>
+				<%-- <c:set var="user" value="${pageContext.request.servletPath}"/> --%>
 				<c:choose>
-					<c:when test="${requestUrl eq '/WEB-INF/views/layout/form.jsp'}">
+					<c:when test="${param.roles ne ('ROLE_USER' || 'ROLE_ADMIN')}">
 						<li>
 							<a href="#">
 								<span class="glyphicon glyphicon-user"></span>

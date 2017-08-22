@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import take.a.talent.user.vo.UserDetailsVO;
 
+
 public class UserAuthenticationService implements UserDetailsService 
 {
   
@@ -36,8 +37,8 @@ public class UserAuthenticationService implements UserDetailsService
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException 
 	{
-	
-		Map<String, Object> user = sqlSession.selectOne("take.a.talent.member.service.MemberMapper.selectMemberTest",username);
+		
+		Map<String, Object> user = sqlSession.selectOne("selectMemberTest",username);
 		if(user == null ) throw new UsernameNotFoundException(username);
 		logger.info(user.toString());
 		List<GrantedAuthority> gas = new ArrayList<GrantedAuthority>();

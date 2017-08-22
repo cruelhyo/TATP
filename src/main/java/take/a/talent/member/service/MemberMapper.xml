@@ -17,6 +17,17 @@
 		#{member_nickname}, #{member_point}, #{member_authority_no}, #{member_email},
 		#{member_agreement}, #{member_sns});
 	</insert>
+	
+	<select id="selectMemberTest" resultType="map">
+		SELECT 
+		m.member_id, as member_id
+		m.member_pw, as member_pw
+		ma.member_authority_name as authority
+		FROM member m
+		INNER JOIN member_authority ma
+		ON m.member_authority_no = ma.member_authority_no
+		WHERE m.member_no = #{member_no};
+	</select>
 
 	<!-- <resultMap
 		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 

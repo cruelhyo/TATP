@@ -1,4 +1,4 @@
-package take.a.talent.controller;
+package take.a.talent.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,71 +15,71 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class LoginController 
+public class MemberController
 {
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
-	@RequestMapping(value = {"/userlogin", "/adminlogin"}, method = RequestMethod.GET)
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+	@RequestMapping(value = { "/userlogin", "/adminlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());
 		return "layout/form";
 	}
-	
+
 	@RequestMapping(value = "/studentPage", method = RequestMethod.GET)
-	public String studentPage(ModelMap model) 
+	public String studentPage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());
 		return "user/studentPage";
 	}
-	
+
 	@RequestMapping(value = "/teacherPage", method = RequestMethod.GET)
-	public String teacherPage(ModelMap model) 
+	public String teacherPage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());
 		return "user/teacherPage";
 	}
-	
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage(ModelMap model) 
+	public String adminPage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());
 		return "user/admin";
 	}
-	
+
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-	public String accessDeniedPage(ModelMap model) 
+	public String accessDeniedPage(ModelMap model)
 	{
 		logger.info("accessDenied call");
 		model.addAttribute("user", getPrincipal());
 		return "user/accessDenied";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() 
+	public String loginPage()
 	{
 		return "user/login";
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth != null)
+		if (auth != null)
 		{
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/login?logout";
 	}
-	
+
 	private String getPrincipal()
 	{
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		if(principal instanceof UserDetails)
+
+		if (principal instanceof UserDetails)
 		{
-			userName = ((UserDetails)principal).getUsername();
+			userName = ((UserDetails) principal).getUsername();
 		}
 		else
 		{
@@ -87,6 +87,5 @@ public class LoginController
 		}
 		return userName;
 	}
-	
-	
+
 }

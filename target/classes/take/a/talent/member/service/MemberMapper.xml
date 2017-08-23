@@ -17,12 +17,12 @@
 		#{member_nickname}, #{member_point}, #{member_authority_no}, #{member_email},
 		#{member_agreement}, #{member_sns});
 	</insert>
-	
+	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
 		SELECT 
-		m.member_id, as member_id
-		m.member_pw, as member_pw
-		ma.member_authority_name as authority
+		m.member_id as member_id
+		,m.member_password as member_pw
+		,ma.member_authority_name as authority
 		FROM member m
 		INNER JOIN member_authority ma
 		ON m.member_authority_no = ma.member_authority_no

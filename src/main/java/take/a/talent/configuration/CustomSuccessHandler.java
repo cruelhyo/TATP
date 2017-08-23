@@ -7,7 +7,9 @@ import java.util.List;
  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -21,10 +23,14 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler
 	//화면이동에 대한 규칙을 정의하기 위해 DefaultRedirectStrategy 객체 생성
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
+	private static final Logger logger = LoggerFactory.getLogger(CustomSuccessHandler.class);
+	
 	//determineTargetUrl 매서드를 이용하여 url을 가져오고 커밋여부를 판별한후 리다이렉트 시키는 매서드
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
 	{
+		logger.info("CustomSuccessHandler 호출");
+		
 		String targetUrl = determineTargetUrl(authentication);
 		
 		if (response.isCommitted()) 

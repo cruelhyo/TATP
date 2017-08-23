@@ -36,45 +36,45 @@ p.footer-text1 {
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Take a Talent</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Home</a></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> menu <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Take a Talent</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> menu <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
 
-			<li><a href="/talent/userjoin"> <span class="glyphicon glyphicon-user"></span>
-					Join
-			</a></li>
-			<li><a href="<c:url value='/userlogin'/>"> <span
-					class="glyphicon glyphicon-log-in"></span> Login
-			</a></li>
-			<li>
-		</ul>
-	</div>
+				<li><a href="<c:url value='/userjoin'/>"> <span class="glyphicon glyphicon-user"></span>
+						Join
+				</a></li>
+				<li><a href="<c:url value='/userlogin'/>"> <span
+						class="glyphicon glyphicon-log-in"></span> Login
+				</a></li>
+				<li>
+			</ul>
+		</div>
 
 
 	</nav>
@@ -85,28 +85,41 @@ p.footer-text1 {
 		<c:if test="${param.logout != null}">
 			<p>You have been logged out successfully.</p>
 		</c:if>
-		<c:url var="loginUrl" value="/login"/>
+		<c:url var="loginUrl" value="/login" />
 		<div class="container">
 			<h2>Member Login</h2>
-			<form action="${loginUrl}" method="post">
+			<br>
+			<form class="form-horizontal" action="${loginUrl}" method="post">
 				<div style="margin: 0; padding: 0;">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				</div>
-				<div class="form-group">
-					<label for="id">ID:</label> <input type="text" class="form-control"
-						id="email" placeholder="Enter id" name="member_id">
+				<div class="form-group row">
+					<label class="control-label col-sm-2" for="id">ID:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="id"
+							placeholder="Enter id" name="member_id">
+					</div>
+					<button type="button" class="btn btn-default">Search ID</button>
 				</div>
-				<div class="form-group">
-					<label for="pwd">Password:</label> <input type="password"
-						class="form-control" id="pwd" placeholder="Enter password"
-						name="member_pw">
+				<div class="form-group row">
+					<label class="control-label col-sm-2 " for="pwd">Password:</label>
+					<div class="col-sm-4">
+						<input type="password" class="form-control" id="pwd"
+							placeholder="Enter password" name="member_pw">
+					</div>
+					<button type="button" class="btn btn-default">Search PW</button>
 				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" name="remember">
-						Remember me</label>
+				<div class="form-group row">
+					<div class="checkbox">
+						<label class="control-label col-sm-2"> </label>
+						<div class="col-sm-4">
+							<label><input type="checkbox" name="remember">ID/PW 기억하기</label>
+							</div>
+							<button type="submit" class="btn btn-inverse">Log in</button>
+					</div>
 				</div>
-				<button type="submit" class="btn btn-default">Log in</button>
+
 			</form>
 		</div>
 </body>

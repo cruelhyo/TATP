@@ -69,12 +69,15 @@ p.footer-text1 {
 							<li><a href="<c:url value='/studentPage'/>">Student
 									Page</a></li>
 						</sec:authorize>
-						<%-- <sec:authorize access="hasRole('ROLE_TEACHER')">
-							<li><a href="<c:url value='/teacherPage' />">Teacher Page</a></li>
-						</sec:authorize> --%>
 						
-						<li><a href="#">Teacher Page</a></li>
-						<!-- <li><a href="#">Page 1-2</a></li> -->
+						<!-- sec사용으로 로그인후 그 아이디에 부여된 권한에 따라 mypage에서 보여줄 내용을 정하는곳.(권한이 없는경우 자동으로 표시안함) -->
+						<sec:authorize access="hasRole('ROLE_TEACHER',)">
+							<li><a href="<c:url value='/teacherPage' />">Teacher Page</a></li>
+						</sec:authorize> 
+						
+						
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

@@ -55,7 +55,8 @@ p.footer-text1 {
 					data-toggle="dropdown" href="#">강좌 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">수강중인 강좌</a></li> <!--이동한 페이지에서 강좌별 상세보기 기능 추가   -->
-						<li><a href="#">QnA 등록</a></li>
+						<li><a href="#">수강신청 현황</a></li>
+						<li><a href="#">수강완료한 강좌</a></li>
 					</ul></li>
 					
 					<li class="dropdown"><a class="dropdown-toggle"

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Dear <strong>${user}</strong>, Welcome to Admin Page.
+	Dear <strong>${user}</strong>, Welcome to Teacher Page.
     <a href="<c:url value='/logout' />">Logout</a>
 </body>
 </html>

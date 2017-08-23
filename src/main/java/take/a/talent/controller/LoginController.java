@@ -26,6 +26,20 @@ public class LoginController
 		return "layout/form";
 	}
 	
+	@RequestMapping(value = "/studentPage", method = RequestMethod.GET)
+	public String studentPage(ModelMap model) 
+	{
+		model.addAttribute("user", getPrincipal());
+		return "user/studentPage";
+	}
+	
+	@RequestMapping(value = "/teacherPage", method = RequestMethod.GET)
+	public String teacherPage(ModelMap model) 
+	{
+		model.addAttribute("user", getPrincipal());
+		return "user/teacherPage";
+	}
+	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model) 
 	{

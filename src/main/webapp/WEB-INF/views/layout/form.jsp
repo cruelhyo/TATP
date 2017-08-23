@@ -36,7 +36,7 @@ p.footer-text1 {
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Take a Talent</a>
+				<a class="navbar-brand" href="<c:url value='/mainform' />">Take a Talent</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
@@ -57,9 +57,17 @@ p.footer-text1 {
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<sec:authorize access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')">
+							<li><a href="<c:url value='/admin' />">Admin Page</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')">
+							<li><a href="<c:url value='/studentPage' />">Student Page</a></li>
+						</sec:authorize>
+						<%-- <sec:authorize access="hasRole('ROLE_TEACHER')">
+							<li><a href="<c:url value='/teacherPage' />">Teacher Page</a></li>
+						</sec:authorize> --%>
 						<li><a href="#">Page 1-1</a></li>
 						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -70,14 +78,14 @@ p.footer-text1 {
 							Join</a>
 						</li>
 						<li>
-							<a href="<c:url value="/userlogin" />">
+							<a href="<c:url value='/userlogin' />">
 								<span class="glyphicon glyphicon-log-in"></span>
 							Login</a>
 						</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 						<li>
-							<a href="<c:url value="/logout" />">
+							<a href="<c:url value='/logout' />">
 								<span class="glyphicon glyphicon-log-in"></span>
 							Logout</a>
 						</li>

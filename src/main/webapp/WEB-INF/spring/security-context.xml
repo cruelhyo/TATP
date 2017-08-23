@@ -13,9 +13,9 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/mainform" access="permitAll" />
 		<security:intercept-url pattern="/teammember" access="permitAll" />
-		<security:intercept-url pattern="/userlogin" access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/adminlogin" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/userlogin" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')" />
+		<security:intercept-url pattern="/adminlogin" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
 		<security:form-login login-page="/login" 
 					username-parameter="member_id" 
 					password-parameter="member_pw"		
@@ -28,14 +28,14 @@
 		
 	</security:http>
 	
-	<security:authentication-manager>
+	<!-- <security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="bill" password="abc123" authorities="ROLE_USER"/>
 				<security:user name="admin" password="admin123" authorities="ROLE_ADMIN"/>
 			</security:user-service>
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager> -->
 	
 	<bean id="customSuccessHandler" class="take.a.talent.configuration.CustomSuccessHandler"/>
 	

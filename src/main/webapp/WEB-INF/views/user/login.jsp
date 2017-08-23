@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>Take A Talent</title>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -62,23 +62,16 @@ p.footer-text1 {
 				</ul></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-				
-						<li>
-							<a href="#">
-								<span class="glyphicon glyphicon-user"></span>
-							Join</a>
-						</li>
-						<li>
-							<a href="/talent/userlogin">
-								<span class="glyphicon glyphicon-log-in"></span>
-							Login</a>
-						</li>
-				  <li>
-						
-				 
-				
-			</ul>
-		</div>
+
+			<li><a href="#"> <span class="glyphicon glyphicon-user"></span>
+					Join
+			</a></li>
+			<li><a href="/talent/userlogin"> <span
+					class="glyphicon glyphicon-log-in"></span> Login
+			</a></li>
+			<li>
+		</ul>
+	</div>
 
 
 	</nav>
@@ -94,15 +87,17 @@ p.footer-text1 {
 			<h2>Member Login</h2>
 			<form action="${loginUrl}" method="post">
 				<div style="margin: 0; padding: 0;">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
 				</div>
 				<div class="form-group">
-					<label for="id">ID:</label> 
-					<input type="text" class="form-control" id="email" placeholder="Enter id" name="member_id">
+					<label for="id">ID:</label> <input type="text" class="form-control"
+						id="email" placeholder="Enter id" name="member_id">
 				</div>
 				<div class="form-group">
-					<label for="pwd">Password:</label> 
-					<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="member_pw">
+					<label for="pwd">Password:</label> <input type="password"
+						class="form-control" id="pwd" placeholder="Enter password"
+						name="member_pw">
 				</div>
 				<div class="checkbox">
 					<label><input type="checkbox" name="remember">

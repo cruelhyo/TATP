@@ -72,8 +72,9 @@ p.footer-text1 {
 						<%-- <sec:authorize access="hasRole('ROLE_TEACHER')">
 							<li><a href="<c:url value='/teacherPage' />">Teacher Page</a></li>
 						</sec:authorize> --%>
-						<li><a href="#">Page 1-1</a></li>
-						<li><a href="#">Page 1-2</a></li>
+						
+						<li><a href="#">Teacher Page</a></li>
+						<!-- <li><a href="#">Page 1-2</a></li> -->
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

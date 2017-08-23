@@ -18,6 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MemberController
 {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	@RequestMapping(value = { "/userjoin"}, method = RequestMethod.GET)
+	public String join(ModelMap model)
+	{
+		model.addAttribute("user", getPrincipal());
+		return "user/join";
+	}
 
 	@RequestMapping(value = { "/userlogin", "/adminlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)

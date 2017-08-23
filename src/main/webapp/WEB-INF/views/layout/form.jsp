@@ -78,7 +78,7 @@ p.footer-text1 {
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAnonymous()">
-					<li><a href="#"> <span class="glyphicon glyphicon-user"></span>
+					<li><a href="/talent/userjoin"> <span class="glyphicon glyphicon-user"></span>
 							Join
 					</a></li>
 					<li><a href="<c:url value='/userlogin'/>"> <span

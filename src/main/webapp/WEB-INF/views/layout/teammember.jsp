@@ -25,7 +25,7 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<c:url value="/"/>">팀 프로젝트 소개</a></li>
 			<li><a href="<c:url value="/teammember"/>">팀멤버</a></li>
-			<li><a href="<c:url value="/form"/>">프로젝트 보러가기</a></li>
+			<li><a href="<c:url value="/mainform"/>">프로젝트 보러가기</a></li>
 			<li><a href="https://github.com/cruelhyo/TATP">github 보러가기</a></li>
 		</ul>
 	</div>

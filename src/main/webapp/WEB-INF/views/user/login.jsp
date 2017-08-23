@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Take A Talent</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,6 +15,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Take A Talent</title>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -66,7 +69,7 @@ p.footer-text1 {
 			<li><a href="#"> <span class="glyphicon glyphicon-user"></span>
 					Join
 			</a></li>
-			<li><a href="/talent/userlogin"> <span
+			<li><a href="<c:url value='/userlogin'/>"> <span
 					class="glyphicon glyphicon-log-in"></span> Login
 			</a></li>
 			<li>
@@ -82,7 +85,7 @@ p.footer-text1 {
 		<c:if test="${param.logout != null}">
 			<p>You have been logged out successfully.</p>
 		</c:if>
-		<c:url var="loginUrl" value="/login" />
+		<c:url var="loginUrl" value="/login"/>
 		<div class="container">
 			<h2>Member Login</h2>
 			<form action="${loginUrl}" method="post">

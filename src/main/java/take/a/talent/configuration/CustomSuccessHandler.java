@@ -60,7 +60,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler
 		{
 			url = "/adminlogin";
 		}
-		else if(isUser(roles))
+		else if(isStudent(roles))
 		{
 			url = "/userlogin";
 		}
@@ -73,18 +73,18 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler
 	}
 	
 	//부여받은 권한이 맞는지의 여부를 판별하는 매서드
-	private boolean isUser(List<String> roles)
+	private boolean isStudent(List<String> roles)
 	{
-		if(roles.contains("ROLE_USER"))
+		if(roles.contains("ROLE_REGULAR_MEM") || roles.contains("ROLE_ASSOCIATE_MEM"))
 		{
 			return true;
 		}
-		return false;
+		return false; 
 	}
 	
 	private boolean isAdmin(List<String> roles)
 	{
-		if(roles.contains("ROLE_ADMIN"))
+		if(roles.contains("ROLE_SYSTEM_ADMIN") || roles.contains("ROLE_OPERATION_ADMIN"))
 		{
 			return true;
 		}

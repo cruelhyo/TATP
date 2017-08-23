@@ -57,10 +57,10 @@ p.footer-text1 {
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<sec:authorize access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')">
 							<li><a href="<c:url value='/admin' />">Admin Page</a></li>
 						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_USER')">
+						<sec:authorize access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')">
 							<li><a href="<c:url value='/studentPage' />">Student Page</a></li>
 						</sec:authorize>
 						<%-- <sec:authorize access="hasRole('ROLE_TEACHER')">

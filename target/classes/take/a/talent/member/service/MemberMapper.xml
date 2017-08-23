@@ -5,18 +5,6 @@
 
 <mapper namespace="take.a.talent.member.service.MemberMapper">
 
-	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
-		insert into member
-		(member_id, member_password, member_name, member_gender, member_age,
-		 member_phone, member_social_number, member_nickname, member_point,
-		 member_authority_no, member_email, member_agreement, member_sns )
-
-		VALUES (#{member_id}, #{member_password},
-		#{member_name},#{member_gender}, #{member_age}, #{member_phone},
-		#{member_social_number},
-		#{member_nickname}, #{member_point}, #{member_authority_no}, #{member_email},
-		#{member_agreement}, #{member_sns});
-	</insert>
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
 		SELECT 

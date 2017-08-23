@@ -1,4 +1,4 @@
-package take.a.talent.configuration;
+package take.a.talent.main.controller;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

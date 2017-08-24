@@ -20,6 +20,7 @@ public class UserAuthenticationService implements UserDetailsService
 {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserAuthenticationService.class);
+	
 	// sqlSession을 직접받아 오기 위해 변수 지정
 	private SqlSessionTemplate sqlSession;
 
@@ -60,8 +61,8 @@ public class UserAuthenticationService implements UserDetailsService
 		// 분기점을 두어 VO객체를 생성할 때 enabled에 false를 넣고 생성 후 리턴
 		if (user.get("authority") == "ROLE_WITHDRAWAL_MEM" || user.get("authority") == "ROLE_RESTRICTION")
 		{
-			return new MemberDetailsVO(user.get("member_id").toString(), user.get("member_pw").toString(), false, true,
-					true, true, gas);
+			return new MemberDetailsVO(user.get("member_id").toString(), user.get("member_pw").toString(), false, false,
+					false, false, gas);
 		}
 
 		// ROLE_WITHDRAWAL_MEM, ROLE_RESTRICTION 권한이 아닌 나머지 권한을 가진 유저는 전부 true로 설정, 맵핑한

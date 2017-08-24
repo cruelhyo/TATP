@@ -25,6 +25,8 @@ public class MemberController
 	@Autowired
 	UserAuthenticationService userAuthenticationService;
 	
+	
+	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{

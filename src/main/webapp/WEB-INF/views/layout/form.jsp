@@ -38,7 +38,7 @@ p.footer-text1 {
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<c:url value='/mainform'/>">Take
+				<a class="navbar-brand" href="<c:url value='/anonymous/mainform'/>">Take
 					a Talent</a>
 			</div>
 			<ul class="nav navbar-nav">
@@ -66,19 +66,19 @@ p.footer-text1 {
 						</sec:authorize>
 						<sec:authorize
 							access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')">
-							<li><a href="<c:url value='/studentPage'/>">Student
+							<li><a href="<c:url value='/member/studentPage'/>">Student
 									Page</a></li>
 						</sec:authorize>
-						<%-- <sec:authorize access="hasRole('ROLE_TEACHER')">
-							<li><a href="<c:url value='/teacherPage' />">Teacher Page</a></li>
-						</sec:authorize> --%>
+						<sec:authorize access="hasRole('ROLE_TEACHER')">
+							<li><a href="<c:url value='/teacher/teacherPage' />">Teacher Page</a></li>
+						</sec:authorize>
 						<li><a href="#">Page 1-1</a></li>
 						<li><a href="#">Page 1-2</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAnonymous()">
-					<li><a href="<c:url value='/userjoin'/>"> <span class="glyphicon glyphicon-user"></span>
+					<li><a href="<c:url value='/anonymous/userjoin'/>"> <span class="glyphicon glyphicon-user"></span>
 							Join
 					</a></li>
 					<li><a href="<c:url value='/userlogin'/>"> <span
@@ -86,7 +86,7 @@ p.footer-text1 {
 					</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value='/logout'/>"> <span
+					<li><a href="<c:url value='/anonymous/logout'/>"> <span
 							class="glyphicon glyphicon-log-in"></span> Logout
 					</a></li>
 				</sec:authorize>
@@ -108,7 +108,7 @@ p.footer-text1 {
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="<c:url value="resources/img/test.jpg"/>" alt=" "
+						<img src="<c:url value='/resources/img/test.jpg'/>" alt=" "
 							style="width: 100%">
 						<div class="carousel-caption">
 							<h3>test1</h3>
@@ -117,7 +117,7 @@ p.footer-text1 {
 					</div>
 
 					<div class="item">
-						<img src="<c:url value="resources/img/test4.jpg"/>" alt=""
+						<img src="<c:url value='/resources/img/test3.jpg'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
 							<h3>test2</h3>
@@ -126,7 +126,7 @@ p.footer-text1 {
 					</div>
 
 					<div class="item">
-						<img src="<c:url value="resources/img/test3.jpg"/>" alt=""
+						<img src="<c:url value='/resources/img/test4.jpg'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
 							<h3>test3</h3>

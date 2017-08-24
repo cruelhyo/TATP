@@ -61,7 +61,7 @@ p.footer-text1 {
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 
-			<li><a href="<c:url value='/userjoin'/>"> <span class="glyphicon glyphicon-user"></span>
+			<li><a href="<c:url value='/anonymous/userjoin'/>"> <span class="glyphicon glyphicon-user"></span>
 					Join
 			</a></li>
 			<li><a href="<c:url value='/userlogin'/>"> <span

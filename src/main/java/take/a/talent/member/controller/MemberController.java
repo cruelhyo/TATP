@@ -25,27 +25,27 @@ public class MemberController
 	@Autowired
 	UserAuthenticationService userAuthenticationService;
 	
-	@RequestMapping(value = { "/userjoin"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{
 		return "user/join";
 	}
 
-	@RequestMapping(value = { "/userlogin", "/adminlogin" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/userlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "layout/form";
 	}
 
-	@RequestMapping(value = "/studentPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/studentPage", method = RequestMethod.GET)
 	public String studentPage(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/studentPage";
 	}
 
-	@RequestMapping(value = "/teacherPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.GET)
 	public String teacherPage(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());

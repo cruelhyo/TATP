@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 				http://www.springframework.org/schema/security
@@ -9,34 +10,31 @@
 	<security:http pattern="/resources/**" security="none" />
 
 	<security:http auto-config='true' use-expressions="true">
-		<security:intercept-url pattern="/" access="permitAll" />
-		<!-- <security:intercept-url pattern="/userjoin" access="permitAll"/>
-		<security:intercept-url pattern="/userlogin" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER')" />
-		<security:intercept-url pattern="/adminlogin" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
-		<security:intercept-url pattern="/studentPage" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')"/>
-		<security:intercept-url pattern="/teacherPage" access="hasRole('ROLE_TEACHER')"/> -->
-		
-		
-		<security:intercept-url pattern="/userlogin" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM'
-																	,'ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')"/>
-																	
-		<security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
-		<security:intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')"/>
-		<security:intercept-url pattern="/member/**" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM'
-																		,'ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')"/>
-		<security:intercept-url pattern="/anonymous/**" access="permitAll"/>
-		
+		<security:intercept-url pattern="/" 
+			access="permitAll" />
+		<security:intercept-url pattern="/userlogin"
+			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<security:intercept-url pattern="/admin/**"
+			access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<security:intercept-url pattern="/teacher/**"
+			access="hasRole('ROLE_TEACHER')" />
+		<security:intercept-url pattern="/member/**"
+			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<security:intercept-url pattern="/anonymous/**"	
+			access="permitAll" />
+
 		<security:form-login login-page="/login"
 			username-parameter="member_id" 
 			password-parameter="member_pw"
 			login-processing-url="/login" 
-			authentication-success-handler-ref="customSuccessHandler"
-			authentication-failure-url="/Access_Denied" />
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-url="/login?error=1" />
+		<security:access-denied-handler error-page="/Access_Denied" />
 
 		<security:csrf />
 	</security:http>
 
-	<bean id="customSuccessHandler" class="take.a.talent.member.service.AuthenticationSuccessHandler" />
+	<bean id="authenticationSuccessHandler"	class="take.a.talent.member.service.AuthenticationSuccessHandler" />
 
 	<bean id="userService" class="take.a.talent.member.service.UserAuthenticationService">
 		<constructor-arg name="sqlSession" ref="sqlSessionTemplate" />

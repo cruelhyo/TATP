@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,43 +15,47 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import take.a.talent.member.service.UserAuthenticationService;
+
 @Controller
 public class MemberController
 {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@RequestMapping(value = { "/userjoin"}, method = RequestMethod.GET)
-	public String join(ModelMap model)
+	@Autowired
+	UserAuthenticationService userAuthenticationService;
+	
+	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
+	public String join()
 	{
-		model.addAttribute("user", getPrincipal());
 		return "user/join";
 	}
 
-	@RequestMapping(value = { "/userlogin", "/adminlogin" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/userlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "layout/form";
 	}
 
-	@RequestMapping(value = "/studentPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/studentPage", method = RequestMethod.GET)
 	public String studentPage(ModelMap model)
 	{
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/studentPage";
 	}
 
-	@RequestMapping(value = "/teacherPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.GET)
 	public String teacherPage(ModelMap model)
 	{
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/teacherPage";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model)
 	{
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/admin";
 	}
 
@@ -58,7 +63,7 @@ public class MemberController
 	public String accessDeniedPage(ModelMap model)
 	{
 		logger.info("accessDenied call");
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/accessDenied";
 	}
 
@@ -79,20 +84,6 @@ public class MemberController
 		return "redirect:/login?logout";
 	}
 
-	private String getPrincipal()
-	{
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		if (principal instanceof UserDetails)
-		{
-			userName = ((UserDetails) principal).getUsername();
-		}
-		else
-		{
-			userName = principal.toString();
-		}
-		return userName;
-	}
+	
 
 }

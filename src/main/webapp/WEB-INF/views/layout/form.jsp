@@ -69,9 +69,13 @@ p.footer-text1 {
 							<li><a href="<c:url value='/member/studentPage'/>">Student
 									Page</a></li>
 						</sec:authorize>
+
+
+				<!-- sec사용으로 로그인후 그 아이디에 부여된 권한에 따라 mypage에서 보여줄 내용을 정하는곳.(권한이 없는경우 자동으로 표시안함) -->
 						<sec:authorize access="hasRole('ROLE_TEACHER')">
 							<li><a href="<c:url value='/teacher/teacherPage' />">Teacher Page</a></li>
 						</sec:authorize>
+
 						<li><a href="#">Page 1-1</a></li>
 						<li><a href="#">Page 1-2</a></li>
 					</ul></li>
@@ -86,7 +90,7 @@ p.footer-text1 {
 					</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value='/anonymous/logout'/>"> <span
+					<li><a href="<c:url value='/logout'/>"> <span
 							class="glyphicon glyphicon-log-in"></span> Logout
 					</a></li>
 				</sec:authorize>

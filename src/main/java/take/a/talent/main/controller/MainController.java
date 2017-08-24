@@ -30,13 +30,13 @@ public class MainController
 		return "main";
 	}
 
-	@RequestMapping(value = "/teammember", method = RequestMethod.GET)
+	@RequestMapping(value = "/anonymous/teammember", method = RequestMethod.GET)
 	public String teammember(Locale locale, Model model)
 	{
 		return "layout/teammember";
 	}
 
-	@RequestMapping(value = "/mainform", method = RequestMethod.GET)
+	@RequestMapping(value = "/anonymous/mainform", method = RequestMethod.GET)
 	public String formtest()
 	{
 		return "layout/form";

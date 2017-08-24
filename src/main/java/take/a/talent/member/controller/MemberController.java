@@ -26,7 +26,7 @@ public class MemberController
 		return "user/join";
 	}
 
-	@RequestMapping(value = { "/userlogin", "/adminlogin" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
 		model.addAttribute("user", getPrincipal());

@@ -13,6 +13,7 @@
 		<security:intercept-url pattern="/mainform"	access="permitAll" />
 		<security:intercept-url pattern="/teammember" access="permitAll" />
 		<security:intercept-url pattern="/userlogin" access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')" />
+		<security:intercept-url pattern="/teacherlogin" access="hasRole('ROLE_TEACHER')" />
 		<security:intercept-url pattern="/adminlogin" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
 		<security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
 		<security:form-login login-page="/login"

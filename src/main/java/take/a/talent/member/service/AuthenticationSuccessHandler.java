@@ -64,7 +64,12 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 		else if (isStudent(roles))
 		{
 			url = "/userlogin";
+			
+		}else if (isTeacher(roles))
+		{
+			url = "/teacherlogin";
 		}
+		
 		else
 		{
 			url = "/Access_Dinied";
@@ -74,6 +79,15 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 	}
 
 	// 부여받은 권한이 맞는지의 여부를 판별하는 매서드
+	private boolean isTeacher(List<String> roles)
+	{
+		if (roles.contains("ROLE_TEACHER")) //TAEHCER 권한여부 추가 
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	private boolean isStudent(List<String> roles)
 	{
 		if (roles.contains("ROLE_REGULAR_MEM") || roles.contains("ROLE_ASSOCIATE_MEM"))
@@ -91,6 +105,8 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 		}
 		return false;
 	}
+	
+	
 
 	// RedirectStrategy 겟팅,세팅하는 매서드
 	public void setRedirectStrategy(RedirectStrategy redirectStrategy)

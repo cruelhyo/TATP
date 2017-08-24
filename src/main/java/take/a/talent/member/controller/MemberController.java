@@ -15,7 +15,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberVo;
 
 @Controller
 public class MemberController
@@ -25,12 +27,26 @@ public class MemberController
 	@Autowired
 	UserAuthenticationService userAuthenticationService;
 	
+	@Autowired
+    private MemberServiceInterface service;
+	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{
+		
 		return "user/join";
 	}
-
+	
+	//join에서 입력한 정보를가지고 service를 호출함. 
+	@RequestMapping(value = { "/insertjoin"}, method = RequestMethod.GET)
+	public String insertMember(MemberVo memberVo)
+	{
+		logger.info("insertjoin.");
+		service.addMember(memberVo);
+		
+		return "user/join";
+	}
+	
 
 	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)

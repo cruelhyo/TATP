@@ -30,6 +30,8 @@ public class MemberController
 	@Autowired
     private MemberServiceInterface service;
 	
+	
+	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{
@@ -41,10 +43,10 @@ public class MemberController
 	@RequestMapping(value = { "/insertjoin"}, method = RequestMethod.GET)
 	public String insertMember(MemberVo memberVo)
 	{
-		logger.info("insertjoin.");
+		logger.info("insertMember service.addMember호출");
 		service.addMember(memberVo);
 		
-		return "user/join";
+		return "redirect:/";
 	}
 	
 

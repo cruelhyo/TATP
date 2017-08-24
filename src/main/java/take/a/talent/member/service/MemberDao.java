@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import take.a.talent.member.vo.MemberVo;
 
-@Repository
+@Repository // dao라고 명시해줌 
+
 public class MemberDao implements MemberDaoInterface{
 		
 	//sql문 작동시킬 sqlsession의 자동 객체화 

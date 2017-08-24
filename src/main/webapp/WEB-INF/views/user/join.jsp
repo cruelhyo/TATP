@@ -79,7 +79,7 @@ p.footer-text1 {
 		<h2>Member Join form</h2>
 		<br>
 		
-		<form class="form-horizontal" action="/action_page.php">
+		<form class="form-horizontal" action="/insertjoin">
 			<div class="form-group">
 
 				<label class="control-label col-sm-2" for="adress">ID:</label>

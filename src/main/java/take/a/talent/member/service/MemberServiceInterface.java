@@ -4,7 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import take.a.talent.member.vo.MemberVo;
 
-@Transactional
+
 public interface MemberServiceInterface {
 
 /*	//회원상세정보조회를 위한 메서드 선언

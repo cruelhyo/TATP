@@ -40,6 +40,6 @@
 		<property name="contentType" value="text/html; charset=UTF-8" />
 	</bean>
 
-	<context:component-scan base-package="take.a.talent" />
+	<context:component-scan base-package="take.a.talent" />  <!--spring에서 take.a.talent로 시작하는 package들을 자동으로 @autowired를 해준다고 등록함. @repository나, @service는 하위임으로 바로 사용가능   -->
 
 </beans>

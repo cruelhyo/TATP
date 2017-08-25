@@ -91,8 +91,7 @@ p.footer-text1 {
 			<br>
 			<form class="form-horizontal" action="${loginUrl}" method="post">
 				<div style="margin: 0; padding: 0;">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</div>
 				<div class="form-group row">
 					<label class="control-label col-sm-2" for="id">ID:</label>

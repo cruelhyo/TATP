@@ -19,7 +19,8 @@
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
-	margin-bottom: 0;
+	margin-bottom: 20px;
+	
 	border-radius: 0;
 }
 
@@ -32,6 +33,15 @@ footer {
 p.footer-text1 {
 	color: #D8D8D8;
 }
+
+.st1 {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-left: 10px;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -78,7 +88,9 @@ p.footer-text1 {
 
 
 	</nav>
-	<div>
+	
+	
+	
 		<c:if test="${param.error != null }">
 			<h2>Username/Password not corrrect</h2>
 		</c:if>
@@ -87,8 +99,10 @@ p.footer-text1 {
 		</c:if>
 		<c:url var="loginUrl" value="/login" />
 		<div class="container">
+		
+			<div class="st1">
 			<h2>Member Login</h2>
-			<br>
+			<hr>
 			<form class="form-horizontal" action="${loginUrl}" method="post">
 				<div style="margin: 0; padding: 0;">
 					<input type="hidden" name="${_csrf.parameterName}"
@@ -100,7 +114,7 @@ p.footer-text1 {
 						<input type="text" class="form-control" id="id"
 							placeholder="Enter id" name="member_id">
 					</div>
-					<button type="button" class="btn btn-default">Search ID</button>
+					<button type="button" class="btn btn-default">Search ID&nbsp;</button>
 				</div>
 				<div class="form-group row">
 					<label class="control-label col-sm-2 " for="pwd">Password:</label>
@@ -110,6 +124,7 @@ p.footer-text1 {
 					</div>
 					<button type="button" class="btn btn-default">Search PW</button>
 				</div>
+				
 				<div class="form-group row">
 					<div class="checkbox">
 						<label class="control-label col-sm-2"> </label>
@@ -121,6 +136,7 @@ p.footer-text1 {
 				</div>
 
 			</form>
+			</div>
 		</div>
 </body>
 </html>

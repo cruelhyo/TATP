@@ -193,9 +193,10 @@ span.round-tab:hover {
 }
 
 .step_21 {
-	border: 1px solid #eee;
+	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 10px;
+	padding-left: 10px;
+	margin-bottom: 10px;
 }
 
 .step33 {
@@ -214,36 +215,42 @@ span.round-tab:hover {
 	margin-left: 10px;
 	outline: none;
 	font-weight: normal;
+	
+	
 }
 
 .dropselectsec1 {
-	width: 74%;
+	width: 67.5%;
 	padding: 6px 5px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	color: #333;
-	margin-left: 10px;
+	margin-left: 1px;
 	outline: none;
 	font-weight: normal;
+	
+	
 }
 
 .mar_ned {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 .wdth {
-	width: 25%;
+	width: 15%;
 }
 
 .birthdrop {
+	width: 25%;
 	padding: 6px 5px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	color: #333;
-	margin-left: 10px;
-	width: 16%;
-	outline: 0;
+	margin-left: 5px;
+	outline: none;
 	font-weight: normal;
+	
+	
 }
 
 /* according menu */
@@ -438,28 +445,37 @@ span.round-tab:hover {
 							</div>
 							<ul class="list-inline pull-right">
 								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-								<li><button type="button" class="btn btn-primary next-step">Save
-										and continue</button></li>
+								<li><button type="button" class="btn btn-primary next-step">다음단계</button></li>
 							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="step2">
 							<div class="step2">
-								<h2>Member Join form</h2>
-								<br>
+								<div class="step_21">
+								
+								<h2 align="center">Member Join form</h2>
+								<hr>
 								<div class="row">
-									<label class="control-label col-sm-2" for="pwd">아이디</label>
-									<div class="form-group col-sm-5">
+								<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>아이디</stong>
+										</p>
+									</div>
+									
+									<div class="form-group col-sm-4">
 										<input type="text" class="form-control" id="ID"
 											placeholder="아이디 입력" name="member_id">
 									</div>
-
-									<button type="submit" class="btn btn-default">아이디 중복확인</button>
+									<button type="submit" class="btn btn-default">중복확인</button>
 								</div>
 								<div class="col-sm-offset-2 col-sm-10"></div>
 
 
 								<div class="row">
-									<label class="control-label col-sm-2" for="pwd">비밀번호</label>
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>비밀번호</stong>
+										</p>
+									</div>
 									<div class="form-group col-sm-5">
 
 										<input type="text" class="form-control" id="PW"
@@ -468,7 +484,11 @@ span.round-tab:hover {
 									<div class="col-sm-offset-2 col-sm-10"></div>
 
 
-									<label class="control-label col-sm-2" for="pwd">비밀번호 확인</label>
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>비밀번호 확인</stong>
+										</p>
+									</div>
 									<div class="form-group col-sm-5">
 
 										<input type="text" class="form-control" id="PW"
@@ -477,25 +497,37 @@ span.round-tab:hover {
 								</div>
 								<div class="row">
 
-									<label class="control-label col-sm-2" for="pwd">이름</label>
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>이름</stong>
+										</p>
+									</div>
 									<div class="form-group col-sm-5">
 										<input type="text" class="form-control" id="name"
 											placeholder="이름 입력">
 									</div>
 
 									<div class="col-sm-offset-2 col-sm-10"></div>
-									<label class="control-label col-sm-2" for="pwd">성별</label>
-									<div class="form-group col-sm-5">
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>성별</stong>
+										</p>
+									</div>
+									<div class="form-group col-sm-8">
 										<input type="radio" name="gender" value="male"> Male <input
 											type="radio" name="gender" value="female">Female<br>
 									</div>
-									<div class="col-sm-11 col-xs-6">
+									
 										<div class="row">
-										<label class="control-label col-md-2" for="pwd">생년월일</label>
-											<div class="col-xs-2">
+										<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>생년월일</stong>
+										</p>
+									</div>
+											<div class="col-xs-2 wdth">
 												<select name="visa_status" id="visa_status"
 													class="dropselectsec1">
-													<option value="">Date</option>
+													<option value="">일</option>
 													<option value="2">1</option>
 													<option value="1">2</option>
 													<option value="4">3</option>
@@ -507,25 +539,25 @@ span.round-tab:hover {
 													<option value="9">9</option>
 												</select>
 											</div>
-											<div class="col-xs-2">
+											<div class="col-xs-2 wdth">
 												<select name="visa_status" id="visa_status"
 													class="dropselectsec1">
-													<option value="">Month</option>
-													<option value="2">Jan</option>
-													<option value="1">Feb</option>
-													<option value="4">Mar</option>
-													<option value="5">Apr</option>
-													<option value="6">May</option>
-													<option value="3">June</option>
-													<option value="7">July</option>
-													<option value="8">Aug</option>
-													<option value="9">Sept</option>
+													<option value="">월</option>
+													<option value="2">01</option>
+													<option value="1">02</option>
+													<option value="4">03</option>
+													<option value="5">04</option>
+													<option value="6">05</option>
+													<option value="3">06</option>
+													<option value="7">07</option>
+													<option value="8">08</option>
+													<option value="9">09</option>
 												</select>
 											</div>
-											<div class="col-xs-2">
+											<div class="col-xs-2 wdth">
 												<select name="visa_status" id="visa_status"
 													class="dropselectsec1">
-													<option value="">Year</option>
+													<option value="">년</option>
 													<option value="2">1990</option>
 													<option value="1">1991</option>
 													<option value="4">1992</option>
@@ -538,219 +570,129 @@ span.round-tab:hover {
 												</select>
 											</div>
 										</div>
-									</div>
+									
 
+								</div>
+								<div class="row mar_ned"></div>
+								<div class="row">
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>주소</stong>
+										</p>
+									</div>
+									<div class="form-group col-sm-4">
+										<input type="text" class="form-control" id="ID"
+											placeholder="주소찾기 name="member_id">
+									</div>
+									<button type="submit" class="btn btn-default">우편번호</button>
+									
+								</div>
+								
+								<div class="row">
+									<div class="col-md-3 col-xs-2">
+										<p align="right">
+											<stong>상세주소</stong>
+										</p>
+									</div>
+									
+										<div class="form-group col-sm-5">
+										<input type="text" class="form-control" id="ID"
+											placeholder="상세주소 name="member_id">
+									</div>
+									
+								</div>
+								
+								<div class="row">
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>핸드폰</stong>
+										</p>
+									</div>
+									<div class="form-group col-sm-5">
+										<input type="text" class="form-control" id="ID"
+											placeholder="번호입력 name="member_id">
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>이메일</stong>
+										</p>
+									</div>
+									
+									<div class="col-md-5">
+										<input type="text" name="specialization" id="specialization"
+											placeholder="메일주소 입력" class="dropselectsec1">
+											<stong>&nbsp;@</stong>
+											<select name="year_of_passedout" id="year_of_passedout"
+											 class="birthdrop">
+												<option value="">직접입력</option>
+												<option value="1">직접입력</option>
+												<option value="2">직접입력</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mar_ned"></div>
+								<div class="row">
+									<div class="col-md-3 col-xs-3">
+										<p align="right">
+											<stong>정보 수신 메일 동의</stong>
+										</p>
+									</div>
+									<div class="col-md-8 col-xs-9">
+										&nbsp;<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>&nbsp;
+										<input type="radio" name="gender" value="male"> Male <input
+											type="radio" name="gender" value="female">Female<br>
+									</div>
+									
 								</div>
 
 								<div class="row"></div>
+								<hr>
 							</div>
+							
+								</div>
 							<ul class="list-inline pull-right">
-								<li><button type="button" class="btn btn-primary next-step">Save
-										and continue</button></li>
+								<li><button type="button" class="btn btn-primary next-step">다음 단계</button></li>
 							</ul>
 
 						</div>
 						<div class="tab-pane" role="tabpanel" id="step3">
 							<div class="step33">
-								<h5>
-									<strong>Basic Details</strong>
-								</h5>
+								<div class="row mar_ned"></div>
+								<p align="left">추가 입력 사항</p>
+							
 								<hr>
 								<div class="row mar_ned"></div>
 								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Date of birth</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<div class="row">
-											<div class="col-md-4 col-xs-4 wdth">
-												<select name="visa_status" id="visa_status"
-													class="dropselectsec1">
-													<option value="">Date</option>
-													<option value="2">1</option>
-													<option value="1">2</option>
-													<option value="4">3</option>
-													<option value="5">4</option>
-													<option value="6">5</option>
-													<option value="3">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-												</select>
-											</div>
-											<div class="col-md-4 col-xs-4 wdth">
-												<select name="visa_status" id="visa_status"
-													class="dropselectsec1">
-													<option value="">Month</option>
-													<option value="2">Jan</option>
-													<option value="1">Feb</option>
-													<option value="4">Mar</option>
-													<option value="5">Apr</option>
-													<option value="6">May</option>
-													<option value="3">June</option>
-													<option value="7">July</option>
-													<option value="8">Aug</option>
-													<option value="9">Sept</option>
-												</select>
-											</div>
-											<div class="col-md-4 col-xs-4 wdth">
-												<select name="visa_status" id="visa_status"
-													class="dropselectsec1">
-													<option value="">Year</option>
-													<option value="2">1990</option>
-													<option value="1">1991</option>
-													<option value="4">1992</option>
-													<option value="5">1993</option>
-													<option value="6">1994</option>
-													<option value="3">1995</option>
-													<option value="7">1996</option>
-													<option value="8">1997</option>
-													<option value="9">1998</option>
-												</select>
-											</div>
-										</div>
-									</div>
+									
+									
 								</div>
-								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Marital Status</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<label class="radio-inline"> <input type="radio"
-											name="inlineRadioOptions" id="inlineRadio2" value="option2">
-											Single
-										</label> <label class="radio-inline"> <input type="radio"
-											name="inlineRadioOptions" id="inlineRadio3" value="option3">
-											Married
-										</label>
-									</div>
-								</div>
-								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Highest Education</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<select name="highest_qualification"
-											id="highest_qualification" class="dropselectsec">
-											<option value=""> Select Highest Education</option>
-											<option value="1">Ph.D</option>
-											<option value="2">Masters Degree</option>
-											<option value="3">PG Diploma</option>
-											<option value="4">Bachelors Degree</option>
-											<option value="5">Diploma</option>
-											<option value="6">Intermediate / (10+2)</option>
-											<option value="7">Secondary</option>
-											<option value="8">Others</option>
-										</select>
-									</div>
-								</div>
-								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Specialization</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<input type="text" name="specialization" id="specialization"
-											placeholder="Specialization" class="dropselectsec"
-											autocomplete="off">
-									</div>
-								</div>
-								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Year of Passed Out</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<select name="year_of_passedout" id="year_of_passedout"
-											class="birthdrop">
-											<option value="">Year</option>
-											<option value="1980">1980</option>
-											<option value="1981">1981</option>
-											<option value="1982">1982</option>
-											<option value="1983">1983</option>
-											<option value="1984">1984</option>
-											<option value="1985">1985</option>
-											<option value="1986">1986</option>
-											<option value="1987">1987</option>
-											<option value="1988">1988</option>
-											<option value="1989">1989</option>
-											<option value="1990">1990</option>
-											<option value="1991">1991</option>
-											<option value="1992">1992</option>
-											<option value="1993">1993</option>
-											<option value="1994">1994</option>
-											<option value="1995">1995</option>
-											<option value="1996">1996</option>
-											<option value="1997">1997</option>
-											<option value="1998">1998</option>
-											<option value="1999">1999</option>
-											<option value="2000">2000</option>
-											<option value="2001">2001</option>
-											<option value="2002">2002</option>
-											<option value="2003">2003</option>
-											<option value="2004">2004</option>
-											<option value="2005">2005</option>
-											<option value="2006">2006</option>
-											<option value="2007">2007</option>
-											<option value="2008">2008</option>
-											<option value="2009">2009</option>
-											<option value="2010">2010</option>
-											<option value="2011">2011</option>
-											<option value="2012">2012</option>
-											<option value="2013">2013</option>
-											<option value="2014">2014</option>
-											<option value="2015">2015</option>
-										</select>
-									</div>
-								</div>
-								<div class="row mar_ned">
-									<div class="col-md-4 col-xs-3">
-										<p align="right">
-											<stong>Total Experience</stong>
-										</p>
-									</div>
-									<div class="col-md-8 col-xs-9">
-										<div class="row">
-											<div class="col-md-6 col-xs-6 wdth">
-												<select name="visa_status" id="visa_status"
-													class="dropselectsec1">
-													<option value="">Month</option>
-													<option value="2">Jan</option>
-													<option value="1">Feb</option>
-													<option value="4">Mar</option>
-													<option value="5">Apr</option>
-													<option value="6">May</option>
-													<option value="3">June</option>
-													<option value="7">July</option>
-													<option value="8">Aug</option>
-													<option value="9">Sept</option>
-												</select>
-											</div>
-											<div class="col-md-6 col-xs-6 wdth"></div>
-										</div>
-									</div>
-								</div>
-								<div class="row mar_ned"></div>
+								
+								
+								
+								
+								
+								
+								
+								<hr>
+								
 							</div>
 							<ul class="list-inline pull-right">
-								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-								<li><button type="button" class="btn btn-default next-step">Skip</button></li>
+								<li><button type="button" class="btn btn-default prev-step">이전 단계</button></li>
+								
 								<li><button type="button"
-										class="btn btn-primary btn-info-full next-step">Save
-										and continue</button></li>
+										class="btn btn-primary btn-info-full next-step">계속하기</button></li>
 							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="complete">
 							<div class="step44">
-								<h5>Completed</h5>
+								<h5>complete</h5>
+								
+								<ul class="list-inline pull-right">
+								<li><button type="button" class="btn btn-primary next-step">가입 완료</button></li>
+							</ul>
 
 
 							</div>

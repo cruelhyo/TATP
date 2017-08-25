@@ -44,15 +44,25 @@
 		<security:csrf />
 	</security:http>
 	
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService">
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
 	<!-- AuthenticationSuccessHandler라는 핸들러 클래스를 빈에 등록 -->
 	<bean id="authenticationSuccessHandler"	class="take.a.talent.member.service.AuthenticationSuccessHandler" />
+
 
 	<!-- UserAuthenticationService라는 서비스 클래스를 빈에 등록 -->
 	<bean id="userService" class="take.a.talent.member.service.UserAuthenticationService">
 		<!-- DB연동하기 위해 SqlSession을 포함 -->
 		<constructor-arg name="sqlSession" ref="sqlSessionTemplate" />
 	</bean>
-
+	
+	
 </beans>
 
 	

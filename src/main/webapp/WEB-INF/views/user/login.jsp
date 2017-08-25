@@ -104,12 +104,12 @@ p.footer-text1 {
 			<div class="st1">
 			
 			<h2>Member Login</h2>
-			<hr>
-				<form class="form-horizontal" action="${loginUrl}" method="post">
-					<div style="margin: 0; padding: 0;">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</div>
+
+			<br>
+			<form class="form-horizontal" action="${loginUrl}" method="post">
+				<div style="margin: 0; padding: 0;">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</div>
 					<div class="form-group row">
 						<label class="control-label col-sm-2" for="id">ID:</label>
 						<div class="col-sm-4">

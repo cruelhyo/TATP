@@ -34,6 +34,6 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-	<context:component-scan base-package="take.a.talent.main.controller" />
+	<context:component-scan base-package="take.a.talent" />
 
 </beans>

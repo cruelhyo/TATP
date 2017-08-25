@@ -86,7 +86,7 @@ p.footer-text1 {
 					</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value='/anonymous/logout'/>"> <span
+					<li><a href="<c:url value='/logout'/>"> <span
 							class="glyphicon glyphicon-log-in"></span> Logout
 					</a></li>
 				</sec:authorize>

@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.User;
 
-public class MemberDetailsVO extends User
+public class MemberDetailsVo extends User
 {
 	/*
 	 * username = id, password = pw, enabled = 계정사용 가능 여부, accountNonExpired = 계정 만료
@@ -18,7 +18,7 @@ public class MemberDetailsVO extends User
 
 	// private int member_no;
 
-	public MemberDetailsVO(String username, String password, boolean enabled, boolean accountNonExpired,
+	public MemberDetailsVo(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities)
 	{
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);

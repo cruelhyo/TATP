@@ -30,7 +30,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException
 	{
-		logger.info("CustomSuccessHandler 호출");
+		logger.info("AuthenticationSuccessHandler 호출");
 
 		String targetUrl = determineTargetUrl(authentication);
 
@@ -57,11 +57,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 			roles.add(a.getAuthority());
 		}
 
-		if (isAdmin(roles))
-		{
-			url = "/adminlogin";
-		}
-		else if (isStudent(roles))
+		if (isAdmin(roles) || isStudent(roles) || isTeacher(roles))
 		{
 			url = "/userlogin";
 		}
@@ -86,6 +82,15 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 	private boolean isAdmin(List<String> roles)
 	{
 		if (roles.contains("ROLE_SYSTEM_ADMIN") || roles.contains("ROLE_OPERATION_ADMIN"))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isTeacher(List<String> roles) 
+	{
+		if(roles.contains("ROLE_TEACHER"))
 		{
 			return true;
 		}

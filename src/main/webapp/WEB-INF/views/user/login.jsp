@@ -38,6 +38,7 @@ p.footer-text1 {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding-left: 10px;
+	padding-right: 10px;
 	padding-top: 10px;
 	margin-bottom: 10px;
 }
@@ -101,20 +102,23 @@ p.footer-text1 {
 		<div class="container">
 		
 			<div class="st1">
+			
 			<h2>Member Login</h2>
 			<hr>
-			<form class="form-horizontal" action="${loginUrl}" method="post">
-				<div style="margin: 0; padding: 0;">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</div>
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="id">ID:</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="id"
-							placeholder="Enter id" name="member_id">
+				<form class="form-horizontal" action="${loginUrl}" method="post">
+					<div style="margin: 0; padding: 0;">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</div>
-					<button type="button" class="btn btn-default">Search ID&nbsp;</button>
+					<div class="form-group row">
+						<label class="control-label col-sm-2" for="id">ID:</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="id"
+							placeholder="Enter id" name="member_id">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-default">Search ID&nbsp;&nbsp;</button>
+						</div>
 				</div>
 				<div class="form-group row">
 					<label class="control-label col-sm-2 " for="pwd">Password:</label>
@@ -122,7 +126,9 @@ p.footer-text1 {
 						<input type="password" class="form-control" id="pwd"
 							placeholder="Enter password" name="member_pw">
 					</div>
-					<button type="button" class="btn btn-default">Search PW</button>
+					<div class="col-sm-2">
+						<button type="button" class="btn btn-default">Search PW</button>
+					</div>
 				</div>
 				
 				<div class="form-group row">
@@ -131,7 +137,9 @@ p.footer-text1 {
 						<div class="col-sm-4">
 							<label><input type="checkbox" name="remember">ID/PW 기억하기</label>
 							</div>
-							<button type="submit" class="btn btn-inverse">Log in</button>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-inverse">Log in</button>
+							</div>
 					</div>
 				</div>
 

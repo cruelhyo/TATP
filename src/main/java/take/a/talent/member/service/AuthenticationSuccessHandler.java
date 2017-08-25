@@ -30,7 +30,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException
 	{
-		logger.info("CustomSuccessHandler 호출");
+		logger.info("AuthenticationSuccessHandler 호출");
 
 		String targetUrl = determineTargetUrl(authentication);
 

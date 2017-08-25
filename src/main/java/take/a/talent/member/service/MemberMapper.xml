@@ -16,6 +16,11 @@
 		ON m.member_authority_no = ma.member_authority_no
 		WHERE m.member_id = #{username};
 	</select>
+	
+	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
+		INSERT INTO testmember(member_id, member_password, member_name, member_phone)
+			VALUES (#{member_id}, #{member_password}, #{member_name}, #{member_phone});
+	</insert>
 
 	<!-- <resultMap
 		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 

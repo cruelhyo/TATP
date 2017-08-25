@@ -144,5 +144,19 @@ public class MemberVo {
 	public void setMember_memo(String member_memo) {
 		this.member_memo = member_memo;
 	}
+	@Override
+	public String toString()
+	{
+		return "MemberVo [member_id=" + member_id + ", member_password=" + member_password + ", member_name="
+				+ member_name + ", member_gender=" + member_gender + ", member_age=" + member_age + ", member_phone="
+				+ member_phone + ", member_social_number=" + member_social_number + ", member_nickname="
+				+ member_nickname + ", member_point=" + member_point + ", member_authority_no=" + member_authority_no
+				+ ", member_email=" + member_email + ", member_agreement=" + member_agreement + ", member_sns="
+				+ member_sns + ", member_student_exp=" + member_student_exp + ", member_student_level="
+				+ member_student_level + ", member_total_class_application_date=" + member_total_class_application_date
+				+ ", member_total_class_participation_date=" + member_total_class_participation_date
+				+ ", member_student_compliment_card=" + member_student_compliment_card + ", member_login_state="
+				+ member_login_state + ", member_memo=" + member_memo + "]";
+	}
 
 }

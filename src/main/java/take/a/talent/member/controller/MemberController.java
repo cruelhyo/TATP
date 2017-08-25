@@ -31,24 +31,37 @@ public class MemberController
     private MemberServiceInterface service;
 	
 	
-	
-	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
-	public String join()
-	{
+	//join form 페이지 요청 
+	@RequestMapping(value = {"/anonymous/userjoin"}, method = RequestMethod.GET)
+	public String userjoin()	{
 		
 		return "user/join";
 	}
 	
-	//join에서 입력한 정보를가지고 service를 호출함. 
-	@RequestMapping(value = { "/insertjoin"}, method = RequestMethod.GET)
-	public String insertMember(MemberVo memberVo)
-	{
-		logger.info("insertMember service.addMember호출");
+	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
+	public String insertjoin(MemberVo memberVo) {
+		logger.info("join액션");
+		logger.info("VO값 확인"+memberVo.toString());
 		service.addMember(memberVo);
+		
 		
 		return "redirect:/";
 	}
 	
+	
+	
+	/*//join에서 입력한 정보를가지고 service를 호출함. 
+	@RequestMapping(value = {"/anonymous/insertjoin"}, method = RequestMethod.GET)
+	public String insertMember(MemberVo memberVo)
+	{
+		logger.info("insertMember service.addMember호출");
+		
+		return "redirect:/";
+	}*/
+	
+	/*@RequestMapping(value="/" , method = {RequestMethod.GET, RequestMethod.POST})*/
 
 	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)

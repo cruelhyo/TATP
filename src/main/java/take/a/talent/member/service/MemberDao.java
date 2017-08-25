@@ -1,9 +1,12 @@
 package take.a.talent.member.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.MemberVo;
 
 @Repository // dao라고 명시해줌 
@@ -14,11 +17,14 @@ public class MemberDao implements MemberDaoInterface{
 	@Autowired
 	 private SqlSessionTemplate sqlSessionTemplate;
 	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	//회원정보 입력을 위한 메서드 선언
 	@Override
 	public int insertMember(MemberVo memberVo) {
-		System.out.println("MemberDao memberInsert : "+memberVo);
-		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);
+		logger.info("DAO insertMember 호출");
+		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);
+		return row;
 	}
 	
 }

@@ -41,7 +41,9 @@
 	<bean id="userService" class="take.a.talent.member.service.UserAuthenticationService">
 		<constructor-arg name="sqlSession" ref="sqlSessionTemplate" />
 	</bean>
-
+	
+	<!-- <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
+	
 </beans>
 
 	

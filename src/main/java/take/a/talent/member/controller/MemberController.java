@@ -29,12 +29,12 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
-	
-	
-	//join form 페이지 요청 
-	@RequestMapping(value = {"/anonymous/userjoin"}, method = RequestMethod.GET)
-	public String userjoin()	{
 		
+	
+	
+	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
+	public String join()
+	{
 		return "user/join";
 	}
 	

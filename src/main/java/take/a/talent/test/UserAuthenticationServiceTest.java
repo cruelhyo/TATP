@@ -20,7 +20,7 @@ public class UserAuthenticationServiceTest
 	@Test
 	public void test() 
 	{
-		String password ="pw004";
+		String password ="pw001";
 		String encryptPassword = passwordEncoder.encode(password);
 		System.out.println(encryptPassword);
 		System.out.println(encryptPassword.length());

@@ -1,6 +1,7 @@
 package take.a.talent.member.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.mysql.fabric.xmlrpc.base.Member;
 
 import take.a.talent.member.controller.MemberController;
+import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberVo;
 
 @Repository // dao라고 명시해줌 
@@ -37,6 +39,17 @@ public class MemberDao implements MemberDaoInterface{
 		
 		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);
 		return row;
+	}
+
+	@Override
+	public IdChecker idCheck(String memberId){
+		logger.info("DAO idCheck 호출");
+		logger.info("memberId : "+memberId);
+		
+		/*IdChecker idChecker = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idChecker", memberId);*/
+		/*logger.info("checkId : "+idChecker.getMember_id());*/
+		//sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 	}
 	
 }

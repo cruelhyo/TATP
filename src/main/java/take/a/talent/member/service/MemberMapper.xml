@@ -17,22 +17,29 @@
 		WHERE m.member_id = #{username};
 	</select>
 	
+	
+	<!--회원가입시 아이디 중복체크  -->
+	<select id ="idCheck" parameterType="String" resultType="take.a.talent.member.vo.IdChecker">
+		SELECT member_id
+		FROM member
+		WHERE member_id=#{member_id};
+		
+	</select> 
+
+	
+	
+	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
 		INSERT INTO member(member_id, member_password, member_name, member_phone)
 			VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone});
 			
 	</insert>
 	
-	<select id ="selectMember" parameterType="string" resultType="int">
-		SELECT member_no
-		FROM testmember
-		WHERE member_id=#{member_id}
-	</select> 
 	
-	 <insert id="insetAddress" parameterType="take.a.talent.member.vo.MemberVo">
-		INSERT INTO test
-		
-	</insert>
+	
+	
+	
+	
 	
 	
 	

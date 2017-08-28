@@ -24,6 +24,9 @@ public interface MemberServiceInterface {
 */
 		//회원가입시 회원정보 입력하기 위한 dao 메서드 선언
 		int addMember(MemberVo memberVo);
+		
+		//회원가입시 아이디 중복검사  
+		int idCheck(String memberId);
 
 	
 }

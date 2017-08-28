@@ -24,6 +24,8 @@
 			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
 		<security:intercept-url pattern="/anonymous/**"	
 			access="permitAll" />
+		<security:intercept-url pattern="/ajax/**"	
+			access="permitAll" />	
 
 
 		<!-- 

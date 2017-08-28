@@ -45,6 +45,33 @@
 			prevTab($active);
 
 		});
+		
+		/* <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> */
+		
+		 $(".idCheck").click(function() {
+			 console.log("idCheck");
+			 /* id 중복검사 로직 추가할 공간  controller호출 로직  */
+			 
+			 $.ajax({
+				 type : 'POST',
+				 url : "<c:url value='/ajax/idCheck'/>",
+				 data :{
+					 'memberId':$('#memberId').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'
+					 },
+				 success : function(){console.log("test");}				 
+			 });				
+			
+		});
+		 
+		$(".mailNumberSearch").click(function(e) {
+
+			console.log("mailNumberSearch");
+			/* 우편번호 찾기 api 호출 ( 로직 추가할 공간  */
+
+		});
+		
+		
 	});
 
 	function nextTab(elem) {
@@ -451,17 +478,17 @@ span.round-tab:hover {
 									<hr>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="ID">
+											<label class="control-label col-sm-3 " for="memberId">
 												<p align="right">
 													<strong>아이디</strong>
 												</p>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="ID"
-													placeholder="아이디 입력" name="member_id">
+												<input type="text" class="form-control" id="memberId"
+													placeholder="아이디 입력" name="memberId">
 											</div>
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-default idCheck">
 													중복 검사</button>
 											</div>
 										</div>
@@ -476,7 +503,7 @@ span.round-tab:hover {
 											</label>
 											<div class="col-sm-5">
 												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 입력" name="member_pw">
+													placeholder="비밀번호 입력" name="memberPw">
 											</div>
 										</div>
 									</div>
@@ -489,8 +516,8 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 재입력" name="member_pw">
+												<input type="text" class="form-control" id="PW2"
+													placeholder="비밀번호 재입력" name="memberPw2">
 											</div>
 										</div>
 									</div>
@@ -592,10 +619,11 @@ span.round-tab:hover {
 											</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" id="adress"
-													placeholder="우편번호" name="">
+													placeholder="우편번호" name="member_address">
 											</div>
 											<div class="col-sm-2">
-												<button type="submit" class="btn btn-default">동 검색</button>
+												<button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button>
+												
 											</div>
 										</div>
 									</div>
@@ -610,7 +638,7 @@ span.round-tab:hover {
 											</label>
 											<div class="col-sm-5">
 												<input type="text" class="form-control" id="ID"
-													placeholder="상세주소" name="member_id">
+													placeholder="상세주소" name="member_address_detail">
 											</div>
 										</div>
 									</div>

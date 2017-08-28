@@ -29,6 +29,21 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
+	
+	
+	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	@RequestMapping(value ="/ajax/idCheck", method=RequestMethod.POST)
+	public String idCheck(String memberId) {
+		logger.info("id체크");
+		logger.info("VO값 확인");
+		logger.info("memberId"+memberId);
+		service.idCheck(memberId);
+		
+		
+		return "";
+	}
+	
 		
 	
 	

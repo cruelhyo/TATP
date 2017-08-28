@@ -18,20 +18,52 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
-		INSERT INTO testmember(member_id, member_password, member_name, member_phone)
-			VALUES (#{member_id}, #{member_password}, #{member_name}, #{member_phone});
+		INSERT INTO member(member_id, member_password, member_name, member_phone)
+			VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone});
+			
 	</insert>
+	
+	<select id ="selectMember" parameterType="string" resultType="int">
+		SELECT member_no
+		FROM testmember
+		WHERE member_id=#{member_id}
+	</select> 
+	
+	 <insert id="insetAddress" parameterType="take.a.talent.member.vo.MemberVo">
+		INSERT INTO test
+		
+	</insert>
+	
+	
+	
+	
 
-	<!-- <resultMap
+	 <resultMap
 		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
 		
-		<result property="member_id" column="member_id" />
-		<result property="member_nickname" column="member_nickname" />
-		<result property="member_name" column="member_name" />
-		<result property="member_password" column="member_password" />
-		<result property="member_authority_no" column="member_authority_no" />
+		<result property="memberId" column="member_id" />
+		<result property="memberPassword" column="member_password" />
+		<result property="memberName" column="member_name" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberAge" column="member_age" />
+		<result property="memberPhone" column="member_phone" />
+		<result property="memberSocial_number" column="member_social_number" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberPoint" column="member_point" />
+		<result property="memberAuthority_no" column="member_authority_no" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberAgreement" column="member_agreement" />
+		<result property="memberSns" column="member_sns" />
+		<result property="memberStudentExp" column="member_student_exp" />
+		<result property="memberStudentLevel" column="member_student_level" />
+		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
+		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
+		<result property="memberLoginState" column="member_login_state" />
+		<result property="memberAddress" column="member_address" />
+		<result property="memberMemo" column="member_memo" />
 		
-	</resultMap> -->
+		
+	</resultMap>
 
 </mapper>
   

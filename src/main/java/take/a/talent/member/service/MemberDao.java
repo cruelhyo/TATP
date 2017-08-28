@@ -30,9 +30,9 @@ public class MemberDao implements MemberDaoInterface{
 	public int insertMember(MemberVo memberVo) {
 		logger.info("DAO insertMember 호출");
 				
-		String encryptPassword = passwordEncoder.encode(memberVo.getMember_password());
+		String encryptPassword = passwordEncoder.encode(memberVo.getMemberPassword());
 		
-		memberVo.setMember_password(encryptPassword);
+		memberVo.setMemberPassword(encryptPassword);
 		
 		
 		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);

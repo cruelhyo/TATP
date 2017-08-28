@@ -114,7 +114,7 @@ p.footer-text1 {
 					<input type="password" class="form-control" id="pw"
 						placeholder="password 확인" name="member_pwd">
 				</div>
-			</div> -->
+			</div>  -->
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Name:</label>
@@ -124,22 +124,41 @@ p.footer-text1 {
 				</div>
 			</div>
 
-		<!-- 	<div class="form-group">
+			 <div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">BirthDay:</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="pw"
 						placeholder="Birthday 입력" name="user_birth">
 				</div>
-			</div> -->
+			</div> 
+			
+			<!-- nickname, sns 주소 입력 추가 후 테스트  -->
+			 <div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">nickname:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pw"
+						placeholder="nickname 입력" name="user_birth">
+				</div>
+			</div> 
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">sns:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pw"
+						placeholder="sns 주소 입력" name="user_birth">
+				</div>
+			</div>  
 
-	<!-- 		<div class="form-group">
+		 <div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Gender:</label>
 				<div class="col-sm-10">
 					<input type="radio" name="gender" value="male"> Male <input
 						type="radio" name="gender" value="female"> Female<br>
 				</div>
-			</div> -->
-
+			</div> 
+ -->
+ 
+ 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="Phone_Number">Phone
 					Number:</label>
@@ -149,7 +168,7 @@ p.footer-text1 {
 				</div>
 			</div>
 
-			<<!-- div class="form-group">
+			<div class="form-group">
 				<label class="control-label col-sm-2" for="adress">Adress:</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control" id="adress"
@@ -158,15 +177,15 @@ p.footer-text1 {
 				<button type="submit" class="btn btn-default">우편번호찾기</button>
 				<div class="col-sm-offset-2 col-sm-10"></div>
 				
-			</div> -->
+			</div> 
 
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"> </label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="adress1"
 						placeholder="상세주소 입력" name="adress">
 				</div>
-			</div> -->
+			</div> 
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Email:</label>
@@ -176,8 +195,8 @@ p.footer-text1 {
 				</div>
 			</div>
 
-
-			<!-- <div class="form-group">
+ 
+			 <div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">정보수신메일 동의:</label>
 				<div class="col-sm-10">
 					<h5>본 site에서 제공하는 정보메일을 받아 보시겠습니까?</h5>

@@ -66,6 +66,21 @@
 			
 		});
 		
+		 $(".ID").blur(function() {
+			 var check = /^[a-z0-9]{3,16}$/; 
+				 /* /^(?=.*[a-z])(?=.*[0-9]).{6,20}$/i; */
+			 var in_id = $('#memberId').val();
+				if(!check.test(in_id)){
+					//아이디가 유효하지 않을때
+					$("#idch").css("color", "#FF0000");
+					$('#idch').text('사용이 불가능한 아이디입니다.');
+				} else {
+					//아이디가 유효할때
+					$("#idch").css("color", "#008000");
+					$('#idch').text('사용가능한 아이디입니다.');
+				}
+		 });
+		
 		
 		/*--------------------------------------------------------------------------------------------------  */
 		
@@ -542,9 +557,11 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="memberId"
+												<input type="text" class="form-control ID " id="memberId"
 													placeholder="아이디 입력" name="memberId">
+													<span id="idch"><input type="hidden" value="0" id="use_id" name="use_id"></span>
 											</div>
+											
 											<div class="col-sm-2">
 												<button type="button" class="btn btn-default idCheck">
 													중복 검사</button>

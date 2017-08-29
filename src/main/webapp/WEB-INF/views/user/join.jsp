@@ -51,6 +51,22 @@
 		
 		/* <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> */
 		
+		
+		$(".ID").keypress(function() {
+			 var check = /^[a-z0-9]{6,16}$/; 
+			 var in_id = $('#memberId').val();
+			 var temp = 0 ;
+				if(!check.test(in_id)){
+					//아이디가 유효하지 않을때
+					$("#idch").css("color", "#FF0000");
+					$('#idch').text('사용이 불가능한 아이디입니다.');
+				} else {
+					//아이디가 유효할때
+					$("#idch").css("color", "#008000");
+					$('#idch').text('');
+				}
+		 });
+		
 		 $(".idCheck").click(function() {
 			 console.log("idCheck");
 			 /* id 중복검사 로직 추가할 공간  controller호출 로직  */
@@ -60,33 +76,20 @@
 				 url : "<c:url value='/ajax/idCheck'/>",
 				 data :{
 					 'memberId':$('#memberId').val(),
-					 '${_csrf.parameterName}':'${_csrf.token}'
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url block 해제하는 토큰 추가함  */
 					 },
 				 success : function(){console.log("test");}				 
 			 });				
 			
 		});
 		
-		 $(".ID").blur(function() {
-			 var check = /^[a-z0-9]{3,16}$/; 
-				 /* /^(?=.*[a-z])(?=.*[0-9]).{6,20}$/i; */
-			 var in_id = $('#memberId').val();
-				if(!check.test(in_id)){
-					//아이디가 유효하지 않을때
-					$("#idch").css("color", "#FF0000");
-					$('#idch').text('사용이 불가능한 아이디입니다.');
-				} else {
-					//아이디가 유효할때
-					$("#idch").css("color", "#008000");
-					$('#idch').text('사용가능한 아이디입니다.');
-				}
-		 });
+	
 		
 		
 		/*--------------------------------------------------------------------------------------------------  */
 		
 		
-			 $(".PW").blur(function() {
+			 $(".PW").keypress(function() {
 				 var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
 				 var in_pw = $('#PW').val();
 					if(!check.test(in_pw)){
@@ -102,7 +105,7 @@
 					
 			 		
 			 
-			 $('.PW2').blur(function(){
+			 $('.PW2').keypress(function(){
 					var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
 					var in_pw = $('#PW').val();
 					var in_pw2 = $('#PW2').val();
@@ -336,9 +339,8 @@
 											</label>
 											<div class="col-sm-8">
 												<input type="radio" name="gender" value="male"> Male
-												&nbsp;&nbsp; <input type="radio" name="gender"
-													value="female">Female
-											</div>
+												&nbsp;&nbsp; <input type="radio" name="gender" value="female">Female
+											</div>       
 										</div>
 									</div>
 									<br>

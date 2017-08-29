@@ -6,12 +6,14 @@ public class JoinMemberVo
 	private String memberPassword;
 	private String memberName;
 	private String memberGender;
-	private String memberSocial_number;
+	private String memberSocialNumber;
 	private String memberAddress;
 	private String memberAddressDetail;
-	private String phone;
-	private String email;
+	private String memberPhone;
+	private String memberEmail;
 	private String memberAgreement;
+	
+	
 	public String getMemberId()
 	{
 		return memberId;
@@ -44,13 +46,13 @@ public class JoinMemberVo
 	{
 		this.memberGender = memberGender;
 	}
-	public String getMemberSocial_number()
+	public String getMemberSocialNumber()
 	{
-		return memberSocial_number;
+		return memberSocialNumber;
 	}
-	public void setMemberSocial_number(String memberSocial_number)
+	public void setMemberSocialNumber(String memberSocialNumber)
 	{
-		this.memberSocial_number = memberSocial_number;
+		this.memberSocialNumber = memberSocialNumber;
 	}
 	public String getMemberAddress()
 	{
@@ -68,21 +70,21 @@ public class JoinMemberVo
 	{
 		this.memberAddressDetail = memberAddressDetail;
 	}
-	public String getPhone()
+	public String getMemberPhone()
 	{
-		return phone;
+		return memberPhone;
 	}
-	public void setPhone(String phone)
+	public void setMemberPhone(String memberPhone)
 	{
-		this.phone = phone;
+		this.memberPhone = memberPhone;
 	}
-	public String getEmail()
+	public String getMemberEmail()
 	{
-		return email;
+		return memberEmail;
 	}
-	public void setEmail(String email)
+	public void setMemberEmail(String memberEmail)
 	{
-		this.email = email;
+		this.memberEmail = memberEmail;
 	}
 	public String getMemberAgreement()
 	{
@@ -96,9 +98,8 @@ public class JoinMemberVo
 	public String toString()
 	{
 		return "JoinMemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName="
-				+ memberName + ", memberGender=" + memberGender + ", memberSocial_number=" + memberSocial_number
-				+ ", memberAddress=" + memberAddress + ", memberAddressDetail=" + memberAddressDetail + ", phone="
-				+ phone + ", email=" + email + ", memberAgreement=" + memberAgreement + "]";
+				+ memberName + ", memberGender=" + memberGender + ", memberSocialNumber=" + memberSocialNumber
+				+ ", memberAddress=" + memberAddress + ", memberAddressDetail=" + memberAddressDetail + ", memberPhone="
+				+ memberPhone + ", memberEmail=" + memberEmail + ", memberAgreement=" + memberAgreement + "]";
 	}
-	
-}
+	}

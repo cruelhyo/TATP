@@ -15,6 +15,6 @@ public interface MemberDaoInterface {
 	int insertMember(MemberVo memberVo);
 
 	//회원가입시 아이디 중복체크
-	IdChecker idCheck(String memberId);
+	boolean idCheck(String memberId);
 	
 }

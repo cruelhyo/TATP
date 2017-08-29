@@ -24,10 +24,10 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public int idCheck(String memberId)
 	{
-		IdChecker idchecker = idao.idCheck(memberId);
-		String checkedId = idchecker.getMember_id();
+		boolean ck = idao.idCheck(memberId);
+		
 				
-		logger.info("checkedId : " + checkedId);
+		logger.info("checkedId : " + ck);
 		return 0;
 	}
 }

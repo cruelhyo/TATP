@@ -19,10 +19,12 @@
 	
 	
 	<!--회원가입시 아이디 중복체크  -->
-	<select id ="idCheck" parameterType="String" resultType="take.a.talent.member.vo.IdChecker">
+	<!-- SELECT EXISTS를 사용하여 중복되는 아이디가 있으면 TRUE, 없으면 FALSE를 반환하므로 resultType도 boolean   -->
+	<select id ="idCheck" parameterType="String" resultType="boolean">
+		SELECT EXISTS(
 		SELECT member_id
 		FROM member
-		WHERE member_id=#{member_id};
+		WHERE member_id=#{member_id});
 		
 	</select> 
 
@@ -30,19 +32,16 @@
 	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
-		INSERT INTO member(member_id, member_password, member_name, member_phone)
-			VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberPhone});
+		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
+		, member_address_detail, member_email, member_agreement)
+			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberPhone}, #{memberAddress}, #{memberAddressDetail},#{memberEmail},#{memberAgreement});
 			
 	</insert>
 	
 	
 	
 	
-	
-	
-	
-	
-	
+
 	
 
 	 <resultMap

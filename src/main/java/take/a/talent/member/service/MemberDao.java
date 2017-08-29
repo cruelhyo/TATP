@@ -41,8 +41,9 @@ public class MemberDao implements MemberDaoInterface{
 		return row;
 	}
 
+	//회원가입시 아이디 중복체크 
 	@Override
-	public IdChecker idCheck(String memberId){
+	public boolean idCheck(String memberId){
 		logger.info("DAO idCheck 호출");
 		logger.info("memberId : "+memberId);
 		

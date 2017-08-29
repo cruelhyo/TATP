@@ -44,6 +44,13 @@ public class MemberController
 		return "";
 	}
 	
+	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
+	public String pwCheck()
+	{
+		logger.info("PW체크");
+		return "user/join";
+	}
+	
 		
 	
 	
@@ -64,6 +71,9 @@ public class MemberController
 		
 		return "redirect:/";
 	}
+	
+	
+	
 	
 	
 	

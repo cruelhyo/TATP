@@ -16,6 +16,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
 
 <script>
 	$(document).ready(function() {
@@ -63,23 +65,79 @@
 			 });				
 			
 		});
+		
+		
+		/*--------------------------------------------------------------------------------------------------  */
+		
+		
+			 $(".PW").blur(function() {
+				 var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
+				 var in_pw = $('#PW').val();
+					if(!check.test(in_pw)){
+						//비번이 유효하지 않을때
+						$("#pwch").css("color", "#FF0000");
+						$('#pwch').text('비밀번호가 유효하지 않습니다');
+					} else {
+						//비번이 유효할때
+						$("#pwch").css("color", "#008000");
+						$('#pwch').text('비밀번호를 사용 가능합니다');
+					}
+			 });
+					
+			 		
+			 
+			 $('.PW2').blur(function(){
+					var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
+					var in_pw = $('#PW').val();
+					var in_pw2 = $('#PW2').val();
+					var temp = 0;
+					if(!check.test(in_pw2)){
+						temp = 0; //비번이 유효하지 않을때
+					} else {
+						temp = 1; //비번이 유효할때
+					}
+					if(temp == 1){
+						if(in_pw == in_pw2){
+		            		$('#pwch2').css('color', '#008000');
+		            		$('#pwch2').text('비밀번호가 일치합니다');
+		            	}else{
+		            		$('#pwch2').css('color', '#FF0000');
+		            		$('#pwch2').text('비밀번호가 불일치합니다');
+		            		$('#pwch2').val('');
+		        			$('#pwch2').focus();
+		            	}
+					}else{
+						$('#pwch2').css('color', '#FF0000');
+						$('#pwch2').text('비밀번호가 유효하지 않습니다');
+					}
+					
+					// 비밀번호 1,2 일치여부 확인 
+					
+			 });
+			 
+		
+		
+		
+		 /* -------------------------------------------------------------------------------  */
 		 
-		$(".mailNumberSearch").click(function(e) {
+		 
+		/* $(".mailNumberSearch").click(function(e) {
 
 			console.log("mailNumberSearch");
-			/* 우편번호 찾기 api 호출 ( 로직 추가할 공간  */
+			 우편번호 찾기 api 호출 ( 로직 추가할 공간)   ---구현중--- 
 
-		});
-		
-		
+		}); */
+			
+		 
+
+		function nextTab(elem) {
+			$(elem).next().find('a[data-toggle="tab"]').click();
+		}
+		function prevTab(elem) {
+			$(elem).prev().find('a[data-toggle="tab"]').click();
+		}
 	});
-
-	function nextTab(elem) {
-		$(elem).next().find('a[data-toggle="tab"]').click();
-	}
-	function prevTab(elem) {
-		$(elem).prev().find('a[data-toggle="tab"]').click();
-	}
+	
 </script>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -502,9 +560,10 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
+												<input type="text" class="form-control PW" id="PW"
 													placeholder="비밀번호 입력" name="memberPw">
 											</div>
+											<span id="pwch"><input type="hidden" value="0" id="use_pw" name="use_pw"></span>
 										</div>
 									</div>
 									<br>
@@ -516,9 +575,10 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW2"
+												<input type="text" class="form-control PW2" id="PW2"
 													placeholder="비밀번호 재입력" name="memberPw2">
 											</div>
+											<span id="pwch2"><input type="hidden" value="0" id="use_pw2" name="use_pw2"></span>
 										</div>
 									</div>
 									<br>

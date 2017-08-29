@@ -41,7 +41,7 @@ public class MemberController
 		service.idCheck(memberId);
 		
 		
-		return "";
+		return "redirect:/user/join";
 	}
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)

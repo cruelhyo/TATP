@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"  href="<c:url value='/resources/css/mapage.css'/>" type="text/css">
-<link rel="stylesheet"  href="<c:url value='/resources/css/join.css'/>" type="text/css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
@@ -36,8 +36,19 @@ $(function () {
   	});
   });
   
+$('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('hide')
+	})
+	
+$('#myTab a[href="#mypage"]').tab('show') // Select tab by name
+$('#myTab a:first').tab('show') // Select first tab
+$('#myTab a:last').tab('show') // Select last tab
+$('#myTab li:eq(2) a').tab('show') // Select third tab (0-indexed)
 
-
+$(function () {
+  $('#myTab a:last').tab('show')
+})
 	
 </script>
 
@@ -119,9 +130,21 @@ $(function () {
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
 								
-								<li class="active"><a data-target="#mypage" id="mypage-tab" role="tab" 
-									data-toggle="tab" aria-controls="home" aria-expanded="true" href="#">
-									<span class="glyphicon glyphicon-dashboard"></span> My Page</a></li>
+							<!-- Dropdown1-->
+								<li class="panel panel-default" id="dropdown">
+									<a data-toggle="collapse" href="#dropdown-lvl4">
+										<span class="glyphicon glyphicon-user"></span>
+										My Page<span class="caret"></span></a> 
+							<!-- Dropdown level 4 -->
+							<div id="dropdown-lvl4" class="panel-collapse collapse">
+										<div class="panel-body">
+											<ul class="nav navbar-nav">
+												<li role="presentation" class="active">
+													<a href="#mypage" aria-controls="home" role="tab" data-toggle="tab">회원정보수정</a></li>
+												<li><a href="#">내주소록 보기</a></li>
+												
+											</ul>
+										</div>
 								
 							<!-- Dropdown1-->
 								<li class="panel panel-default" id="dropdown">
@@ -133,7 +156,8 @@ $(function () {
 							<div id="dropdown-lvl1" class="panel-collapse collapse">
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
-												<li><a href="#">충전하기</a></li>
+												<li role="presentation" class="active">
+													<a href="#mypoint" aria-controls="home" role="tab" data-toggle="tab">충전하기</a></li>
 												<li><a href="#">충전내역 보기</a></li>
 												<li><a href="#">환전하기</a></li>
 											</ul>
@@ -145,12 +169,12 @@ $(function () {
 
 							<!-- Dropdown-->
 								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl1"> 
+									<a data-toggle="collapse" href="#dropdown-lvl3"> 
 										<span class="glyphicon glyphicon-user"></span> 
 										My Profile <span class="caret"></span></a> 
 										
 							<!-- Dropdown level 1 -->
-									<div id="dropdown-lvl1" class="panel-collapse collapse">
+									<div id="dropdown-lvl3" class="panel-collapse collapse">
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li><a href="#">My Portfolio</a></li>
@@ -188,14 +212,18 @@ $(function () {
 			</div>
 		</div>
 		<!-- 내정보수정 -->
-		<div id="mypage">
-			<jsp:include page="../include/memberUpdateForm.jsp" flush="true"></jsp:include>
-		</div>
-		<div id="mypoint">
+		<div class="tab-content">
+  			<div role="tabpanel" class="tab-pane fade in active" id="mypage">
+				<jsp:include page="../include/memberUpdateForm.jsp" flush="true"></jsp:include>
+			</div>
+			
+		<div role="tabpanel" class="tab-pane fade in active" id="mypoint">
 			<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
 		</div>
 	
-	</div>
+		</div>
+
+
 
 
 </body>

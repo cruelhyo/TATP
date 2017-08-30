@@ -21,29 +21,35 @@
 	
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(function()
+	{
 		//Initialize tooltips
 		$('.nav-tabs > li a[title]').tooltip();
-
+		
+		// idCheck버튼 비활성화
+		$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+		
 		//Wizard
-		$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-
+		$('a[data-toggle="tab"]').on('show.bs.tab', function(e)
+		{
 			var $target = $(e.target);
 
-			if ($target.parent().hasClass('disabled')) {
+			if ($target.parent().hasClass('disabled'))
+			{
 				return false;
 			}
 		});
 
-		$(".next-step").click(function(e) {
-
+		$(".next-step").click(function(e)
+		{
 			var $active = $('.wizard .nav-tabs li.active');
 			$active.next().removeClass('disabled');
 			nextTab($active);
 
 		});
-		$(".prev-step").click(function(e) {
-
+		
+		$(".prev-step").click(function(e)
+		{
 			var $active = $('.wizard .nav-tabs li.active');
 			prevTab($active);
 
@@ -52,22 +58,27 @@
 		/* <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> */
 		
 		
-		$(".ID").keypress(function() {
-			 var check = /^[a-z0-9]{6,16}$/; 
-			 var in_id = $('#memberId').val();
-			 var temp = 0 ;
-				if(!check.test(in_id)){
-					//아이디가 유효하지 않을때
-					$("#idch").css("color", "#FF0000");
-					$('#idch').text('사용이 불가능한 아이디입니다.');
-				} else {
-					//아이디가 유효할때
-					$("#idch").css("color", "#008000");
-					$('#idch').text('');
-				}
+		$(".ID").keypress(function()
+		{
+			var check = /^[a-z0-9]{6,16}$/; 
+			var in_id = $('#memberId').val();
+			var temp = 0 ;
+			if(!check.test(in_id))
+			{
+				//아이디가 유효하지 않을때
+				$("#idch").css("color", "#FF0000");
+				$('#idch').text('사용이 불가능한 아이디입니다.');
+			}
+			else
+			{
+				//아이디가 유효할때 아이디 증복체크 버튼 active하기
+				$("#idch").css("color", "#999900");
+				$('#idch').text('아이디 중복 검사가 필요합니다.');
+				$(".idCheck").attr('class','btn btn-primary idCheck active');
+			}
 		 });
 		
-		 $(".idCheck").click(function() {
+		$(".idCheck").click(function() {
 			 console.log("idCheck");
 			 /* id 중복검사 로직 추가할 공간  controller호출 로직  */
 			 
@@ -78,8 +89,21 @@
 					 'memberId':$('#memberId').val(),
 					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url block 해제하는 토큰 추가함  */
 					 },
-				 success : function(){console.log("test");}				 
-			 });				
+				success : function(idExist)
+				{
+					console.log(idExist);
+					if(idExist)
+					{
+						$("#idch").css("color", "#FF0000");
+						$('#idch').text('이미 존재하는 아이디입니다.');
+					}
+					else
+					{
+						$("#idch").css("color", "#009900");
+						$('#idch').text('사용 가능한 아이디입니다.');
+					}
+				}				 
+			 });	
 			
 		});
 		
@@ -156,7 +180,6 @@
 			$(elem).prev().find('a[data-toggle="tab"]').click();
 		}
 	});
-	
 </script>
 
 
@@ -278,7 +301,7 @@
 											</div>
 											
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-default idCheck">
+												<button type="button" class="btn btn-primary idCheck">
 													중복 검사</button>
 											</div>
 										</div>

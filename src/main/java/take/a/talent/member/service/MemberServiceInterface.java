@@ -26,7 +26,7 @@ public interface MemberServiceInterface {
 		int addMember(MemberVo memberVo);
 		
 		//회원가입시 아이디 중복검사  
-		int idCheck(String memberId);
+		boolean idCheck(String memberId);
 
 	
 }

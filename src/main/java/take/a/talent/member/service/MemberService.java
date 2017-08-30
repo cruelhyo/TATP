@@ -22,12 +22,13 @@ public class MemberService implements MemberServiceInterface{
 	}
 
 	@Override
-	public int idCheck(String memberId)
+	public boolean idCheck(String memberId)
 	{
 		boolean ck = idao.idCheck(memberId);
 		
 				
 		logger.info("checkedId : " + ck);
-		return 0;
+		
+		return ck;
 	}
 }

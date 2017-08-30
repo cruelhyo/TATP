@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
@@ -34,14 +35,14 @@ public class MemberController
 	
 	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
 	@RequestMapping(value ="/ajax/idCheck", method=RequestMethod.POST)
-	public String idCheck(String memberId) {
+	public @ResponseBody boolean idCheck(String memberId, ModelMap model) {
 		logger.info("id체크");
 		logger.info("VO값 확인");
 		logger.info("memberId"+memberId);
-		service.idCheck(memberId);
+		boolean idExist = service.idCheck(memberId);
+		model.addAttribute("idExist", idExist);
 		
-		
-		return "redirect:/user/join";
+		return idExist;
 	}
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)

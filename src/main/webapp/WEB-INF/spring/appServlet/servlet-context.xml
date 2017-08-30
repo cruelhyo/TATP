@@ -28,9 +28,8 @@
 
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> -->
 
-	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-	<!-- <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" 
-		/> -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+<!-- 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->

@@ -15,6 +15,7 @@
 	</properties>
 	<dependencies>
 	
+	
 		<!-- jackson // ajax로 DTO객체를 바로 리턴받기 위해서  -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

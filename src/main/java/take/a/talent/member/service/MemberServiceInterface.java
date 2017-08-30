@@ -2,7 +2,6 @@ package take.a.talent.member.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import take.a.talent.member.vo.MemberVo;
 
 
 public interface MemberServiceInterface {
@@ -23,7 +22,7 @@ public interface MemberServiceInterface {
 		User getUser(String userId);
 */
 		//회원가입시 회원정보 입력하기 위한 dao 메서드 선언
-		int addMember(MemberVo memberVo);
+		//int addMember(MemberVo memberVo);
 		
 		//회원가입시 아이디 중복검사  
 		boolean idCheck(String memberId);

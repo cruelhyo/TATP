@@ -24,7 +24,15 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
+						<sec:authorize access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')">
+							<li><a href="<c:url value='/admin'/>">Admin Page</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM')">
+							<li><a href="<c:url value='/member/studentPage'/>">Student Page</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_TEACHER')">
+							<li><a href="<c:url value='/teacher/teacherPage'/>">Teacher Page</a></li>
+						</sec:authorize>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>

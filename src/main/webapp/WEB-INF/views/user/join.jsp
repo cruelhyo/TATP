@@ -17,6 +17,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
 
 <script>
 	$(document).ready(function() {
@@ -46,14 +48,115 @@
 			prevTab($active);
 
 		});
-	});
+		
+		/* <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> */
+		
+		
+		$(".ID").keypress(function() {
+			 var check = /^[a-z0-9]{6,16}$/; 
+			 var in_id = $('#memberId').val();
+			 var temp = 0 ;
+				if(!check.test(in_id)){
+					//아이디가 유효하지 않을때
+					$("#idch").css("color", "#FF0000");
+					$('#idch').text('사용이 불가능한 아이디입니다.');
+				} else {
+					//아이디가 유효할때
+					$("#idch").css("color", "#008000");
+					$('#idch').text('');
+				}
+		 });
+		
+		 $(".idCheck").click(function() {
+			 console.log("idCheck");
+			 /* id 중복검사 로직 추가할 공간  controller호출 로직  */
+			 
+			 $.ajax({
+				 type : 'POST',
+				 url : "<c:url value='/ajax/idCheck'/>",
+				 data :{
+					 'memberId':$('#memberId').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url block 해제하는 토큰 추가함  */
+					 },
+				 success : function(){console.log("test");}				 
+			 });				
+			
+		});
+		
+	
+		
+		
+		/*--------------------------------------------------------------------------------------------------  */
+		
+		
+			 $(".PW").keypress(function() {
+				 var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
+				 var in_pw = $('#PW').val();
+					if(!check.test(in_pw)){
+						//비번이 유효하지 않을때
+						$("#pwch").css("color", "#FF0000");
+						$('#pwch').text('비밀번호가 유효하지 않습니다');
+					} else {
+						//비번이 유효할때
+						$("#pwch").css("color", "#008000");
+						$('#pwch').text('비밀번호를 사용 가능합니다');
+					}
+			 });
+					
+			 		
+			 
+			 $('.PW2').keypress(function(){
+					var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
+					var in_pw = $('#PW').val();
+					var in_pw2 = $('#PW2').val();
+					var temp = 0;
+					if(!check.test(in_pw2)){
+						temp = 0; //비번이 유효하지 않을때
+					} else {
+						temp = 1; //비번이 유효할때
+					}
+					if(temp == 1){
+						if(in_pw == in_pw2){
+		            		$('#pwch2').css('color', '#008000');
+		            		$('#pwch2').text('비밀번호가 일치합니다');
+		            	}else{
+		            		$('#pwch2').css('color', '#FF0000');
+		            		$('#pwch2').text('비밀번호가 불일치합니다');
+		            		$('#pwch2').val('');
+		        			$('#pwch2').focus();
+		            	}
+					}else{
+						$('#pwch2').css('color', '#FF0000');
+						$('#pwch2').text('비밀번호가 유효하지 않습니다');
+					}
+					
+					// 비밀번호 1,2 일치여부 확인 
+					
+			 });
+			 
+		
+		
+		
+		 /* -------------------------------------------------------------------------------  */
+		 
+		 
+		/* $(".mailNumberSearch").click(function(e) {
 
-	function nextTab(elem) {
-		$(elem).next().find('a[data-toggle="tab"]').click();
-	}
-	function prevTab(elem) {
-		$(elem).prev().find('a[data-toggle="tab"]').click();
-	}
+			console.log("mailNumberSearch");
+			 우편번호 찾기 api 호출 ( 로직 추가할 공간)   ---구현중--- 
+
+		}); */
+			
+		 
+
+		function nextTab(elem) {
+			$(elem).next().find('a[data-toggle="tab"]').click();
+		}
+		function prevTab(elem) {
+			$(elem).prev().find('a[data-toggle="tab"]').click();
+		}
+	});
+	
 </script>
 
 
@@ -163,17 +266,19 @@
 									<hr>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="ID">
+											<label class="control-label col-sm-3 " for="memberId">
 												<p align="right">
 													<strong>아이디</strong>
 												</p>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="ID"
-													placeholder="아이디 입력" name="member_id">
+												<input type="text" class="form-control ID " id="memberId"
+													placeholder="아이디 입력" name="memberId">
+													<span id="idch"><input type="hidden" value="0" id="use_id" name="use_id"></span>
 											</div>
+											
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-default idCheck">
 													중복 검사</button>
 											</div>
 										</div>
@@ -187,9 +292,10 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 입력" name="member_pw">
+												<input type="text" class="form-control PW" id="PW"
+													placeholder="비밀번호 입력" name="memberPw">
 											</div>
+											<span id="pwch"><input type="hidden" value="0" id="use_pw" name="use_pw"></span>
 										</div>
 									</div>
 									<br>
@@ -201,9 +307,10 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 재입력" name="member_pw">
+												<input type="text" class="form-control PW2" id="PW2"
+													placeholder="비밀번호 재입력" name="memberPw2">
 											</div>
+											<span id="pwch2"><input type="hidden" value="0" id="use_pw2" name="use_pw2"></span>
 										</div>
 									</div>
 									<br>
@@ -232,9 +339,8 @@
 											</label>
 											<div class="col-sm-8">
 												<input type="radio" name="gender" value="male"> Male
-												&nbsp;&nbsp; <input type="radio" name="gender"
-													value="female">Female
-											</div>
+												&nbsp;&nbsp; <input type="radio" name="gender" value="female">Female
+											</div>       
 										</div>
 									</div>
 									<br>
@@ -304,10 +410,11 @@
 											</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" id="adress"
-													placeholder="우편번호" name="">
+													placeholder="우편번호" name="member_address">
 											</div>
 											<div class="col-sm-2">
-												<button type="submit" class="btn btn-default">동 검색</button>
+												<button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button>
+												
 											</div>
 										</div>
 									</div>
@@ -322,7 +429,7 @@
 											</label>
 											<div class="col-sm-5">
 												<input type="text" class="form-control" id="ID"
-													placeholder="상세주소" name="member_id">
+													placeholder="상세주소" name="member_address_detail">
 											</div>
 										</div>
 									</div>

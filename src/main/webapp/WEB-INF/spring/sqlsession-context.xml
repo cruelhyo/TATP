@@ -11,7 +11,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<!-- war배포할때에 localhost // 원격 작업할때는 takeatalent.cafe24.com -->
-		<property name="url" value="jdbc:mysql://takeatalent.cafe24.com:3306/takeatalent?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="url" value="jdbc:mysql://takeatalent.cafe24.com:3306/takeatalent?;useUnicode=true&amp;characterEncoding=utf8" />
 		<property name="username" value="takeatalent" />
 		<property name="password" value="lhkc37711@" />
 	</bean>

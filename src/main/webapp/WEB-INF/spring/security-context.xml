@@ -24,19 +24,23 @@
 			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
 		<security:intercept-url pattern="/anonymous/**"	
 			access="permitAll" />
+		<security:intercept-url pattern="/ajax/**"	
+			access="permitAll" />	
+
 
 		<!-- 
 			/login 요청 패이지는 시큐리티가 적용되는 로그인(인증)패이지라고 지정
 			parameter 지정
 			인증 성공시 가는 핸들러 지정
-			인증 실패시 요정하는 url 지정  
-		-->
+			인증 실패시 요정하는 url 지정   -->
+
 		<security:form-login login-page="/login"
 			username-parameter="member_id" 
 			password-parameter="member_pw"
 			login-processing-url="/login" 
 			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-url="/login?error=1" />
+			
 		<!-- 권한이 맞지 않은 사용자가 접근시 /Access_Denied요청 -->
 		<security:access-denied-handler error-page="/Access_Denied" />
 		

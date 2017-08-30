@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
 
 @Controller
@@ -25,6 +27,31 @@ public class MemberController
 	@Autowired
 	UserAuthenticationService userAuthenticationService;
 	
+	@Autowired
+    private MemberServiceInterface service;
+	
+	
+	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	@RequestMapping(value ="/ajax/idCheck", method=RequestMethod.POST)
+	public @ResponseBody boolean idCheck(String memberId, ModelMap model) {
+		logger.info("id체크");
+		logger.info("VO값 확인");
+		logger.info("memberId"+memberId);
+		boolean idExist = service.idCheck(memberId);
+		model.addAttribute("idExist", idExist);
+		
+		return idExist;
+	}
+	
+	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
+	public String pwCheck()
+	{
+		logger.info("PW체크");
+		return "user/join";
+	}
+	
+		
 	
 	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
@@ -32,8 +59,36 @@ public class MemberController
 	{
 		return "user/join";
 	}
+	
+	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+/*	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
+	public String insertjoin(MemberVo memberVo) {
+		logger.info("join액션");
+		logger.info("VO값 확인"+memberVo.toString());
+		service.addMember(memberVo);
+		
+		
+		return "redirect:/";
+	}
+	*/
+	
+	
+	
+	
+	
+	/*//join에서 입력한 정보를가지고 service를 호출함. 
+	@RequestMapping(value = {"/anonymous/insertjoin"}, method = RequestMethod.GET)
+	public String insertMember(MemberVo memberVo)
+	{
+		logger.info("insertMember service.addMember호출");
+		
+		return "redirect:/";
+	}*/
+	
+	/*@RequestMapping(value="/" , method = {RequestMethod.GET, RequestMethod.POST})*/
 
-	@RequestMapping(value = { "/userlogin" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());

@@ -16,6 +16,8 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
+	
+	
 
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -26,9 +28,8 @@
 
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> -->
 
-	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-	<!-- <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" 
-		/> -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+<!-- 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -40,6 +41,6 @@
 		<property name="contentType" value="text/html; charset=UTF-8" />
 	</bean>
 
-	<context:component-scan base-package="take.a.talent" />
+	<context:component-scan base-package="take.a.talent" />  <!--spring에서 take.a.talent로 시작하는 package들을 자동으로 @autowired를 해준다고 등록함. @repository나, @service는 하위임으로 바로 사용가능   -->
 
 </beans>

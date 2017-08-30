@@ -10,386 +10,286 @@
 <title>Take A Talent</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/join.css'/>" type="text/css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(function()
+	{
 		//Initialize tooltips
 		$('.nav-tabs > li a[title]').tooltip();
-
+		
+		// idCheck버튼 비활성화
+		$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+		
 		//Wizard
-		$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-
+		$('a[data-toggle="tab"]').on('show.bs.tab', function(e)
+		{
 			var $target = $(e.target);
 
-			if ($target.parent().hasClass('disabled')) {
+			if ($target.parent().hasClass('disabled'))
+			{
 				return false;
 			}
 		});
 
-		$(".next-step").click(function(e) {
-
+		$(".next-step").click(function(e)
+		{
 			var $active = $('.wizard .nav-tabs li.active');
 			$active.next().removeClass('disabled');
 			nextTab($active);
 
 		});
-		$(".prev-step").click(function(e) {
-
+		
+		$(".prev-step").click(function(e)
+		{
 			var $active = $('.wizard .nav-tabs li.active');
 			prevTab($active);
 
 		});
+		
+		// ID입력창에 글자 입력될때마다 id유효성 검사
+		$(".ID").keyup(function()
+		{
+			var check = /^[a-z0-9]{6,16}$/; 
+			var in_id = $('#memberId').val();
+			var temp = 0 ;
+			if(!check.test(in_id))
+			{
+				//아이디가 유효하지 않을때 증복체크 버튼 disabled하기
+				$("#idch1").css("color", "#FF0000");
+				$("#idch2").css("color", "#FF0000");
+				$('#idch1').text('사용이 불가능한 아이디입니다.');
+				$('#idch2').text('(영문,숫자조합 6자이상)');
+				$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+			}
+			else
+			{
+				//아이디가 유효할때 아이디 증복체크 버튼 active하기
+				$("#idch1").css("color", "#999900");
+				$('#idch1').text('아이디 중복 검사가 필요합니다.');
+				$('#idch2').text('');
+				$(".idCheck").attr('class','btn btn-primary idCheck active');
+			}
+		 });
+		
+		// 아이디 중복검사 버튼 클릭 시
+		$(".idCheck").click(function()
+		{
+			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+			 */			 
+			 $.ajax(
+			{
+				 type : 'POST',
+				 url : "<c:url value='/ajax/idCheck'/>",
+				 data :{
+					 'memberId':$('#memberId').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
+					 }, 
+				success : function(idExist)
+				{
+					console.log(idExist);
+					if(idExist)
+					{	
+						$("#idch1").css("color", "#FF0000");
+						$('#idch1').text('이미 존재하는 아이디입니다.');
+						$('#idch2').text('');
+					}
+					else
+					{
+						$("#idch1").css("color", "#009900");
+						$('#idch1').text('사용 가능한 아이디입니다.');
+						$('#idch2').text('');
+					}
+				}				 
+			 });	
+			
+		});
+		
+		// pw입력시 유효성 검사
+		$('.PW').keyup(function()
+		{
+			var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+			var in_pw = $('#PW').val();
+			if(!check.test(in_pw))
+			{
+				//비번이 유효하지 않을때
+				$('#pwch1').css('color', '#FF0000');
+				$('#pwch2').css('color', '#FF0000');
+				$('#pwch1').text('비밀번호가 유효하지 않습니다.');
+				$('#pwch2').text('(영문,숫자,특수문자조합 8자이상)');
+			}
+			else
+			{
+				//비번이 유효할때
+				$('#pwch1').css("color", "#008000");
+				$('#pwch1').text('비밀번호를 사용 가능합니다');
+				$('#pwch2').text('');
+			}
+		});
+					
+			 		
+			 
+		$('.PW2').keyup(function()
+		{
+			var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+			var in_pw = $('#PW').val();
+			var in_pw2 = $('#PW2').val();
+			var temp = 0;
+			if(!check.test(in_pw2))
+			{
+				temp = 0; //비번이 유효하지 않을때
+			} 
+			else 
+			{
+				temp = 1; //비번이 유효할때
+			}
+			
+			if(temp == 1)
+			{
+				if(in_pw == in_pw2)
+				{
+            		$('#pwch3').css('color', '#008000');
+            		$('#pwch3').text('비밀번호가 일치합니다');
+            	}
+				else
+				{
+            		$('#pwch3').css('color', '#FF0000');
+            		$('#pwch3').text('비밀번호가 불일치합니다');
+            		$('#pwch3').val('');
+        			$('#pwch3').focus();
+            	}
+			}
+			else
+			{
+				$('#pwch3').css('color', '#FF0000');
+				$('#pwch3').text('비밀번호가 유효하지 않습니다');
+			}
+				
+			// 비밀번호 1,2 일치여부 확인 
+		});
+			 
+		
+		
+		
+		 /* -------------------------------------------------------------------------------  */
+		 
+		 
+			     /* 성별 radio 체크 클릭시 값을 받아오는 동작수행 */
+	    $("input:radio[name=gender]").click(function(){
+	    	
+	    	 /* 성별 체크박스 값을 받아오기위한 설정 */
+	    	var gen = $(":input:radio[name=gender]:checked").val();
+			
+	    	$('input:radio[name=gender]:input[value=' + gen +']').attr("checked", true);
+			
+			if(gen == "male"){
+				console.log("male");
+			}else{
+				 console.log("female");
+			}
+
+	    	
+	    }); 
+	     
+	     
+	    /* 메일수신동의여부 체크 클릭시 값을 받아오는 동작수행 */
+	    $("input:radio[name=mailagreement]").click(function(){
+	    	
+	    	 /* 메일수신동의여부 체크박스 값을 받아오기위한 설정 */
+	    	var mailagree = $(":input:radio[name=mailagreement]:checked").val();
+			
+	    	$('input:radio[name=mailagreement]:input[value=' + mailagree +']').attr("checked", true);
+			
+			if(mailagree == "y"){
+				console.log("yes");
+			}else{
+				 console.log("no");
+			}
+
+	    	
+	    }); 
+			
+		 
+
+		function nextTab(elem) {
+			$(elem).next().find('a[data-toggle="tab"]').click();
+		}
+		function prevTab(elem) {
+			$(elem).prev().find('a[data-toggle="tab"]').click();
+		}
 	});
-
-	function nextTab(elem) {
-		$(elem).next().find('a[data-toggle="tab"]').click();
-	}
-	function prevTab(elem) {
-		$(elem).prev().find('a[data-toggle="tab"]').click();
-	}
 </script>
-<style>
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
-/* Add a gray background color and some padding to the footer */
-footer {
-	background-color: #151515;
-	padding: 25px;
-}
+<!-- 우편번호 찾기 api  -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode()
+    {
+        new daum.Postcode(
+        {     
+            oncomplete: function(data)
+            {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
 
-.button-1 {
-	padding: 0px;
-}
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') 
+                { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
 
-/*top_bar*/
-.wizard {
-	margin: 20px auto;
-	background: #fff;
-}
+                } 
+                else 
+                { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
 
-.wizard .nav-tabs {
-	position: relative;
-	margin: 40px auto;
-	margin-bottom: 0;
-	border-bottom-color: #e0e0e0;
-}
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R')
+                {
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== '')
+                    {
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== '')
+                    {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
 
-.wizard>div.wizard-inner {
-	position: relative;
-}
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+                
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
 
-.connecting-line {
-	height: 2px;
-	background: #e0e0e0;
-	position: absolute;
-	width: 80%;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	top: 50%;
-	z-index: 1;
-}
+    
+    /* $(".mailNumberSearch").click(function(e) {
 
-.wizard .nav-tabs>li.active>a, .wizard .nav-tabs>li.active>a:hover,
-	.wizard .nav-tabs>li.active>a:focus {
-	color: #555555;
-	cursor: default;
-	border: 0;
-	border-bottom-color: transparent;
-}
+	console.log("mailNumberSearch");
+	 우편번호 찾기 api 호출 ( 로직 추가할 공간)   ---구현중--- 
 
-span.round-tab {
-	width: 70px;
-	height: 70px;
-	line-height: 70px;
-	display: inline-block;
-	border-radius: 100px;
-	background: #fff;
-	border: 2px solid #e0e0e0;
-	z-index: 2;
-	position: absolute;
-	left: 0;
-	text-align: center;
-	font-size: 25px;
-}
-
-span.round-tab i {
-	color: #555555;
-}
-
-.wizard li.active span.round-tab {
-	background: #fff;
-	border: 2px solid #5bc0de;
-}
-
-.wizard li.active span.round-tab i {
-	color: #5bc0de;
-}
-
-span.round-tab:hover {
-	color: #333;
-	border: 2px solid #333;
-}
-
-.wizard .nav-tabs>li {
-	width: 25%;
-}
-
-.wizard li:after {
-	content: " ";
-	position: absolute;
-	left: 46%;
-	opacity: 0;
-	margin: 0 auto;
-	bottom: 0px;
-	border: 5px solid transparent;
-	border-bottom-color: #5bc0de;
-	transition: 0.1s ease-in-out;
-}
-
-.wizard li.active:after {
-	content: " ";
-	position: absolute;
-	left: 46%;
-	opacity: 1;
-	margin: 0 auto;
-	bottom: 0px;
-	border: 10px solid transparent;
-	border-bottom-color: #5bc0de;
-}
-
-.wizard .nav-tabs>li a {
-	width: 70px;
-	height: 70px;
-	margin: 20px auto;
-	border-radius: 100%;
-	padding: 0;
-}
-
-.wizard .nav-tabs>li a:hover {
-	background: transparent;
-}
-
-.wizard .tab-pane {
-	position: relative;
-	padding-top: 50px;
-}
-
-.wizard h3 {
-	margin-top: 0;
-}
-
-.step1 .row {
-	margin-bottom: 10px;
-}
-
-.step_21 {
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-}
-
-.step33 {
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding-left: 10px;
-	margin-bottom: 10px;
-}
-
-.dropselectsec {
-	width: 68%;
-	padding: 6px 5px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	color: #333;
-	margin-left: 10px;
-	outline: none;
-	font-weight: normal;
-}
-
-.dropselectsec1 {
-	width: 67.5%;
-	padding: 6px 5px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	color: #333;
-	margin-left: 1px;
-	outline: none;
-	font-weight: normal;
-}
-
-.mar_ned {
-	margin-bottom: 15px;
-}
-
-.wdth {
-	width: 15%;
-}
-
-.birthdrop {
-	width: 25%;
-	padding: 6px 5px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	color: #333;
-	margin-left: 5px;
-	outline: none;
-	font-weight: normal;
-}
-
-/* according menu */
-#accordion-container {
-	font-size: 13px
-}
-
-.accordion-header {
-	font-size: 13px;
-	background: #ebebeb;
-	margin: 5px 0 0;
-	padding: 7px 20px;
-	cursor: pointer;
-	color: #fff;
-	font-weight: 400;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px
-}
-
-.unselect_img {
-	width: 18px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.active-header {
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
-	background: #F53B27;
-}
-
-.active-header:after {
-	content: "\f068";
-	font-family: 'FontAwesome';
-	float: right;
-	margin: 5px;
-	font-weight: 400
-}
-
-.inactive-header {
-	background: #333;
-}
-
-.inactive-header:after {
-	content: "\f067";
-	font-family: 'FontAwesome';
-	float: right;
-	margin: 4px 5px;
-	font-weight: 400
-}
-
-.accordion-content {
-	display: none;
-	padding: 20px;
-	background: #fff;
-	border: 1px solid #ccc;
-	border-top: 0;
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px
-}
-
-.accordion-content a {
-	text-decoration: none;
-	color: #333;
-}
-
-.accordion-content td {
-	border-bottom: 1px solid #dcdcdc;
-}
-
-@media ( max-width : 585px ) {
-	.wizard {
-		width: 90%;
-		height: auto !important;
-	}
-	span.round-tab {
-		font-size: 16px;
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
-	}
-	.wizard .nav-tabs>li a {
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
-	}
-	.wizard li.active:after {
-		content: " ";
-		position: absolute;
-		left: 35%;
-	}
-}
-</style>
+}); */
+</script>
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Take a Talent</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Home</a></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> menu <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Page 1-1</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-
-			<li><a href="<c:url value='/anonymous/userjoin'/>"> <span
-					class="glyphicon glyphicon-user"></span> Join
-			</a></li>
-			<li><a href="<c:url value='/userlogin'/>"> <span
-					class="glyphicon glyphicon-log-in"></span> Login
-			</a></li>
-			<li>
-		</ul>
+	<div>
+		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-
-
-	</nav>
 	<!-- 회원가입폼 -->
 
 	<div class="container">
@@ -451,17 +351,21 @@ span.round-tab:hover {
 									<hr>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="ID">
+											<label class="control-label col-sm-3 " for="memberId">
 												<p align="right">
 													<strong>아이디</strong>
 												</p>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="ID"
-													placeholder="아이디 입력" name="member_id">
+												<input type="text" class="form-control ID " id="memberId"
+													placeholder="아이디 입력" name="memberId">
+													<span id="idch1"></span><br>
+													<span id="idch2"></span>												
+												<input type="hidden" value="0" id="use_id" name="use_id">
 											</div>
+											
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-primary idCheck">
 													중복 검사</button>
 											</div>
 										</div>
@@ -475,9 +379,13 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 입력" name="member_pw">
+												<input type="password" class="form-control PW" id="PW"
+													placeholder="비밀번호 입력" name="memberPw">
+												<input type="hidden" value="0" id="use_pw" name="use_pw">
+												<span id="pwch1"></span><br>
+												<span id="pwch2"></span>
 											</div>
+											
 										</div>
 									</div>
 									<br>
@@ -489,8 +397,10 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="PW"
-													placeholder="비밀번호 재입력" name="member_pw">
+												<input type="password" class="form-control PW2" id="PW2"
+													placeholder="비밀번호 재입력" name="memberPw2">
+												<input type="hidden" value="0" id="use_pw2" name="use_pw2">
+												<span id="pwch3"></span>
 											</div>
 										</div>
 									</div>
@@ -520,9 +430,8 @@ span.round-tab:hover {
 											</label>
 											<div class="col-sm-8">
 												<input type="radio" name="gender" value="male"> Male
-												&nbsp;&nbsp; <input type="radio" name="gender"
-													value="female">Female
-											</div>
+												&nbsp;&nbsp; <input type="radio" name="gender" value="female">Female
+											</div>       
 										</div>
 									</div>
 									<br>
@@ -535,48 +444,95 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_day" id="visa_status_day"
 													class="dropselectsec1">
 													<option value="">일</option>
-													<option value="2">1</option>
-													<option value="1">2</option>
-													<option value="4">3</option>
-													<option value="5">4</option>
-													<option value="6">5</option>
-													<option value="3">6</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
 													<option value="7">7</option>
 													<option value="8">8</option>
 													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+													<option value="31">31</option>
 												</select>
 											</div>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_month" id="visa_status_month"
 													class="dropselectsec1">
 													<option value="">월</option>
-													<option value="2">01</option>
-													<option value="1">02</option>
-													<option value="4">03</option>
-													<option value="5">04</option>
-													<option value="6">05</option>
-													<option value="3">06</option>
+													<option value="1">01</option>
+													<option value="2">02</option>
+													<option value="3">03</option>
+													<option value="4">04</option>
+													<option value="5">05</option>
+													<option value="6">06</option>
 													<option value="7">07</option>
 													<option value="8">08</option>
 													<option value="9">09</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
 												</select>
 											</div>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_year" id="visa_status_year"
 													class="dropselectsec1">
 													<option value="">년</option>
-													<option value="2">1990</option>
-													<option value="1">1991</option>
-													<option value="4">1992</option>
-													<option value="5">1993</option>
-													<option value="6">1994</option>
-													<option value="3">1995</option>
-													<option value="7">1996</option>
-													<option value="8">1997</option>
-													<option value="9">1998</option>
+													<option value="80">1980</option>
+													<option value="81">1981</option>
+													<option value="82">1982</option>
+													<option value="83">1983</option>
+													<option value="84">1984</option>
+													<option value="85">1985</option>
+													<option value="86">1986</option>
+													<option value="87">1987</option>
+													<option value="88">1988</option>
+													<option value="89">1989</option>
+													<option value="90">1990</option>
+													<option value="91">1991</option>
+													<option value="92">1992</option>
+													<option value="93">1993</option>
+													<option value="94">1994</option>
+													<option value="95">1995</option>
+													<option value="96">1996</option>
+													<option value="97">1997</option>
+													<option value="98">1998</option>
+													<option value="99">1999</option>
+													<option value="00">2000</option>
+													<option value="01">2001</option>
+													<option value="02">2002</option>
+													<option value="03">2003</option>
+													<option value="04">2004</option>
+													<option value="05">2005</option>
+													<option value="06">2006</option>
+													<option value="07">2007</option>
+													<option value="08">2008</option>
+													<option value="09">2009</option>
+													<option value="10">2010</option>													
 												</select>
 											</div>
 										</div>
@@ -591,11 +547,13 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" id="adress"
-													placeholder="우편번호" name="">
+												<input type="text" class="form-control" id="sample6_postcode"
+													placeholder="우편번호" name="member_address">
+													
 											</div>
 											<div class="col-sm-2">
-												<button type="submit" class="btn btn-default">동 검색</button>
+												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
+												<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 											</div>
 										</div>
 									</div>
@@ -609,8 +567,8 @@ span.round-tab:hover {
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="ID"
-													placeholder="상세주소" name="member_id">
+												<input type="text" class="form-control" id="sample6_address"
+													placeholder="상세주소" name="member_address_detail">
 											</div>
 										</div>
 									</div>
@@ -663,8 +621,8 @@ span.round-tab:hover {
 											<div class="col-sm-5">
 												<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>
 												&nbsp; 
-												<input type="radio" name="yes" value="y">예 
-												<input type="radio" name="no" value="n">아니오<br>
+												<input type="radio" name="mailagreement" value="y">예 
+												<input type="radio" name="mailagreement" value="n">아니오<br>
 											</div>
 										</div>
 									</div>

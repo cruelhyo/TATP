@@ -51,24 +51,59 @@ $(document).ready(function(){
 	  $('#myTab a:last').tab('show')
 	});
 	
-	$('#myPageShow').click(function(){
-		$('.includePage').hide();
-		$('#myPage').show();
-	});
+	//숨긴 includepage 해당 버튼 클릭시 보여주기
+		$('#myPageShow').click(function(){
+			$('.includePage').hide();
+			$('#myPage').show();
+		});
+		
+		$('#myPointHistoryShow').click(function(){
+			$('.includePage').hide();
+			$('#myPointHistory').show();
+		});
 	
-	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
-	});
-	
-	$('#myChangePWShow').click(function(){
-		$('.includePage').hide();
-		$('#myChangePW').show();
-	});
-	
-	
+		$('#myAddressShow').click(function(){
+			$('.includePage').hide();
+			$('#myAddress').show();
+		});
+		
+		$('#myPointShow').click(function(){
+			$('.includePage').hide();
+			$('#myPoint').show();
+		});
+		
+		$('#myChangePWShow').click(function(){
+			$('.includePage').hide();
+			$('#myChangePW').show();
+		});
+		
+		$('#myExchangeShow').click(function(){
+			$('.includePage').hide();
+			$('#myExchange').show();
+		});
+		
+		
+	// 주소추가폼 숨기기
+		$('.add').hide();
+		$('#plus').click(function(){
+			$('.add').hide();
+			$('#address1').show();
+		});
+	//주소추가하기 버튼 누르면 폼 다시 사라짐
+		$('#plus2').click(function(){
+			$('.add').hide();
+		});
+
+		// 환전내역 숨기기
+		$('.ExchangeHistory').hide();
+		$('#ExchangeView').click(function(){
+			$('.ExchangeHistory').hide();
+			$('#ExHistory').show();
+		});
 	
 });
+
+
 	
 </script>
 
@@ -113,7 +148,7 @@ $(document).ready(function(){
 													<a href="#mypage" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
 												</li>
 												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
-												<li><a href="#">내주소록 보기</a></li>
+												<li><a href="#" id ="myAddressShow">내주소록 보기</a></li>
 												
 											</ul>
 										</div>
@@ -133,8 +168,8 @@ $(document).ready(function(){
 											<ul class="nav navbar-nav">
 												<li role="presentation" class="active">
 													<a href="#mypoint" aria-controls="home" role="tab" data-toggle="tab" id="myPointShow">충전하기</a></li>
-												<li><a href="#">충전내역 보기</a></li>
-												<li><a href="#">환전하기</a></li>
+												<li><a href="#myPointHistory" id="myPointHistoryShow">충전내역 보기</a></li>
+												<li><a href="#myExchange" id="myExchangeShow">환전하기</a></li>
 											</ul>
 										</div>
 									</div>
@@ -195,15 +230,29 @@ $(document).ready(function(){
 		</div>
 		<!-- 내정보수정 -->
 		<div class="tab-content">
+			<!--기본정보 수정  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
 				<jsp:include page="../include/memberUpdateForm.jsp" flush="true"></jsp:include>
 			</div>
-			
+			<!--내포인트 충전 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
 				<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
 			</div>
+			<!--비밀번호 변경 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
 				<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 주소추가 삭제 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="myAddress">
+				<jsp:include page="../include/address.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 내 결제내역 보기 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
+				<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 내 환전포인트 보기 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="myExchange">
+				<jsp:include page="../include/pointExchange.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
 	</div>

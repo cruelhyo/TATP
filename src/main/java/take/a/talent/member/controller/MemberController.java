@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberVo;
 
 @Controller
 public class MemberController
@@ -42,6 +43,15 @@ public class MemberController
 		model.addAttribute("idExist", idExist);
 		
 		return idExist;
+	}
+	
+	@RequestMapping(value ="/ajax/updateMember", method=RequestMethod.POST)
+	public @ResponseBody int updateMember(MemberVo memberVo, ModelMap model)
+	{
+		logger.info("updateMember");
+		int updateMemberResult = service.updateMember(memberVo);
+		model.addAttribute("updateMemberResult", updateMemberResult);
+		return updateMemberResult;
 	}
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
@@ -104,6 +114,13 @@ public class MemberController
 
 	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.GET)
 	public String teacherPage(ModelMap model)
+	{
+		model.addAttribute("user", userAuthenticationService.getUserName());
+		return "user/teacherPage";
+	}
+	
+	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.POST)
+	public String teacherPagep(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/teacherPage";

@@ -2,6 +2,8 @@ package take.a.talent.member.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import take.a.talent.member.vo.MemberVo;
+
 
 
 public interface MemberServiceInterface {
@@ -26,6 +28,6 @@ public interface MemberServiceInterface {
 		
 		//회원가입시 아이디 중복검사  
 		boolean idCheck(String memberId);
-
+		int updateMember(MemberVo memberVo);
 	
 }

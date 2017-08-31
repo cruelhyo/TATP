@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -53,12 +55,13 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 	}
 	
-	public int updateMember(MemberVo memberVo) 
+	@Override
+	public int updateMember(MemberVo memberVo)
 	{
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		memberVo.setMemberId(user.getUsername());
 		logger.info("DAO updateMember 호출");
-		
-		int result = sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
-		return result;
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
 	}
 	
 }

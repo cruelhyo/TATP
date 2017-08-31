@@ -45,7 +45,7 @@
 		<security:access-denied-handler error-page="/Access_Denied" />
 		
 		<!-- csrf에 대한 공격을 대비하기 위해 설정 -->
-		<security:csrf />
+		<!-- <security:csrf /> -->
 	</security:http>
 	
 

@@ -39,8 +39,17 @@
 	</insert>
 	
 	
-	
-	
+	<!-- 회원 정보 수정(비밀번호, 주소 제외) -->	
+	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member 
+		SET member_name = #{memberName}
+		, member_nickname = #{memberNickname}
+		, member_gender = #{memberGender}
+		, member_birthday = #{memberBirthday}
+		, member_phone = #{memberPhone}
+		, member_email = #{memberEmail}
+		WHERE member_id = #{memberId}; 
+	</update>
 
 	
 

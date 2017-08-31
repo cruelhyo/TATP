@@ -53,4 +53,12 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 	}
 	
+	public int updateMember(MemberVo memberVo) 
+	{
+		logger.info("DAO updateMember 호출");
+		
+		int result = sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
+		return result;
+	}
+	
 }

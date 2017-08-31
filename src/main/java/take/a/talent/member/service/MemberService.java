@@ -23,4 +23,14 @@ public class MemberService implements MemberServiceInterface{
 		
 		return ck;
 	}
+
+	@Override
+	public boolean nicknameCheck(String memberNickname) {
+		
+		boolean nck = false;
+		 
+		logger.info("checkedNickname : " + nck);
+			
+		return nck;
+	}
 }

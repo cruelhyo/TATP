@@ -76,6 +76,7 @@
 			}
 		 });
 		
+		
 		// 아이디 중복검사 버튼 클릭 시
 		$(".idCheck").click(function()
 		{
@@ -104,6 +105,67 @@
 						$("#idch1").css("color", "#009900");
 						$('#idch1').text('사용 가능한 아이디입니다.');
 						$('#idch2').text('');
+					}
+				}				 
+			 });	
+			
+		});
+		
+		
+		// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
+		$(".nickName").keyup(function()
+		{
+			var check = /^[a-z0-9~!@#$%^*()\-_=+]{5,16}$/; 
+			 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
+			var in_nickname = $('#NICKNAME').val();
+			var temp = 0 ;
+			if(!check.test(in_nickname))
+			{
+				//닉네임이 유효하지 않을때 증복체크 버튼 disabled하기
+				$("#nkch1").css("color", "#FF0000");
+				/* $("#nkch2").css("color", "#FF0000"); */
+				$('#nkch1').text('사용이 불가능한 닉네임입니다.');
+				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
+			}
+			else
+			{
+				//닉네임이 유효할때 아이디 증복체크 버튼 active하기
+				$("#nkch1").css("color", "#999900");
+				$('#nkch1').text('닉네임 중복 검사가 필요합니다.');
+				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');
+			}
+		 });
+		
+		
+		
+		// 닉네임 중복검사 버튼 클릭 시
+		$(".NICKNAME").click(function()
+		{
+			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+			 */			 
+			 $.ajax(
+			{
+				 type : 'POST',
+				 url : "<c:url value='/ajax/nicknameCheck'/>",
+				 data :{
+					 'membernickname':$('#memberNickname').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
+					 }, 
+				success : function(idExist)
+				{
+					console.log(idExist);
+					if(idExist)
+					{	
+						$("#nkch1").css("color", "#FF0000");
+						$('#nkch1').text('이미 존재하는 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+					else
+					{
+						$("#nkch1").css("color", "#009900");
+						$('#nkch1').text('사용 가능한 닉네임입니다.');
+						$('#nkch2').text('');
 					}
 				}				 
 			 });	
@@ -421,6 +483,31 @@
 										</div>
 									</div>
 									<br>
+									
+									<div class="row">
+										<div class="form-group">
+												<label class="control-label col-sm-3 " for="NICKNAME">
+													<p align="right">
+														<strong>닉네임</strong>
+													</p>
+												</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control nickName " id="memberNickname"
+														placeholder="닉네임 입력" name="memberNickname">
+														<span id="nkch1"></span><br>
+														<span id="nkch2"></span>												
+													<input type="hidden" value="0" id="use_nickname" name="use_nickname">
+												</div>
+											<br>
+									
+									<div class="col-sm-2">
+												<button type="button" class="btn btn-primary nicknameCheck">
+													중복 검사</button>
+											</div>
+										</div>
+									</div>
+									<br>
+									
 
 									<div class="row">
 										<div class="form-group">

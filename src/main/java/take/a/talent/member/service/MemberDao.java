@@ -53,4 +53,16 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 	}
 	
+	//회원가입시 닉네임 중복체크 
+	@Override
+	public boolean nicknameCheck(String memberNickname){
+		logger.info("DAO nicknameCheck 호출");
+		logger.info("memberNickname : "+memberNickname);
+		
+		/*IdChecker idChecker = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idChecker", memberId);*/
+		/*logger.info("checkId : "+idChecker.getMember_id());*/
+		//sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
+	}
+	
 }

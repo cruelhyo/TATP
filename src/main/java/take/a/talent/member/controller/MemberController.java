@@ -53,7 +53,7 @@ public class MemberController
 		
 		boolean nicknameExist = service.nicknameCheck(memberNickname);
 		model.addAttribute("nicknameExist",nicknameExist);
-		return false;
+		return nicknameExist;
 		
 	}
 	

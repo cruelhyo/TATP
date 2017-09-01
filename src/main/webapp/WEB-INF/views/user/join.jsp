@@ -394,7 +394,7 @@
 					</ul>
 				</div>
 
-				<form role="form" action="">
+				<form role="form" >
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="step1">
@@ -725,10 +725,6 @@
 											class="btn btn-primary next-step">다음 단계</button></li>
 								</ul>
 								
-								<ul class="list-inline pull-right">
-									<li><button type="submit"
-											class="btn btn-primary submit">제출</button></li>
-								</ul>
 								
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step3">

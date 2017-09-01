@@ -16,5 +16,7 @@ public interface MemberDaoInterface {
 
 	//회원가입시 아이디 중복체크
 	boolean idCheck(String memberId);
+
+	boolean nicknameCheck(String memberNickname);
 	
 }

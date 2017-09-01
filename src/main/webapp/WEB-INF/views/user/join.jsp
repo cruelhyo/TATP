@@ -35,8 +35,28 @@
 			}
 		});
 
+		$(".next-step-agree").click(function(e)
+		{
+			console.log(".next-step-agree");
+			if($("input:checkbox[id=agreeCheck]").is(":checked"))
+			{
+				$('#checkPlz').text('');
+				var $active = $('.wizard .nav-tabs li.active');
+				$active.next().removeClass('disabled');
+				nextTab($active);
+			}
+			else
+			{
+				$("#checkPlz").css("color", "#FF0000");
+				$('#checkPlz').text('이용약관에 동의해주세요.');
+			}
+
+		});
+		
+		
 		$(".next-step").click(function(e)
 		{
+			console.log(".next-step");
 			var $active = $('.wizard .nav-tabs li.active');
 			$active.next().removeClass('disabled');
 			nextTab($active);
@@ -411,8 +431,7 @@
 								<div class="step-12"></div>
 							</div>
 							<ul class="list-inline pull-right">
-								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-								<li><button type="button" class="btn btn-primary next-step">다음단계</button></li>
+								<li><button type="button" class="btn btn-primary next-step-agree">다음단계</button></li>
 							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="step2">
@@ -491,32 +510,7 @@
 											</div>
 										</div>
 									</div>
-									<br>
-									
-									<div class="row">
-										<div class="form-group">
-												<label class="control-label col-sm-3 " for="NICKNAME">
-													<p align="right">
-														<strong>닉네임</strong>
-													</p>
-												</label>
-												<div class="col-sm-3">
-													<input type="text" class="form-control nickName " id="memberNickname"
-														placeholder="닉네임 입력" name="memberNickname">
-														<span id="nkch1"></span><br>
-														<span id="nkch2"></span>												
-													<input type="hidden" value="0" id="use_nickname" name="use_nickname">
-												</div>
-											<br>
-									
-									<div class="col-sm-2">
-												<button type="button" class="btn btn-primary nicknameCheck">
-													중복 검사</button>
-											</div>
-										</div>
-									</div>
-									<br>
-									
+									<br>									
 
 									<div class="row">
 										<div class="form-group">
@@ -728,6 +722,7 @@
 								</div>
 							</div>
 								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-default prev-step">이전 단계</button></li>
 									<li><button type="button"
 											class="btn btn-primary next-step">다음 단계</button></li>
 								</ul>

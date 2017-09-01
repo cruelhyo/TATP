@@ -29,7 +29,7 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public boolean nicknameCheck(String memberNickname) {
 		
-		boolean nck = false;
+		boolean nck = memberDao.nicknameCheck(memberNickname);
 		 
 		logger.info("checkedNickname : " + nck);
 			

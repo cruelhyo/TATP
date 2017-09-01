@@ -30,7 +30,7 @@ public class MemberDao implements MemberDaoInterface{
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	//로그인 후 스프링 시큐리티 세션에서 저장되는 username, userpassword, authority를 가져올수 있게 user를 지정
-	private User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	//private User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	//회원정보 입력을 위한 메서드 선언
 	@Override
@@ -63,6 +63,7 @@ public class MemberDao implements MemberDaoInterface{
 	public int updateMember(MemberVo memberVo)
 	{
 		//vo에 지금 로그인되어있는 사용자의 아이디를 세팅
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		memberVo.setMemberId(user.getUsername());
 		logger.info("DAO updateMember 호출");
 		logger.info(memberVo.toString());

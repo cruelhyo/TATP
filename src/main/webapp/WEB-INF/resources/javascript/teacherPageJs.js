@@ -59,14 +59,14 @@ $(document).ready(function()
 	
 	//memberUpdateForm js
 	
-	$('#myPageShow').click(function(){
+	/*$('#myPageShow').click(function(){
 		console.log("select for update member");
 		
 		$.ajax({
 			url : '<c:url value="/teacher/teacherPage/selectForUpdateMember"/>'
 			
 		});
-	});
+	});*/
 	
 	//url ?뒤에 있는 파라미터 값을 가져오는 함수
 	function getQuerystring(paramName)

@@ -336,6 +336,12 @@
 								<div class="step_11">
 									<div class="row"></div>
 								</div>
+									<div class="step_21">
+										<div role="tabpanel" class="tab-pane fade in activ" id="myAgree">
+											<jsp:include page="../include/agree.jsp" flush="true"></jsp:include>
+										</div>
+										
+									</div>
 								<div class="step-12"></div>
 							</div>
 							<ul class="list-inline pull-right">
@@ -351,7 +357,7 @@
 									<hr>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="memberId">
+											<label class="control-label col-sm-4 " for="memberId">
 												<p align="right">
 													<strong>아이디</strong>
 												</p>
@@ -373,7 +379,7 @@
 									<br>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="PW">
+											<label class="control-label col-sm-4 " for="PW">
 												<p align="right">
 													<stong>비밀번호</stong>
 												</p>
@@ -391,7 +397,7 @@
 									<br>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="PW">
+											<label class="control-label col-sm-4 " for="PW">
 												<p align="right">
 													<stong>비밀번호 확인</stong>
 												</p>
@@ -408,7 +414,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="name">
+											<label class="control-label col-sm-4 " for="name">
 												<p align="right">
 													<stong>이름</stong>
 												</p>
@@ -423,7 +429,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="gender">
+											<label class="control-label col-sm-4" for="gender">
 												<p align="right">
 													<stong>성별</stong>
 												</p>
@@ -438,7 +444,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="birth">
+											<label class="control-label col-sm-4" for="birth">
 												<p align="right">
 													<stong>생년월일</stong>
 												</p>
@@ -541,7 +547,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="adress">
+											<label class="control-label col-sm-4 " for="adress">
 												<p align="right">
 													<strong>주소</strong>
 												</p>
@@ -561,7 +567,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="adress">
+											<label class="control-label col-sm-4" for="adress">
 												<p align="right">
 													<stong>상세주소</stong>
 												</p>
@@ -576,7 +582,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="phone">
+											<label class="control-label col-sm-4" for="phone">
 												<p align="right">
 													<stong>핸드폰</stong>
 												</p>
@@ -591,7 +597,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="email">
+											<label class="control-label col-sm-4" for="email">
 												<p align="right">
 													<stong>이메일</stong>
 												</p>
@@ -613,7 +619,7 @@
 										
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="emailcheck">
+											<label class="control-label col-sm-4" for="emailcheck">
 												<p align="right">
 													<stong>정보 수신 메일 동의</stong>
 												</p>
@@ -637,8 +643,49 @@
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step3">
 								<div class="step33">
-									<div class="row mar_ned"></div>
-									<p align="left">추가 입력 사항</p>
+								<br>
+									<div class="row mar_ned col-sm-5"></div>
+									<div align="left" ><h3>추가 입력 사항</h3></div>
+									<hr>
+										
+										<div class="row">
+										<div class="form-group ">
+											<label class="control-label col-sm-4 " for="nickname">
+												<p align="right">
+													<strong>닉네임</strong>
+												</p>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control ID " id="nickname"
+													placeholder="닉네임 입력" name="nickname">
+													
+											</div>
+											
+											<div class="col-sm-2">
+												<button type="button" class="btn btn-primary idCheck">
+													중복 검사</button>
+											</div>
+										</div>
+									</div>
+									<br>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="control-label col-sm-4" for="gender">
+												<p align="right">
+													<stong>관심사</stong>
+												</p>
+											</label>
+											<div class="col-sm-8">
+												<input type="radio" name="hobby" value="hobby"> 외국어&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 운동&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 독서&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 예술&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 기타&nbsp;&nbsp;
+												<p>(선택사항입니다.)</p>
+											</div>       
+										</div>
+									</div>
 
 									<hr>
 									<div class="row mar_ned"></div>
@@ -650,7 +697,7 @@
 
 
 
-									<hr>
+									
 
 								</div>
 								<ul class="list-inline pull-right">
@@ -663,14 +710,18 @@
 							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">
 								<div class="step44">
-									<h5>complete</h5>
-
+									<div class="step33">
+										<br>
+										<h5 align="center"> take a talent에 가입을 완료하시겠습니까?</h5>
+										<br>
+									</div>
+									<br>
 									<ul class="list-inline pull-right">
-										<li><button type="button"
-												class="btn btn-primary next-step">가입 완료</button></li>
+										<li>
+											<button type="button" class="btn btn-primary next-step"><a href="<c:url value='/userlogin'/>">가입 완료</a>
+											</button>
+										</li>
 									</ul>
-
-
 								</div>
 							</div>
 							<div class="clearfix"></div>

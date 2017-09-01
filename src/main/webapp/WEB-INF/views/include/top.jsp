@@ -4,11 +4,10 @@
 <nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Take a Talent</a>
+				<a class="navbar-brand"  href="<c:url value='/anonymous/mainform'/>">Take a Talent</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="<c:url value='/anonymous/mainform'/>">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
+			<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> menu <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Page 1-1</a></li>
@@ -37,6 +36,7 @@
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
+				<li class="active"><a href="#">이용방법</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAnonymous()">

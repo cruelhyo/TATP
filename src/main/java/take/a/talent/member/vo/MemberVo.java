@@ -1,7 +1,7 @@
 package take.a.talent.member.vo;
 
 public class MemberVo {
-
+	private int memberNo; 
 	private String memberId;
 	private String memberPassword;
 	private String memberName;
@@ -23,6 +23,14 @@ public class MemberVo {
 	private int memberLogin_state;
 	private String memberAddress;
 	private String memberMemo;
+	public int getMemberNo()
+	{
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo)
+	{
+		this.memberNo = memberNo;
+	}
 	public String getMemberId()
 	{
 		return memberId;

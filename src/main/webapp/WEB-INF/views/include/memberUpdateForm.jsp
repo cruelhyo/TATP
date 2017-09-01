@@ -22,7 +22,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름 입력">
+							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름 입력" 
+									value="${memberVo.memberName}">
 						</div>
 					</div>
 				</div>
@@ -36,7 +37,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임 입력">
+							<input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임 입력"
+									value="${memberVo.memberNickname}">
 						</div>
 					</div>
 				</div>
@@ -67,7 +69,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08">
+							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08"
+									value="${memberVo.memberBirthday}">
 						</div>
 					</div>
 				</div>
@@ -80,7 +83,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678"
+									value="${memberVo.memberPhone}">
 						</div>
 					</div>
 				</div>
@@ -95,7 +99,8 @@
 						</label>
 						<div class="row">
 							<div class="col-sm-7 ">
-								<input type="text" class="dropselectsec1" id="memberEmail" name="memberEmail" placeholder="ex) abc123@naver.com">
+								<input type="text" class="dropselectsec1" id="memberEmail" name="memberEmail" placeholder="ex) abc123@naver.com"
+										value="${memberVo.memberEmail}">
 							</div>
 					</div>
 					</div>

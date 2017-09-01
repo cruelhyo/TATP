@@ -56,12 +56,14 @@ public class MemberController
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
 	
-	/*@RequestMapping(value ="/teacher/teacherPage/selectForUpdateMember", method=RequestMethod.GET)
-	public String selectForUpdateMember()
+	@RequestMapping(value ="/ajax/teacherPage/selectForUpdateMember", method=RequestMethod.GET)
+	public @ResponseBody ModelMap selectForUpdateMember(ModelMap model)
 	{
 		logger.info("selectForUpdateMember");
-		return "teacher/teacherPage";
-	}*/
+		MemberVo memberVo = service.selectForUpdateMember();
+		model.addAttribute("memberVo", memberVo);
+		return model;
+	}
 
 	
 	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)

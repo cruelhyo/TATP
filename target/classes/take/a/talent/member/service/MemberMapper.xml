@@ -6,7 +6,7 @@
 <mapper namespace="take.a.talent.member.service.MemberMapper">
 
 	 <resultMap	type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
-		
+		<result property="memberNo" column="member_no "/>
 		<result property="memberId" column="member_id" />
 		<result property="memberPassword" column="member_password" />
 		<result property="memberName" column="member_name" />
@@ -25,7 +25,6 @@
 		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
 		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
 		<result property="memberLoginState" column="member_login_state" />
-		<result property="memberAddress" column="member_address" />
 		<result property="memberMemo" column="member_memo" />
 		
 		
@@ -54,15 +53,15 @@
 		
 	</select> 
 	
-	<select id="selectForUpdateMember" parameterType="String" resultType="take.a.talent.member.vo.MemberVo">
-		SELECT member_name
-		, member_nickname
-		, member_gender
-		, member_birthday
-		, member_phone
+	<select id="selectForUpdateMember" resultMap="MemberVo">
+		SELECT member_name 
+		, member_nickname 
+		, member_gender 
+		, member_birthday 
+		, member_phone 
 		, member_email
 		FROM member
-		WHERE member_id = #{member_id};
+		WHERE member_id = #{memberId};
 	</select>
 	
 	<!--회원가입시 닉네임 중복체크  -->

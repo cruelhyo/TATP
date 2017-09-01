@@ -74,11 +74,14 @@ public class MemberDao implements MemberDaoInterface{
 	@Override
 	public MemberVo selectForUpdateMember()
 	{
+		logger.info("DAO selectForUpdateMember 호출");
 		//지금 로그인 되어있는 사용자의 아이디를 가져옴
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		//selectForUpdateMember 쿼리를 호출
-		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMember", memberId);
+		MemberVo memberVo = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMember", memberId);
+		logger.info(memberVo.toString());
+		return memberVo;
 	}
 
 	//회원가입시 닉네임 중복체크 

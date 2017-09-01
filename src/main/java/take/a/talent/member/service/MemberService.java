@@ -40,8 +40,9 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public MemberVo selectForUpdateMember()
 	{
+		logger.info("selectForUpdateMember");
 		MemberVo selectForUpdateMemberResult = memberDao.selectForUpdateMember();
-		
+		logger.info(selectForUpdateMemberResult.toString());
 		return selectForUpdateMemberResult;
 	}
 	

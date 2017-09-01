@@ -192,29 +192,28 @@ $(document).ready(function(){
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li><a href="#">My Portfolio</a></li>
-												<li><a href="#">Link</a></li>
-												<li><a href="#">Link</a></li>
-
-												<!-- Dropdown level 2 -->
-												<li class="panel panel-default" id="dropdown">
-													<a data-toggle="collapse" href="#dropdown-lvl2"> 
-														<span class="glyphicon glyphicon-off"></span>
-														My Class 
-														<span class="caret"></span>
-													</a>
-													<div id="dropdown-lvl2" class="panel-collapse collapse">
-														<div class="panel-body">
-															<ul class="nav navbar-nav">
-																<li><a href="#">class 1</a></li>
-																<li><a href="#">class 2</a></li>
-																<li><a href="#">class 3</a></li>
-															</ul>
-														</div>
-													</div>
-												</li>
+												<li><a href="#">이력사항 관리</a></li>
+												<li><a href="#">Link</a></li>	
 											</ul>
 										</div>
 									</div>
+								</li>
+								<!-- Dropdown level 2 -->
+								<li class="panel panel-default" id="dropdown">
+									<a data-toggle="collapse" href="#dropdown-lvl2"> 
+										<span class="glyphicon glyphicon-off"></span>
+											My Class 
+										<span class="caret"></span>
+									</a>
+											<div id="dropdown-lvl2" class="panel-collapse collapse">
+												<div class="panel-body">
+													<ul class="nav navbar-nav">
+														<li><a href="#">class 1</a></li>
+														<li><a href="#">class 2</a></li>
+														<li><a href="#">class 3</a></li>
+													</ul>
+												</div>
+											</div>
 								</li>
 
 								<li><a href="#"><span

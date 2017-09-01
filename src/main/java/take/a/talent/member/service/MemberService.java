@@ -12,13 +12,15 @@ import take.a.talent.member.controller.MemberController;
 public class MemberService implements MemberServiceInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
-
+	
+	@Autowired
+	MemberDao memberDao;
+	
 	@Override
 	public boolean idCheck(String memberId)
 	{
-		boolean ck = false;
+		boolean ck = memberDao.idCheck(memberId);
 		
-				
 		logger.info("checkedId : " + ck);
 		
 		return ck;

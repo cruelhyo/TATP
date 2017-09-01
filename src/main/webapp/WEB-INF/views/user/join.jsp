@@ -50,6 +50,8 @@
 
 		});
 		
+
+		
 		
 		// ID입력창에 글자 입력될때마다 id유효성 검사
 		$(".ID").keyup(function()
@@ -392,7 +394,7 @@
 					</ul>
 				</div>
 
-				<form role="form">
+				<form role="form" action="">
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="step1">
@@ -722,6 +724,12 @@
 									<li><button type="button"
 											class="btn btn-primary next-step">다음 단계</button></li>
 								</ul>
+								
+								<ul class="list-inline pull-right">
+									<li><button type="submit"
+											class="btn btn-primary submit">제출</button></li>
+								</ul>
+								
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step3">
 								<div class="step33">

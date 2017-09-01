@@ -12,7 +12,7 @@
 	 <div class="form-group">
 		<label  for="comment" >
 			<h3>TAT 이용 동의 약관</h3></label>
-			<textarea class="form-control" rows="5" id="comment"
+			<textarea class="form-control" rows="5" id="comment" disabled
 			style="overflow: scroll; width: 98%; height: 500px; padding: 10px; border: 1px solid #5bc0de; border-radius: 3px;">
 제 1 조 (목적)
  이 약관은 TAT가 제공하는 TAT 서비스의 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.

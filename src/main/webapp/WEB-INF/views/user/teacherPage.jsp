@@ -17,10 +17,11 @@
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>Take A Talent</title>
-
-
 <!-- mypage 자바스크립트 -->
 <script>
+
+
+
 $(document).ready(function(){
 	$('.includePage').hide();
 	$(function () {
@@ -80,6 +81,16 @@ $(document).ready(function(){
 		$('#myExchangeShow').click(function(){
 			$('.includePage').hide();
 			$('#myExchange').show();
+		});
+		
+		$('#myAccountShow').click(function(){
+			$('.includePage').hide();
+			$('#myAccount').show();
+		});
+		
+		$('#modifiedMypageShow').click(function(){
+			$('.includePage').hide();
+			$('#modifiedMypage').show();
 		});
 		
 		
@@ -170,6 +181,7 @@ $(document).ready(function(){
 													<a href="#mypoint" aria-controls="home" role="tab" data-toggle="tab" id="myPointShow">충전하기</a></li>
 												<li><a href="#myPointHistory" id="myPointHistoryShow">충전내역 보기</a></li>
 												<li><a href="#myExchange" id="myExchangeShow">환전하기</a></li>
+												<li><a href="#myAccount" id="myAccountShow">계좌관리</a></li>
 											</ul>
 										</div>
 									</div>
@@ -216,8 +228,8 @@ $(document).ready(function(){
 											</div>
 								</li>
 
-								<li><a href="#"><span
-										class="glyphicon glyphicon-signal"></span></a></li>
+								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
+										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
 
 							</ul>
 						</div>
@@ -227,6 +239,9 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		
+		
+		
 		<!-- 내정보수정 -->
 		<div class="tab-content">
 			<!--기본정보 수정  -->
@@ -252,6 +267,14 @@ $(document).ready(function(){
 			<!-- 내 환전포인트 보기 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myExchange">
 				<jsp:include page="../include/pointExchange.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 계좌관리 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="myAccount">
+				<jsp:include page="../include/myAccount.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 내정보 전체 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
+				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
 	</div>

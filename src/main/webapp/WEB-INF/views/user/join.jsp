@@ -494,31 +494,6 @@
 									
 									<div class="row">
 										<div class="form-group">
-												<label class="control-label col-sm-3 " for="NICKNAME">
-													<p align="right">
-														<strong>닉네임</strong>
-													</p>
-												</label>
-												<div class="col-sm-3">
-													<input type="text" class="form-control nickName " id="memberNickname"
-														placeholder="닉네임 입력" name="memberNickname">
-														<span id="nkch1"></span><br>
-														<span id="nkch2"></span>												
-													<input type="hidden" value="0" id="use_nickname" name="use_nickname">
-												</div>
-											<br>
-									
-									<div class="col-sm-2">
-												<button type="button" class="btn btn-primary nicknameCheck">
-													중복 검사</button>
-											</div>
-										</div>
-									</div>
-									<br>
-									
-
-									<div class="row">
-										<div class="form-group">
 											<label class="control-label col-sm-4" for="gender">
 												<p align="right">
 													<stong>성별</stong>

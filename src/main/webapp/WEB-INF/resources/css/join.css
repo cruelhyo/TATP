@@ -183,6 +183,18 @@ span.round-tab:hover {
 	font-weight: normal;
 }
 
+.dropselects100 {
+	width: 100;
+	padding: 6px 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	color: #333;
+	margin-left: 1px;
+	outline: none;
+	font-weight: normal;
+
+bankSelec
+
 .mar_ned {
 	margin-bottom: 15px;
 }

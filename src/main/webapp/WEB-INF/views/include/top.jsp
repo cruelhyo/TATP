@@ -7,19 +7,19 @@
 				<a class="navbar-brand"  href="<c:url value='/anonymous/mainform'/>">Take a Talent</a>
 			</div>
 			<ul class="nav navbar-nav">
-			<li class="dropdown"><a class="dropdown-toggle"
+			<!-- <li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> menu <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Page 1-1</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
+					</ul></li> -->
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<li><a href="#">무료강좌</a></li>
+						<li><a href="<c:url value='/anonymous/classSearch'/>">유료강좌</a></li>
+						
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
@@ -33,10 +33,12 @@
 						<sec:authorize access="hasRole('ROLE_TEACHER')">
 							<li><a href="<c:url value='/teacher/teacherPage'/>">Teacher Page</a></li>
 						</sec:authorize>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<sec:authorize access="isAnonymous()">
+							<li><a>로그인후 이용해 주세요</a></li>
+						</sec:authorize>
+						
 					</ul></li>
-				<li class="active"><a href="#">이용방법</a></li>
+				<li class="active"><a href="<c:url value='/anonymous/usePage'/>">이용방법</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAnonymous()">

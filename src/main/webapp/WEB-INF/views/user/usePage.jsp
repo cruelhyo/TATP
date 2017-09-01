@@ -16,7 +16,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<title>Take A Talent</title>
+<title>이용방법</title>
 
 
 <!-- mypage 자바스크립트 -->
@@ -77,12 +77,6 @@ $(document).ready(function(){
 			$('#myChangePW').show();
 		});
 		
-		$('#modifiedMypageShow').click(function(){
-			$('.includePage').hide();
-			$('#modifiedMypage').show();
-		});
-		
-		
 	
 });
 
@@ -133,90 +127,36 @@ p.footer-text1 {
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
 								
-								<!-- Dropdown1-->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl4">
+								<li>
+									<a href="#" id="">
 										<span class="glyphicon glyphicon-user"></span>
-										My Page
-										<span class="caret"></span>
-									</a> 
-									<!-- Dropdown level 4 -->
-									<div id="dropdown-lvl4" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul class="nav navbar-nav">
-												<li role="presentation" class="active">
-													<a href="#mypage2" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
-												</li>
-												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>	
-											</ul>
-										</div>
-									</div>
-								</li>
-								<!-- Dropdown1-->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl1">
-										<span class="glyphicon glyphicon-user"></span>
-										My Point
-										<span class="caret"></span>
-									</a> 
-								
-									<!-- Dropdown level 1 -->
-									<div id="dropdown-lvl1" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul class="nav navbar-nav">
-												<li role="presentation" class="active">
-													<a href="#mypoint" aria-controls="home" role="tab" data-toggle="tab" id="myPointShow">충전하기</a></li>
-												<li><a href="#myPointHistory" id="myPointHistoryShow">충전내역 보기</a></li>	
-											</ul>
-										</div>
-									</div>
+										서비스소개
+									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="#" id="">
 										<span class="glyphicon glyphicon-cloud"></span>
-										My Favorit
+										수업개설 이용방법
 									</a>
 								</li>
-								
-								<!-- Dropdown-->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl3"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										My Q&A <span class="caret"></span></a> 
-										
-									<!-- Dropdown level 1 -->
-									<div id="dropdown-lvl3" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul class="nav navbar-nav">
-												<li><a href="#">문의사항</a></li>
-												
-
-												
-												
-											</ul>
-										</div>
-									</div>
+								<li>
+									<a href="#" id="">
+										<span class="glyphicon glyphicon-signal"></span>
+										수업듣기 이용방법
+									</a>
 								</li>
-								<!-- Dropdown level 2 -->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl2"> 
+								<li>
+									<a href="#" id="">
 										<span class="glyphicon glyphicon-off"></span>
-											My Class 
-										<span class="caret"></span>
+										이용요금
 									</a>
-										<div id="dropdown-lvl2" class="panel-collapse collapse">
-											<div class="panel-body">
-												<ul class="nav navbar-nav">
-													<li><a href="#">class 1</a></li>
-														<li><a href="#">class 2</a></li>
-														<li><a href="#">class 3</a></li>
-												</ul>
-											</div>
-										</div>
-									</li>
-
-								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
-										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
+								</li>
+								<li>
+									<a href="#" id="">
+										<span class="glyphicon glyphicon-user"></span>
+										자주묻는 질문
+									</a>
+								</li>
 
 							</ul>
 						</div>
@@ -244,10 +184,6 @@ p.footer-text1 {
 			<!-- 내 결제내역 보기 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
 				<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 내정보 전체 보기-->
-			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
-				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
 			</div>
 			
 		</div>

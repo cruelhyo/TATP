@@ -45,14 +45,22 @@ public class MemberController
 		return idExist;
 	}
 	
-	@RequestMapping(value ="/ajax/updateMember", method=RequestMethod.POST)
-	public @ResponseBody int updateMember(MemberVo memberVo, ModelMap model)
+	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
+	public String updateMember(MemberVo memberVo)
 	{
 		logger.info("updateMember");
+		logger.info(memberVo.toString());
 		int updateMemberResult = service.updateMember(memberVo);
-		model.addAttribute("updateMemberResult", updateMemberResult);
-		return updateMemberResult;
+		//model.addAttribute("updateMemberResult", updateMemberResult);
+		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
+	
+	/*@RequestMapping(value ="/teacher/teacherPage/selectForUpdateMember", method=RequestMethod.GET)
+	public String selectForUpdateMember()
+	{
+		logger.info("selectForUpdateMember");
+		return "teacher/teacherPage";
+	}*/
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
 	public String pwCheck()

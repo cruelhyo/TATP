@@ -27,10 +27,22 @@ public class MemberService implements MemberServiceInterface{
 		
 		return ck;
 	}
+	//회원 업데이트 dao호출
 	@Override
 	public int updateMember(MemberVo memberVo)
 	{
-		return memberDao.updateMember(memberVo);
+		int updateMemberResult = memberDao.updateMember(memberVo);
+		
+		return updateMemberResult;
+		 
 	}
+	//회원 업데이트 시 셀텍트 dao호출
+	/*@Override
+	public MemberVo selectForUpdateMember()
+	{
+		MemberVo selectForUpdateMemberResult = memberDao.selectForUpdateMember();
+		
+		return selectForUpdateMemberResult;
+	}*/
 	
 }

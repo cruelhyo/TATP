@@ -6,7 +6,14 @@
 
 			<h2 align="center">회원 정보 수정</h2>
 			<hr>
-			<form action="<c:url value='/ajax/updateMember'/>" id="updateForm" method="post">
+			<c:if test="${param.updateSuccess == 1}">
+				<p>수정이 성공적입니다</p>
+			</c:if>
+			<c:if test="${param.updateSuccess == 0}">
+				<p>수정을 실패했습니다</p>
+			</c:if>
+			<form action="<c:url value='/teacher/teacherPage/updateMember'/>" id="updateForm" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-3 " for="name">

@@ -58,20 +58,42 @@ $(document).ready(function()
 	});
 	
 	//memberUpdateForm js
-	$('#updateMemberBtn').click(function()
-	{
-		var updateMemberForm = $('#updateForm').serialize();
+	
+	$('#myPageShow').click(function(){
+		console.log("select for update member");
+		
 		$.ajax({
-			type : 'POST',
-			url : '<c:url value="/ajax/updateMember"/>',
-			data : updateMemberForm,
-			dataType : json,
-			success : function(updateMemberResult)
-			{
-				console.log(updateMemberResult);
-			}
+			url : '<c:url value="/teacher/teacherPage/selectForUpdateMember"/>'
+			
 		});
 	});
 	
+	//url ?뒤에 있는 파라미터 값을 가져오는 함수
+	function getQuerystring(paramName)
+	{ 
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+		
+		for(var i = 0; _tempArray.length; i++) 
+		{ 
+			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+			
+			// _keyValuePair[0] : 파라미터 명			
+			if(_keyValuePair[0] == paramName)
+			{
+				return _keyValuePair[1]; // _keyValuePair[1] : 파라미터 값
+			}
+		}
+	}
+	
+	//getQuerystring 함수를 이용해 파라미터 값을 가져온다
+	var updateSuccess = getQuerystring('updateSuccess');
+	// 파라미터 값이 0 혹은 1이면
+	if(updateSuccess == 1 || updateSuccess == 0)
+	{
+		//아래의 함수를 실행한다
+		$('.includePage').hide();
+		$('#myPage').show();
+	}
 	
 });

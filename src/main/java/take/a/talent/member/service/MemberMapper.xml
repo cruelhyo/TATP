@@ -53,7 +53,17 @@
 		WHERE member_id=#{member_id});
 		
 	</select> 
-
+	
+<!-- 	<select id="selectForUpdateMember" parameterType="String" resultType="take.a.talent.member.vo.MemberVo">
+		SELECT member_name
+		, member_nickname
+		, member_gender
+		, member_birthday
+		, member_phone
+		, member_email
+		FROM member
+		WHERE member_id = #{member_id};
+	</select> -->
 	
 	
 	<!-- 회원가입  수정중!!!!! -->
@@ -68,13 +78,13 @@
 	<!-- 회원 정보 수정(비밀번호, 주소 제외) -->	
 	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">
 		UPDATE member 
-		SET memberName = #{memberName}
-		, memberNickname = #{memberNickname}
-		, memberGender = #{memberGender}
-		, memberBirthday = #{memberBirthday}
-		, memberPhone = #{memberPhone}
-		, memberEmail = #{memberEmail}
-		WHERE memberId = #{memberId}; 
+		SET member_name = #{memberName}
+		, member_nickname = #{memberNickname}
+		, member_gender = #{memberGender}
+		, member_birthday = #{memberBirthday}
+		, member_phone = #{memberPhone}
+		, member_email = #{memberEmail}
+		WHERE member_id = #{memberId}; 
 	</update>
 
 	

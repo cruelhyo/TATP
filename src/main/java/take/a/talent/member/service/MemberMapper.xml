@@ -54,7 +54,7 @@
 		
 	</select> 
 	
-<!-- 	<select id="selectForUpdateMember" parameterType="String" resultType="take.a.talent.member.vo.MemberVo">
+	<select id="selectForUpdateMember" parameterType="String" resultType="take.a.talent.member.vo.MemberVo">
 		SELECT member_name
 		, member_nickname
 		, member_gender
@@ -63,7 +63,16 @@
 		, member_email
 		FROM member
 		WHERE member_id = #{member_id};
-	</select> -->
+	</select>
+	
+	<!--회원가입시 닉네임 중복체크  -->
+	<select id ="nicknameCheck" parameterType="String" resultType="boolean">
+		SELECT EXISTS(
+		SELECT member_nickname
+		FROM member
+		WHERE member_id=#{member_id});
+		
+	</select> 
 	
 	
 	<!-- 회원가입  수정중!!!!! -->

@@ -33,6 +33,10 @@ public interface MemberServiceInterface {
 		int updateMember(MemberVo memberVo);
 		
 		//회원 업데이트 시 셀렉트
-		/*MemberVo selectForUpdateMember();*/
+		MemberVo selectForUpdateMember();
+		
+
+		boolean nicknameCheck(String memberNickname);
+
 	
 }

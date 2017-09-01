@@ -45,6 +45,7 @@ public class MemberController
 		return idExist;
 	}
 	
+
 	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
 	public String updateMember(MemberVo memberVo)
 	{
@@ -61,6 +62,20 @@ public class MemberController
 		logger.info("selectForUpdateMember");
 		return "teacher/teacherPage";
 	}*/
+
+	
+	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)
+	public @ResponseBody boolean nickNameCheck(String memberNickname, ModelMap model){
+		logger.info("nickname체크");
+		logger.info("nickname값 확인");
+		logger.info("memberNickname"+memberNickname);
+		
+		boolean nicknameExist = service.nicknameCheck(memberNickname);
+		model.addAttribute("nicknameExist",nicknameExist);
+		return nicknameExist;
+		
+	}
+
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
 	public String pwCheck()

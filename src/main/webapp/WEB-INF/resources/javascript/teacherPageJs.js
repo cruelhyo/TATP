@@ -39,22 +39,54 @@ $(document).ready(function()
 	  $('#myTab a:last').tab('show')
 	});
 	
-	$('#myPageShow').click(function()
-	{
+	//숨긴 includepage 해당 버튼 클릭시 보여주기
+	$('#myPageShow').click(function(){
 		$('.includePage').hide();
 		$('#myPage').show();
 	});
 	
-	$('#myPointShow').click(function()
-	{
+	$('#myPointHistoryShow').click(function(){
+		$('.includePage').hide();
+		$('#myPointHistory').show();
+	});
+
+	$('#myAddressShow').click(function(){
+		$('.includePage').hide();
+		$('#myAddress').show();
+	});
+	
+	$('#myPointShow').click(function(){
 		$('.includePage').hide();
 		$('#myPoint').show();
 	});
 	
-	$('#myChangePWShow').click(function()
-	{
+	$('#myChangePWShow').click(function(){
 		$('.includePage').hide();
 		$('#myChangePW').show();
+	});
+	
+	$('#myExchangeShow').click(function(){
+		$('.includePage').hide();
+		$('#myExchange').show();
+	});
+	
+	
+	// 주소추가폼 숨기기
+	$('.add').hide();
+	$('#plus').click(function(){
+		$('.add').hide();
+		$('#address1').show();
+	});
+	//주소추가하기 버튼 누르면 폼 다시 사라짐
+	$('#plus2').click(function(){
+		$('.add').hide();
+	});
+
+	// 환전내역 숨기기
+	$('.ExchangeHistory').hide();
+	$('#ExchangeView').click(function(){
+		$('.ExchangeHistory').hide();
+		$('#ExHistory').show();
 	});
 	
 	//memberUpdateForm js

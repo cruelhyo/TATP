@@ -20,13 +20,13 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public boolean idCheck(String memberId)
 	{
-		boolean ck = false;
+		boolean ck = memberDao.idCheck(memberId);
 		
-				
 		logger.info("checkedId : " + ck);
 		
 		return ck;
 	}
+	
 	//회원 업데이트 dao호출
 	@Override
 	public int updateMember(MemberVo memberVo)
@@ -37,12 +37,23 @@ public class MemberService implements MemberServiceInterface{
 		 
 	}
 	//회원 업데이트 시 셀텍트 dao호출
-	/*@Override
+	@Override
 	public MemberVo selectForUpdateMember()
 	{
 		MemberVo selectForUpdateMemberResult = memberDao.selectForUpdateMember();
 		
 		return selectForUpdateMemberResult;
-	}*/
+	}
 	
+
+	@Override
+	public boolean nicknameCheck(String memberNickname) {
+		
+		boolean nck = memberDao.nicknameCheck(memberNickname);
+		 
+		logger.info("checkedNickname : " + nck);
+			
+		return nck;
+	}
+
 }

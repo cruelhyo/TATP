@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/join.css'/>" type="text/css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
 
 <script>
 	$(document).ready(function()
@@ -36,8 +34,28 @@
 			}
 		});
 
+		$(".next-step-agree").click(function(e)
+		{
+			console.log(".next-step-agree");
+			if($("input:checkbox[id=agreeCheck]").is(":checked"))
+			{
+				$('#checkPlz').text('');
+				var $active = $('.wizard .nav-tabs li.active');
+				$active.next().removeClass('disabled');
+				nextTab($active);
+			}
+			else
+			{
+				$("#checkPlz").css("color", "#FF0000");
+				$('#checkPlz').text('이용약관에 동의해주세요.');
+			}
+
+		});
+		
+		
 		$(".next-step").click(function(e)
 		{
+			console.log(".next-step");
 			var $active = $('.wizard .nav-tabs li.active');
 			$active.next().removeClass('disabled');
 			nextTab($active);
@@ -51,108 +69,192 @@
 
 		});
 		
-		/* <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> */
+
 		
 		
-		$(".ID").keypress(function()
+		// ID입력창에 글자 입력될때마다 id유효성 검사
+		$(".ID").keyup(function()
 		{
 			var check = /^[a-z0-9]{6,16}$/; 
 			var in_id = $('#memberId').val();
 			var temp = 0 ;
 			if(!check.test(in_id))
 			{
-				//아이디가 유효하지 않을때
-				$("#idch").css("color", "#FF0000");
-				$('#idch').text('사용이 불가능한 아이디입니다.');
+				//아이디가 유효하지 않을때 증복체크 버튼 disabled하기
+				$("#idch1").css("color", "#FF0000");
+				$("#idch2").css("color", "#FF0000");
+				$('#idch1').text('사용이 불가능한 아이디입니다.');
+				$('#idch2').text('(영문,숫자조합 6자이상)');
+				$(".idCheck").attr('class','btn btn-primary idCheck disabled');
 			}
 			else
 			{
 				//아이디가 유효할때 아이디 증복체크 버튼 active하기
-				$("#idch").css("color", "#999900");
-				$('#idch').text('아이디 중복 검사가 필요합니다.');
+				$("#idch1").css("color", "#999900");
+				$('#idch1').text('아이디 중복 검사가 필요합니다.');
+				$('#idch2').text('');
 				$(".idCheck").attr('class','btn btn-primary idCheck active');
 			}
 		 });
 		
-		$(".idCheck").click(function() {
-			 console.log("idCheck");
-			 /* id 중복검사 로직 추가할 공간  controller호출 로직  */
-			 
-			 $.ajax({
+		
+		// 아이디 중복검사 버튼 클릭 시
+		$(".idCheck").click(function()
+		{
+			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+			 */			 
+			 $.ajax(
+			{
 				 type : 'POST',
 				 url : "<c:url value='/ajax/idCheck'/>",
 				 data :{
 					 'memberId':$('#memberId').val(),
-					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url block 해제하는 토큰 추가함  */
-					 },
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
+					 }, 
 				success : function(idExist)
 				{
 					console.log(idExist);
 					if(idExist)
-					{
-						$("#idch").css("color", "#FF0000");
-						$('#idch').text('이미 존재하는 아이디입니다.');
+					{	
+						$("#idch1").css("color", "#FF0000");
+						$('#idch1').text('이미 존재하는 아이디입니다.');
+						$('#idch2').text('');
 					}
 					else
 					{
-						$("#idch").css("color", "#009900");
-						$('#idch').text('사용 가능한 아이디입니다.');
+						$("#idch1").css("color", "#009900");
+						$('#idch1').text('사용 가능한 아이디입니다.');
+						$('#idch2').text('');
 					}
 				}				 
 			 });	
 			
 		});
 		
-	
+		
+		// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
+		$(".nickName").keyup(function()
+		{
+			var check = /^[a-z0-9~!@#$%^*()\-_=+]{5,16}$/; 
+			 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
+			var in_nickname = $('#NICKNAME').val();
+			var temp = 0 ;
+			if(!check.test(in_nickname))
+			{
+				//닉네임이 유효하지 않을때 증복체크 버튼 disabled하기
+				$("#nkch1").css("color", "#FF0000");
+				/* $("#nkch2").css("color", "#FF0000"); */
+				$('#nkch1').text('사용이 불가능한 닉네임입니다.');
+				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
+			}
+			else
+			{
+				//닉네임이 유효할때 아이디 증복체크 버튼 active하기
+				$("#nkch1").css("color", "#999900");
+				$('#nkch1').text('닉네임 중복 검사가 필요합니다.');
+				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');
+			}
+		 });
 		
 		
-		/*--------------------------------------------------------------------------------------------------  */
 		
-		
-			 $(".PW").keypress(function() {
-				 var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
-				 var in_pw = $('#PW').val();
-					if(!check.test(in_pw)){
-						//비번이 유효하지 않을때
-						$("#pwch").css("color", "#FF0000");
-						$('#pwch').text('비밀번호가 유효하지 않습니다');
-					} else {
-						//비번이 유효할때
-						$("#pwch").css("color", "#008000");
-						$('#pwch').text('비밀번호를 사용 가능합니다');
+		// 닉네임 중복검사 버튼 클릭 시
+		$(".NICKNAME").click(function()
+		{
+			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+			 */			 
+			 $.ajax(
+			{
+				 type : 'POST',
+				 url : "<c:url value='/ajax/nicknameCheck'/>",
+				 data :{
+					 'membernickname':$('#memberNickname').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
+					 }, 
+				success : function(idExist)
+				{
+					console.log(idExist);
+					if(idExist)
+					{	
+						$("#nkch1").css("color", "#FF0000");
+						$('#nkch1').text('이미 존재하는 닉네임입니다.');
+						$('#nkch2').text('');
 					}
-			 });
+					else
+					{
+						$("#nkch1").css("color", "#009900");
+						$('#nkch1').text('사용 가능한 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+				}				 
+			 });	
+			
+		});
+		
+		// pw입력시 유효성 검사
+		$('.PW').keyup(function()
+		{
+			var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+			var in_pw = $('#PW').val();
+			if(!check.test(in_pw))
+			{
+				//비번이 유효하지 않을때
+				$('#pwch1').css('color', '#FF0000');
+				$('#pwch2').css('color', '#FF0000');
+				$('#pwch1').text('비밀번호가 유효하지 않습니다.');
+				$('#pwch2').text('(영문,숫자,특수문자조합 8자이상)');
+			}
+			else
+			{
+				//비번이 유효할때
+				$('#pwch1').css("color", "#008000");
+				$('#pwch1').text('비밀번호를 사용 가능합니다');
+				$('#pwch2').text('');
+			}
+		});
 					
 			 		
 			 
-			 $('.PW2').keypress(function(){
-					var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{6,20}$/i;
-					var in_pw = $('#PW').val();
-					var in_pw2 = $('#PW2').val();
-					var temp = 0;
-					if(!check.test(in_pw2)){
-						temp = 0; //비번이 유효하지 않을때
-					} else {
-						temp = 1; //비번이 유효할때
-					}
-					if(temp == 1){
-						if(in_pw == in_pw2){
-		            		$('#pwch2').css('color', '#008000');
-		            		$('#pwch2').text('비밀번호가 일치합니다');
-		            	}else{
-		            		$('#pwch2').css('color', '#FF0000');
-		            		$('#pwch2').text('비밀번호가 불일치합니다');
-		            		$('#pwch2').val('');
-		        			$('#pwch2').focus();
-		            	}
-					}else{
-						$('#pwch2').css('color', '#FF0000');
-						$('#pwch2').text('비밀번호가 유효하지 않습니다');
-					}
-					
-					// 비밀번호 1,2 일치여부 확인 
-					
-			 });
+		$('.PW2').keyup(function()
+		{
+			var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+			var in_pw = $('#PW').val();
+			var in_pw2 = $('#PW2').val();
+			var temp = 0;
+			if(!check.test(in_pw2))
+			{
+				temp = 0; //비번이 유효하지 않을때
+			} 
+			else 
+			{
+				temp = 1; //비번이 유효할때
+			}
+			
+			if(temp == 1)
+			{
+				if(in_pw == in_pw2)
+				{
+            		$('#pwch3').css('color', '#008000');
+            		$('#pwch3').text('비밀번호가 일치합니다');
+            	}
+				else
+				{
+            		$('#pwch3').css('color', '#FF0000');
+            		$('#pwch3').text('비밀번호가 불일치합니다');
+            		$('#pwch3').val('');
+        			$('#pwch3').focus();
+            	}
+			}
+			else
+			{
+				$('#pwch3').css('color', '#FF0000');
+				$('#pwch3').text('비밀번호가 유효하지 않습니다');
+			}
+				
+			// 비밀번호 1,2 일치여부 확인 
+		});
 			 
 		
 		
@@ -160,12 +262,41 @@
 		 /* -------------------------------------------------------------------------------  */
 		 
 		 
-		/* $(".mailNumberSearch").click(function(e) {
+			     /* 성별 radio 체크 클릭시 값을 받아오는 동작수행 */
+	    $("input:radio[name=gender]").click(function(){
+	    	
+	    	 /* 성별 체크박스 값을 받아오기위한 설정 */
+	    	var gen = $(":input:radio[name=gender]:checked").val();
+			
+	    	$('input:radio[name=gender]:input[value=' + gen +']').attr("checked", true);
+			
+			if(gen == "male"){
+				console.log("male");
+			}else{
+				
+				 console.log("female");
+			}
 
-			console.log("mailNumberSearch");
-			 우편번호 찾기 api 호출 ( 로직 추가할 공간)   ---구현중--- 
+	    	
+	    }); 
+	     
+	     
+	    /* 메일수신동의여부 체크 클릭시 값을 받아오는 동작수행 */
+	    $("input:radio[name=mailagreement]").click(function(){
+	    	
+	    	 /* 메일수신동의여부 체크박스 값을 받아오기위한 설정 */
+	    	var mailagree = $(":input:radio[name=mailagreement]:checked").val();
+			
+	    	$('input:radio[name=mailagreement]:input[value=' + mailagree +']').attr("checked", true);
+			
+			if(mailagree == "y"){
+				console.log("yes");
+			}else{
+				 console.log("no");
+			}
 
-		}); */
+	    	
+	    }); 
 			
 		 
 
@@ -177,7 +308,67 @@
 		}
 	});
 </script>
+<!-- 우편번호 찾기 api  -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode()
+    {
+        new daum.Postcode(
+        {     
+            oncomplete: function(data)
+            {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
 
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') 
+                { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } 
+                else 
+                { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R')
+                {
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== '')
+                    {
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== '')
+                    {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+                
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+
+    
+    /* $(".mailNumberSearch").click(function(e) {
+
+	console.log("mailNumberSearch");
+	 우편번호 찾기 api 호출 ( 로직 추가할 공간)   ---구현중--- 
+
+}); */
+</script>
 
 </head>
 <body>
@@ -223,18 +414,23 @@
 					</ul>
 				</div>
 
-				<form role="form">
+				<form role="form" >
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="step1">
 								<div class="step_11">
 									<div class="row"></div>
 								</div>
+									<div class="step_21">
+										<div role="tabpanel" class="tab-pane fade in activ" id="myAgree">
+											<jsp:include page="../include/agree.jsp" flush="true"></jsp:include>
+										</div>
+										
+									</div>
 								<div class="step-12"></div>
 							</div>
 							<ul class="list-inline pull-right">
-								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-								<li><button type="button" class="btn btn-primary next-step">다음단계</button></li>
+								<li><button type="button" class="btn btn-primary next-step-agree">다음단계</button></li>
 							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="step2">
@@ -245,7 +441,7 @@
 									<hr>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="memberId">
+											<label class="control-label col-sm-4 " for="memberId">
 												<p align="right">
 													<strong>아이디</strong>
 												</p>
@@ -253,7 +449,9 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control ID " id="memberId"
 													placeholder="아이디 입력" name="memberId">
-													<span id="idch"><input type="hidden" value="0" id="use_id" name="use_id"></span>
+													<span id="idch1"></span><br>
+													<span id="idch2"></span>												
+												<input type="hidden" value="0" id="use_id" name="use_id">
 											</div>
 											
 											<div class="col-sm-2">
@@ -265,38 +463,42 @@
 									<br>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="PW">
+											<label class="control-label col-sm-4 " for="PW">
 												<p align="right">
 													<stong>비밀번호</stong>
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control PW" id="PW"
+												<input type="password" class="form-control PW" id="PW"
 													placeholder="비밀번호 입력" name="memberPw">
+												<input type="hidden" value="0" id="use_pw" name="use_pw">
+												<span id="pwch1"></span><br>
+												<span id="pwch2"></span>
 											</div>
-											<span id="pwch"><input type="hidden" value="0" id="use_pw" name="use_pw"></span>
+											
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="PW">
+											<label class="control-label col-sm-4 " for="PW">
 												<p align="right">
 													<stong>비밀번호 확인</stong>
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control PW2" id="PW2"
+												<input type="password" class="form-control PW2" id="PW2"
 													placeholder="비밀번호 재입력" name="memberPw2">
+												<input type="hidden" value="0" id="use_pw2" name="use_pw2">
+												<span id="pwch3"></span>
 											</div>
-											<span id="pwch2"><input type="hidden" value="0" id="use_pw2" name="use_pw2"></span>
 										</div>
 									</div>
 									<br>
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="name">
+											<label class="control-label col-sm-4 " for="name">
 												<p align="right">
 													<stong>이름</stong>
 												</p>
@@ -307,11 +509,11 @@
 											</div>
 										</div>
 									</div>
-									<br>
+									<br>									
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="gender">
+											<label class="control-label col-sm-4" for="gender">
 												<p align="right">
 													<stong>성별</stong>
 												</p>
@@ -326,54 +528,101 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="birth">
+											<label class="control-label col-sm-4" for="birth">
 												<p align="right">
 													<stong>생년월일</stong>
 												</p>
 											</label>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_day" id="visa_status_day"
 													class="dropselectsec1">
 													<option value="">일</option>
-													<option value="2">1</option>
-													<option value="1">2</option>
-													<option value="4">3</option>
-													<option value="5">4</option>
-													<option value="6">5</option>
-													<option value="3">6</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
 													<option value="7">7</option>
 													<option value="8">8</option>
 													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+													<option value="31">31</option>
 												</select>
 											</div>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_month" id="visa_status_month"
 													class="dropselectsec1">
 													<option value="">월</option>
-													<option value="2">01</option>
-													<option value="1">02</option>
-													<option value="4">03</option>
-													<option value="5">04</option>
-													<option value="6">05</option>
-													<option value="3">06</option>
+													<option value="1">01</option>
+													<option value="2">02</option>
+													<option value="3">03</option>
+													<option value="4">04</option>
+													<option value="5">05</option>
+													<option value="6">06</option>
 													<option value="7">07</option>
 													<option value="8">08</option>
 													<option value="9">09</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
 												</select>
 											</div>
 											<div class="col-sm-2 wdth">
-												<select name="visa_status" id="visa_status"
+												<select name="visa_status_year" id="visa_status_year"
 													class="dropselectsec1">
 													<option value="">년</option>
-													<option value="2">1990</option>
-													<option value="1">1991</option>
-													<option value="4">1992</option>
-													<option value="5">1993</option>
-													<option value="6">1994</option>
-													<option value="3">1995</option>
-													<option value="7">1996</option>
-													<option value="8">1997</option>
-													<option value="9">1998</option>
+													<option value="80">1980</option>
+													<option value="81">1981</option>
+													<option value="82">1982</option>
+													<option value="83">1983</option>
+													<option value="84">1984</option>
+													<option value="85">1985</option>
+													<option value="86">1986</option>
+													<option value="87">1987</option>
+													<option value="88">1988</option>
+													<option value="89">1989</option>
+													<option value="90">1990</option>
+													<option value="91">1991</option>
+													<option value="92">1992</option>
+													<option value="93">1993</option>
+													<option value="94">1994</option>
+													<option value="95">1995</option>
+													<option value="96">1996</option>
+													<option value="97">1997</option>
+													<option value="98">1998</option>
+													<option value="99">1999</option>
+													<option value="00">2000</option>
+													<option value="01">2001</option>
+													<option value="02">2002</option>
+													<option value="03">2003</option>
+													<option value="04">2004</option>
+													<option value="05">2005</option>
+													<option value="06">2006</option>
+													<option value="07">2007</option>
+													<option value="08">2008</option>
+													<option value="09">2009</option>
+													<option value="10">2010</option>													
 												</select>
 											</div>
 										</div>
@@ -382,18 +631,19 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3 " for="adress">
+											<label class="control-label col-sm-4 " for="adress">
 												<p align="right">
 													<strong>주소</strong>
 												</p>
 											</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" id="adress"
+												<input type="text" class="form-control" id="sample6_postcode"
 													placeholder="우편번호" name="member_address">
+													
 											</div>
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button>
-												
+												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
+												<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 											</div>
 										</div>
 									</div>
@@ -401,13 +651,13 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="adress">
+											<label class="control-label col-sm-4" for="adress">
 												<p align="right">
 													<stong>상세주소</stong>
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="ID"
+												<input type="text" class="form-control" id="sample6_address"
 													placeholder="상세주소" name="member_address_detail">
 											</div>
 										</div>
@@ -416,7 +666,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="phone">
+											<label class="control-label col-sm-4" for="phone">
 												<p align="right">
 													<stong>핸드폰</stong>
 												</p>
@@ -431,7 +681,7 @@
 
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="email">
+											<label class="control-label col-sm-4" for="email">
 												<p align="right">
 													<stong>이메일</stong>
 												</p>
@@ -453,7 +703,7 @@
 										
 									<div class="row">
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="emailcheck">
+											<label class="control-label col-sm-4" for="emailcheck">
 												<p align="right">
 													<stong>정보 수신 메일 동의</stong>
 												</p>
@@ -461,8 +711,8 @@
 											<div class="col-sm-5">
 												<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>
 												&nbsp; 
-												<input type="radio" name="yes" value="y">예 
-												<input type="radio" name="no" value="n">아니오<br>
+												<input type="radio" name="mailagreement" value="y">예 
+												<input type="radio" name="mailagreement" value="n">아니오<br>
 											</div>
 										</div>
 									</div>
@@ -471,14 +721,58 @@
 								</div>
 							</div>
 								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-default prev-step">이전 단계</button></li>
 									<li><button type="button"
 											class="btn btn-primary next-step">다음 단계</button></li>
 								</ul>
+								
+								
 							</div>
 							<div class="tab-pane" role="tabpanel" id="step3">
 								<div class="step33">
-									<div class="row mar_ned"></div>
-									<p align="left">추가 입력 사항</p>
+								<br>
+									<div class="row mar_ned col-sm-5"></div>
+									<div align="left" ><h3>추가 입력 사항</h3></div>
+									<hr>
+										
+										<div class="row">
+										<div class="form-group ">
+											<label class="control-label col-sm-4 " for="nickname">
+												<p align="right">
+													<strong>닉네임</strong>
+												</p>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control ID " id="nickname"
+													placeholder="닉네임 입력" name="nickname">
+													
+											</div>
+											
+											<div class="col-sm-2">
+												<button type="button" class="btn btn-primary idCheck">
+													중복 검사</button>
+											</div>
+										</div>
+									</div>
+									<br>
+									
+									<div class="row">
+										<div class="form-group">
+											<label class="control-label col-sm-4" for="gender">
+												<p align="right">
+													<stong>관심사</stong>
+												</p>
+											</label>
+											<div class="col-sm-8">
+												<input type="radio" name="hobby" value="hobby"> 외국어&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 운동&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 독서&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 예술&nbsp;&nbsp;
+												<input type="radio" name="hobby" value="hobby"> 기타&nbsp;&nbsp;
+												<p>(선택사항입니다.)</p>
+											</div>       
+										</div>
+									</div>
 
 									<hr>
 									<div class="row mar_ned"></div>
@@ -490,7 +784,7 @@
 
 
 
-									<hr>
+									
 
 								</div>
 								<ul class="list-inline pull-right">
@@ -503,14 +797,18 @@
 							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">
 								<div class="step44">
-									<h5>complete</h5>
-
+									<div class="step33">
+										<br>
+										<h5 align="center"> take a talent에 가입을 완료하시겠습니까?</h5>
+										<br>
+									</div>
+									<br>
 									<ul class="list-inline pull-right">
-										<li><button type="button"
-												class="btn btn-primary next-step">가입 완료</button></li>
+										<li>
+											<button type="button" class="btn btn-primary next-step"><a href="<c:url value='/userlogin'/>">가입 완료</a>
+											</button>
+										</li>
 									</ul>
-
-
 								</div>
 							</div>
 							<div class="clearfix"></div>

@@ -71,13 +71,26 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
 	}
 	
-	/*@Override
+	@Override
 	public MemberVo selectForUpdateMember()
 	{
 		//지금 로그인 되어있는 사용자의 아이디를 가져옴
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		//selectForUpdateMember 쿼리를 호출
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMember", memberId);
-	}*/
+	}
+
+	//회원가입시 닉네임 중복체크 
+	@Override
+	public boolean nicknameCheck(String memberNickname){
+		logger.info("DAO nicknameCheck 호출");
+		logger.info("memberNickname : "+memberNickname);
+		
+		/*IdChecker idChecker = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idChecker", memberId);*/
+		/*logger.info("checkId : "+idChecker.getMember_id());*/
+		//sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
+	}
 	
 }

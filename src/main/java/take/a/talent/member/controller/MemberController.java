@@ -12,8 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
@@ -33,17 +35,7 @@ public class MemberController
 	
 	
 	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
-	@RequestMapping(value ="/ajax/idCheck", method=RequestMethod.POST)
-	public @ResponseBody boolean idCheck(String memberId, ModelMap model) {
-		logger.info("id체크");
-		logger.info("VO값 확인");
-		logger.info("memberId"+memberId);
-		boolean idExist = service.idCheck(memberId);
-		model.addAttribute("idExist", idExist);
-		
-		return idExist;
-	}
+	
 	
 
 	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)

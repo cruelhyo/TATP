@@ -70,6 +70,16 @@ $(document).ready(function()
 		$('#myExchange').show();
 	});
 	
+	$('#myAccountShow').click(function(){
+		$('.includePage').hide();
+		$('#myAccount').show();
+	});
+	
+	$('#modifiedMypageShow').click(function(){
+		$('.includePage').hide();
+		$('#modifiedMypage').show();
+	});
+	
 	
 	// 주소추가폼 숨기기
 	$('.add').hide();

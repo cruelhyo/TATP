@@ -1,14 +1,14 @@
 package take.a.talent.member.vo;
 
 public class MemberVo {
-
+	private int memberNo; 
 	private String memberId;
 	private String memberPassword;
 	private String memberName;
 	private String memberGender;
 	private int memberAge;
 	private String memberPhone;
-	private String memberSocial_number;
+	private String memberBirthday;
 	private String memberNickname;
 	private int memberPoint;
 	private int memberAuthority_no;
@@ -23,6 +23,14 @@ public class MemberVo {
 	private int memberLogin_state;
 	private String memberAddress;
 	private String memberMemo;
+	public int getMemberNo()
+	{
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo)
+	{
+		this.memberNo = memberNo;
+	}
 	public String getMemberId()
 	{
 		return memberId;
@@ -71,13 +79,13 @@ public class MemberVo {
 	{
 		this.memberPhone = memberPhone;
 	}
-	public String getMemberSocial_number()
+	public String getMemberBirthday()
 	{
-		return memberSocial_number;
+		return memberBirthday;
 	}
-	public void setMemberSocial_number(String memberSocial_number)
+	public void setMemberBirthday(String memberBirthday)
 	{
-		this.memberSocial_number = memberSocial_number;
+		this.memberBirthday = memberBirthday;
 	}
 	public String getMemberNickname()
 	{
@@ -196,7 +204,7 @@ public class MemberVo {
 	{
 		return "MemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName=" + memberName
 				+ ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", memberPhone=" + memberPhone
-				+ ", memberSocial_number=" + memberSocial_number + ", memberNickname=" + memberNickname
+				+ ", memberBirthday=" + memberBirthday + ", memberNickname=" + memberNickname
 				+ ", memberPoint=" + memberPoint + ", memberAuthority_no=" + memberAuthority_no + ", memberEmail="
 				+ memberEmail + ", memberAgreement=" + memberAgreement + ", memberSns=" + memberSns
 				+ ", memberStudent_exp=" + memberStudent_exp + ", memberStudent_level=" + memberStudent_level

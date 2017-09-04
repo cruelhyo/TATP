@@ -41,5 +41,17 @@ public class MainController
 	{
 		return "layout/form";
 	}
-
+	
+	@RequestMapping(value = "/anonymous/usePage", method = RequestMethod.GET)
+	public String howToUse()
+	{
+		return "user/usePage";
+	}
+	
+	@RequestMapping(value = "/anonymous/classSearch", method = RequestMethod.GET)
+	public String classSearch()
+	{
+		return "user/classSearch";
+	}
+	
 }

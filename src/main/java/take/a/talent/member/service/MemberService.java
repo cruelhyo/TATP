@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
+import take.a.talent.member.vo.MemberVo;
 
 
 @Service // service라고 명시해줌
@@ -15,7 +16,7 @@ public class MemberService implements MemberServiceInterface{
 	
 	@Autowired
 	MemberDao memberDao;
-	
+
 	@Override
 	public boolean idCheck(String memberId)
 	{
@@ -25,14 +26,35 @@ public class MemberService implements MemberServiceInterface{
 		
 		return ck;
 	}
+	
+	//회원 업데이트 dao호출
+	@Override
+	public int updateMember(MemberVo memberVo)
+	{
+		int updateMemberResult = memberDao.updateMember(memberVo);
+		
+		return updateMemberResult;
+		 
+	}
+	//회원 업데이트 시 셀텍트 dao호출
+	@Override
+	public MemberVo selectForUpdateMember()
+	{
+		logger.info("selectForUpdateMember");
+		MemberVo selectForUpdateMemberResult = memberDao.selectForUpdateMember();
+		logger.info(selectForUpdateMemberResult.toString());
+		return selectForUpdateMemberResult;
+	}
+	
 
 	@Override
 	public boolean nicknameCheck(String memberNickname) {
 		
-		boolean nck = false;
+		boolean nck = memberDao.nicknameCheck(memberNickname);
 		 
 		logger.info("checkedNickname : " + nck);
 			
 		return nck;
 	}
+
 }

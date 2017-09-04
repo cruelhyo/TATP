@@ -52,19 +52,19 @@ $(document).ready(function(){
 	});
 	
 	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
+		$('#usePageserviceShow').click(function(){
 			$('.includePage').hide();
-			$('#myPage2').show();
+			$('#usePageservice').show();
 		});
 		
-		$('#myPointHistoryShow').click(function(){
+		$('#openClassUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myPointHistory').show();
+			$('#openClassUse').show();
 		});
 	
-		$('#myAddressShow').click(function(){
+		$('#classUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myAddress').show();
+			$('#classUse').show();
 		});
 		
 		$('#myPointShow').click(function(){
@@ -128,19 +128,19 @@ p.footer-text1 {
 							<ul class="nav navbar-nav">
 								
 								<li>
-									<a href="#" id="">
+									<a href="#" id="usePageserviceShow">
 										<span class="glyphicon glyphicon-user"></span>
 										서비스소개
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="openClassUseShow">
 										<span class="glyphicon glyphicon-cloud"></span>
 										수업개설 이용방법
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="classUseShow">
 										<span class="glyphicon glyphicon-signal"></span>
 										수업듣기 이용방법
 									</a>
@@ -166,19 +166,37 @@ p.footer-text1 {
 				</div>
 			</div>
 		</div>
-		<!-- 내정보수정 -->
+		
+		
+	 
+		<!-- 이용방법 -->
 		<div class="tab-content">
-			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateForm2.jsp" flush="true"></jsp:include>
+			<!--서비스소개  -->
+  			<div role="tabpanel" class="tab-pane fade in active includePage" id="usePageservice">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
-			<!--내포인트 충전 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
-				<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
+			<!--수업오픈 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="openClassUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS2.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
 			<!--비밀번호 변경 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
-				<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="classUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS3.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
 			
 			<!-- 내 결제내역 보기 -->

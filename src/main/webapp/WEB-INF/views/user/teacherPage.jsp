@@ -12,9 +12,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<c:url value='/resources/css/mapage.css'/>" type="text/css">
 <link rel="stylesheet" href="<c:url value='/resources/css/join.css'/>" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/portfolio.css'/>" type="text/css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 <title>Take A Talent</title>
 
@@ -107,7 +110,7 @@
 									<div id="dropdown-lvl3" class="panel-collapse collapse">
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
-												<li><a href="#">My Portfolio</a></li>
+												<li><a href="#" id="portfolioShow">My Portfolio</a></li>
 												<li><a href="#">이력사항 관리</a></li>
 												<li><a href="#">Link</a></li>	
 											</ul>
@@ -179,6 +182,10 @@
 			<!-- 내정보 전체 보기-->
 			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
 				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 포트폴리오-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="portfolio">
+				<jsp:include page="../include/portfolio.jsp" flush="true"></jsp:include>
 			</div>
 		</div>
 	</div>

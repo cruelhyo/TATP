@@ -4,7 +4,9 @@
 	<div class="col-sm-8">
 		<div class="step_21">
 
-			<h2 align="center">회원 정보 수정</h2>
+			<h2 align="left" >&nbsp;&nbsp;&nbsp;&nbsp;
+				<font color="#5F5F5F">회원 정보 수정</font>
+			</h2>
 			<hr>
 			<c:if test="${param.updateSuccess == 1}">
 				<p>수정이 성공적입니다</p>

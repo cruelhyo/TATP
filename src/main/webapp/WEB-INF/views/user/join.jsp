@@ -104,6 +104,8 @@
 													<br>
 													<span id="idch2"></span>												
 												<input type="hidden" value="0" id="use_id" name="use_id">
+												<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+												<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 											</div>
 											
 											<div class="col-sm-2">

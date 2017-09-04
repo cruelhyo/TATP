@@ -92,14 +92,19 @@ $(document).ready(function()
 			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
 			 */			 
 			var ajaxIdCheck = $('#ajaxIdCheck').val();
+			var csrfToken = $('#csrfToken').val();
+			var csrfHeader = $('#csrfHeader').val();
 			$.ajax(
 			{
-				 type : 'POST',
-				 url : ajaxIdCheck,
-				 data :{
-					 'memberId':$('#memberId').val(),
-					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
-					 }, 
+				type : 'POST',
+				url : ajaxIdCheck,
+				data : $('#memberId').val(),
+				beforeSend : function(xhr) 
+				{
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+					xhr.setRequestHeader(csrfHeader, csrfToken);
+				},
 				success : function(idExist)
 				{
 					console.log(idExist);

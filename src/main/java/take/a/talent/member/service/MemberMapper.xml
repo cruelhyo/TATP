@@ -5,6 +5,31 @@
 
 <mapper namespace="take.a.talent.member.service.MemberMapper">
 
+	 <resultMap	type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
+		<result property="memberNo" column="member_no "/>
+		<result property="memberId" column="member_id" />
+		<result property="memberPassword" column="member_password" />
+		<result property="memberName" column="member_name" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberAge" column="member_age" />
+		<result property="memberPhone" column="member_phone" />
+		<result property="memberBirthday" column="member_birthday" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberPoint" column="member_point" />
+		<result property="memberAuthority_no" column="member_authority_no" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberAgreement" column="member_agreement" />
+		<result property="memberSns" column="member_sns" />
+		<result property="memberStudentExp" column="member_student_exp" />
+		<result property="memberStudentLevel" column="member_student_level" />
+		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
+		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
+		<result property="memberLoginState" column="member_login_state" />
+		<result property="memberMemo" column="member_memo" />
+		
+		
+	</resultMap>
+
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
 		SELECT 
@@ -28,6 +53,16 @@
 		
 	</select> 
 	
+	<select id="selectForUpdateMember" resultMap="MemberVo">
+		SELECT member_name 
+		, member_nickname 
+		, member_gender 
+		, member_birthday 
+		, member_phone 
+		, member_email
+		FROM member
+		WHERE member_id = #{memberId};
+	</select>
 	
 	<!--회원가입시 닉네임 중복체크  -->
 	<select id ="nicknameCheck" parameterType="String" resultType="boolean">
@@ -37,7 +72,6 @@
 		WHERE member_id=#{member_id});
 		
 	</select> 
-
 	
 	
 	<!-- 회원가입  수정중!!!!! -->
@@ -49,37 +83,21 @@
 	</insert>
 	
 	
-	
-	
+	<!-- 회원 정보 수정(비밀번호, 주소 제외) -->	
+	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member 
+		SET member_name = #{memberName}
+		, member_nickname = #{memberNickname}
+		, member_gender = #{memberGender}
+		, member_birthday = #{memberBirthday}
+		, member_phone = #{memberPhone}
+		, member_email = #{memberEmail}
+		WHERE member_id = #{memberId}; 
+	</update>
 
 	
 
-	 <resultMap
-		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
-		
-		<result property="memberId" column="member_id" />
-		<result property="memberPassword" column="member_password" />
-		<result property="memberName" column="member_name" />
-		<result property="memberGender" column="member_gender" />
-		<result property="memberAge" column="member_age" />
-		<result property="memberPhone" column="member_phone" />
-		<result property="memberSocial_number" column="member_social_number" />
-		<result property="memberNickname" column="member_nickname" />
-		<result property="memberPoint" column="member_point" />
-		<result property="memberAuthority_no" column="member_authority_no" />
-		<result property="memberEmail" column="member_email" />
-		<result property="memberAgreement" column="member_agreement" />
-		<result property="memberSns" column="member_sns" />
-		<result property="memberStudentExp" column="member_student_exp" />
-		<result property="memberStudentLevel" column="member_student_level" />
-		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
-		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
-		<result property="memberLoginState" column="member_login_state" />
-		<result property="memberAddress" column="member_address" />
-		<result property="memberMemo" column="member_memo" />
-		
-		
-	</resultMap>
+	
 
 </mapper>
   

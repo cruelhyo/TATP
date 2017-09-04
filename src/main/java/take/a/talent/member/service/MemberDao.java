@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -23,9 +25,12 @@ public class MemberDao implements MemberDaoInterface{
 	
 	//sql문 작동시킬 sqlsession의 자동 객체화 
 	@Autowired
-	 private SqlSessionTemplate sqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	//로그인 후 스프링 시큐리티 세션에서 저장되는 username, userpassword, authority를 가져올수 있게 user를 지정
+	//private User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	//회원정보 입력을 위한 메서드 선언
 	@Override
@@ -53,6 +58,32 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 	}
 	
+	//회원 업데이트
+	@Override
+	public int updateMember(MemberVo memberVo)
+	{
+		//vo에 지금 로그인되어있는 사용자의 아이디를 세팅
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		memberVo.setMemberId(user.getUsername());
+		logger.info("DAO updateMember 호출");
+		logger.info(memberVo.toString());
+		//updateMember 쿼리를 호출
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
+	}
+	
+	@Override
+	public MemberVo selectForUpdateMember()
+	{
+		logger.info("DAO selectForUpdateMember 호출");
+		//지금 로그인 되어있는 사용자의 아이디를 가져옴
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		//selectForUpdateMember 쿼리를 호출
+		MemberVo memberVo = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMember", memberId);
+		logger.info(memberVo.toString());
+		return memberVo;
+	}
+
 	//회원가입시 닉네임 중복체크 
 	@Override
 	public boolean nicknameCheck(String memberNickname){

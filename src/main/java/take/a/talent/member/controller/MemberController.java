@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberVo;
 
 @Controller
 public class MemberController
@@ -44,6 +45,19 @@ public class MemberController
 		return idExist;
 	}
 	
+
+	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
+	public String updateMember(MemberVo memberVo)
+	{
+		logger.info("updateMember");
+		logger.info(memberVo.toString());
+		int updateMemberResult = service.updateMember(memberVo);
+		//model.addAttribute("updateMemberResult", updateMemberResult);
+		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
+	}
+	
+	
+
 	
 	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)
 	public @ResponseBody boolean nickNameCheck(String memberNickname, ModelMap model){
@@ -56,6 +70,7 @@ public class MemberController
 		return nicknameExist;
 		
 	}
+
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
 	public String pwCheck()
@@ -121,6 +136,13 @@ public class MemberController
 		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/teacherPage";
 	}
+	
+	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.POST)
+	public String teacherPagep(ModelMap model)
+	{
+		model.addAttribute("user", userAuthenticationService.getUserName());
+		return "user/teacherPage";
+	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(ModelMap model)
@@ -153,7 +175,5 @@ public class MemberController
 		}
 		return "redirect:/login?logout";
 	}
-
-	
 
 }

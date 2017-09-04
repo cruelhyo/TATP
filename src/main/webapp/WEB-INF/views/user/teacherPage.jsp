@@ -17,110 +17,14 @@
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>Take A Talent</title>
+
 <!-- mypage 자바스크립트 -->
-<script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/teacherPageJs.js'/>"></script>
 
-
-
-$(document).ready(function(){
-	$('.includePage').hide();
-	$(function () {
-	  	$('.navbar-toggle-sidebar').click(function () {
-	  		$('.navbar-nav').toggleClass('slide-in');
-	  		$('.side-body').toggleClass('body-slide-in');
-	  		$('#search').removeClass('in').addClass('collapse').slideUp(200);
-	  	});
-	
-	  	$('#search-trigger').click(function () {
-	  		$('.navbar-nav').removeClass('slide-in');
-	  		$('.side-body').removeClass('body-slide-in');
-	  		$('.search-input').focus();
-	  	});
-	  });
-	  
-	$('#myTab a').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('hide')
-		});
-		
-	$('#myTab a[href="#mypage"]').tab('show'); // Select tab by name
-	$('#myTab a:first').tab('show'); // Select first tab
-	$('#myTab a:last').tab('show'); // Select last tab
-	$('#myTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
-	
-	$(function () {
-	  $('#myTab a:last').tab('show')
-	});
-	
-	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
-			$('.includePage').hide();
-			$('#myPage').show();
-		});
-		
-		$('#myPointHistoryShow').click(function(){
-			$('.includePage').hide();
-			$('#myPointHistory').show();
-		});
-	
-		$('#myAddressShow').click(function(){
-			$('.includePage').hide();
-			$('#myAddress').show();
-		});
-		
-		$('#myPointShow').click(function(){
-			$('.includePage').hide();
-			$('#myPoint').show();
-		});
-		
-		$('#myChangePWShow').click(function(){
-			$('.includePage').hide();
-			$('#myChangePW').show();
-		});
-		
-		$('#myExchangeShow').click(function(){
-			$('.includePage').hide();
-			$('#myExchange').show();
-		});
-		
-		$('#myAccountShow').click(function(){
-			$('.includePage').hide();
-			$('#myAccount').show();
-		});
-		
-		$('#modifiedMypageShow').click(function(){
-			$('.includePage').hide();
-			$('#modifiedMypage').show();
-		});
-		
-		
-	// 주소추가폼 숨기기
-		$('.add').hide();
-		$('#plus').click(function(){
-			$('.add').hide();
-			$('#address1').show();
-		});
-	//주소추가하기 버튼 누르면 폼 다시 사라짐
-		$('#plus2').click(function(){
-			$('.add').hide();
-		});
-
-		// 환전내역 숨기기
-		$('.ExchangeHistory').hide();
-		$('#ExchangeView').click(function(){
-			$('.ExchangeHistory').hide();
-			$('#ExHistory').show();
-		});
-	
-});
-
-
-	
-</script>
 
 </head>
 <body>
-	
+	<input type="hidden" id="ajaxSelectForUpdateMember" value="<c:url value='/ajax/teacherPage/selectForUpdateMember'/>">
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
@@ -156,7 +60,7 @@ $(document).ready(function(){
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li role="presentation" class="active">
-													<a href="#mypage" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
+													<a href="" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
 												</li>
 												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
 												<li><a href="#" id ="myAddressShow">내주소록 보기</a></li>

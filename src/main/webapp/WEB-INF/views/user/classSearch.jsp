@@ -137,7 +137,7 @@
            				<li class="treeUl">
       						<label>
                					<input type="checkbox">
-                				프라모델/피규어/인형
+                				프라모델/피규어/Doll
                  			</label>
            				</li>
            				<li class="treeUl">

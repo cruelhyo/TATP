@@ -80,6 +80,29 @@ $(document).ready(function()
 		$('#modifiedMypage').show();
 	});
 	
+	$('#portfolioShow').click(function(){
+		$('.includePage').hide();
+		$('#portfolio').show();
+	});
+	
+	$('#myAccountShow').click(function(){
+		$('.includePage').hide();
+		$('#myAccount').show();
+	});
+	
+	//portfoio
+	  
+	     
+	$('.gallery-item').magnificPopup({
+		type: 'image',
+			gallery:{
+				enabled:true
+					}
+	});
+	        
+	// MixItUp 2
+		$('#container').mixItUp();
+	    
 	
 	// 주소추가폼 숨기기
 	$('.add').hide();

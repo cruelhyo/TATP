@@ -21,7 +21,69 @@
 
 <!-- mypage 자바스크립트 -->
 <script type="text/javascript" src="<c:url value='/resources/javascript/usePageJs.js'/>"></script>
+<script>
+$(document).ready(function(){
+	$('.includePage').hide();
+	$(function () {
+	  	$('.navbar-toggle-sidebar').click(function () {
+	  		$('.navbar-nav').toggleClass('slide-in');
+	  		$('.side-body').toggleClass('body-slide-in');
+	  		$('#search').removeClass('in').addClass('collapse').slideUp(200);
+	  	});
+	
+	  	$('#search-trigger').click(function () {
+	  		$('.navbar-nav').removeClass('slide-in');
+	  		$('.side-body').removeClass('body-slide-in');
+	  		$('.search-input').focus();
+	  	});
+	  });
+	  
+	$('#myTab a').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('hide')
+		});
+		
+	$('#myTab a[href="#mypage"]').tab('show'); // Select tab by name
+	$('#myTab a:first').tab('show'); // Select first tab
+	$('#myTab a:last').tab('show'); // Select last tab
+	$('#myTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
+	
+	$(function () {
+	  $('#myTab a:last').tab('show')
+	});
+	
+	//숨긴 includepage 해당 버튼 클릭시 보여주기
+		$('#usePageserviceShow').click(function(){
+			$('.includePage').hide();
+			$('#usePageservice').show();
+		});
+		
+		$('#openClassUseShow').click(function(){
+			$('.includePage').hide();
+			$('#openClassUse').show();
+		});
+	
+		$('#classUseShow').click(function(){
+			$('.includePage').hide();
+			$('#classUse').show();
+		});
+		
+		$('#myPointShow').click(function(){
+			$('.includePage').hide();
+			$('#myPoint').show();
+		});
+		
+		$('#myChangePWShow').click(function(){
+			$('.includePage').hide();
+			$('#myChangePW').show();
+		});
+		
+	
+});
 
+
+	
+</script>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -66,19 +128,19 @@ p.footer-text1 {
 							<ul class="nav navbar-nav">
 								
 								<li>
-									<a href="#" id="">
+									<a href="#" id="usePageserviceShow">
 										<span class="glyphicon glyphicon-user"></span>
 										서비스소개
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="openClassUseShow">
 										<span class="glyphicon glyphicon-cloud"></span>
 										수업개설 이용방법
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="classUseShow">
 										<span class="glyphicon glyphicon-signal"></span>
 										수업듣기 이용방법
 									</a>
@@ -104,19 +166,37 @@ p.footer-text1 {
 				</div>
 			</div>
 		</div>
-		<!-- 내정보수정 -->
+		
+		
+	 
+		<!-- 이용방법 -->
 		<div class="tab-content">
-			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateForm2.jsp" flush="true"></jsp:include>
+			<!--서비스소개  -->
+  			<div role="tabpanel" class="tab-pane fade in active includePage" id="usePageservice">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
-			<!--내포인트 충전 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
-				<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
+			<!--수업오픈 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="openClassUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS2.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
 			<!--비밀번호 변경 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
-				<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="classUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS3.png'/>" alt=" "
+						style="width: 100%" >
+	 				</div>
+				</div>
 			</div>
 			
 			<!-- 내 결제내역 보기 -->

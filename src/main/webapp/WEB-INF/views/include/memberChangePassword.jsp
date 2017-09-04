@@ -2,7 +2,8 @@
 <div class="col-sm-8">
 	<div class="step_21">
 
-		<h2 align="center">비밀번호 수정</h2>
+		<h2 align="left" >&nbsp;&nbsp;&nbsp;&nbsp;
+				<font color="#5F5F5F">비밀번호 수정</font></h2>
 		<hr>
 	<div class="row">
 		<div class="form-group">

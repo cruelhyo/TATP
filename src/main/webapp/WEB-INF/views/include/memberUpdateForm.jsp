@@ -22,8 +22,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름 입력" 
-									value="${memberVo.memberName}">
+							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름 입력">
 						</div>
 					</div>
 				</div>
@@ -37,8 +36,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임 입력"
-									value="${memberVo.memberNickname}">
+							<input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임 입력">
 						</div>
 					</div>
 				</div>
@@ -52,10 +50,10 @@
 							</p>
 						</label>
 						<div class="col-sm-8">
-							<input type="radio" name="memberGender" id="memberGender" value="male" readonly="readonly">
+							<input type="radio" name="memberGender" class="male" id="memberGender" value="male" readonly="readonly">
 							Male 
 							&nbsp;&nbsp; 
-							<input type="radio" name="memberGender" id="memberGender" value="female"readonly="readonly">
+							<input type="radio" name="memberGender" class="female" id="memberGender" value="female"readonly="readonly">
 							Female
 						</div>
 					</div>
@@ -69,8 +67,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08"
-									value="${memberVo.memberBirthday}">
+							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08">
 						</div>
 					</div>
 				</div>
@@ -83,8 +80,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678"
-									value="${memberVo.memberPhone}">
+							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
 						</div>
 					</div>
 				</div>
@@ -99,8 +95,7 @@
 						</label>
 						<div class="row">
 							<div class="col-sm-7 ">
-								<input type="text" class="dropselectsec1" id="memberEmail" name="memberEmail" placeholder="ex) abc123@naver.com"
-										value="${memberVo.memberEmail}">
+								<input type="text" class="dropselectsec1" id="memberEmail" name="memberEmail" placeholder="ex) abc123@naver.com">
 							</div>
 					</div>
 					</div>

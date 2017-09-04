@@ -91,11 +91,31 @@ $(document).ready(function()
 	
 	//memberUpdateForm js
 	
-	$('#myPageShow').click(function(){
+	$('#myPageShow').click(function()
+	{
 		console.log("select for update member");
 		var ajaxSelectForUpdateMember = $('#ajaxSelectForUpdateMember').val();
-		$.ajax({
-			url : ajaxSelectForUpdateMember
+		$.ajax(
+		{
+			url : ajaxSelectForUpdateMember,
+			
+			success : function(result)
+			{
+				console.log(result);
+				$('#memberName').val(result.memberName);
+				$('#memberNickname').val(result.memberNickname);
+				if(result.memberGender == 'male')
+				{
+					$('.male').prop("checked", true);
+				}
+				else
+				{
+					$('.female').prop("checked", true);
+				}
+				$('#memberBirthday').val(result.memberBirthday);
+				$('#memberPhone').val(result.memberPhone);
+				$('#memberEmail').val(result.memberEmail);
+			}
 			
 		});
 	});

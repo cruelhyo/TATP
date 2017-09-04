@@ -56,14 +56,7 @@ public class MemberController
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
 	
-	@RequestMapping(value ="/ajax/teacherPage/selectForUpdateMember", method=RequestMethod.GET)
-	public @ResponseBody ModelMap selectForUpdateMember(ModelMap model)
-	{
-		logger.info("selectForUpdateMember");
-		MemberVo memberVo = service.selectForUpdateMember();
-		model.addAttribute("memberVo", memberVo);
-		return model;
-	}
+	
 
 	
 	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)

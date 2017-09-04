@@ -204,7 +204,7 @@ public class MemberVo {
 	{
 		return "MemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName=" + memberName
 				+ ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", memberPhone=" + memberPhone
-				+ ", memberSocial_number=" + memberBirthday + ", memberNickname=" + memberNickname
+				+ ", memberBirthday=" + memberBirthday + ", memberNickname=" + memberNickname
 				+ ", memberPoint=" + memberPoint + ", memberAuthority_no=" + memberAuthority_no + ", memberEmail="
 				+ memberEmail + ", memberAgreement=" + memberAgreement + ", memberSns=" + memberSns
 				+ ", memberStudent_exp=" + memberStudent_exp + ", memberStudent_level=" + memberStudent_level

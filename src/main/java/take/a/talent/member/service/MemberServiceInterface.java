@@ -27,5 +27,7 @@ public interface MemberServiceInterface {
 		//회원가입시 아이디 중복검사  
 		boolean idCheck(String memberId);
 
+		boolean nicknameCheck(String memberNickname);
+
 	
 }

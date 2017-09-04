@@ -755,6 +755,7 @@
 									</div>
 
 									<hr>
+									<h5 align="center"> take a talent에 가입을 완료하시겠습니까?</h5>
 									<div class="row mar_ned"></div>
 									<div class="row mar_ned"></div>
 
@@ -779,13 +780,14 @@
 								<div class="step44">
 									<div class="step33">
 										<br>
-										<h5 align="center"> take a talent에 가입을 완료하시겠습니까?</h5>
+										<h5 align="center"> take a talent에 가입이 완료 되었습니다.</h5>
 										<br>
+										
 									</div>
 									<br>
 									<ul class="list-inline pull-right">
 										<li>
-											<button type="button" class="btn btn-primary next-step"><a href="<c:url value='/userlogin'/>">가입 완료</a>
+											<button type="button" class="btn btn-link"><a href="<c:url value='/userlogin'/>">로그인</a>
 											</button>
 										</li>
 									</ul>

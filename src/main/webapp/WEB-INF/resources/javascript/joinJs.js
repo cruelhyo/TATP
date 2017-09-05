@@ -21,6 +21,7 @@ $(document).ready(function()
 			}
 		});
 
+		//이용약관 동의 하면 이동시키게 하는 함수
 		$(".next-step-agree").click(function(e)
 		{
 			console.log(".next-step-agree");

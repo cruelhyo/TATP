@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import take.a.talent.member.service.MemberServiceInterface;
+import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
 @RestController
@@ -63,6 +64,15 @@ public class MemberRestController
 		model.addAttribute("nicknameExist",nicknameExist);
 		return nicknameExist;
 		
+	}
+	
+	@RequestMapping(value="/ajax/selectForUpdateMemberForStudent", method=RequestMethod.GET)
+	public MemberAndAddressVo selectForUpdateMemberForStudent()
+	{
+		logger.info("selectForUpdateMemberForStudent");
+		MemberAndAddressVo memberAndAddressVo = service.selectForUpdateMemberForStudent();
+		logger.info(memberAndAddressVo.toString());
+		return memberAndAddressVo;
 	}
 
 }

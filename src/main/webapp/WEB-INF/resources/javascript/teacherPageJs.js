@@ -6,6 +6,7 @@ $(document).ready(function()
 {
 	
 	$('.includePage').hide();
+	$('#modifiedMypage').show();
 	$(function () 
 	{
 	  	$('.navbar-toggle-sidebar').click(function () 
@@ -101,7 +102,8 @@ $(document).ready(function()
 	
 	//memberUpdateFormForTeacher js
 	
-	function selectForUpdateMember(){
+	function selectForUpdateMember()
+	{
 		console.log("select for update member");
 		var ajaxSelectForUpdateMember = $('#ajaxSelectForUpdateMember').val();
 		$.ajax(
@@ -187,9 +189,33 @@ $(document).ready(function()
 					$("#nkch1").css("color", "#009900");
 					$('#nkch1').text('사용 가능한 닉네임입니다.');
 					$('#nkch2').text('');
+					$('#updateMemberBtn').prop('disabled', false);
 				}
 			}				 
-		 });	
-		
+		});	
 	});
+	// 수정완료 버튼 비활성화 함수
+	function disableButton() {
+		$('#updateMemberBtn').prop('disabled', true);
+	}
+	disableButton();
+	
+	$(".phone").keyup(function()
+	{
+		var check = /^[0-9]{11,11}$/; 
+		 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
+		var in_phone = $('.phone').val();
+		if(!check.test(in_phone))
+		{
+			$("#phch1").css("color", "#FF0000");
+			$('#phch1').text('번호를 제대로 입력해 주세요');
+			$('#updateMemberBtn').prop('disabled', true);
+		}
+		else
+		{
+			$('#phch1').text('');
+			$('#updateMemberBtn').prop('disabled', false);
+		}
+	 });
+	
 });

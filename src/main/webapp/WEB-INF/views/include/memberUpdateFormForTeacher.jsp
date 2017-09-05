@@ -6,16 +6,12 @@
 
 			<h2 align="center">회원 정보 수정</h2>
 			<hr>
-			<c:if test="${param.updateSuccess == 1}">
-				<p>수정이 성공적입니다</p>
-			</c:if>
-			<c:if test="${param.updateSuccess == 0}">
-				<p>수정을 실패했습니다</p>
-			</c:if>
 			<form action="<c:url value='/teacher/teacherPage/updateMember'/>" id="updateForm" method="post">
+				<input type="hidden" id="ajaxSelectForUpdateMember" value="<c:url value='/ajax/teacherPage/selectForUpdateMember'/>">
 				<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nickNameCheckForUpdate'/>">
 				<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-3 " for="name">
@@ -24,7 +20,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름 입력">
+							<input type="text" class="form-control" id="memberName" name="memberName" readonly="readonly">
 						</div>
 					</div>
 				</div>
@@ -75,7 +71,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08">
+							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08" readonly="readonly">
 						</div>
 					</div>
 				</div>
@@ -88,7 +84,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<input type="text" class="form-control phone" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<span id="phch1"></span>
 						</div>
 					</div>
 				</div>

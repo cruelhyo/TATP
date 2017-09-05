@@ -63,6 +63,38 @@ $(document).ready(function(){
 			$('#modifiedMypage').show();
 		});
 		
+		//memberUpdateFormForStuden js
 		
-	
+		function selectForUpdateMemberForStudent()
+		{
+			console.log("select for update member");
+			var ajaxSelectForUpdateMemberForStudent = $('#ajaxSelectForUpdateMemberForStudent').val();
+			
+			$.ajax(
+			{
+				url : ajaxSelectForUpdateMemberForStudent,
+				
+				success : function(result)
+				{
+					console.log(result);
+					$('#memberName').val(result.memberName);
+					$('#memberNickname').val(result.memberNickname);
+					if(result.memberGender == 'male')
+					{
+						$('.male').prop("checked", true);
+					}
+					else
+					{
+						$('.female').prop("checked", true);
+					}
+					$('#memberBirthday').val(result.memberBirthday);
+					$('#memberPhone').val(result.memberPhone);
+					$('#memberEmail').val(result.memberEmail);
+					$('#memberMailNumber').val(result.memberMailNumber);
+					$('#memberAddress').val(result.memberAddress);
+				}
+			});
+		}
+		selectForUpdateMemberForStudent();
+		
 });

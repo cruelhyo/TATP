@@ -26,8 +26,19 @@
 		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
 		<result property="memberLoginState" column="member_login_state" />
 		<result property="memberMemo" column="member_memo" />
-		
-		
+	</resultMap>
+	<resultMap type="take.a.talent.member.vo.MemberAndAddressVo" id="MemberAndAddressVo">
+		<result property="memberId" column="member_id"/>
+		<result property="memberPassword" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberNickname" column="member_nickname"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberBirthday" column="member_birthday"/>
+		<result property="memberMailNumber" column="address_mailnumber"/>
+		<result property="memberAddress" column="member_address"/>
+		<result property="memberPhone" column="member_phone"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberAgreement" column="member_agreement"/>
 	</resultMap>
 
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
@@ -53,6 +64,7 @@
 		
 	</select> 
 	
+	<!-- 업데이트시 셀렉트(강사) -->
 	<select id="selectForUpdateMember" resultMap="MemberVo">
 		SELECT member_name 
 		, member_nickname 
@@ -77,7 +89,22 @@
 	<select id ="nicknameCheckForUpdate" parameterType="String" resultType="String">
 		SELECT member_nickname
 		FROM member
-		WHERE member_nickname=#{memberNickname};
+		WHERE member_id=#{memberId};
+	</select>
+	
+	<select id="selectForUpdateMemberForStudent" parameterType="String" resultMap="MemberAndAddressVo">
+		SELECT m.member_name
+		, m.member_nickname
+		, m.member_gender
+		, m.member_birthday
+		, m.member_phone
+		, m.member_email
+		, a.address_mailnumber
+		, a.member_address
+		FROM member m
+		INNER JOIN address a
+		ON m.member_no = a.member_no
+		WHERE m.member_id = #{memberId};
 	</select>
 	
 	<!-- 회원가입  수정중!!!!! -->
@@ -89,7 +116,7 @@
 	</insert>
 	
 	
-	<!-- 회원 정보 수정(비밀번호, 주소 제외) -->	
+	<!-- 회원(강사) 정보 수정(비밀번호, 주소 제외) -->	
 	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">
 		UPDATE member 
 		SET member_name = #{memberName}
@@ -101,7 +128,22 @@
 		WHERE member_id = #{memberId}; 
 	</update>
 
-	
+	<!-- 회원(학생) 정보 수정(비밀번호 제외) -->
+	<update id="updateMemberForStudent" parameterType="take.a.talent.member.vo.MemberAndAddressVo">
+		UPDATE member m
+		INNER JOIN address a
+		ON  m.member_no = a.member_no
+		SET 
+		m.member_name = #{memberName}
+		, m.member_nickname = #{memberNickname}
+		, m.member_gender = #{memberGender}
+		, m.member_birthday = #{memberBirthday}
+		, m.member_phone = #{memberPhone}
+		, m.member_email = #{memberEmail}
+		, a.address_mailnumber = #{memberMailNumber}
+		, a.member_address = #{memberAddress}
+		where m.member_id = #{memberId};
+	</update>
 
 	
 

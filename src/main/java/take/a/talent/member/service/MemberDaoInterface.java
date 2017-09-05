@@ -3,6 +3,7 @@ package take.a.talent.member.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.MemberAndAddressVo;
 
 //import com.mysql.fabric.xmlrpc.base.Member;
 
@@ -20,10 +21,16 @@ public interface MemberDaoInterface {
 	//회원가입시 닉네임 체크
 	boolean nicknameCheck(String memberNickname);
 	
-	//회원 업데이트
+	//회원(강사) 업데이트
 	int updateMember(MemberVo memberVo);
 	
 	//회원 업데이트 시 셀렉트
 	MemberVo selectForUpdateMember();
+	
+	//회원(학생) 업데이트
+	int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo);
+	
+	//회원(학생) 업데이트시 셀렉트
+	MemberAndAddressVo selectForUpdateMemberForStudent();
 	
 }

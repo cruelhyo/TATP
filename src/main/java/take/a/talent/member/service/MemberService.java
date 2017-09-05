@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
+import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
 
@@ -65,6 +66,23 @@ public class MemberService implements MemberServiceInterface{
 		logger.info("checkedNickname : " + nck);
 			
 		return nck;
+	}
+	
+	@Override
+	public int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
+	{
+		logger.info("updateMemberForStudent");
+		logger.info(memberAndAddressVo.toString());
+		
+		return memberDao.updateMemberForStudent(memberAndAddressVo);
+	}
+	
+	@Override
+	public MemberAndAddressVo selectForUpdateMemberForStudent()
+	{
+		logger.info("selectForUpdateMemberForStudent");
+		
+		return memberDao.selectForUpdateMemberForStudent();
 	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
 @Controller
@@ -32,11 +33,7 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
-	
-	
-	
-	
-	
+		
 
 	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
 	public String updateMember(MemberVo memberVo)
@@ -48,12 +45,6 @@ public class MemberController
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
 	
-	
-
-	
-	
-
-	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)
 	public String pwCheck()
 	{
@@ -61,15 +52,20 @@ public class MemberController
 		return "user/join";
 	}
 	
-		
-	
-	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{
 		return "user/join";
 	}
 	
+	@RequestMapping(value = { "/student/studentPage/updateMemberForStudent"}, method = RequestMethod.POST)
+	public String updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
+	{
+		logger.info("updateMemberForStudent");
+		logger.info(memberAndAddressVo.toString());
+		int updateMemberForStudentResult = service.updateMemberForStudent(memberAndAddressVo);
+		return "redirect:/member/studentPage?updateSuccess="+updateMemberForStudentResult;
+	}
 	
 	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
 /*	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)

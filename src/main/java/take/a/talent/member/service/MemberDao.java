@@ -14,6 +14,7 @@ import com.mysql.fabric.xmlrpc.base.Member;
 
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
 @Repository // dao라고 명시해줌 
@@ -103,8 +104,10 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info("DAO nicknameCheckForUpdate 호출");
 		logger.info("memberNickname : "+memberNickname);
 		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
 		boolean nicknameCheckResult =  sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
-		String nicknameCheckForUpdateResult = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheckForUpdate", memberNickname);
+		String nicknameCheckForUpdateResult = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheckForUpdate", memberId);
 		if(nicknameCheckResult) 
 		{
 			if(nicknameCheckForUpdateResult.equals(memberNickname)) 
@@ -114,6 +117,30 @@ public class MemberDao implements MemberDaoInterface{
 			return nicknameCheckResult;
 		}
 		return nicknameCheckResult;
+	}
+	
+	@Override
+	public int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
+	{
+		logger.info("DAO updateMemberForStudent 호출");
+		logger.info("memberAndAddressVo : "+memberAndAddressVo);
+		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		memberAndAddressVo.setMemberId(memberId);
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMemberForStudent", memberAndAddressVo);
+	}
+	
+	@Override
+	public MemberAndAddressVo selectForUpdateMemberForStudent()
+	{
+		logger.info("DAO selectForUpdateMemberForStudent 호출");
+		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMemberForStudent", memberId);
 	}
 	
 }

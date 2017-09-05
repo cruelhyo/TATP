@@ -8,7 +8,7 @@ $(document).ready(function()
 		$('.nav-tabs > li a[title]').tooltip();
 		
 		// idCheck버튼 비활성화
-		$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+		/*$(".idCheck").attr('class','btn btn-primary idCheck disabled');*/
 		
 		// nicknameCheck버튼 비활성화
 		$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');

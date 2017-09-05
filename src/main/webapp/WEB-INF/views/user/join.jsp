@@ -294,7 +294,9 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control memberNickname " id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
-													
+												<span id="nkch1"></span>
+												<br>
+												<span id="nkch2"></span>			
 											</div>
 											
 											<div class="col-sm-2">

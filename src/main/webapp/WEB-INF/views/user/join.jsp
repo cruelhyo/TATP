@@ -26,7 +26,7 @@
 	</div>
 	<!-- 회원가입폼 -->
 	<input type="hidden" id="ajaxIdCheck" value="<c:url value='/ajax/idCheck'/>">
-	<input type="hidden" id="ajaxnicknameCheck" value="<c:url value='/ajax/nicknameCheck'/>">
+	<input type="hidden" id="ajaxnickNameCheck" value="<c:url value='/ajax/nickNameCheck'/>">
 	<div class="container">
 		<div class="row">
 			<section>
@@ -296,7 +296,10 @@
 												<input type="text" class="form-control memberNickname " id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
 												<span id="nkch1"></span>
 												<br>
-												<span id="nkch2"></span>			
+												<span id="nkch2"></span>
+												<input type="hidden" value="0" id="use_nickname" name="use_nickname">
+												<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+												<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>			
 											</div>
 											
 											<div class="col-sm-2">

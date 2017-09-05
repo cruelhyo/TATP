@@ -23,7 +23,9 @@ $(document).ready(function()
 				return false;
 			}
 		});
-
+		
+		
+		//join 이용약관 비 활성화시 페이지 이동 block
 		$(".next-step-agree").click(function(e)
 		{
 			console.log(".next-step-agree");
@@ -41,6 +43,8 @@ $(document).ready(function()
 			}
 
 		});
+		
+		
 		
 		
 		$(".next-step").click(function(e)
@@ -128,6 +132,79 @@ $(document).ready(function()
 			
 		});
 		
+		// 닉네임 중복검사 버튼 클릭 시
+		$(".nicknameCheck").click(function()
+		{
+			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+			 */			 
+			var ajaxnickNameCheck = $('#ajaxnickNameCheck').val();
+			var csrfToken = $('#csrfToken').val();
+			var csrfHeader = $('#csrfHeader').val();
+			$.ajax(
+			{
+				type : 'POST',
+				url : ajaxnickNameCheck,
+				data : $('#memberNickname').val(),
+				beforeSend : function(xhr) 
+				{
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+					xhr.setRequestHeader(csrfHeader, csrfToken);
+				},
+				success : function(nicknameExist)
+				{
+					console.log(nicknameExist);
+					if(nicknameExist)
+					{	
+						$("#nkch1").css("color", "#FF0000");
+						$('#nkch1').text('이미 존재하는 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+					else
+					{
+						$("#nkch1").css("color", "#009900");
+						$('#nkch1').text('사용 가능한 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+				}				 
+			 });	
+			
+		});
+		
+		/* // 닉네임 중복검사 버튼 클릭 시
+		$(".memberNickname").click(function()
+		{
+				 
+			var ajaxNicknameCheck = $('#ajaxNicknameCheck').val();
+			$.ajax(
+			{
+				 type : 'POST',
+				 url : ajaxNicknameCheck,
+				 data :{
+					 'membernickname':$('#memberNickname').val(),
+					 '${_csrf.parameterName}':'${_csrf.token}'  
+					 }, 
+				success : function(nicknameExist)
+				{
+					console.log(nicknameExist);
+					if(nicknameExist)
+					{	
+						$("#nkch1").css("color", "#FF0000");
+						$('#nkch1').text('이미 존재하는 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+					else
+					{
+						$("#nkch1").css("color", "#009900");
+						$('#nkch1').text('사용 가능한 닉네임입니다.');
+						$('#nkch2').text('');
+					}
+				}				 
+			 });	
+			
+		}); */
+		
 		
 		// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
 		$(".memberNickname").keyup(function()
@@ -155,40 +232,10 @@ $(document).ready(function()
 		
 		
 		
-		// 닉네임 중복검사 버튼 클릭 시
-		$(".NICKNAME").click(function()
-		{
-			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
-			 */			 
-			var ajaxNicknameCheck = $('#ajaxNicknameCheck').val();
-			$.ajax(
-			{
-				 type : 'POST',
-				 url : ajaxNicknameCheck,
-				 data :{
-					 'membernickname':$('#memberNickname').val(),
-					 '${_csrf.parameterName}':'${_csrf.token}'  /* security url POST요청 승인하는 토큰 추가함  */
-					 }, 
-				success : function(idExist)
-				{
-					console.log(idExist);
-					if(idExist)
-					{	
-						$("#nkch1").css("color", "#FF0000");
-						$('#nkch1').text('이미 존재하는 닉네임입니다.');
-						$('#nkch2').text('');
-					}
-					else
-					{
-						$("#nkch1").css("color", "#009900");
-						$('#nkch1').text('사용 가능한 닉네임입니다.');
-						$('#nkch2').text('');
-					}
-				}				 
-			 });	
-			
-		});
+		
+		
+		
+		
 		
 		// pw입력시 유효성 검사
 		$('.PW').keyup(function()

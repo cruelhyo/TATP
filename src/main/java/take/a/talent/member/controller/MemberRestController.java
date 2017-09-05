@@ -29,7 +29,7 @@ public class MemberRestController
 		return memberVo;
 	}
 	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	//아이디 중복체크 
 	@RequestMapping(value ="/ajax/idCheck**", method=RequestMethod.POST)
 	public boolean idCheck(@RequestBody String memberId, ModelMap model) {
 		logger.info("id체크");
@@ -41,6 +41,7 @@ public class MemberRestController
 		return idExist;
 	}
 	
+	// 닉네임 중복체크 
 	@RequestMapping(value="/ajax/nickNameCheck**", method=RequestMethod.POST)
 	public boolean nickNameCheck(@RequestBody String memberNickname, ModelMap model){
 		logger.info("nickname체크");

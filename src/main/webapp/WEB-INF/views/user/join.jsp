@@ -285,7 +285,7 @@
 									<div align="left" ><h3>추가 입력 사항</h3></div>
 									<hr>
 										
-										<div class="row">
+									<div class="row">
 										<div class="form-group">
 											<label class="control-label col-sm-4 " for="nickname">
 												<p align="right">

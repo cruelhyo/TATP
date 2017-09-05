@@ -69,10 +69,16 @@
 		SELECT EXISTS(
 		SELECT member_nickname
 		FROM member
-		WHERE member_id=#{member_id});
+		WHERE member_nickname=#{memberNickname});
 		
-	</select> 
+	</select>
 	
+	<!-- 업데이트시 닉네임 중복체크 --> 
+	<select id ="nicknameCheckForUpdate" parameterType="String" resultType="String">
+		SELECT member_nickname
+		FROM member
+		WHERE member_nickname=#{memberNickname};
+	</select>
 	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">

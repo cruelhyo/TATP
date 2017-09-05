@@ -108,7 +108,7 @@ p.footer-text1 {
 		<div class="tab-content">
 			<!--기본정보 수정  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateForm2.jsp" flush="true"></jsp:include>
+				<jsp:include page="../include/memberUpdateFormForStudent.jsp" flush="true"></jsp:include>
 			</div>
 			<!--내포인트 충전 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">

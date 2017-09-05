@@ -150,7 +150,7 @@
 		<div class="tab-content">
 			<!--기본정보 수정  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
-				<jsp:include page="../include/memberUpdateForm.jsp" flush="true"></jsp:include>
+				<jsp:include page="../include/memberUpdateFormForTeacher.jsp" flush="true"></jsp:include>
 			</div>
 			<!--내포인트 충전 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">

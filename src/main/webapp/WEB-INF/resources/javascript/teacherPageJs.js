@@ -99,10 +99,9 @@ $(document).ready(function()
 		$('#ExHistory').show();
 	});
 	
-	//memberUpdateForm js
+	//memberUpdateFormForTeacher js
 	
-	$('#myPageShow').click(function()
-	{
+	function selectForUpdateMember(){
 		console.log("select for update member");
 		var ajaxSelectForUpdateMember = $('#ajaxSelectForUpdateMember').val();
 		$.ajax(
@@ -128,34 +127,70 @@ $(document).ready(function()
 			}
 			
 		});
-	});
-	
-	//url ?뒤에 있는 파라미터 값을 가져오는 함수
-	function getQuerystring(paramName)
-	{ 
-		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
-		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
-		
-		for(var i = 0; _tempArray.length; i++) 
-		{ 
-			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-			
-			// _keyValuePair[0] : 파라미터 명			
-			if(_keyValuePair[0] == paramName)
-			{
-				return _keyValuePair[1]; // _keyValuePair[1] : 파라미터 값
-			}
-		}
 	}
+	selectForUpdateMember();
 	
-	//getQuerystring 함수를 이용해 파라미터 값을 가져온다
-	var updateSuccess = getQuerystring('updateSuccess');
-	// 파라미터 값이 0 혹은 1이면
-	if(updateSuccess == 1 || updateSuccess == 0)
+	// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
+	$(".nickName").keyup(function()
 	{
-		//아래의 함수를 실행한다
-		$('.includePage').hide();
-		$('#myPage').show();
-	}
+		var check = /^[a-z0-9]{5,16}$/; 
+		 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
+		var in_nickname = $('.NICKNAME').val();
+		if(!check.test(in_nickname))
+		{
+			//닉네임이 유효하지 않을때 증복체크 버튼 disabled하기
+			$("#nkch1").css("color", "#FF0000");
+			/* $("#nkch2").css("color", "#FF0000"); */
+			$('#nkch1').text('사용이 불가능한 닉네임입니다.');
+			$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
+		}
+		else
+		{
+			//닉네임이 유효할때 아이디 증복체크 버튼 active하기
+			$("#nkch1").css("color", "#999900");
+			$('#nkch1').text('닉네임 중복 검사가 필요합니다.');
+			$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');
+		}
+	 });
+	
+	// 닉네임 중복검사 버튼 클릭 시
+	$(".nickNameCheck").click(function()
+	{
+		 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+		 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
+		 */			 
+		var ajaxNicknameCheck = $('#ajaxNicknameCheck').val();
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		$.ajax(
+		{
+			type : 'POST',
+			url : ajaxNicknameCheck,
+			data : $('#memberNickname').val(),
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(idExist)
+			{
+				console.log(idExist);
+				if(idExist)
+				{	
+					$("#nkch1").css("color", "#FF0000");
+					$('#nkch1').text('이미 존재하는 닉네임입니다.');
+					$('#nkch2').text('');
+				}
+				else
+				{
+					$("#nkch1").css("color", "#009900");
+					$('#nkch1').text('사용 가능한 닉네임입니다.');
+					$('#nkch2').text('');
+				}
+			}				 
+		 });	
+		
+	});
 	
 });

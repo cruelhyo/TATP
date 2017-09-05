@@ -13,7 +13,9 @@
 				<p>수정을 실패했습니다</p>
 			</c:if>
 			<form action="<c:url value='/teacher/teacherPage/updateMember'/>" id="updateForm" method="post">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nickNameCheck'/>">
+				<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-3 " for="name">
@@ -30,13 +32,19 @@
 				
 				<div class="row">
 					<div class="form-group">
-						<label class="control-label col-sm-3 " for="nickname">
+						<label class="control-label col-sm-3" for="nickname">
 							<p align="right">
 								<strong>닉네임</strong>
 							</p>
 						</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임 입력">
+						<div class="col-sm-4">
+							<input type="text" class="form-control nickName NICKNAME" id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
+							<span id="nkch1"></span>
+						</div>
+						
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-primary nickNameCheck">
+								중복 검사</button>
 						</div>
 					</div>
 				</div>

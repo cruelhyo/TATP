@@ -33,8 +33,9 @@ p.footer-text1 {
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-	<div class="jumbotron">
-		<div class="container text-center">
+	
+	<div class="jumbotron" style="padding: 0px;" >
+		<div class="container-full text-center ">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
@@ -45,30 +46,29 @@ p.footer-text1 {
 
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="<c:url value='/resources/img/test.jpg'/>" alt=" "
+					<div class="item active" >
+						<img src="<c:url value='/resources/img/tatP0.png'/>" alt=" "
 							style="width: 100%">
 						<div class="carousel-caption">
-							<h3>test1</h3>
-							<p>Wellcome Take a Talent!</p>
+							
 						</div>
 					</div>
 
 					<div class="item">
-						<img src="<c:url value='/resources/img/test3.jpg'/>" alt=""
+						<img src="<c:url value='/resources/img/tatP2.png'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
-							<h3>test2</h3>
+							
 							<p></p>
 						</div>
 					</div>
 
 					<div class="item">
-						<img src="<c:url value='/resources/img/test4.jpg'/>" alt=""
+						<img src="<c:url value='/resources/img/tatp3.png'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
-							<h3>test3</h3>
-							<p></p>
+							
+							
 						</div>
 					</div>
 				</div>

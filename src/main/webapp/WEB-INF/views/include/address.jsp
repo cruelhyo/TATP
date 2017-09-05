@@ -12,8 +12,13 @@
 	<div class="col-sm-8">
 		<div class="step_21">
 		
-			<h2 align="center">My Address</h2><p align="center">기본 주소지를 선택하고,강의를 진행할 주소를 등록해주세요.</p>
+			<h2 align="left" >&nbsp;&nbsp;&nbsp;&nbsp;
+				<font color="#5F5F5F">My Address</font>
+			</h2>
+			<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기본 주소지를 선택하고,강의를 진행할 주소를 등록해주세요.</p>
+		
 			<hr>
+			
 			<div class="container">
 				
 				

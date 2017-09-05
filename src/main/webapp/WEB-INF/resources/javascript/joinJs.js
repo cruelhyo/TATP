@@ -257,12 +257,12 @@ $(document).ready(function()
 		 
 		 
 			     /* 성별 radio 체크 클릭시 값을 받아오는 동작수행 */
-	    $("input:radio[name=gender]").click(function(){
+	    $("input:radio[name=memberGender]").click(function(){
 	    	
 	    	 /* 성별 체크박스 값을 받아오기위한 설정 */
-	    	var gen = $(":input:radio[name=gender]:checked").val();
+	    	var gen = $(":input:radio[name=memberGender]:checked").val();
 			
-	    	$('input:radio[name=gender]:input[value=' + gen +']').attr("checked", true);
+	    	$('input:radio[name=memberGender]:input[value=' + gen +']').attr("checked", true);
 			
 			if(gen == "male"){
 				console.log("male");

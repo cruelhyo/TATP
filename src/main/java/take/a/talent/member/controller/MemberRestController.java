@@ -41,13 +41,25 @@ public class MemberRestController
 		return idExist;
 	}
 	
-	@RequestMapping(value="/ajax/nickNameCheck**", method=RequestMethod.POST)
+	@RequestMapping(value="/ajax/nickNameCheck", method=RequestMethod.POST)
 	public boolean nickNameCheck(@RequestBody String memberNickname, ModelMap model){
 		logger.info("nickname체크");
 		logger.info("nickname값 확인");
 		logger.info("memberNickname"+memberNickname);
 		
 		boolean nicknameExist = service.nicknameCheck(memberNickname);
+		model.addAttribute("nicknameExist",nicknameExist);
+		return nicknameExist;
+		
+	}
+	
+	@RequestMapping(value="/ajax/nickNameCheckForUpdate", method=RequestMethod.POST)
+	public boolean nickNameCheckForUpdate(@RequestBody String memberNickname, ModelMap model){
+		logger.info("nickname체크");
+		logger.info("nickname값 확인");
+		logger.info("memberNickname"+memberNickname);
+		
+		boolean nicknameExist = service.nicknameCheckForUpdate(memberNickname);
 		model.addAttribute("nicknameExist",nicknameExist);
 		return nicknameExist;
 		

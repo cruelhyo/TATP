@@ -133,7 +133,7 @@ $(document).ready(function()
 	// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
 	$(".nickName").keyup(function()
 	{
-		var check = /^[a-z0-9]{5,16}$/; 
+		var check = /^[a-z0-9]{2,10}$/; 
 		 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
 		var in_nickname = $('.NICKNAME').val();
 		if(!check.test(in_nickname))

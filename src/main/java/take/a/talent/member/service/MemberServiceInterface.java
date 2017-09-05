@@ -37,6 +37,8 @@ public interface MemberServiceInterface {
 		
 
 		boolean nicknameCheck(String memberNickname);
+		
+		boolean nicknameCheckForUpdate(String memberNickname);
 
 	
 }

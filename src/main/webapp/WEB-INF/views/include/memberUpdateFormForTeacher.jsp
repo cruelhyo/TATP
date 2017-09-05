@@ -13,7 +13,7 @@
 				<p>수정을 실패했습니다</p>
 			</c:if>
 			<form action="<c:url value='/teacher/teacherPage/updateMember'/>" id="updateForm" method="post">
-				<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nickNameCheck'/>">
+				<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nickNameCheckForUpdate'/>">
 				<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 				<div class="row">

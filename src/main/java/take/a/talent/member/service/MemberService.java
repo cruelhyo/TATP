@@ -56,5 +56,15 @@ public class MemberService implements MemberServiceInterface{
 			
 		return nck;
 	}
+	
+	@Override
+	public boolean nicknameCheckForUpdate(String memberNickname) {
+		
+		boolean nck = memberDao.nicknameCheckForUpdate(memberNickname);
+		 
+		logger.info("checkedNickname : " + nck);
+			
+		return nck;
+	}
 
 }

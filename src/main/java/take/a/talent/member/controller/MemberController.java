@@ -51,17 +51,7 @@ public class MemberController
 	
 
 	
-	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)
-	public @ResponseBody boolean nickNameCheck(String memberNickname, ModelMap model){
-		logger.info("nickname체크");
-		logger.info("nickname값 확인");
-		logger.info("memberNickname"+memberNickname);
-		
-		boolean nicknameExist = service.nicknameCheck(memberNickname);
-		model.addAttribute("nicknameExist",nicknameExist);
-		return nicknameExist;
-		
-	}
+	
 
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)

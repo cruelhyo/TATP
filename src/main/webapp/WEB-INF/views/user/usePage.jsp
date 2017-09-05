@@ -171,6 +171,7 @@ p.footer-text1 {
 	 
 		<!-- 이용방법 -->
 		<div class="tab-content">
+
 			<!--서비스소개  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="usePageservice">
 				<div class="col-sm-6">
@@ -179,6 +180,11 @@ p.footer-text1 {
 						style="width: 100%" >
 	 				</div>
 				</div>
+
+			<!--기본정보 수정  -->
+  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
+				<jsp:include page="../include/memberUpdateFormForStudent.jsp" flush="true"></jsp:include>
+
 			</div>
 			<!--수업오픈 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="openClassUse">

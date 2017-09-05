@@ -96,4 +96,24 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
 	}
 	
+	// 업데이트시 넥네임 중복체크
+	
+	public boolean nicknameCheckForUpdate(String memberNickname)
+	{
+		logger.info("DAO nicknameCheckForUpdate 호출");
+		logger.info("memberNickname : "+memberNickname);
+		
+		boolean nicknameCheckResult =  sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
+		String nicknameCheckForUpdateResult = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheckForUpdate", memberNickname);
+		if(nicknameCheckResult) 
+		{
+			if(nicknameCheckForUpdateResult.equals(memberNickname)) 
+			{
+				return false;
+			}
+			return nicknameCheckResult;
+		}
+		return nicknameCheckResult;
+	}
+	
 }

@@ -67,9 +67,9 @@ $(document).ready(function(){
 			$('#classUse').show();
 		});
 		
-		$('#myPointShow').click(function(){
+		$('#qnaShow').click(function(){
 			$('.includePage').hide();
-			$('#myPoint').show();
+			$('#qna').show();
 		});
 		
 		$('#myChangePWShow').click(function(){
@@ -152,7 +152,7 @@ p.footer-text1 {
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="qnaShow">
 										<span class="glyphicon glyphicon-user"></span>
 										자주묻는 질문
 									</a>
@@ -189,7 +189,7 @@ p.footer-text1 {
 	 				</div>
 				</div>
 			</div>
-			<!--비밀번호 변경 -->
+			<!--수업듣기 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="classUse">
 				<div class="col-sm-6">
 					<div class="step_21">
@@ -199,9 +199,9 @@ p.footer-text1 {
 				</div>
 			</div>
 			
-			<!-- 내 결제내역 보기 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
-				<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
+			<!-- 자주묻는 질문 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="qna">
+				<jsp:include page="../include/qnaPage.jsp" flush="true"></jsp:include>
 			</div>
 			
 		</div>

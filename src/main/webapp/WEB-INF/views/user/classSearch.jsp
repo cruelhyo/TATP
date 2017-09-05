@@ -347,6 +347,36 @@
 				</ul>
 			</div>
 		</div>
+		<div class="well" style="border: none; radius: 0;">
+    		<p align="left" style="">
+				<font size="3" color="#80B2D2" face="나눔고딕">&nbsp;&nbsp;강의 지역</font></p>
+    		<hr style=" border:  solid 1px white;">
+      		<div class="row" align="left">
+      			<div class="col-sm-6 wdth">
+						<select name=area" id="area"
+						class="dropselects100">
+							<option value="">지역선택</option>
+							<option value="1">서울</option>
+							<option value="2">경기</option>
+							<option value="3">부산</option>
+							<option value="4">광주</option>
+							<option value="5">대전</option>
+							<option value="6">세종시</option>
+							<option value="7">대구</option>
+							<option value="8">충청남도</option>
+							<option value="9">충청북도</option>
+							<option value="10">전라남도</option>
+							<option value="11">전라북도</option>
+							<option value="12">경상남도</option>
+							<option value="13">경상북도</option>
+							<option value="14">제주도</option>
+							<option value="15">강원도</option>
+						</select>
+					</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default btn-sm" id="">찾기</button>
+      		</div>
+     		 
+     	</div>
 	</div>
     
     <div class="col-sm-8 text-left"> 

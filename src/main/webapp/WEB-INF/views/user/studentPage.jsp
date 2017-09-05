@@ -145,9 +145,11 @@ p.footer-text1 {
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li role="presentation" class="active">
-													<a href="#mypage2" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
+													<a href="#mypage2" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">
+													회원정보수정</a>
 												</li>
-												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>	
+												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
+												<li><a href="#" id="">강사 신청하기</a></li>		
 											</ul>
 										</div>
 									</div>

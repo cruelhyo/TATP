@@ -29,6 +29,19 @@ public class MemberRestController
 		return memberVo;
 	}
 	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	@RequestMapping(value ="/ajax/insertMember**", method=RequestMethod.POST)
+	public String insertjoin(@RequestBody MemberVo memberVo) {
+		logger.info("join액션");
+		logger.info("VO값 확인"+memberVo.toString());
+		
+		/*service.addMember(memberVo);*/
+		
+		
+		return "redirect:/";
+	}
+	
+	
 	//아이디 중복체크 
 	@RequestMapping(value ="/ajax/idCheck**", method=RequestMethod.POST)
 	public boolean idCheck(@RequestBody String memberId, ModelMap model) {

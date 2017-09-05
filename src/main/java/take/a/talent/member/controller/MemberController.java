@@ -72,7 +72,7 @@ public class MemberController
 	
 	
 	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
-/*	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
+/*@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
 	public String insertjoin(MemberVo memberVo) {
 		logger.info("join액션");
 		logger.info("VO값 확인"+memberVo.toString());
@@ -80,8 +80,8 @@ public class MemberController
 		
 		
 		return "redirect:/";
-	}
-	*/
+	}*/
+	
 	
 	
 	

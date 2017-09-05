@@ -4,6 +4,11 @@
 
 $(document).ready(function()
 	{
+	
+				
+	
+	
+	
 		//Initialize tooltips
 		$('.nav-tabs > li a[title]').tooltip();
 		
@@ -172,7 +177,102 @@ $(document).ready(function()
 			
 		});
 		
-		/* // 닉네임 중복검사 버튼 클릭 시
+		//insertmember
+		$("#submitBtn").click(function()
+			{
+			var ajaxinsertMember = $('#ajaxinsertMember').val();
+			var csrfToken = $('#csrfToken').val();
+			var csrfHeader = $('#csrfHeader').val();
+			/*var formData = $("#insertfrom").serialize();*/
+			
+
+		    
+			
+			
+			//json serializeObject 기능구현을 위한 부분 
+			$.fn.serializeObject = function(){
+			    var o = {};
+			    var a = this.serializeArray();
+			    $.each(a, function() {
+			    	var name = $.trim(this.name),
+			    		value = $.trim(this.value);
+			    	
+			        if (o[name]) {
+			            if (!o[name].push) {
+			                o[name] = [o[name]];
+			            }
+			            o[name].push(value || '');
+			        } else {
+			            o[name] = value || '';
+			        }
+			    });
+			    return o;
+			};
+					
+			/* $.ajax({
+		    	 type : "POST",
+		    	 url:'ajaxinsertMember',
+
+		    	 data: { formData: JSON.stringify($(form).serializeObject()) },
+		     });
+		     */
+					
+			/*var queryString = $("form[name=insertfrom]").serialize() ;*/
+			var formData = JSON.stringify($("#insertfrom").serializeObject()) ;
+			
+		     
+				$.ajax(
+						{
+		 					type : "POST",
+		 					url : ajaxinsertMember,
+		 					cache : false,
+		 					
+
+		 					data :formData, /*{ formData: JSON.stringify($("form").serializeObject()) },*/
+		 						   beforeSend : function(xhr) 
+		 					{
+		 						xhr.setRequestHeader("Accept", "application/json");
+		 						xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+		 						xhr.setRequestHeader(csrfHeader, csrfToken);
+		 						
+		 					},
+		 					dataType:'json',
+		 					success : function()
+		 					{
+		 						console.log("insert ajax호출");
+		 					}
+					 					
+							});
+						
+				
+				/*$.ajax(
+				{
+ 					type : "POST",
+ 					url : ajaxinsertMember,
+ 					cache : false,
+ 					data : formData,
+ 						   beforeSend : function(xhr) 
+ 					{
+ 						xhr.setRequestHeader("Accept", "application/json");
+ 						xhr.setRequestHeader("Content-Type", "application/json");
+ 						xhr.setRequestHeader(csrfHeader, csrfToken);
+ 					},
+ 					dataType:'json',
+ 					success : function()
+ 					{
+ 						console.log("insert ajax호출");
+ 					}
+			 					
+					});
+				});*/
+			
+			/*function onSuccess(json, status){alert($.trim(json));}
+			function onError(data, status){alert("error");}*/
+		
+		
+				       
+				       
+				       /* // 닉네임 중복검사 버튼 클릭 시
 		$(".memberNickname").click(function()
 		{
 				 
@@ -201,9 +301,9 @@ $(document).ready(function()
 						$('#nkch2').text('');
 					}
 				}				 
-			 });	
+			 });	*/
 			
-		}); */
+		}); 
 		
 		
 		// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
@@ -351,3 +451,5 @@ $(document).ready(function()
 			$(elem).prev().find('a[data-toggle="tab"]').click();
 		}
 	});
+				   
+				   

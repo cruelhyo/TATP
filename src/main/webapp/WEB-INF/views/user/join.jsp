@@ -27,6 +27,7 @@
 	<!-- 회원가입폼 -->
 	<input type="hidden" id="ajaxIdCheck" value="<c:url value='/ajax/idCheck'/>">
 	<input type="hidden" id="ajaxnickNameCheck" value="<c:url value='/ajax/nickNameCheck'/>">
+	<input type="hidden" id="ajaxinsertMember" value="<c:url value='/ajax/insertMember'/>">
 	<div class="container">
 		<div class="row">
 			<section>
@@ -67,7 +68,7 @@
 					</ul>
 				</div>
 				
-				<form role="form" >
+	<form role="form" name="insertfrom" id="insertfrom" action="" method="post" >
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="step1">
@@ -334,10 +335,16 @@
 									<div class="row mar_ned"></div>
 								</div>
 								<ul class="list-inline pull-right">
+									
 									<li><button type="button"
 											class="btn btn-default prev-step">이전 단계</button></li>
 
-									<li><button type="button" class="btn btn-primary btn-info-full next-step">계속하기</button></li>
+									<li>
+									<button type="button" id ="submitBtn"class="btn btn-primary btn-info-full next-step">계속하기</button>
+									<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+									<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+									</li>
+								
 								</ul>
 							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">

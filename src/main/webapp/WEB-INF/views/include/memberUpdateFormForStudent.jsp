@@ -6,8 +6,8 @@
 			<h2 align="center">회원 정보 수정</h2>
 			<hr>
 			<form action="<c:url value='/student/studentPage/updateMemberForStudent'/>" method="post">
-				<input type="hidden" id="ajaxSelectForUpdateMemberForStudent" 
-						value="<c:url value='/ajax/selectForUpdateMemberForStudent'/>">
+				<input type="hidden" id="ajaxSelectForUpdateMemberForStudent" value="<c:url value='/ajax/selectForUpdateMemberForStudent'/>">
+				<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nickNameCheckForUpdate'/>">
 				<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -33,14 +33,20 @@
 						</label>
 						<div class="col-sm-4">
 							<input type="text" class="form-control nickName NICKNAME" id="memberNickname" name="memberNickname" placeholder="닉네임 입력">
-							<span id="nkch1"></span>
 						</div>
-						
 						<div class="col-sm-2">
 							<button type="button" id="nickNameCheck" class="btn btn-primary nickNameCheck">
 								중복 검사
 							</button>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						<span id="nkch1"></span>
+						<br>
+						<span id="nkch2"></span>
 					</div>
 				</div>
 				<br>
@@ -55,7 +61,7 @@
 							<input type="radio" class="male" id="memberGender" name="memberGender" value="male" readonly="readonly">
 							Male 
 							&nbsp;&nbsp; 
-							<input type="radio" calss="female" id="memberGender" name="memberGender" value="female" readonly="readonly">
+							<input type="radio" class="female" id="memberGender" name="memberGender" value="female" readonly="readonly">
 							Female
 						</div>
 					</div>
@@ -82,7 +88,8 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<input type="text" class="form-control phone" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<span id="phch1"></span>
 						</div>
 					</div>
 				</div>
@@ -110,10 +117,10 @@
 							</p>
 						</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="memberMailNumber" name="memberMailNumber" placeholder="우편번호">
+							<input type="text" class="form-control memberMailNumber" id="sample6_postcode" name="memberMailNumber" placeholder="우편번호">
 						</div>
 						<div class="col-sm-2">
-							<button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button>
+							<button type="button" onclick="sample6_execDaumPostcode()" class="btn btn-default mailNumberSearch">우편번호 검색</button>
 						</div>
 					</div>
 				</div>
@@ -126,14 +133,14 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberAddress" name="memberAddress" placeholder="상세주소">
+							<input type="text" class="form-control memberAddress" id="sample6_address" name="memberAddress" placeholder="상세주소">
 						</div>
 					</div>
 				</div>
 				<br><br>
 				<hr>
 				<div class="col-sm-1">
-					<button type="submit" class="btn btn-link">수정완료</button>
+					<button type="submit" class="btn btn-link" id="updateMemberBtn">수정완료</button>
 				</div>
 			</form>
 			<br><br>

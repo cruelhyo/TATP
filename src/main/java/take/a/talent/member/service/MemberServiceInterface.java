@@ -1,7 +1,10 @@
 package take.a.talent.member.service;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
+import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -45,6 +48,11 @@ public interface MemberServiceInterface {
 		
 		//회원(학생) 업데이트시 셀렉트
 		MemberAndAddressVo selectForUpdateMemberForStudent();
-
+		
+		//회원(강사) 주소 insert
+		int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
+		
+		//회원(강사) 주소리스트 select
+		List<AddressAndClassificationVo> selectAddressListForTeacher();
 	
 }

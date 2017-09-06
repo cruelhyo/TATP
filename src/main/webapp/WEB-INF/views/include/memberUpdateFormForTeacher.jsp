@@ -35,17 +35,22 @@
 						</label>
 						<div class="col-sm-4">
 							<input type="text" class="form-control nickName NICKNAME" id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
-							<span id="nkch1"></span>
 						</div>
-						
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-primary nickNameCheck">
 								중복 검사</button>
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						<span id="nkch1"></span>
+						<br>
+						<span id="nkch2"></span>
+					</div>
+				</div>
 				<br>
-	
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="gender">
@@ -108,7 +113,7 @@
 				<br> <br>
 				<hr>
 				<div class="col-sm-1">
-					<button type="submit" class="btn btn-link" id="updateMemberBtn">수정완료</button>
+					<button type="button" class="btn btn-link" id="updateMemberBtn">수정완료</button>
 				</div>
 			</form>
 					<br>

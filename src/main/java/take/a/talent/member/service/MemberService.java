@@ -1,11 +1,16 @@
 package take.a.talent.member.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
+import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -47,7 +52,7 @@ public class MemberService implements MemberServiceInterface{
 		return selectForUpdateMemberResult;
 	}
 	
-
+	//
 	@Override
 	public boolean nicknameCheck(String memberNickname) {
 		
@@ -61,13 +66,26 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public boolean nicknameCheckForUpdate(String memberNickname) {
 		
-		boolean nck = memberDao.nicknameCheckForUpdate(memberNickname);
-		 
-		logger.info("checkedNickname : " + nck);
-			
-		return nck;
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		boolean nicknameCheckResult = memberDao.nicknameCheck(memberNickname);
+		String nicknameCheckForUpdateResult = memberDao.nicknameCheckForUpdate(memberId);
+		logger.info("nicknameCheckResult : " + nicknameCheckResult);
+		logger.info("nicknameCheckForUpdateResult : " + nicknameCheckForUpdateResult);
+		if(nicknameCheckResult) 
+		{
+			if(nicknameCheckForUpdateResult.equals(memberNickname)) 
+			{
+				return false;
+			}
+			return nicknameCheckResult;
+		}
+		return nicknameCheckResult;
 	}
 	
+	//회원(학생) 업데이트
 	@Override
 	public int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
 	{
@@ -77,12 +95,44 @@ public class MemberService implements MemberServiceInterface{
 		return memberDao.updateMemberForStudent(memberAndAddressVo);
 	}
 	
+	//회원(학생) 업데이트시 셀렉트
 	@Override
 	public MemberAndAddressVo selectForUpdateMemberForStudent()
 	{
 		logger.info("selectForUpdateMemberForStudent");
 		
 		return memberDao.selectForUpdateMemberForStudent();
+	}
+	
+	//회원(강사) 주소 insert
+	public int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
+	{
+		logger.info("selectForUpdateMemberForStudent");
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//회원 memberNo select vo객체에 세팅
+		int memberNo = memberDao.selectMemberNo(memberId);
+		addressAndClassificationVo.setMemberNo(memberNo);
+		
+		return memberDao.insertAddressForTeacher(addressAndClassificationVo);
+	}
+	
+	//회원(강사) 주소리스트 select
+	@Override
+	public List<AddressAndClassificationVo> selectAddressListForTeacher()
+	{
+		logger.info("selectAddressListForTeacher");
+		
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//회원 memberNo select 
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		return memberDao.selectAddressListForTeacher(memberNo);
 	}
 
 }

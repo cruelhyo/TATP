@@ -40,6 +40,14 @@
 		<result property="memberEmail" column="member_email"/>
 		<result property="memberAgreement" column="member_agreement"/>
 	</resultMap>
+	<resultMap type="take.a.talent.member.vo.AddressAndClassificationVo" id="AddressAndClassificationVo">
+		<result property="addressNo" column="address_no"/>
+		<result property="memberNo" column="member_no"/>
+		<result property="addressClassificationNo" column="address_classification_no"/>
+		<result property="addressMailNumber" column="address_mailnumber"/>
+		<result property="memberAddress" column="member_address"/>
+		<result property="addressClassificationName" column="address_classification_name"/>
+	</resultMap>
 
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
@@ -107,12 +115,43 @@
 		WHERE m.member_id = #{memberId};
 	</select>
 	
+	<!-- 회원(강사) 주소추가시 member_no 가져오기 -->
+	<select id="selectMemberNoForInsertAddress" parameterType="String" resultType="int">
+		SELECT member_no
+		FROM member
+		WHERE member_id = #{memberId};
+	</select>
+	
+	<!-- 회원(강사) 주소리스트 select -->
+	<select id="selectAddressListForTeacher" parameterType="int" resultMap="AddressAndClassificationVo">
+		SELECT ac.address_classification_name
+		, a.address_mailnumber
+		, a.member_address
+		FROM address a
+		INNER JOIN address_classification ac
+		ON a.address_classification_no = ac.address_classification_no
+		WHERE a.member_no = #{memberNo};
+	</select>
+	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
 		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
 		, member_address_detail, member_email, member_agreement)
 			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberPhone}, #{memberAddress}, #{memberAddressDetail},#{memberEmail},#{memberAgreement});
 			
+	</insert>
+	
+	<insert id="insertAddressForTeacher" parameterType="take.a.talent.member.vo.AddressAndClassificationVo">
+		INSERT INTO 
+		address(address_no, member_no, address_classification_no, address_mailnumber, member_address)
+		VALUES 
+		(
+			#{addressNo}
+			, #{memberNo}
+			, #{addressClassificationNo}
+			, #{addressMailNumber}
+			, #{memberAddress}
+		)
 	</insert>
 	
 	

@@ -21,6 +21,8 @@
 
 <!-- mypage 자바스크립트 -->
 <script type="text/javascript" src="<c:url value='/resources/javascript/studentPageJs.js'/>"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/findAddressJs.js'/>"></script>
 
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */

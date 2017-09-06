@@ -24,6 +24,8 @@
 
 <!-- mypage 자바스크립트 -->
 <script type="text/javascript" src="<c:url value='/resources/javascript/teacherPageJs.js'/>"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/findAddressJs.js'/>"></script>
 
 
 </head>

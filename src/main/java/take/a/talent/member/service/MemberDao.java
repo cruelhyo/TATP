@@ -1,5 +1,7 @@
 package take.a.talent.member.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.mysql.fabric.xmlrpc.base.Member;
 
 import take.a.talent.member.controller.MemberController;
+import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
@@ -97,28 +100,17 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
 	}
 	
-	// 업데이트시 넥네임 중복체크
-	
-	public boolean nicknameCheckForUpdate(String memberNickname)
+	//업데이트시 닉네임 체크를 위한 셀렉트
+	public String nicknameCheckForUpdate(String memberId)
 	{
 		logger.info("DAO nicknameCheckForUpdate 호출");
-		logger.info("memberNickname : "+memberNickname);
+		logger.info("memberId : "+memberId);
 		
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String memberId = user.getUsername();
-		boolean nicknameCheckResult =  sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
-		String nicknameCheckForUpdateResult = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheckForUpdate", memberId);
-		if(nicknameCheckResult) 
-		{
-			if(nicknameCheckForUpdateResult.equals(memberNickname)) 
-			{
-				return false;
-			}
-			return nicknameCheckResult;
-		}
-		return nicknameCheckResult;
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheckForUpdate", memberId);
+		
 	}
 	
+	//회원(학생) 업데이트
 	@Override
 	public int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
 	{
@@ -132,6 +124,7 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMemberForStudent", memberAndAddressVo);
 	}
 	
+	//회원(학생) 업데이트시 셀렉트
 	@Override
 	public MemberAndAddressVo selectForUpdateMemberForStudent()
 	{
@@ -141,6 +134,36 @@ public class MemberDao implements MemberDaoInterface{
 		String memberId = user.getUsername();
 		
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectForUpdateMemberForStudent", memberId);
+	}
+	
+	//회원(강사) 주소 insert
+	@Override
+	public int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
+	{
+		logger.info("DAO insertAddressForTeacher 호출");
+		logger.info("AddressAndClassificationVo : "+addressAndClassificationVo);
+		
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertAddressForTeacher", addressAndClassificationVo);
+	}
+	
+	//회원 member_no select
+	@Override
+	public int selectMemberNo(String memberId)
+	{
+		logger.info("DAO selectMemberNo 호출");
+		logger.info("memberId : "+memberId);
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberNoForInsertAddress", memberId);
+	}
+	
+	//회원(강사) 주소리스트 select
+	@Override
+	public List<AddressAndClassificationVo> selectAddressListForTeacher(int memberNo)
+	{
+		logger.info("DAO insertAddressForTeacher 호출");
+		logger.info("memberNo : "+memberNo);
+		
+		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectAddressListForTeacher", memberNo);
 	}
 	
 }

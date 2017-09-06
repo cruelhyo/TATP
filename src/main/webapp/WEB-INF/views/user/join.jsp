@@ -204,7 +204,7 @@
 											</div>
 											<div class="col-sm-2">
 												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
-												<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+												<input type="button"  class="btn btn-default"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 											</div>
 										</div>
 									</div>

@@ -72,7 +72,9 @@ $(document).ready(function()
 				     if ($("#memberPhone").val()!='') {
 					  if ($("#memberEmail").val()!='') {
 					   if ($("#mailagreement").is(":checked")) {
-							  alert('이부분 얼럿 지우고 값 넘어가게 disalble해제 추가하면 됨');
+						   var $active = $('.wizard .nav-tabs li.active');
+							$active.next().removeClass('disabled');
+							nextTab($active);
 							  
 					   }else{
 						   alert('수신동의여부 확인해주세요');

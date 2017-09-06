@@ -263,8 +263,8 @@
 											<div class="col-sm-5">
 												<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>
 												&nbsp; 
-												<input type="radio" name="mailagreement" value="y">예 
-												<input type="radio" name="mailagreement" value="n">아니오<br>
+												<input type="radio" id="mailagreement" name="mailagreement" value="y">예 
+												<input type="radio" id="mailagreement" name="mailagreement" value="n">아니오<br>
 											</div>
 										</div>
 									</div>

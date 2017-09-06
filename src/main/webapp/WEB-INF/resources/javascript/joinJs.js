@@ -57,44 +57,78 @@ $(document).ready(function()
 		});
 		
 		
-		/*//join 입력사항 비입력시  페이지 이동 block
+		//join 입력사항 비입력시  다음 페이지 이동 block  및  alert설정  
 		$(".next-step").click(function(e)
-		{
-			console.log("회원가입 정보 미기재시 페이지 block ");
+		 {
+			/*console.log("회원가입 정보 미기재시 페이지 block ");*/
 			 if ($("#memberId").val() != '') {
-					var $active = $('.wizard .nav-tabs li.active');
-					$active.next().removeClass('disabled');
-					nextTab($active);
-						alert('아이디를 입력해주세요');
-				 
-			 }else{
-				 alert('아이디를 입력해주세요');
-			 }*/
+			  if ($("#PW").val()!='') {
+		       if ($("#PW2").val()!='') {
+		    	if ($("#memberName").val()!='') {
+				 if ($("#memberGender").is(":checked")) { // 체크박스 형식 가져오기 
+				  if ($("#memberBirthday").val()!='') {
+				   if ($("#sample6_postcode").val()!='') {
+				    if ($("#sample6_address").val()!='') {
+				     if ($("#memberPhone").val()!='') {
+					  if ($("#memberEmail").val()!='') {
+					   if ($("#mailagreement").is(":checked")) {
+							  alert('이부분 얼럿 지우고 값 넘어가게 disalble해제 추가하면 됨');
+							  
+					   }else{
+						   alert('수신동의여부 확인해주세요');
+							}
+					}else{
+						alert('이메일을 입력하세요');
+					}
+					}else{
+						alert('휴대폰번호를 입력하세요');
+					}
+					}else{
+						alert('상세주소를 입력하세요');
+					}
+					}else{
+						alert('우편번호를 입력하세요');
+					}
+					}else{
+						alert('생년월일을 입력하세요');
+					}
+					}else{
+						alert('성별을 체크하세요');
+					}
+					}else{
+						alert('이름을 입력하세요');
+					}
+					}else{
+						alert('비밀번호를 재입력하세요');
+					}
+					}else{ 
+						alert('비밀번호를 입력하세요');
+					}   
+					}else{
+					 alert('아이디를 입력하세요');
+					}
+		  	});
+		
+
+		
+	
 			 
-			/*if(memberId != null)
-			{
-				$('#checkPlz').text('');
-				var $active = $('.wizard .nav-tabs li.active');
-				$active.next().removeClass('disabled');
-				nextTab($active);
-			}
-			else
-			{
-				$("#checkPlz").css("color", "#FF0000");
-				$('#checkPlz').text('이용약관에 동의해주세요.');
-			}
-			 
-		});*/
+			
+		// 최종 입력이 끝나고 다음페이지로 넘겨주는것.
+		/*var $active = $('.wizard .nav-tabs li.active');
+		$active.next().removeClass('disabled');
+		nextTab($active);*/
 		
 		
 		
 		
-		$(".next-step").click(function(e)
+		
+		// 기존에 여과없이 넘어가던 동작(원래 있던거)
+		/*$(".next-step").click(function(e)
 		{
-			console.log(".next-step");
 			var $active = $('.wizard .nav-tabs li.active');
-			$active.next().removeClass('disabled');
-			nextTab($active);
+		$active.next().removeClass('disabled');
+		nextTab($active);
 
 		});
 		
@@ -103,7 +137,7 @@ $(document).ready(function()
 			var $active = $('.wizard .nav-tabs li.active');
 			prevTab($active);
 
-		});
+		});*/
 		
 
 		

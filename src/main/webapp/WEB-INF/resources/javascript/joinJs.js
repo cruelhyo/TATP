@@ -6,17 +6,23 @@ $(document).ready(function()
 	{
 	
 				
-	
-	
-	
 		//Initialize tooltips
 		$('.nav-tabs > li a[title]').tooltip();
 		
-		// idCheck버튼 비활성화
-		/*$(".idCheck").attr('class','btn btn-primary idCheck disabled');*/
+		// idCheck버튼 비활성화 (초기화때 사용)
+		$(".idCheck").prop('disabled', true);
+		/*$(".idCheck").attr('class','btn btn-primary idCheck disabled');       merge 할때 삭제 */ 
 		
-		// nicknameCheck버튼 비활성화
-		$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
+		// nicknameCheck버튼 비활성화 (초기화때 사용)
+		$(".nicknameCheck").prop('disabled', true);
+		/*$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');*/
+		
+
+		// 회원가입 정보입력후 다음단계 버튼 비활성화 
+		/*$(".next-step").prop('disabled', true);*/
+		/*$(".next-step").attr('class','btn btn-primary next-step disabled');*/
+		
+		
 		
 		//Wizard
 		$('a[data-toggle="tab"]').on('show.bs.tab', function(e)
@@ -34,6 +40,7 @@ $(document).ready(function()
 		$(".next-step-agree").click(function(e)
 		{
 			console.log(".next-step-agree");
+			
 			if($("input:checkbox[id=agreeCheck]").is(":checked"))
 			{
 				$('#checkPlz').text('');
@@ -48,6 +55,36 @@ $(document).ready(function()
 			}
 
 		});
+		
+		
+		/*//join 입력사항 비입력시  페이지 이동 block
+		$(".next-step").click(function(e)
+		{
+			console.log("회원가입 정보 미기재시 페이지 block ");
+			 if ($("#memberId").val() != '') {
+					var $active = $('.wizard .nav-tabs li.active');
+					$active.next().removeClass('disabled');
+					nextTab($active);
+						alert('아이디를 입력해주세요');
+				 
+			 }else{
+				 alert('아이디를 입력해주세요');
+			 }*/
+			 
+			/*if(memberId != null)
+			{
+				$('#checkPlz').text('');
+				var $active = $('.wizard .nav-tabs li.active');
+				$active.next().removeClass('disabled');
+				nextTab($active);
+			}
+			else
+			{
+				$("#checkPlz").css("color", "#FF0000");
+				$('#checkPlz').text('이용약관에 동의해주세요.');
+			}
+			 
+		});*/
 		
 		
 		
@@ -84,15 +121,17 @@ $(document).ready(function()
 				$("#idch2").css("color", "#FF0000");
 				$('#idch1').text('사용이 불가능한 아이디입니다.');
 				$('#idch2').text('(영문,숫자조합 6자이상)');
-				$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+				$(".idCheck").prop('disabled', true);
+				/*$(".idCheck").attr('class','btn btn-primary idCheck disabled');*/
 			}
 			else
 			{
 				//아이디가 유효할때 아이디 증복체크 버튼 active하기
 				$("#idch1").css("color", "#999900");
 				$('#idch1').text('아이디 중복 검사가 필요합니다.');
-				$('#idch2').text('');
-				$(".idCheck").attr('class','btn btn-primary idCheck active');
+				$('#idch2').css('display','none');
+				$(".idCheck").prop('disabled', false);
+				/*$(".idCheck").attr('class','btn btn-primary idCheck active');*/
 			}
 		 });
 		
@@ -177,19 +216,15 @@ $(document).ready(function()
 			
 		});
 		
-		//insertmember
+		//회원가입 - form에서 입력한 전체 값을 넘김(가입완료버튼 클릭시) 
 		$("#submitBtn").click(function()
 			{
 			var ajaxinsertMember = $('#ajaxinsertMember').val();
 			var csrfToken = $('#csrfToken').val();
 			var csrfHeader = $('#csrfHeader').val();
-			/*var formData = $("#insertfrom").serialize();*/
-			
-
-		    
 			
 			
-			//json serializeObject 기능구현을 위한 부분 
+			//form을 넘기기 위해 json serializeObject 기능구현을 위한 부분 
 			$.fn.serializeObject = function(){
 			    var o = {};
 			    var a = this.serializeArray();
@@ -209,18 +244,9 @@ $(document).ready(function()
 			    return o;
 			};
 					
-			/* $.ajax({
-		    	 type : "POST",
-		    	 url:'ajaxinsertMember',
-
-		    	 data: { formData: JSON.stringify($(form).serializeObject()) },
-		     });
-		     */
-					
-			/*var queryString = $("form[name=insertfrom]").serialize() ;*/
+		
 			var formData = JSON.stringify($("#insertfrom").serializeObject()) ;
-			
-		     
+				
 				$.ajax(
 						{
 		 					type : "POST",
@@ -243,65 +269,7 @@ $(document).ready(function()
 		 					}
 					 					
 							});
-						
-				
-				/*$.ajax(
-				{
- 					type : "POST",
- 					url : ajaxinsertMember,
- 					cache : false,
- 					data : formData,
- 						   beforeSend : function(xhr) 
- 					{
- 						xhr.setRequestHeader("Accept", "application/json");
- 						xhr.setRequestHeader("Content-Type", "application/json");
- 						xhr.setRequestHeader(csrfHeader, csrfToken);
- 					},
- 					dataType:'json',
- 					success : function()
- 					{
- 						console.log("insert ajax호출");
- 					}
-			 					
-					});
-				});*/
-			
-			/*function onSuccess(json, status){alert($.trim(json));}
-			function onError(data, status){alert("error");}*/
-		
-		
-				       
-				       
-				       /* // 닉네임 중복검사 버튼 클릭 시
-		$(".memberNickname").click(function()
-		{
-				 
-			var ajaxNicknameCheck = $('#ajaxNicknameCheck').val();
-			$.ajax(
-			{
-				 type : 'POST',
-				 url : ajaxNicknameCheck,
-				 data :{
-					 'membernickname':$('#memberNickname').val(),
-					 '${_csrf.parameterName}':'${_csrf.token}'  
-					 }, 
-				success : function(nicknameExist)
-				{
-					console.log(nicknameExist);
-					if(nicknameExist)
-					{	
-						$("#nkch1").css("color", "#FF0000");
-						$('#nkch1').text('이미 존재하는 닉네임입니다.');
-						$('#nkch2').text('');
-					}
-					else
-					{
-						$("#nkch1").css("color", "#009900");
-						$('#nkch1').text('사용 가능한 닉네임입니다.');
-						$('#nkch2').text('');
-					}
-				}				 
-			 });	*/
+									
 			
 		}); 
 		
@@ -319,14 +287,16 @@ $(document).ready(function()
 				$("#nkch1").css("color", "#FF0000");
 				/* $("#nkch2").css("color", "#FF0000"); */
 				$('#nkch1').text('사용이 불가능한 닉네임입니다.');
-				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
+				$(".nicknameCheck").prop('disabled', true);
+				/*$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');*/
 			}
 			else
 			{
 				//닉네임이 유효할때 아이디 증복체크 버튼 active하기
 				$("#nkch1").css("color", "#999900");
 				$('#nkch1').text('닉네임 중복 검사가 필요합니다.');
-				$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');
+				$(".nicknameCheck").prop('disabled', false);
+				/*$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');*/
 			}
 		 });
 		

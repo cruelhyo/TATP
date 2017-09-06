@@ -274,7 +274,7 @@
 							</div>
 								<ul class="list-inline pull-right">
 									<li><button type="button" class="btn btn-default prev-step">이전 단계</button></li>
-									<li><button type="button" class="btn btn-primary next-step">다음 단계</button></li>
+									<li><button type="button" class="btn btn-primary next-step" >다음 단계</button></li>
 								</ul>
 								
 								

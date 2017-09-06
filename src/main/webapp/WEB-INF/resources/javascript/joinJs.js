@@ -115,19 +115,12 @@ $(document).ready(function()
 		
 	
 			 
-			
-		// 최종 입력이 끝나고 다음페이지로 넘겨주는것.
-		/*var $active = $('.wizard .nav-tabs li.active');
-		$active.next().removeClass('disabled');
-		nextTab($active);*/
-		
-		
-		
 		
 		
 		// 기존에 여과없이 넘어가던 동작(원래 있던거)
 		/*$(".next-step").click(function(e)
 		{
+			// 최종 입력이 끝나고 다음페이지로 넘겨주는것.
 			var $active = $('.wizard .nav-tabs li.active');
 		$active.next().removeClass('disabled');
 		nextTab($active);
@@ -158,6 +151,7 @@ $(document).ready(function()
 				$('#idch1').text('사용이 불가능한 아이디입니다.');
 				$('#idch2').text('(영문,숫자조합 6자이상)');
 				$(".idCheck").prop('disabled', true);
+				$(".next-step").prop('disabled', true);
 				/*$(".idCheck").attr('class','btn btn-primary idCheck disabled');*/
 			}
 			else
@@ -167,6 +161,7 @@ $(document).ready(function()
 				$('#idch1').text('아이디 중복 검사가 필요합니다.');
 				$('#idch2').css('display','none');
 				$(".idCheck").prop('disabled', false);
+				$(".next-step").prop('disabled', true);
 				/*$(".idCheck").attr('class','btn btn-primary idCheck active');*/
 			}
 		 });
@@ -175,12 +170,15 @@ $(document).ready(function()
 		// 아이디 중복검사 버튼 클릭 시
 		$(".idCheck").click(function()
 		{
+			
 			 /** <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 			 * POST 요청에 대해서 항상 csrf 토큰이 필요하다
 			 */			 
 			var ajaxIdCheck = $('#ajaxIdCheck').val();
 			var csrfToken = $('#csrfToken').val();
 			var csrfHeader = $('#csrfHeader').val();
+			
+			
 			$.ajax(
 			{
 				type : 'POST',
@@ -200,15 +198,18 @@ $(document).ready(function()
 						$("#idch1").css("color", "#FF0000");
 						$('#idch1').text('이미 존재하는 아이디입니다.');
 						$('#idch2').text('');
+						$(".next-step").prop('disabled', true);
+						
 					}
 					else
 					{
 						$("#idch1").css("color", "#009900");
 						$('#idch1').text('사용 가능한 아이디입니다.');
 						$('#idch2').text('');
+						$(".next-step").prop('disabled', false);
 					}
 				}				 
-			 });	
+			 }); 
 			
 		});
 		
@@ -355,6 +356,7 @@ $(document).ready(function()
 				$('#pwch2').css('color', '#FF0000');
 				$('#pwch1').text('비밀번호가 유효하지 않습니다.');
 				$('#pwch2').text('(영문,숫자,특수문자조합 8자이상)');
+				$(".next-step").prop('disabled', true);
 			}
 			else
 			{
@@ -362,6 +364,7 @@ $(document).ready(function()
 				$('#pwch1').css("color", "#008000");
 				$('#pwch1').text('비밀번호를 사용 가능합니다');
 				$('#pwch2').text('');
+				/*$(".next-step").prop('disabled', false);*/
 			}
 		});
 					
@@ -376,6 +379,7 @@ $(document).ready(function()
 			if(!check.test(in_pw2))
 			{
 				temp = 0; //비번이 유효하지 않을때
+				$(".next-step").prop('disabled', true);
 			} 
 			else 
 			{
@@ -388,6 +392,7 @@ $(document).ready(function()
 				{
             		$('#pwch3').css('color', '#008000');
             		$('#pwch3').text('비밀번호가 일치합니다');
+            		$(".next-step").prop('disabled', false);
             	}
 				else
 				{
@@ -395,12 +400,14 @@ $(document).ready(function()
             		$('#pwch3').text('비밀번호가 불일치합니다');
             		$('#pwch3').val('');
         			$('#pwch3').focus();
+        			$(".next-step").prop('disabled', true);
             	}
 			}
 			else
 			{
 				$('#pwch3').css('color', '#FF0000');
 				$('#pwch3').text('비밀번호가 유효하지 않습니다');
+				
 			}
 				
 			// 비밀번호 1,2 일치여부 확인 

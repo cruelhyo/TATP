@@ -18,13 +18,10 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
 <title>Take A Talent</title>
 
 <!-- mypage 자바스크립트 -->
 <script type="text/javascript" src="<c:url value='/resources/javascript/teacherPageJs.js'/>"></script>
-
 
 </head>
 <body>
@@ -33,16 +30,11 @@
 	</div>
 	
 	<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<hr>
+	<!-- /.container-fluid -->
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
-				<!-- uncomment code for absolute positioning tweek see top comment in css -->
 				<div class="absolute-wrapper"></div>
 				<!-- Menu -->
 				<div class="side-menu">
@@ -50,7 +42,6 @@
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<!-- Dropdown1-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl4">
@@ -67,7 +58,6 @@
 												</li>
 												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
 												<li><a href="#" id ="myAddressShow">내주소록 보기</a></li>
-												
 											</ul>
 										</div>
 									</div>
@@ -79,7 +69,6 @@
 										My Point
 										<span class="caret"></span>
 									</a> 
-								
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl1" class="panel-collapse collapse">
 										<div class="panel-body">
@@ -99,13 +88,11 @@
 										My Favorit
 									</a>
 								</li>
-								
 								<!-- Dropdown-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl3"> 
 										<span class="glyphicon glyphicon-user"></span> 
 										My Profile <span class="caret"></span></a> 
-										
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl3" class="panel-collapse collapse">
 										<div class="panel-body">
@@ -136,60 +123,54 @@
 								</li>
 
 								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
-										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
-
+										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a>
+								</li>
 							</ul>
 						</div>
 						<!-- /.navbar-collapse -->
 					</nav>
-
 				</div>
 			</div>
 		</div>
-		
-		
-		
 		<!-- 내정보수정 -->
 		<div class="tab-content">
-			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
-				<jsp:include page="../include/memberUpdateFormForTeacher.jsp" flush="true"></jsp:include>
-			</div>
-			<!--내포인트 충전 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
-				<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
-			</div>
-			<!--비밀번호 변경 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
-				<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 주소추가 삭제 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myAddress">
-				<jsp:include page="../include/address.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 내 결제내역 보기 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
-				<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 내 환전포인트 보기 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myExchange">
-				<jsp:include page="../include/pointExchange.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 계좌관리 보기-->
-			<div role="tabpanel" class="tab-pane face in active includePage" id="myAccount">
-				<jsp:include page="../include/myAccount.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 내정보 전체 보기-->
-			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
-				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
-			</div>
-			<!-- 포트폴리오-->
-			<div role="tabpanel" class="tab-pane face in active includePage" id="portfolio">
-				<jsp:include page="../include/portfolio.jsp" flush="true"></jsp:include>
-			</div>
+		<!--기본정보 수정  -->
+  		<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
+			<jsp:include page="../include/memberUpdateFormForTeacher.jsp" flush="true"></jsp:include>
+		</div>
+		<!--내포인트 충전 -->
+		<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
+			<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
+		</div>
+		<!--비밀번호 변경 -->
+		<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
+			<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 주소추가 삭제 -->
+		<div role="tabpanel" class="tab-pane fade in active includePage" id="myAddress">
+			<jsp:include page="../include/address.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 내 결제내역 보기 -->
+		<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
+			<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 내 환전포인트 보기 -->
+		<div role="tabpanel" class="tab-pane fade in active includePage" id="myExchange">
+			<jsp:include page="../include/pointExchange.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 계좌관리 보기-->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="myAccount">
+			<jsp:include page="../include/myAccount.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 내정보 전체 보기-->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
+			<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 포트폴리오-->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="portfolio">
+			<jsp:include page="../include/portfolio.jsp" flush="true"></jsp:include>
 		</div>
 	</div>
-
-
+</div>
 </body>
 </html>

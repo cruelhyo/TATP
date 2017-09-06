@@ -33,24 +33,24 @@ $(document).ready(function(){
 	});
 	
 	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
+		$('#usePageserviceShow').click(function(){
 			$('.includePage').hide();
-			$('#myPage2').show();
+			$('#usePageservice').show();
 		});
 		
-		$('#myPointHistoryShow').click(function(){
+		$('#openClassUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myPointHistory').show();
+			$('#openClassUse').show();
 		});
 	
-		$('#myAddressShow').click(function(){
+		$('#classUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myAddress').show();
+			$('#classUse').show();
 		});
 		
-		$('#myPointShow').click(function(){
+		$('#qnaShow').click(function(){
 			$('.includePage').hide();
-			$('#myPoint').show();
+			$('#qna').show();
 		});
 		
 		$('#myChangePWShow').click(function(){

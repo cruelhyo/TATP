@@ -15,12 +15,10 @@
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="<c:url value='/resources/javascript/usePageJs.js'/>"></script>
 <title>이용방법</title>
 
-
-<!-- mypage 자바스크립트 -->
-<script type="text/javascript" src="<c:url value='/resources/javascript/usePageJs.js'/>"></script>
+<!--  
 <script>
 $(document).ready(function(){
 	$('.includePage').hide();
@@ -83,7 +81,7 @@ $(document).ready(function(){
 
 
 	
-</script>
+</script>-->
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -104,21 +102,15 @@ p.footer-text1 {
 
 </head>
 <body>
+	<!-- top nav include -->
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-
-<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<!-- side menu -->
+	<hr>
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
-				<!-- uncomment code for absolute positioning tweek see top comment in css -->
 				<div class="absolute-wrapper"></div>
 				<!-- Menu -->
 				<div class="side-menu">
@@ -126,7 +118,6 @@ p.footer-text1 {
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<li>
 									<a href="#" id="usePageserviceShow">
 										<span class="glyphicon glyphicon-user"></span>
@@ -166,20 +157,16 @@ p.footer-text1 {
 				</div>
 			</div>
 		</div>
-		
+	
 		
 	 
 		<!-- 이용방법 -->
 		<div class="tab-content">
-			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateFormForStudent.jsp" flush="true"></jsp:include>
 			<!--서비스소개  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="usePageservice">
 				<div class="col-sm-6">
 					<div class="step_21">
-	 					<img src="<c:url value='/resources/img/tatS.png'/>" alt=" "
-						style="width: 100%" >
+	 					<img src="<c:url value='/resources/img/tatS.png'/>" style="width: 100%" >
 	 				</div>
 				</div>
 			</div>
@@ -187,8 +174,7 @@ p.footer-text1 {
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="openClassUse">
 				<div class="col-sm-6">
 					<div class="step_21">
-	 					<img src="<c:url value='/resources/img/tatS2.png'/>" alt=" "
-						style="width: 100%" >
+	 					<img src="<c:url value='/resources/img/tatS2.png'/>" style="width: 100%" >
 	 				</div>
 				</div>
 			</div>
@@ -196,8 +182,7 @@ p.footer-text1 {
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="classUse">
 				<div class="col-sm-6">
 					<div class="step_21">
-	 					<img src="<c:url value='/resources/img/tatS3.png'/>" alt=" "
-						style="width: 100%" >
+	 					<img src="<c:url value='/resources/img/tatS3.png'/>" style="width: 100%" >
 	 				</div>
 				</div>
 			</div>
@@ -206,10 +191,8 @@ p.footer-text1 {
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="qna">
 				<jsp:include page="../include/qnaPage.jsp" flush="true"></jsp:include>
 			</div>
-			
 		</div>
-	</div>
-	 
+	 </div>
    
 </body>
 </html>

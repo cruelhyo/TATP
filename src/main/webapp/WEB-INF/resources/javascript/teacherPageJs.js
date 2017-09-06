@@ -80,7 +80,11 @@ $(document).ready(function()
 		$('.includePage').hide();
 		$('#modifiedMypage').show();
 	});
-	
+
+	$('#portfolioShow').click(function(){
+		$('.includePage').hide();
+		$('#portfolio').show();
+	});
 	
 	// 주소추가폼 숨기기
 	$('.add').hide();

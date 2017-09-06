@@ -16,7 +16,7 @@
 					</label>
 					
 					<div class="col-sm-6 wdth">
-						<select name=bankSelect" id="bankSelect"
+						<select name="bankSelect" id="bankSelect"
 						class="dropselects100">
 							<option value="">은행선택</option>
 							<option value="1">국민은행</option>
@@ -71,8 +71,11 @@
 				</div>
 			</div>
    	</div>
-	<br>
-	<br>
+		<hr>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-link">계좌 등록 완료</button>
+			</div>
+			<br> <br>
 </div>
 </div>
 	

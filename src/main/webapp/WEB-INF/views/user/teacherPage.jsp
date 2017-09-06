@@ -98,8 +98,8 @@
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li><a href="#" id="portfolioShow">My Portfolio</a></li>
-												<li><a href="#">이력사항 관리</a></li>
-												<li><a href="#">Link</a></li>	
+												<li><a href="#" id="resumeShow">이력사항 관리</a></li>
+												<li><a href="#" id="resumeViewShow">내 이력보기</a></li>	
 											</ul>
 										</div>
 									</div>
@@ -169,6 +169,14 @@
 		<!-- 포트폴리오-->
 		<div role="tabpanel" class="tab-pane face in active includePage" id="portfolio">
 			<jsp:include page="../include/portfolio.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 이력서 등록 -->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="resume">
+			<jsp:include page="../include/resume.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 이력서 보기-->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="resumeView">
+			<jsp:include page="../include/resumeView.jsp" flush="true"></jsp:include>
 		</div>
 	</div>
 </div>

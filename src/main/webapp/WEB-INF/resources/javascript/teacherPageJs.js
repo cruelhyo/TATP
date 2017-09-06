@@ -86,6 +86,19 @@ $(document).ready(function()
 		$('#portfolio').show();
 	});
 	
+	$('#resumeShow').click(function(){
+		$('.includePage').hide();
+		$('#resume').show();
+	});
+	
+	$('#resumeViewShow').click(function(){
+		$('.includePage').hide();
+		$('#resumeView').show();
+	});
+	
+	
+	
+	
 	// 주소추가폼 숨기기
 	$('.add').hide();
 	$('#plus').click(function(){

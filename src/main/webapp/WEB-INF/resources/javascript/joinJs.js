@@ -93,11 +93,12 @@ $(document).ready(function()
 				    if ($("#sample6_address").val()!='') {
 				     if ($("#memberPhone").val()!='') {
 					  if ($("#memberEmail").val()!='') {
-						  
-					   if  ($("input[name='mailagreement']:checked").val()!= null) {
+					   if  ($("input[name='memberMailagreement']:checked").val()!= null) {
 						   var $active = $('.wizard .nav-tabs li.active');
 							$active.next().removeClass('disabled');
 							nextTab($active);
+							
+							$(".submit").prop('disabled', true);
 							  
 					   }else{
 						   alert('수신동의여부 확인해주세요');
@@ -134,6 +135,17 @@ $(document).ready(function()
 					}
 		  	});
 		
+		
+		
+		// 계속하기(가입완료)버튼 클릭시 
+		$(".submit").click(function(e)
+				 {
+					console.log("회원가입 정보 미기재시 페이지 block ");
+					 if ($("#memberNickname").val() != '') {
+							}else{
+							 alert('닉네임을 입력하세요');
+							}
+				  	});
 
 		
 	
@@ -256,6 +268,7 @@ $(document).ready(function()
 						$("#nkch1").css("color", "#009900");
 						$('#nkch1').text('사용 가능한 닉네임입니다.');
 						$('#nkch2').text('');
+						$(".submit").prop('disabled', false);
 					}
 				}				 
 			 });	
@@ -334,6 +347,7 @@ $(document).ready(function()
 				/* $("#nkch2").css("color", "#FF0000"); */
 				$('#nkch1').text('사용이 불가능한 닉네임입니다.');
 				$(".nicknameCheck").prop('disabled', true);
+				$(".submit").prop('disabled', true);
 				/*$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');*/
 			}
 			else
@@ -342,6 +356,7 @@ $(document).ready(function()
 				$("#nkch1").css("color", "#999900");
 				$('#nkch1').text('닉네임 중복 검사가 필요합니다.');
 				$(".nicknameCheck").prop('disabled', false);
+				$(".submit").prop('disabled', true);
 				/*$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck active');*/
 			}
 		 });
@@ -449,21 +464,48 @@ $(document).ready(function()
 	     
 	     
 	    /* 메일수신동의여부 체크 클릭시 값을 받아오는 동작수행 */
-	    $("input:radio[name=mailagreement]").click(function(){
+	    $("input:radio[name=memberMailagreement]").click(function(){
 	    	
 	    	 /* 메일수신동의여부 체크박스 값을 받아오기위한 설정 */
-	    	var mailagree = $(":input:radio[name=mailagreement]:checked").val();
+	    	var memberMailagreement = $(":input:radio[name=memberMailagreement]:checked").val();
 			
-	    	$('input:radio[name=mailagreement]:input[value=' + mailagree +']').attr("checked", true);
+	    	$('input:radio[name=memberMailagreement]:input[value=' + memberMailagreement +']').attr("checked", true);
 			
-			if(mailagree == "y"){
+	    	if(memberMailagreement == "y"){
 				console.log("yes");
 			}else{
 				 console.log("no");
 			}
+	    	
+	    	
 
 	    	
 	    }); 
+	    
+	    
+	    /*관심사  체크 클릭시 값을 받아오는 동작수행 */
+	    $("input:radio[name=memberHobby]").click(function(){
+	    	
+	    	 /*관심사 체크박스 값을 받아오기위한 설정 */
+	    	var memberHobby = $(":input:radio[name=memberHobby]:checked").val();
+			
+	    	$('input:radio[name=memberHobby]:input[value=' + memberHobby +']').attr("checked", true);
+			
+	    	if(memberHobby =="외국어"){
+	    		console.log("외국어");
+	    	}else if(memberHobby =="운동"){
+	    		console.log("운동");
+	    	}else if(memberHobby =="독서"){
+	    		console.log("독서");
+	    	}else if(memberHobby =="예술"){
+	    		console.log("예술");
+	    	}else if(memberHobby =="기타"){
+	    		console.log("기타");
+	    	}
+
+	    	
+	    }); 
+	    
 			
 		 
 

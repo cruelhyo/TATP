@@ -263,8 +263,8 @@
 											<div class="col-sm-5">
 												<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>
 												&nbsp; 
-												<input type="radio" id="mailagreement" name="mailagreement" value="y">예 
-												<input type="radio" id="mailagreement" name="mailagreement" value="n">아니오<br>
+												<input type="radio" id="mailagreement" name="memberMailagreement" value="y">예 
+												<input type="radio" id="mailagreement" name="memberMailagreement" value="n">아니오<br>
 											</div>
 										</div>
 									</div>
@@ -319,11 +319,11 @@
 												</p>
 											</label>
 											<div class="col-sm-8">
-												<input type="radio" name="hobby" value="hobby"> 외국어&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 운동&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 독서&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 예술&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 기타&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="외국어"> 외국어&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="운동"> 운동&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="독서"> 독서&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="예술"> 예술&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="기타"> 기타&nbsp;&nbsp;
 												<p>(선택사항입니다.)</p>
 											</div>       
 										</div>
@@ -340,7 +340,7 @@
 											class="btn btn-default prev-step">이전 단계</button></li>
 
 									<li>
-									<button type="button" id ="submitBtn"class="btn btn-primary btn-info-full next-step">계속하기</button>
+									<button type="button" id ="submitBtn"class="btn btn-primary btn-info-full next-step submit">계속하기</button>
 									<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 									<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 									</li>

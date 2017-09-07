@@ -1,9 +1,12 @@
 package take.a.talent.member.vo;
 
-public class MemberVo {
+public class MemberVo { 
+	
+	//serializeObject에서 name값과 일치해야함
 	private int memberNo; 
 	private String memberId;
 	private String memberPassword;
+	private String memberPasswordre;
 	private String memberName;
 	private String memberGender;
 	private int memberAge;
@@ -23,196 +26,159 @@ public class MemberVo {
 	private int memberLogin_state;
 	private String memberAddress;
 	private String memberMemo;
-	public int getMemberNo()
-	{
+	public int getMemberNo() {
 		return memberNo;
 	}
-	public void setMemberNo(int memberNo)
-	{
+	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public String getMemberId()
-	{
+	public String getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(String memberId)
-	{
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMemberPassword()
-	{
+	public String getMemberPassword() {
 		return memberPassword;
 	}
-	public void setMemberPassword(String memberPassword)
-	{
+	public void setMemberPassword(String memberPassword) {
 		this.memberPassword = memberPassword;
 	}
-	public String getMemberName()
-	{
+	public String getMemberPasswordre() {
+		return memberPasswordre;
+	}
+	public void setMemberPasswordre(String memberPasswordre) {
+		this.memberPasswordre = memberPasswordre;
+	}
+	public String getMemberName() {
 		return memberName;
 	}
-	public void setMemberName(String memberName)
-	{
+	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public String getMemberGender()
-	{
+	public String getMemberGender() {
 		return memberGender;
 	}
-	public void setMemberGender(String memberGender)
-	{
+	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
-	public int getMemberAge()
-	{
+	public int getMemberAge() {
 		return memberAge;
 	}
-	public void setMemberAge(int memberAge)
-	{
+	public void setMemberAge(int memberAge) {
 		this.memberAge = memberAge;
 	}
-	public String getMemberPhone()
-	{
+	public String getMemberPhone() {
 		return memberPhone;
 	}
-	public void setMemberPhone(String memberPhone)
-	{
+	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-	public String getMemberBirthday()
-	{
+	public String getMemberBirthday() {
 		return memberBirthday;
 	}
-	public void setMemberBirthday(String memberBirthday)
-	{
+	public void setMemberBirthday(String memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
-	public String getMemberNickname()
-	{
+	public String getMemberNickname() {
 		return memberNickname;
 	}
-	public void setMemberNickname(String memberNickname)
-	{
+	public void setMemberNickname(String memberNickname) {
 		this.memberNickname = memberNickname;
 	}
-	public int getMemberPoint()
-	{
+	public int getMemberPoint() {
 		return memberPoint;
 	}
-	public void setMemberPoint(int memberPoint)
-	{
+	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
-	public int getMemberAuthority_no()
-	{
+	public int getMemberAuthority_no() {
 		return memberAuthority_no;
 	}
-	public void setMemberAuthority_no(int memberAuthority_no)
-	{
+	public void setMemberAuthority_no(int memberAuthority_no) {
 		this.memberAuthority_no = memberAuthority_no;
 	}
-	public String getMemberEmail()
-	{
+	public String getMemberEmail() {
 		return memberEmail;
 	}
-	public void setMemberEmail(String memberEmail)
-	{
+	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-	public int getMemberAgreement()
-	{
+	public int getMemberAgreement() {
 		return memberAgreement;
 	}
-	public void setMemberAgreement(int memberAgreement)
-	{
+	public void setMemberAgreement(int memberAgreement) {
 		this.memberAgreement = memberAgreement;
 	}
-	public String getMemberSns()
-	{
+	public String getMemberSns() {
 		return memberSns;
 	}
-	public void setMemberSns(String memberSns)
-	{
+	public void setMemberSns(String memberSns) {
 		this.memberSns = memberSns;
 	}
-	public int getMemberStudent_exp()
-	{
+	public int getMemberStudent_exp() {
 		return memberStudent_exp;
 	}
-	public void setMemberStudent_exp(int memberStudent_exp)
-	{
+	public void setMemberStudent_exp(int memberStudent_exp) {
 		this.memberStudent_exp = memberStudent_exp;
 	}
-	public int getMemberStudent_level()
-	{
+	public int getMemberStudent_level() {
 		return memberStudent_level;
 	}
-	public void setMemberStudent_level(int memberStudent_level)
-	{
+	public void setMemberStudent_level(int memberStudent_level) {
 		this.memberStudent_level = memberStudent_level;
 	}
-	public int getMemberTotal_class_application_date()
-	{
+	public int getMemberTotal_class_application_date() {
 		return memberTotal_class_application_date;
 	}
-	public void setMemberTotal_class_application_date(int memberTotal_class_application_date)
-	{
+	public void setMemberTotal_class_application_date(int memberTotal_class_application_date) {
 		this.memberTotal_class_application_date = memberTotal_class_application_date;
 	}
-	public int getMemberTotal_class_participation_date()
-	{
+	public int getMemberTotal_class_participation_date() {
 		return memberTotal_class_participation_date;
 	}
-	public void setMemberTotal_class_participation_date(int memberTotal_class_participation_date)
-	{
+	public void setMemberTotal_class_participation_date(int memberTotal_class_participation_date) {
 		this.memberTotal_class_participation_date = memberTotal_class_participation_date;
 	}
-	public int getMemberStudent_compliment_card()
-	{
+	public int getMemberStudent_compliment_card() {
 		return memberStudent_compliment_card;
 	}
-	public void setMemberStudent_compliment_card(int memberStudent_compliment_card)
-	{
+	public void setMemberStudent_compliment_card(int memberStudent_compliment_card) {
 		this.memberStudent_compliment_card = memberStudent_compliment_card;
 	}
-	public int getMemberLogin_state()
-	{
+	public int getMemberLogin_state() {
 		return memberLogin_state;
 	}
-	public void setMemberLogin_state(int memberLogin_state)
-	{
+	public void setMemberLogin_state(int memberLogin_state) {
 		this.memberLogin_state = memberLogin_state;
 	}
-	public String getMemberAddress()
-	{
+	public String getMemberAddress() {
 		return memberAddress;
 	}
-	public void setMemberAddress(String memberAddress)
-	{
+	public void setMemberAddress(String memberAddress) {
 		this.memberAddress = memberAddress;
 	}
-	public String getMemberMemo()
-	{
+	public String getMemberMemo() {
 		return memberMemo;
 	}
-	public void setMemberMemo(String memberMemo)
-	{
+	public void setMemberMemo(String memberMemo) {
 		this.memberMemo = memberMemo;
 	}
 	@Override
-	public String toString()
-	{
-		return "MemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName=" + memberName
-				+ ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", memberPhone=" + memberPhone
-				+ ", memberBirthday=" + memberBirthday + ", memberNickname=" + memberNickname
-				+ ", memberPoint=" + memberPoint + ", memberAuthority_no=" + memberAuthority_no + ", memberEmail="
-				+ memberEmail + ", memberAgreement=" + memberAgreement + ", memberSns=" + memberSns
-				+ ", memberStudent_exp=" + memberStudent_exp + ", memberStudent_level=" + memberStudent_level
-				+ ", memberTotal_class_application_date=" + memberTotal_class_application_date
-				+ ", memberTotal_class_participation_date=" + memberTotal_class_participation_date
-				+ ", memberStudent_compliment_card=" + memberStudent_compliment_card + ", memberLogin_state="
-				+ memberLogin_state + ", memberAddress=" + memberAddress + ", memberMemo=" + memberMemo + "]";
+	public String toString() {
+		return "MemberVo [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
+				+ ", memberPasswordre=" + memberPasswordre + ", memberName=" + memberName + ", memberGender="
+				+ memberGender + ", memberAge=" + memberAge + ", memberPhone=" + memberPhone + ", memberBirthday="
+				+ memberBirthday + ", memberNickname=" + memberNickname + ", memberPoint=" + memberPoint
+				+ ", memberAuthority_no=" + memberAuthority_no + ", memberEmail=" + memberEmail + ", memberAgreement="
+				+ memberAgreement + ", memberSns=" + memberSns + ", memberStudent_exp=" + memberStudent_exp
+				+ ", memberStudent_level=" + memberStudent_level + ", memberTotal_class_application_date="
+				+ memberTotal_class_application_date + ", memberTotal_class_participation_date="
+				+ memberTotal_class_participation_date + ", memberStudent_compliment_card="
+				+ memberStudent_compliment_card + ", memberLogin_state=" + memberLogin_state + ", memberAddress="
+				+ memberAddress + ", memberMemo=" + memberMemo + "]";
 	}
+	
 	
 	
 	

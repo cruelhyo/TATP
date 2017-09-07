@@ -125,7 +125,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="password" class="form-control PW" id="PW" placeholder="비밀번호 입력" name="memberPw">
+												<input type="password" class="form-control PW" id="PW" placeholder="비밀번호 입력" name="memberPassword">
 												<input type="hidden" value="0" id="use_pw" name="use_pw">
 												<span id="pwch1"></span>
 												<br>
@@ -142,7 +142,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="password" class="form-control PW2" id="PW2" placeholder="비밀번호 재입력" name="memberPw2">
+												<input type="password" class="form-control PW2" id="PW2" placeholder="비밀번호 재입력" name="memberPasswordre">
 												<input type="hidden" value="0" id="use_pw2" name="use_pw2">
 												<span id="pwch3"></span>
 											</div>
@@ -173,7 +173,7 @@
 											<div class="col-sm-8">
 												<input type="radio" id="memberGender" name="memberGender" value="male"> Male
 												&nbsp;&nbsp; 
-												<input type="radio" id="memberGender" name="memberGender" value="female">Female
+												<input type="radio" id="memberGender" name="memberGender" value="female"> feMale
 											</div>       
 										</div>
 									</div>

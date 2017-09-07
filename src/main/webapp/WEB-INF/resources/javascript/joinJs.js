@@ -86,13 +86,15 @@ $(document).ready(function()
 			  if ($("#PW").val()!='') {
 		       if ($("#PW2").val()!='') {
 		    	if ($("#memberName").val()!='') {
-				 if ($("#memberGender").is(":checked")) { // 체크박스 형식 가져오기 
+		       /*if ($("input[name='levelCode']:checked").val()!=null)*/
+				 if ($("input[name='memberGender']:checked").val()!= null) { // 체크박스 형식 가져오기 
 				  if ($("#memberBirthday").val()!='') {
 				   if ($("#sample6_postcode").val()!='') {
 				    if ($("#sample6_address").val()!='') {
 				     if ($("#memberPhone").val()!='') {
 					  if ($("#memberEmail").val()!='') {
-					   if ($("#mailagreement").is(":checked")) {
+						  
+					   if  ($("input[name='mailagreement']:checked").val()!= null) {
 						   var $active = $('.wizard .nav-tabs li.active');
 							$active.next().removeClass('disabled');
 							nextTab($active);
@@ -431,6 +433,7 @@ $(document).ready(function()
 	    	
 	    	 /* 성별 체크박스 값을 받아오기위한 설정 */
 	    	var gen = $(":input:radio[name=memberGender]:checked").val();
+	    	
 			
 	    	$('input:radio[name=memberGender]:input[value=' + gen +']').attr("checked", true);
 			

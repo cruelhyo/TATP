@@ -2,6 +2,7 @@ package take.a.talent.member.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,12 +96,12 @@ public class MemberRestController
 	
 	//회원(강사) 주소리스트 select
 	@RequestMapping(value="/ajax/selectAddressListForTeacher", method=RequestMethod.GET)
-	public List<AddressAndClassificationVo> selectAddressListForTeacher()
+	public Map<String, Object> selectAddressListForTeacher()
 	{
 		logger.info("selectAddressListForTeacher");
-		List<AddressAndClassificationVo> selectAddressListForTeacher = service.selectAddressListForTeacher();
-		logger.info(selectAddressListForTeacher.toString());
-		return selectAddressListForTeacher;
+		Map<String, Object> addressListMap = service.selectAddressListForTeacher();
+		logger.info(addressListMap.toString());
+		return addressListMap;
 	}
 
 }

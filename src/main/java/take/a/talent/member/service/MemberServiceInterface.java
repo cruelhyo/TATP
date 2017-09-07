@@ -1,6 +1,7 @@
 package take.a.talent.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,6 @@ public interface MemberServiceInterface {
 		int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
 		
 		//회원(강사) 주소리스트 select
-		List<AddressAndClassificationVo> selectAddressListForTeacher();
+		Map<String, Object> selectAddressListForTeacher();
 	
 }

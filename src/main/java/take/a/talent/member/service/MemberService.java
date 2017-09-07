@@ -1,6 +1,8 @@
 package take.a.talent.member.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,7 +123,7 @@ public class MemberService implements MemberServiceInterface{
 	
 	//회원(강사) 주소리스트 select
 	@Override
-	public List<AddressAndClassificationVo> selectAddressListForTeacher()
+	public Map<String, Object> selectAddressListForTeacher()
 	{
 		logger.info("selectAddressListForTeacher");
 		
@@ -131,8 +133,9 @@ public class MemberService implements MemberServiceInterface{
 		
 		//회원 memberNo select 
 		int memberNo = memberDao.selectMemberNo(memberId);
-		
-		return memberDao.selectAddressListForTeacher(memberNo);
+		Map<String, Object> addressListMap = new HashMap<String, Object>();
+		addressListMap.put("addressList", memberDao.selectAddressListForTeacher(memberNo));
+		return addressListMap;
 	}
 
 }

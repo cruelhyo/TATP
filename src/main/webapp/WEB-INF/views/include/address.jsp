@@ -29,38 +29,14 @@
 								<th>수정</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<div>
-										<ul class="list-inline">
-											<li><button type="button" class="btn btn-primary btn-xs">삭제</button></li>
-										</ul>
-									</div>
-								</td>
-								<td>
-									<div>
-										<ul class="list-inline">
-											<li><button type="button" class="btn btn-default btn-xs"  id="plus">추가</button></li>
-										</ul>
-									</div>
-								</td>
-								<td>
-									<div>
-										<ul class="list-inline">
-											<li><button type="button" class="btn btn-primary btn-xs"  id="edit">수정</button></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
+						<tbody id="addressTBody">
+							
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<form name="addressForm" id="addressForm" action="" method="post">
+				<input type="hidden" id="selectAddressListForTeacher" value="<c:url value='/ajax/selectAddressListForTeacher'/>">
 				<input type="hidden" id="ajaxInsertAddressForTeacher" value="<c:url value='/ajax/insertAddressForTeacher'/>">
 				<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>

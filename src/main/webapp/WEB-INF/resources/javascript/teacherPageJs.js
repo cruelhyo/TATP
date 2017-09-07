@@ -85,21 +85,7 @@ $(document).ready(function()
 	// 주소추가폼 숨기기
 	$('.add').hide();
 	
-	// 주소추가폼 보이기
-	$('#plus').click(function(){
-		$('.add').hide();
-		$('#address1').show();
-	});
-	$('#edit').click(function(){
-		$('.add').hide();
-		$('#address1').show();
-	});
 	
-	//주소추가하기 버튼 누르면 폼 다시 사라짐
-	$('#plus2').click(function(){
-		$('.add').hide();
-	});
-
 	// 환전내역 숨기기
 	$('.ExchangeHistory').hide();
 	$('#ExchangeView').click(function(){
@@ -232,6 +218,39 @@ $(document).ready(function()
 	
 	//-------------------- address js ------------------------------------------------------------
 	
+	
+	// 주소리스트 받아오기
+	$(function()
+	{	
+		var selectAddressListForTeacher = $('#selectAddressListForTeacher').val();
+		$.ajax({
+			url : selectAddressListForTeacher,
+			dataType : 'json',
+			success : function(result)
+			{
+				resultList = result.addressList;
+				$.each(resultList, function(index, value){
+					$('#addressTBody').append(
+							'<tr><td>' + value.addressClassificationName + 
+							'</td><td>' + value.addressMailNumber +
+							'</td><td>' + value.memberAddress +
+							'</td><td><div><ul class="list-inline">' +
+							'<li><button type="button" class="btn btn-primary btn-xs">삭제' +
+							'</button></li></ul></div></td>' +
+							'<td><div><ul class="list-inline"><li>' +
+							'<button type="button" class="btn btn-default btn-xs" id="plus">추가' +
+							'</button></li></ul></div></td>' +
+							'<td><div><ul class="list-inline"><li>' +
+							'<button type="button" class="btn btn-primary btn-xs" id="edit">수정' +
+							'</button></li></ul></div></td></tr><div id="htmltest"></div>'
+					);
+				});
+			}
+		});
+		var inputtest = '<input type="text">'
+		$('#htmltest').html(inputtest);
+	});
+	
 	//주소 등록하기 클릭시
 	$('.submitAddress').click(function()
 	{
@@ -280,6 +299,22 @@ $(document).ready(function()
 		});
 		
 	});
+	
+	// 주소추가폼 보이기
+	$('div').on('click', '#plus', function(){
+		$('.add').hide();
+		$('#address1').show();
+	});
+	$('div').on('click', '#edit', function(){
+		$('.add').hide();
+		$('#address1').show();
+	});
+	
+	//주소추가하기 버튼 누르면 폼 다시 사라짐
+	$('#plus2').click(function(){
+		$('.add').hide();
+	});
+
 	
 	
 });

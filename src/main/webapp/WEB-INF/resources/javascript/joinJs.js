@@ -57,10 +57,31 @@ $(document).ready(function()
 		});
 		
 		
-		//join 입력사항 비입력시  다음 페이지 이동 block  및  alert설정  
+		
+		// 기존에 여과없이 넘어가던 동작(원래 있던거)
+		/*$(".next-step").click(function(e)
+		{
+			// 최종 입력이 끝나고 다음페이지로 넘겨주는것.
+			var $active = $('.wizard .nav-tabs li.active');
+		$active.next().removeClass('disabled');
+		nextTab($active);
+
+		});*/
+		
+		$(".prev-step").click(function(e)
+		{
+			var $active = $('.wizard .nav-tabs li.active');
+			$active.next().removeClass('disabled');
+			prevTab($active);
+
+		});
+		
+		
+	
+	///join 입력사항 비입력시  다음 페이지 이동 block  및  alert설정  
 		$(".next-step").click(function(e)
 		 {
-			/*console.log("회원가입 정보 미기재시 페이지 block ");*/
+			console.log("회원가입 정보 미기재시 페이지 block ");
 			 if ($("#memberId").val() != '') {
 			  if ($("#PW").val()!='') {
 		       if ($("#PW2").val()!='') {
@@ -117,23 +138,9 @@ $(document).ready(function()
 			 
 		
 		
-		// 기존에 여과없이 넘어가던 동작(원래 있던거)
-		/*$(".next-step").click(function(e)
-		{
-			// 최종 입력이 끝나고 다음페이지로 넘겨주는것.
-			var $active = $('.wizard .nav-tabs li.active');
-		$active.next().removeClass('disabled');
-		nextTab($active);
-
-		});
+	
 		
-		$(".prev-step").click(function(e)
-		{
-			var $active = $('.wizard .nav-tabs li.active');
-			prevTab($active);
-
-		});*/
-		
+	
 
 		
 		

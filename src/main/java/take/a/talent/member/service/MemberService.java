@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
+import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -136,6 +137,15 @@ public class MemberService implements MemberServiceInterface{
 		Map<String, Object> addressListMap = new HashMap<String, Object>();
 		addressListMap.put("addressList", memberDao.selectAddressListForTeacher(memberNo));
 		return addressListMap;
+	}
+
+	//회원(강사) 계좌 insert
+	@Override
+	public int insertAccount(MemberAccountVo memberAccountVo) 
+	{
+		logger.info("insertAccount");
+		logger.info(memberAccountVo.toString());
+		return memberDao.insertAccount(memberAccountVo);
 	}
 
 }

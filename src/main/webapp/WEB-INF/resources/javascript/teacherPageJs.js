@@ -80,6 +80,23 @@ $(document).ready(function()
 		$('.includePage').hide();
 		$('#modifiedMypage').show();
 	});
+
+	$('#portfolioShow').click(function(){
+		$('.includePage').hide();
+		$('#portfolio').show();
+	});
+	
+	$('#resumeShow').click(function(){
+		$('.includePage').hide();
+		$('#resume').show();
+	});
+	
+	$('#resumeViewShow').click(function(){
+		$('.includePage').hide();
+		$('#resumeView').show();
+	});
+	
+	
 	
 	
 	// 주소추가폼 숨기기

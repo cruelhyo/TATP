@@ -9,12 +9,26 @@
 		<div class="form-group">
 			<label class="control-label col-sm-3 " for="PW">
 				<p align="right">
-					<strong>비밀번호</strong>
+					<strong>현재 비밀번호</strong>
 				</p>
 			</label>
 			<div class="col-sm-5">
 				<input type="text" class="form-control" id="PW"
-					placeholder="비밀번호 입력" name="memberPw">
+					placeholder="현재 비밀번호를 입력해주세요" name="NowmemberPw">
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="form-group">
+			<label class="control-label col-sm-3 " for="PW">
+				<p align="right">
+					<strong>새 비밀번호</strong>
+				</p>
+			</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="PW"
+					placeholder="새로운 비밀번호 입력해주세요" name="memberPw">
 			</div>
 		</div>
 	</div>
@@ -28,7 +42,7 @@
 			</label>
 			<div class="col-sm-5">
 				<input type="text" class="form-control" id="PW"
-					placeholder="비밀번호 재입력" name="member_pw">
+					placeholder="새로운 비밀번호를 재입력 해주세요" name="member_pw">
 			</div>
 		</div>
 	</div>

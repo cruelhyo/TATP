@@ -26,7 +26,7 @@
 	</div>
 	<!-- 회원가입폼 -->
 	<input type="hidden" id="ajaxIdCheck" value="<c:url value='/ajax/idCheck'/>">
-	<input type="hidden" id="ajaxNicknameCheck" value="<c:url value='/ajax/nicknameCheck'/>">
+	<input type="hidden" id="ajaxnicknameCheck" value="<c:url value='/ajax/nicknameCheck'/>">
 	<div class="container">
 		<div class="row">
 			<section>
@@ -204,7 +204,7 @@
 											</div>
 											<div class="col-sm-2">
 												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
-												<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+												<input type="button"  class="btn btn-default"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 											</div>
 										</div>
 									</div>
@@ -293,12 +293,12 @@
 												</p>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control ID " id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
+												<input type="text" class="form-control memberNickname " id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
 													
 											</div>
 											
 											<div class="col-sm-2">
-												<button type="button" class="btn btn-primary idCheck">
+												<button type="button" class="btn btn-primary nicknameCheck">
 													중복 검사</button>
 											</div>
 										</div>

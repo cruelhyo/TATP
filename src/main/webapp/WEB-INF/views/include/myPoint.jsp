@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+
+<style> 
+input.underline {border:0;border-bottom:1 solid #FF0000;}
+</style>
+
+
 	<div class="col-sm-8">
 		<div class="step_21">
 
@@ -51,11 +57,8 @@
 						</p>
 					</label>
 					<div class="col-sm-8">
-						<input type="radio" name="gender" value="male">직접입력
-					</div>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="mypoiny"
-							name="myPoint">
+						<input type="radio" name="gender" value="male">직접입력:
+						<input class="underline" type="text" id="mypoint" name="myPoint"placeholder="   point 입력" >
 					</div>
 				</div>
 			</div>

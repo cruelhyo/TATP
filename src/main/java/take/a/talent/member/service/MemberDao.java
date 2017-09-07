@@ -17,6 +17,7 @@ import com.mysql.fabric.xmlrpc.base.Member;
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -164,6 +165,15 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info("memberNo : "+memberNo);
 		
 		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectAddressListForTeacher", memberNo);
+	}
+		
+	//회원(강사) 계좌 insert
+	@Override
+	public int insertAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("DAO insertAccount 호출");
+		logger.info(memberAccountVo.toString());
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertAccount", memberAccountVo);
 	}
 	
 }

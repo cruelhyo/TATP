@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 $(document).ready(function()
 	{
 		//Initialize tooltips
@@ -9,6 +5,9 @@ $(document).ready(function()
 		
 		// idCheck버튼 비활성화
 		$(".idCheck").attr('class','btn btn-primary idCheck disabled');
+		
+		// nicknameCheck버튼 비활성화
+		$(".nicknameCheck").attr('class','btn btn-primary nicknameCheck disabled');
 		
 		//Wizard
 		$('a[data-toggle="tab"]').on('show.bs.tab', function(e)
@@ -21,7 +20,6 @@ $(document).ready(function()
 			}
 		});
 
-		//이용약관 동의 하면 이동시키게 하는 함수
 		$(".next-step-agree").click(function(e)
 		{
 			console.log(".next-step-agree");
@@ -128,11 +126,11 @@ $(document).ready(function()
 		
 		
 		// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
-		$(".nickName").keyup(function()
+		$(".memberNickname").keyup(function()
 		{
 			var check = /^[a-z0-9~!@#$%^*()\-_=+]{5,16}$/; 
 			 /* /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i; */
-			var in_nickname = $('#NICKNAME').val();
+			var in_nickname = $('#memberNickname').val();
 			var temp = 0 ;
 			if(!check.test(in_nickname))
 			{
@@ -301,4 +299,4 @@ $(document).ready(function()
 		function prevTab(elem) {
 			$(elem).prev().find('a[data-toggle="tab"]').click();
 		}
-	});
+});

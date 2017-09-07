@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -43,6 +44,17 @@ public class MemberController
 		int updateMemberResult = service.updateMember(memberVo);
 		//model.addAttribute("updateMemberResult", updateMemberResult);
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
+	}
+	
+	//회원(강사) 계좌 insert
+	@RequestMapping(value ="/teacher/teacherPage/insertAccount", method=RequestMethod.POST)
+	public String accountMember(MemberAccountVo memberAccountVo)
+	{
+		logger.info("insertAccount");
+		logger.info(memberAccountVo.toString());
+		int insertAccountResult = service.insertAccount(memberAccountVo);
+		return "redirect:/teacher/teacherPage?updateSuccess="+ insertAccountResult;
+		
 	}
 	
 	@RequestMapping(value = { "/ajax/pwCheck"}, method = RequestMethod.GET)

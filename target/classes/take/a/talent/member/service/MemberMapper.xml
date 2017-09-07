@@ -40,6 +40,12 @@
 		<result property="memberEmail" column="member_email"/>
 		<result property="memberAgreement" column="member_agreement"/>
 	</resultMap>
+	<resultMap	type="take.a.talent.member.vo.MemberAccountVo" id="MemberAccountVo">
+		<result property="teacherAccountNo" column="teacher_account_no"/>
+		<result property="bankNo" column="bank_no"/>
+		<result property="accountNumber" column="account_number"/>
+		<result property="accountHolderName" column="account_holder_name"/>
+	</resultMap>
 
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
@@ -114,7 +120,20 @@
 			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberPhone}, #{memberAddress}, #{memberAddressDetail},#{memberEmail},#{memberAgreement});
 			
 	</insert>
-	
+
+	<!-- 계좌 입력 정보 -->
+	<insert id="insertAccount" parameterType="take.a.talent.member.vo.MemberAccountVo">
+		INSERT INTO teacher_account 
+		(teacher_account_no
+		, bank_no
+		, account_number
+		, account_holder_name)
+		 VALUES 
+		 (#{teacherAccountNo}
+		 , #{bankNo}
+		 , #{accountNumber}
+		 ,#{accountHolderName});
+	</insert>
 	
 	<!-- 회원(강사) 정보 수정(비밀번호, 주소 제외) -->	
 	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">

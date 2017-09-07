@@ -51,4 +51,10 @@ public interface MemberDaoInterface {
 	
 	//회원(강사) 주소리스트 select
 	List<AddressAndClassificationVo> selectAddressListForTeacher(int memberNo);
+	
+	//회원(강사) 주소 업데이트
+	int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
+	
+	//회원(강사) 주소 삭제
+	int deleteAddressForTeacher(int address_no);
 }

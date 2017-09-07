@@ -115,6 +115,13 @@ public class MemberService implements MemberServiceInterface{
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
+		//폼에서 제대로 입력 안했을 때 0을 리턴
+		int addressMailNumber = addressAndClassificationVo.getAddressMailNumber();
+		String memberAddress = addressAndClassificationVo.getMemberAddress();
+		if(addressMailNumber == 0 || memberAddress.equals(""))
+		{
+			return 0;
+		}
 		//회원 memberNo select vo객체에 세팅
 		int memberNo = memberDao.selectMemberNo(memberId);
 		addressAndClassificationVo.setMemberNo(memberNo);
@@ -138,6 +145,24 @@ public class MemberService implements MemberServiceInterface{
 		addressListMap.put("addressList", memberDao.selectAddressListForTeacher(memberNo));
 		return addressListMap;
 	}
+	
+	//회원(강사) 주소 업데이트
+	@Override
+	public int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
+	{
+		logger.info("updateAddressForTeacher");
+		logger.info(addressAndClassificationVo.toString());
+		
+		//폼에서 제대로 입력 안했을 때 0을 리턴
+		int addressMailNumber = addressAndClassificationVo.getAddressMailNumber();
+		String memberAddress = addressAndClassificationVo.getMemberAddress();
+		if(addressMailNumber == 0 || memberAddress.equals(""))
+		{
+			return 0;
+		}
+		//업데이트 dao vo를 입력값으로 호출 후 리턴
+		return memberDao.updateAddressForTeacher(addressAndClassificationVo);
+	}
 
 	//회원(강사) 계좌 insert
 	@Override
@@ -146,6 +171,15 @@ public class MemberService implements MemberServiceInterface{
 		logger.info("insertAccount");
 		logger.info(memberAccountVo.toString());
 		return memberDao.insertAccount(memberAccountVo);
+	}
+	
+	//회원(강사) 주소 삭제
+	@Override
+	public int deleteAddressForTeacher(int addressNo)
+	{
+		logger.info("deleteAddressForTeacher");
+		
+		return memberDao.deleteAddressForTeacher(addressNo);
 	}
 
 }

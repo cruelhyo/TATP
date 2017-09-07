@@ -154,7 +154,7 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info("DAO selectMemberNo 호출");
 		logger.info("memberId : "+memberId);
 		
-		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberNoForInsertAddress", memberId);
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberNo", memberId);
 	}
 	
 	//회원(강사) 주소리스트 select
@@ -166,6 +166,16 @@ public class MemberDao implements MemberDaoInterface{
 		
 		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectAddressListForTeacher", memberNo);
 	}
+	
+	//회원(강사) 주소 업데이트
+	@Override
+	public int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
+	{
+		logger.info("DAO updateAddressForTeacher 호출");
+		logger.info("addressAndClassificationVo : "+ addressAndClassificationVo);
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateAddressForTeacher", addressAndClassificationVo);
+	}
 		
 	//회원(강사) 계좌 insert
 	@Override
@@ -173,7 +183,17 @@ public class MemberDao implements MemberDaoInterface{
 	{
 		logger.info("DAO insertAccount 호출");
 		logger.info(memberAccountVo.toString());
+
 		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertAccount", memberAccountVo);
+	}
+	
+	//회원(강사) 주소 삭제
+	@Override
+	public int deleteAddressForTeacher(int addressNo)
+	{
+		logger.info("DAO deleteAddressForTeacher 호출");
+		
+		return sqlSessionTemplate.delete("take.a.talent.member.service.MemberMapper.deleteAddressForTeacher", addressNo);
 	}
 	
 }

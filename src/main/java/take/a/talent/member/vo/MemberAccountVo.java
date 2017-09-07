@@ -5,6 +5,7 @@ public class MemberAccountVo {
 	private String bankNo;
 	private String accountNumber;
 	private String accountHolderName;
+	
 	public String getTeacherAccountNo() {
 		return teacherAccountNo;
 	}

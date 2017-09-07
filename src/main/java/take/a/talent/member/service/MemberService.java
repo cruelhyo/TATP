@@ -15,6 +15,7 @@ import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
 
@@ -120,6 +121,12 @@ public class MemberService implements MemberServiceInterface{
 		addressAndClassificationVo.setMemberNo(memberNo);
 		
 		return memberDao.insertAddressForTeacher(addressAndClassificationVo);
+	}
+	//포인트 충전 insert
+	public MemberPointVo insertForUpdatePoint(MemberPointVo memberPointVo) 
+	{
+		return memberPointVo;
+		
 	}
 	
 	//회원(강사) 주소리스트 select

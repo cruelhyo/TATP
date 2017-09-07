@@ -57,7 +57,16 @@
 		<result property="accountNumber" column="account_number"/>
 		<result property="accountHolderName" column="account_holder_name"/>
 	</resultMap>
-
+	
+	<resultMap	type="take.a.talent.member.vo.MemberPointVo" id="MemberPointVo">
+		<result property="pointChargeNo"  column="point_charge_no"/>
+		<result property="pointChargeMoney"  column="point_charge_money"/>
+		<result property="pointChargePoint"  column="point_charge_point"/>
+		<result property="pointChargeDate"  column="point_charge_date"/>
+		<result property="pointChargeShape"  column="point_charge_shape"/>
+	</resultMap>
+	
+	
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
 		SELECT 
@@ -176,6 +185,25 @@
 		 , #{bankNo}
 		 , #{accountNumber}
 		 ,#{accountHolderName});
+	</insert>
+	
+	<!-- 포인트 입력 -->
+	<insert id ="insertPoint" parameterType="take.a.talent.member.vo.MemberAccountVo">
+		INSERT INTO point_charge 
+		(member_no
+		, point_charge_money
+		, point_charge_point
+		, point_charge_date
+		, point_charge_shape)
+		VALUES 
+		((SELECT member_no
+		FROM member
+		WHERE member_no=#{memberNo})
+		, #{pointChargeMoney}
+		, #{pointChargePoint}
+		, sysdate()
+		, #{ pointChargeShape});
+		
 	</insert>
 	
 	<!-- 회원(강사) 정보 수정(비밀번호, 주소 제외) -->	

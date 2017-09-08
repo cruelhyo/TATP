@@ -47,6 +47,7 @@ $(document).ready(function()
 	$('#myPageShow').click(function(){
 		$('.includePage').hide();
 		$('#myPage').show();
+		selectForUpdateMember();
 	});
 	
 	$('#myPointHistoryShow').click(function(){
@@ -57,6 +58,7 @@ $(document).ready(function()
 	$('#myAddressShow').click(function(){
 		$('.includePage').hide();
 		$('#myAddress').show();
+		selectAddressListForTeacher();
 	});
 	
 	
@@ -147,7 +149,6 @@ $(document).ready(function()
 			
 		});
 	}
-	selectForUpdateMember();
 	
 	// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
 	$(".nickName").keyup(function()
@@ -237,44 +238,48 @@ $(document).ready(function()
 	
 	
 	// 주소리스트 받아오기
-	$(function()
+	function selectAddressListForTeacher()
 	{	
+		//url
 		var selectAddressListForTeacher = $('#selectAddressListForTeacher').val();
+		
 		$.ajax({
 			url : selectAddressListForTeacher,
 			dataType : 'json',
 			success : function(result)
 			{
+				// tbody 초기화
+				$('#addressTBody').empty();
+				//맵핑된 객체 가져오기
 				resultList = result.addressList;
+				//객체의 숫자 만큼 돌린다
 				$.each(resultList, function(index, value){
 					$('#addressTBody').append(
 							'<tr><td>' + value.addressClassificationName + 
 							'</td><td>' + value.addressMailNumber +
 							'</td><td>' + value.memberAddress +
 							'</td><td><div><ul class="list-inline">' +
-							'<li><button type="button" class="btn btn-primary btn-xs">삭제' +
+							'<li><button type="button" class="btn btn-primary btn-xs" id="del" value="'+ value.addressNo +'">삭제' +
 							'</button></li></ul></div></td>' +
 							'<td><div><ul class="list-inline"><li>' +
-							'<button type="button" class="btn btn-default btn-xs" id="plus">추가' +
-							'</button></li></ul></div></td>' +
-							'<td><div><ul class="list-inline"><li>' +
-							'<button type="button" class="btn btn-primary btn-xs" id="edit">수정' +
-							'</button></li></ul></div></td></tr><div id="htmltest"></div>'
+							'<button type="button" class="btn btn-default btn-xs" id="edit" value="'+ value.addressNo +'">수정' +
+							'</button></li></ul></div></td></tr>' 
 					);
 				});
 			}
 		});
-		var inputtest = '<input type="text">'
-		$('#htmltest').html(inputtest);
-	});
+	}
 	
-	//주소 등록하기 클릭시
-	$('.submitAddress').click(function()
+	//주소 추가하기 클릭시
+	$('.submitInsertAddress').click(function()
 	{
+		//url
 		var ajaxInsertAddressForTeacher = $('#ajaxInsertAddressForTeacher').val();
+		//csrf
 		var csrfToken = $('#csrfToken').val();
 		var csrfHeader = $('#csrfHeader').val();
 		
+		//폼 값 맵핑
 		$.fn.serializeObject = function()
 		{
 		    var o = {};
@@ -295,6 +300,7 @@ $(document).ready(function()
 		    return o;
 		};
 		
+		//폼 object화
 		var formData = $("#addressForm").serializeObject();
 		console.log(formData);
 		$.ajax(
@@ -303,6 +309,7 @@ $(document).ready(function()
 			url : ajaxInsertAddressForTeacher,
 			data : JSON.stringify(formData),
 			dataType:'json',
+			//Accept, Content-Type, csrf를 먼저 보낸다
 			beforeSend : function(xhr) 
 			{
 				xhr.setRequestHeader("Accept", "application/json");
@@ -311,24 +318,150 @@ $(document).ready(function()
 			},
 			success : function(result)
 			{
+				
 				console.log(result);
+				
+				if(result == 0)
+				{
+					alert('각 항목을 제대로 입력해주세요.');
+				}
+				
+				// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+				selectAddressListForTeacher();
 			}
 		});
 		
 	});
 	
+	//주소 수정하기 클릭시
+	$('.submitUpdateAddress').click(function()
+	{
+		
+		//url
+		var ajaxupdateAddressForTeacher = $('#ajaxupdateAddressForTeacher').val();
+		//csrf token
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		//폼에서 입력한 값들 object화
+		var formData = $("#addressForm").serializeObject();
+		console.log(formData);
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxupdateAddressForTeacher,
+			//formData를 json규격에 맞춤
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			//성공하면 result값을 따져서 alert창을 띄운다
+			success : function(result)
+			{
+				
+				console.log(result);
+				
+				if(result == 0)
+				{
+					alert('각 항목을 제대로 입력해주세요.');
+				}
+				// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+				selectAddressListForTeacher();
+			}
+		});
+	});
+	
+	//주소 삭제버튼 클릭시
+	$('div').on('click', '#del', function()
+	{
+		//url
+		var ajaxDeleteAddressForTeacher = $('#ajaxDeleteAddressForTeacher').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		//value에 담겨있는 addressNo를 가져온다
+		var addressNo = $(this).val();
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxDeleteAddressForTeacher,
+			data : addressNo,
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+		selectAddressListForTeacher();
+	});
+	
 	// 주소추가폼 보이기
 	$('div').on('click', '#plus', function(){
+		//폼 숨기기
 		$('.add').hide();
 		$('#address1').show();
+		//포커싱
+		$('#addressClassificationNo').focus();
+		//추가하기 버튼 보이기
+		$('.submitInsertAddress').css('display', '');
+		//수정하기 버튼 숨기기
+		$('.submitUpdateAddress').css('display', 'none');
+		//폼 초기화
+		$('#addressForm')[0].reset();
 	});
 	$('div').on('click', '#edit', function(){
+		//value에 있는 addressNo를 가져온다
+		var addressNo = $(this).val();
+		$('.addressNoInForm').val(addressNo);
 		$('.add').hide();
 		$('#address1').show();
+		//포커싱
+		$('#addressClassificationNo').focus();
+		//추가하기 버튼 숨기기
+		$('.submitInsertAddress').css('display', 'none');
+		//수정하기 버튼 보이기
+		$('.submitUpdateAddress').css('display', '');
+		//폼 초기화
+		$('#addressForm')[0].reset();
 	});
 	
 	//주소추가하기 버튼 누르면 폼 다시 사라짐
 	$('#plus2').click(function(){
+		$('.add').hide();
+	});
+	$('#plus3').click(function(){
 		$('.add').hide();
 	});
 

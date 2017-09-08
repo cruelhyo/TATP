@@ -103,6 +103,25 @@ public class MemberRestController
 		logger.info(addressListMap.toString());
 		return addressListMap;
 	}
+	
+	//회원(강사) 주소 업데이트
+	@RequestMapping(value="/ajax/updateAddressForTeacher", method=RequestMethod.POST)
+	public int updateAddressForTeacher(@RequestBody AddressAndClassificationVo addressAndClassificationVo)
+	{
+		logger.info("updateAddressForTeacher");
+		logger.info(addressAndClassificationVo.toString());
+		
+		return service.updateAddressForTeacher(addressAndClassificationVo);
+	}
+	
+	//회원(강사) 주소 삭제
+	@RequestMapping(value="/ajax/deleteAddressForTeacher", method=RequestMethod.POST)
+	public int deleteAddressForTeacher(@RequestBody int addressNo)
+	{
+		logger.info("updateAddressForTeacher");
+		
+		return service.deleteAddressForTeacher(addressNo);
+	}
 
 	//맴버포인트 가지고 오기
 	@RequestMapping(value="/ajax/selectMemberPoint", method=RequestMethod.GET)

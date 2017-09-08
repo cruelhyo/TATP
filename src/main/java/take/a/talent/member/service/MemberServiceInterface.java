@@ -66,5 +66,10 @@ public interface MemberServiceInterface {
 		
 		//맴버 포인트 가져오기
 		int selectMemberPoint();
+		//회원(강사) 주소 업데이트
+		int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
+		
+		//회원(강사) 주소 삭제
+		int deleteAddressForTeacher(int addressNo);
 	
 }

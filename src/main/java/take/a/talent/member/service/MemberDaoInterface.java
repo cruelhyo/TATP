@@ -8,6 +8,7 @@ import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 
 //import com.mysql.fabric.xmlrpc.base.Member;
@@ -67,4 +68,10 @@ public interface MemberDaoInterface {
 	
 	//회원(강사) 주소 삭제
 	int deleteAddressForTeacher(int address_no);
+	
+	//회원 포인트 충전 내역 리스트 select
+	List<MemberPointVo> selectPointHistoryList(int memberNo);
+	
+	//포인트 환전 내역 insert
+	int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo);
 }

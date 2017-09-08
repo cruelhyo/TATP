@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberVo;
 
 @RestController
@@ -131,6 +132,27 @@ public class MemberRestController
 		int memberPoint = service.selectMemberPoint();
 		logger.info(Integer.toString(memberPoint));
 		return memberPoint;
+	}
+	
+	//회원 포인트 충전 내역 리스트 select
+	@RequestMapping(value="/ajax/selectPointHistoryList", method=RequestMethod.GET)
+	public Map<String, Object> selectPointHistoryList()
+	{
+		logger.info("selectPointHistoryList");
+		Map<String, Object> pointListMap = service.selectPointHistoryList();
+		logger.info(pointListMap.toString());
+		
+		return pointListMap;
+	}
+	
+	//포인트 환전 내역 insert
+	@RequestMapping(value="/ajax/insertPointExchangeHistory", method=RequestMethod.POST)
+	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
+	{
+		logger.info("insertPointExchangeHistory");
+		logger.info(memberPointExchangeVo.toString());
+		int result = service.insertPointExchangeHistory(memberPointExchangeVo);
+		return result;
 	}
 	
 }

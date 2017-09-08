@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -64,12 +65,18 @@ public interface MemberServiceInterface {
 		//회원(강사) 주소리스트 select
 		Map<String, Object> selectAddressListForTeacher();
 		
-		//맴버 포인트 가져오기
+		//맴버 테이블 포인트 가져오기
 		int selectMemberPoint();
 		//회원(강사) 주소 업데이트
 		int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
 		
 		//회원(강사) 주소 삭제
 		int deleteAddressForTeacher(int addressNo);
+		
+		//회원 포인트 충전 내역 리스트 select
+		Map<String, Object> selectPointHistoryList();
+		
+		//포인트 환전 내역 insert
+		int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo);
 	
 }

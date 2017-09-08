@@ -15,6 +15,7 @@ import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -147,10 +148,10 @@ public class MemberService implements MemberServiceInterface{
 		
 		//충전 금액을 포인트로 변환과 회원이 가지고 있는 포인트를 select후 합산하여 vo에 세팅
 		int money = memberPointVo.getPointChargeMoney();
-		int memberPonit = memberDao.selectMemberPoint(memberNo);
+		int memberPoint = memberDao.selectMemberPoint(memberNo);
 		int point = money/1000;
 		memberPointVo.setPointChargePoint(point);
-		memberVo.setMemberPoint(memberPonit + point);
+		memberVo.setMemberPoint(memberPoint + point);
 		
 		//합산한 포인트가 member 테이블에 업데이트가 안되었을시 0을 리턴
 		int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
@@ -228,6 +229,70 @@ public class MemberService implements MemberServiceInterface{
 		logger.info("deleteAddressForTeacher");
 		
 		return memberDao.deleteAddressForTeacher(addressNo);
+	}
+	
+	//회원 포인트 충전 내역 리스트 select
+	public Map<String, Object> selectPointHistoryList()
+	{
+		logger.info("selectPointHistoryList");
+		
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//memberNo select
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		//dao호출 리턴 list 맵핑
+		Map<String, Object> pointListMap = new HashMap<String, Object>();
+		pointListMap.put("pointList", memberDao.selectPointHistoryList(memberNo));
+		
+		return pointListMap;
+	}
+	
+	//포인트 환전 내역 insert
+	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
+	{
+		logger.info("insertPointExchangeHistory");
+		logger.info(memberPointExchangeVo.toString());
+		
+		//새로운 객체를 생성
+		MemberVo memberVo = new MemberVo();
+		
+		
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//memberNo select후 각 vo에 세팅
+		int memberNo = memberDao.selectMemberNo(memberId);
+		memberVo.setMemberNo(memberNo);
+		memberPointExchangeVo.setMemberNo(memberNo);
+		
+		//입력한 환전 포인트 환전 금액으로 바꾸고 세팅
+		int pointExchangePoint = memberPointExchangeVo.getPointExchangePoint();
+		int exchangeMoney = pointExchangePoint * 700;
+		memberPointExchangeVo.setPointExchangeMoney(exchangeMoney);
+		//현재 가지고 있던 포인트 가져오기
+		int memberPonit = memberDao.selectMemberPoint(memberNo);
+		
+		//가지고 있던 포인트가 환전할 금액보다 크거나 같을시
+		if(memberPonit >= pointExchangePoint) {
+			//원래 포인트에서 환전할 포인트 빼고 vo에 세팅
+			memberPonit = memberPonit - pointExchangePoint;
+			memberVo.setMemberPoint(memberPonit);
+			
+			//계산한 포인트가 member 테이블에 업데이트가 안되었을시 0을 리턴
+			int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
+			if(memberPointUpdateResult == 0) 
+			{
+				return 0;
+			}
+			
+			//환전 내역 insert 결과 리턴
+			return memberDao.insertPointExchangeHistory(memberPointExchangeVo);
+		}
+		return 0;
 	}
 
 }

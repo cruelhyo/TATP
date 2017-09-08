@@ -44,73 +44,108 @@ $(document).ready(function()
 	});
 	
 	//숨긴 includepage 해당 버튼 클릭시 보여주기
+	
+	//회원 정보 수정
 	$('#myPageShow').click(function(){
 		$('.includePage').hide();
 		$('#myPage').show();
 		selectForUpdateMember();
 	});
 	
+	// 포인트 충전 내역
 	$('#myPointHistoryShow').click(function(){
 		$('.includePage').hide();
 		$('#myPointHistory').show();
+		
+		//url
+		var ajaxSelectPointHistoryList = $('#ajaxSelectPointHistoryList').val();
+		
+		$.ajax(
+		{
+			url : ajaxSelectPointHistoryList,
+			dataType : 'json',
+			success : function(result)
+			{
+				console.log(result);
+				//tbody 초기화
+				$('#pointTBody').empty();
+				//맵핑된 객체 가져오기
+				resultList = result.pointList;
+				//객체의 숫자 만큼 돌린다
+				$.each(resultList, function(index, value)
+				{
+					$('#pointTBody').append(
+							'<tr><td></td><td>' + value.pointChargeMoney +
+							'</td><td>' + value.pointChargePoint +
+							'</td><td>' + value.pointChargeDate +
+							'</td></tr>'
+					);
+				});
+			}
+		});
 	});
-
+	
+	//내 주소록 보기
 	$('#myAddressShow').click(function(){
 		$('.includePage').hide();
 		$('#myAddress').show();
 		selectAddressListForTeacher();
 	});
 	
+	//포인트 충전하기
+	$('#myPointShow').click(function(){
+		$('.includePage').hide();
+		$('#myPoint').show();
+		// 현재 포인트 가져오기 함수
+		selectMemberPoint();
+	});
 	
-	
+	//비밀번호 변경
 	$('#myChangePWShow').click(function(){
 		$('.includePage').hide();
 		$('#myChangePW').show();
 	});
 	
+	//환전하기
 	$('#myExchangeShow').click(function(){
 		$('.includePage').hide();
 		$('#myExchange').show();
+		// 현재 포인트 가져오기 함수
+		selectMemberPoint();
 	});
 	
+	//계좌관리
 	$('#myAccountShow').click(function(){
 		$('.includePage').hide();
 		$('#myAccount').show();
 	});
 	
+	//내 정보 전체보기
 	$('#modifiedMypageShow').click(function(){
 		$('.includePage').hide();
 		$('#modifiedMypage').show();
 	});
 
+	//포트폴리오 보기
 	$('#portfolioShow').click(function(){
 		$('.includePage').hide();
 		$('#portfolio').show();
 	});
 	
+	//이력서 등록
 	$('#resumeShow').click(function(){
 		$('.includePage').hide();
 		$('#resume').show();
 	});
 	
+	//이력서 보기
 	$('#resumeViewShow').click(function(){
 		$('.includePage').hide();
 		$('#resumeView').show();
 	});
 	
-	
-	
-	
 	// 주소추가폼 숨기기
 	$('.add').hide();
-	
-	
-	// 환전내역 숨기기
-	$('.ExchangeHistory').hide();
-	$('#ExchangeView').click(function(){
-		$('.ExchangeHistory').hide();
-		$('#ExHistory').show();
-	});
 	
 	//---------------------- memberUpdateFormForTeacher js ----------------------------------------------------
 	
@@ -253,7 +288,8 @@ $(document).ready(function()
 				//맵핑된 객체 가져오기
 				resultList = result.addressList;
 				//객체의 숫자 만큼 돌린다
-				$.each(resultList, function(index, value){
+				$.each(resultList, function(index, value)
+				{
 					$('#addressTBody').append(
 							'<tr><td>' + value.addressClassificationName + 
 							'</td><td>' + value.addressMailNumber +
@@ -467,28 +503,87 @@ $(document).ready(function()
 
 	//-------------------------------- myPoint js ---------------------------------------
 	
-	
-	
-	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
-		
+	function selectMemberPoint()
+	{
+		//url
 		var ajaxSelectMemberPoint = $('#ajaxSelectMemberPoint').val();
 		$.ajax(
 		{
 			url : ajaxSelectMemberPoint,
-			
 			success : function(result)
 			{
 				console.log(result);
 				$('#memberPoint').val(result);
+				$('.memberExchange').val(result);
 			}
 		});
-		
+	}
+	
+	//-------------------------------- pointExchange js ----------------------------------------
+	
+	
+	// 환전내역 숨김과 동시에 환전 폼도 숨겨줍니다
+	$('.ExchangeHistory').hide();
+	$('.ExchangePointForm').hide();
+	// 환전 내역 보이면서 환전 폼 숨기기
+	$('#ExchangeView').click(function(){
+		$('#ExHistory').show();
+		$('.ExchangePointForm').hide();
+	});
+	//환전 폼 보이면서 환전 내역 숨기기
+	$('#Exchange').click(function(){
+		$('.ExchangePointForm').show();
+		$('#ExHistory').hide();
 	});
 	
-	
-	
+	$('.submitChangePoint').click(function()
+	{
+		var ajaxInsertPointExchangeHistory = $('#ajaxInsertPointExchangeHistory').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		//폼에서 입력한 값들 object화
+		var formData = $("#ExchangePointForm").serializeObject();
+		console.log(formData);
+		$.ajax(
+		{
+			type : 'POST',
+			url : ajaxInsertPointExchangeHistory,
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+	});
 	
 
 });

@@ -19,6 +19,7 @@ import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
@@ -224,6 +225,25 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info("DAO deleteAddressForTeacher 호출");
 		
 		return sqlSessionTemplate.delete("take.a.talent.member.service.MemberMapper.deleteAddressForTeacher", addressNo);
+	}
+	
+	//회원 포인트 충전 내역 리스트 select
+	@Override
+	public List<MemberPointVo> selectPointHistoryList(int memberNo)
+	{
+		logger.info("DAO selectPointHistoryList 호출");
+		
+		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectPointHistoryList", memberNo);
+	}
+	
+	//포인트 환전 내역 insert
+	@Override
+	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
+	{
+		logger.info("DAO insertPointExchangeHistory 호출");
+		logger.info(memberPointExchangeVo.toString());
+		
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertPointExchangHistory", memberPointExchangeVo);
 	}
 	
 }

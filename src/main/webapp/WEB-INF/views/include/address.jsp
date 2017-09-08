@@ -88,7 +88,6 @@
 						</div>
 					</div>
 					<br>
-		
 					<div class="row">
 						<div class="form-group">
 							<label class="control-label col-sm-3" for="adress">

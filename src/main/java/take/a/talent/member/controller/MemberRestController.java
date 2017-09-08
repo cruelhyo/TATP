@@ -104,4 +104,14 @@ public class MemberRestController
 		return addressListMap;
 	}
 
+	//맴버포인트 가지고 오기
+	@RequestMapping(value="/ajax/selectMemberPoint", method=RequestMethod.GET)
+	public int selectMemberPoint() 
+	{
+		logger.info("selectMemberPoint");
+		int memberPoint = service.selectMemberPoint();
+		logger.info(Integer.toString(memberPoint));
+		return memberPoint;
+	}
+	
 }

@@ -19,6 +19,7 @@ import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
 @Repository // dao라고 명시해줌 
@@ -75,6 +76,18 @@ public class MemberDao implements MemberDaoInterface{
 		//updateMember 쿼리를 호출
 		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
 	}
+	
+	//포인트 충전
+	@Override
+	public int insertPointCharge(MemberPointVo memberPointVo)
+	{
+		logger.info("DAO insertPoint 호출");
+		logger.info(memberPointVo.toString());
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertPoint", memberPointVo);
+	}
+	
+	
+	
 	
 	@Override
 	public MemberVo selectForUpdateMember()
@@ -175,5 +188,23 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info(memberAccountVo.toString());
 		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertAccount", memberAccountVo);
 	}
+	
+	//맴버 테이블 포인트 업데이트
+	public int updatePointForMember(MemberVo memberVo)
+	{
+		logger.info("DAO updatePointForMember 호출");
+		logger.info(memberVo.toString());
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updatePointForMember", memberVo);
+	}
+	
+	//회원 포인트 가져오기
+	public int selectMemberPoint(int memberNo) 
+	{
+		logger.info("DAO selectMemberPoint 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberPoint", memberNo);
+	}
+	
 	
 }

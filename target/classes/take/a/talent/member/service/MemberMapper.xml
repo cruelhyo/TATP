@@ -59,6 +59,7 @@
 	</resultMap>
 	
 	<resultMap	type="take.a.talent.member.vo.MemberPointVo" id="MemberPointVo">
+		<result property="memberNo" column="member_no"/>
 		<result property="pointChargeNo"  column="point_charge_no"/>
 		<result property="pointChargeMoney"  column="point_charge_money"/>
 		<result property="pointChargePoint"  column="point_charge_point"/>
@@ -151,6 +152,14 @@
 		WHERE a.member_no = #{memberNo};
 	</select>
 	
+	<!-- 회원이 가지고 있는 포인트 가져오기 -->
+	<select id="selectMemberPoint" parameterType="int" resultType="int">
+		SELECT member_point
+		FROM member
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
 		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
@@ -187,8 +196,8 @@
 		 ,#{accountHolderName});
 	</insert>
 	
-	<!-- 포인트 입력 -->
-	<insert id ="insertPoint" parameterType="take.a.talent.member.vo.MemberAccountVo">
+	<!-- 포인트 입력(충전) -->
+	<insert id ="insertPoint" parameterType="take.a.talent.member.vo.MemberPointVo">
 		INSERT INTO point_charge 
 		(member_no
 		, point_charge_money
@@ -196,15 +205,19 @@
 		, point_charge_date
 		, point_charge_shape)
 		VALUES 
-		((SELECT member_no
-		FROM member
-		WHERE member_no=#{memberNo})
+		(#{memberNo}
 		, #{pointChargeMoney}
 		, #{pointChargePoint}
-		, sysdate()
-		, #{ pointChargeShape});
-		
+		, SYSDATE()
+		, #{pointChargeShape});
 	</insert>
+	
+	<!-- 충전한 포인트 기존포인트와 합산하여 업데이트 -->
+	<update id="updatePointForMember" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member
+		SET member_point = #{memberPoint}
+		WHERE member_no = #{memberNo};
+	</update>
 	
 	<!-- 회원(강사) 정보 수정(비밀번호, 주소 제외) -->	
 	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">

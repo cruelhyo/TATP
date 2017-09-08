@@ -5,6 +5,9 @@
 $(document).ready(function()
 {
 	
+	
+	
+	
 	$('.includePage').hide();
 	$('#modifiedMypage').show();
 	$(function () 
@@ -56,10 +59,7 @@ $(document).ready(function()
 		$('#myAddress').show();
 	});
 	
-	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
-	});
+	
 	
 	$('#myChangePWShow').click(function(){
 		$('.includePage').hide();
@@ -332,6 +332,30 @@ $(document).ready(function()
 		$('.add').hide();
 	});
 
+	//-------------------------------- myPoint js ---------------------------------------
 	
 	
+	
+	$('#myPointShow').click(function(){
+		$('.includePage').hide();
+		$('#myPoint').show();
+		
+		var ajaxSelectMemberPoint = $('#ajaxSelectMemberPoint').val();
+		$.ajax(
+		{
+			url : ajaxSelectMemberPoint,
+			
+			success : function(result)
+			{
+				console.log(result);
+				$('#memberPoint').val(result);
+			}
+		});
+		
+	});
+	
+	
+	
+	
+
 });

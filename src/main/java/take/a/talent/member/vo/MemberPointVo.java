@@ -1,27 +1,35 @@
 package take.a.talent.member.vo;
 
 public class MemberPointVo {
-	private String pointChargeNo;
-	private String pointChargeMoney;
-	private String pointChargePoint;
+	private int memberNo;
+	private int pointChargeNo;
+	private int pointChargeMoney;
+	private int pointChargePoint;
 	private String pointChargeDate;
 	private String pointChargeShape;
-	public String getPointChargeNo() {
+	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	public int getPointChargeNo() {
 		return pointChargeNo;
 	}
-	public void setPointChargeNo(String pointChargeNo) {
+	public void setPointChargeNo(int pointChargeNo) {
 		this.pointChargeNo = pointChargeNo;
 	}
-	public String getPointChargeMoney() {
+	public int getPointChargeMoney() {
 		return pointChargeMoney;
 	}
-	public void setPointChargeMoney(String pointChargeMoney) {
+	public void setPointChargeMoney(int pointChargeMoney) {
 		this.pointChargeMoney = pointChargeMoney;
 	}
-	public String getPointChargePoint() {
+	public int getPointChargePoint() {
 		return pointChargePoint;
 	}
-	public void setPointChargePoint(String pointChargePoint) {
+	public void setPointChargePoint(int pointChargePoint) {
 		this.pointChargePoint = pointChargePoint;
 	}
 	public String getPointChargeDate() {
@@ -40,6 +48,6 @@ public class MemberPointVo {
 	public String toString() {
 		return "MemberPointVo [pointChargeNo=" + pointChargeNo + ", pointChargeMoney=" + pointChargeMoney
 				+ ", pointChargePoint=" + pointChargePoint + ", pointChargeDate=" + pointChargeDate
-				+ ", pointChargeShape=" + pointChargeShape + "]";
+				+ ", pointChargeShape=" + pointChargeShape + ", memberNo=" + memberNo + "]";
 	}
 }

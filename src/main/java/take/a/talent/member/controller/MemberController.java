@@ -22,6 +22,7 @@ import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
 @Controller
@@ -54,6 +55,17 @@ public class MemberController
 		logger.info(memberAccountVo.toString());
 		int insertAccountResult = service.insertAccount(memberAccountVo);
 		return "redirect:/teacher/teacherPage?updateSuccess="+ insertAccountResult;
+		
+	}
+	
+	//point 충전
+	@RequestMapping(value ="/teacher/teacherPage/insertPoint", method=RequestMethod.POST)
+	public String pointCharge(MemberPointVo memberPointVo)
+	{
+		logger.info("insertPoint");
+		logger.info(memberPointVo.toString());
+		int pointUpdateResult = service.pointCharge(memberPointVo);
+		return "redirect:/teacher/teacherPage?pointUpdateResult="+ pointUpdateResult;
 		
 	}
 	

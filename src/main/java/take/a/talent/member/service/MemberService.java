@@ -122,12 +122,53 @@ public class MemberService implements MemberServiceInterface{
 		
 		return memberDao.insertAddressForTeacher(addressAndClassificationVo);
 	}
-	//포인트 충전 insert
-	public MemberPointVo insertForUpdatePoint(MemberPointVo memberPointVo) 
+	
+	//포인트 충전 insert 와 맴버테이블 포인트 업데이트
+	public int pointCharge(MemberPointVo memberPointVo)
 	{
-		return memberPointVo;
+		//MemberVo 새로운 객체를 생성
+		MemberVo memberVo = new MemberVo();
+		
+		//로그인 되어있는 회원 id가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//memberNo select후 각 vo에 세팅
+		int memberNo = memberDao.selectMemberNo(memberId);
+		memberVo.setMemberNo(memberNo);
+		memberPointVo.setMemberNo(memberNo);
+		
+		//충전 금액을 포인트로 변환과 회원이 가지고 있는 포인트를 select후 합산하여 vo에 세팅
+		int money = memberPointVo.getPointChargeMoney();
+		int memberPonit = memberDao.selectMemberPoint(memberNo);
+		int point = money/1000;
+		memberPointVo.setPointChargePoint(point);
+		memberVo.setMemberPoint(memberPonit + point);
+		
+		//합산한 포인트가 member 테이블에 업데이트가 안되었을시 0을 리턴
+		int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
+		if(memberPointUpdateResult == 0) 
+		{
+			return 0;
+		}
+		
+		//업데이트 dao호출후 리턴
+		int pointUpdateResult = memberDao.insertPointCharge(memberPointVo);
+		return pointUpdateResult;
 		
 	}
+	
+	//맴버 포인트 가져오기
+	public int selectMemberPoint()
+	{
+		//로그인 되어있는 회원 id가져온 후 memberNo 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		return memberDao.selectMemberPoint(memberNo);
+	}
+	
 	
 	//회원(강사) 주소리스트 select
 	@Override

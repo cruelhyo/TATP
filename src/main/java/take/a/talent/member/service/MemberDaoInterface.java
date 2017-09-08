@@ -8,6 +8,7 @@ import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
 
 //import com.mysql.fabric.xmlrpc.base.Member;
 
@@ -51,4 +52,13 @@ public interface MemberDaoInterface {
 	
 	//회원(강사) 주소리스트 select
 	List<AddressAndClassificationVo> selectAddressListForTeacher(int memberNo);
+
+	//포인트 충전
+	int insertPointCharge(MemberPointVo memberPointVo);
+	
+	//맴버 테이블 포인트 업데이트
+	int updatePointForMember(MemberVo memberVo);
+	
+	//회원 포인트 가져오기
+	int selectMemberPoint(int memberNo);
 }

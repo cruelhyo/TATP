@@ -9,7 +9,6 @@
 		<hr>
 		<form action="<c:url value='/teacher/teacherPage/insertAccount'/>" id="insertAcount" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />	
-			<div class="container">
 		   		<div class="row">
 					<div class="form-group">
 						<label class= "col-sm-4">
@@ -69,7 +68,6 @@
 						</div>
 					</div>
 				</div>
-		   	</div>
 			<hr>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-link">계좌 등록 완료</button>

@@ -18,60 +18,63 @@ import take.a.talent.member.vo.MemberVo;
 
 @Transactional
 public interface MemberDaoInterface {
-	//회원가입
+	//�쉶�썝媛��엯
 	int insertMember(MemberVo memberVo);
 
-	//회원가입시 아이디 중복체크
+	//�쉶�썝媛��엯�떆 �븘�씠�뵒 以묐났泥댄겕
 	boolean idCheck(String memberId);
 	
-	//회원가입시 닉네임 체크
+	//�쉶�썝媛��엯�떆 �땳�꽕�엫 泥댄겕
 	boolean nicknameCheck(String memberNickname);
 	
-	//회원(강사) 업데이트
+	//�쉶�썝(媛뺤궗) �뾽�뜲�씠�듃
 	int updateMember(MemberVo memberVo);
 	
-	//회원 업데이트 시 셀렉트
+	//�쉶�썝 �뾽�뜲�씠�듃 �떆 ���젆�듃
 	MemberVo selectForUpdateMember();
 	
-	//회원(학생) 업데이트
+	//�쉶�썝(�븰�깮) �뾽�뜲�씠�듃
 	int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo);
 	
-	//회원(학생) 업데이트시 셀렉트
+	//�쉶�썝(�븰�깮) �뾽�뜲�씠�듃�떆 ���젆�듃
 	MemberAndAddressVo selectForUpdateMemberForStudent();
 
-	//회원(강사) 계좌 insert
+	//�쉶�썝(媛뺤궗) 怨꾩쥖 insert
 	int insertAccount(MemberAccountVo memberAccountVo);
 	
-	//업데이트시 닉네임 체크를 위한 셀렉트
+	//�뾽�뜲�씠�듃�떆 �땳�꽕�엫 泥댄겕瑜� �쐞�븳 ���젆�듃
 	String nicknameCheckForUpdate(String memberId);
 	
-	//회원(강사) 주소 insert
+	//�쉶�썝(媛뺤궗) 二쇱냼 insert
 	int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
 	
-	//회원 member_no select
+	//�쉶�썝 member_no select
 	int selectMemberNo(String memberId);
 	
-	//회원(강사) 주소리스트 select
+	//�쉶�썝(媛뺤궗) 二쇱냼由ъ뒪�듃 select
 	List<AddressAndClassificationVo> selectAddressListForTeacher(int memberNo);
 
-	//포인트 충전
+	//�룷�씤�듃 異⑹쟾
 	int insertPointCharge(MemberPointVo memberPointVo);
 	
-	//맴버 테이블 포인트 업데이트
+	//留대쾭 �뀒�씠釉� �룷�씤�듃 �뾽�뜲�씠�듃
 	int updatePointForMember(MemberVo memberVo);
 	
-	//회원 포인트 가져오기
+	//�쉶�썝 �룷�씤�듃 媛��졇�삤湲�
 	int selectMemberPoint(int memberNo);
 	
-	//회원(강사) 주소 업데이트
+	//�쉶�썝(媛뺤궗) 二쇱냼 �뾽�뜲�씠�듃
 	int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
 	
-	//회원(강사) 주소 삭제
+	//�쉶�썝(媛뺤궗) 二쇱냼 �궘�젣
 	int deleteAddressForTeacher(int address_no);
 	
-	//회원 포인트 충전 내역 리스트 select
+	//�쉶�썝 �룷�씤�듃 異⑹쟾 �궡�뿭 由ъ뒪�듃 select
 	List<MemberPointVo> selectPointHistoryList(int memberNo);
 	
-	//포인트 환전 내역 insert
+	//�룷�씤�듃 �솚�쟾 �궡�뿭 insert
 	int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo);
+	
+	//최근 한달 포인트 환전 내역 select
+	List<MemberPointExchangeVo> selectPointExchangeList(int memberNo);
 }

@@ -522,20 +522,53 @@ $(document).ready(function()
 	//-------------------------------- pointExchange js ----------------------------------------
 	
 	
+	//포인트 환전 내역 보기 js
+	function selectPontExchangeList()
+	{
+		//url
+		var ajaxSelectPointExchangeList = $('#ajaxSelectPointExchangeList').val();
+		$.ajax(
+		{
+			url : ajaxSelectPointExchangeList,
+			dataType : 'json',
+			success : function(result)
+			{
+				// tbody 초기화
+				$('#exchangeTBody').empty();
+				// 맵핑된 객체 가져오기
+				resultList = result.pointExchangeList;
+				
+				$.each(resultList, function(index, value)
+				{
+					$('#exchangeTBody').append(
+							'<tr><td>●</td><td>' + value.pointExchangePoint +
+							'</td><td>' + value.pointExchangeMoney +
+							'</td><td>' + value.pointExchangeDate +
+							'</td></tr>'
+					);
+				});
+			}
+		});
+	}
+	
 	// 환전내역 숨김과 동시에 환전 폼도 숨겨줍니다
 	$('.ExchangeHistory').hide();
 	$('.ExchangePointForm').hide();
+	
 	// 환전 내역 보이면서 환전 폼 숨기기
 	$('#ExchangeView').click(function(){
+		selectPontExchangeList();
 		$('#ExHistory').show();
 		$('.ExchangePointForm').hide();
 	});
+	
 	//환전 폼 보이면서 환전 내역 숨기기
 	$('#Exchange').click(function(){
 		$('.ExchangePointForm').show();
 		$('#ExHistory').hide();
 	});
 	
+	//포인트 환전하기 js
 	$('.submitChangePoint').click(function()
 	{
 		var ajaxInsertPointExchangeHistory = $('#ajaxInsertPointExchangeHistory').val();
@@ -584,6 +617,8 @@ $(document).ready(function()
 			}
 		});
 	});
+	
+	
 	
 
 });

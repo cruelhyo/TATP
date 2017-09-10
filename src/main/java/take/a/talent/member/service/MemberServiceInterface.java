@@ -78,5 +78,8 @@ public interface MemberServiceInterface {
 		
 		//포인트 환전 내역 insert
 		int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo);
+		
+		//최근 한달 포인트 환전내역 select
+		Map<String, Object> selectPointExchangeList();
 	
 }

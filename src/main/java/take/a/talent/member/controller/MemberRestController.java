@@ -28,7 +28,7 @@ public class MemberRestController
 	@Autowired
     private MemberServiceInterface service;
 	
-	//회원(강사) 업데이트시 셀렉트
+	//�쉶�썝(媛뺤궗) �뾽�뜲�씠�듃�떆 ���젆�듃
 	@RequestMapping(value ="/ajax/teacherPage/selectForUpdateMember", method=RequestMethod.GET)
 	public MemberVo selectForUpdateMember()
 	{
@@ -37,11 +37,11 @@ public class MemberRestController
 		return memberVo;
 	}
 	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
+	//join form�뿉�꽌 �엯�젰�븳 媛믩뱾�쓣 MemberController�뿉�꽌 memberVo���엯�쑝濡� �쟾�떖�븳�떎. 
 	@RequestMapping(value ="/ajax/idCheck**", method=RequestMethod.POST)
 	public boolean idCheck(@RequestBody String memberId, ModelMap model) {
-		logger.info("id체크");
-		logger.info("VO값 확인");
+		logger.info("id泥댄겕");
+		logger.info("VO媛� �솗�씤");
 		logger.info("memberId"+memberId);
 		boolean idExist = service.idCheck(memberId);
 		model.addAttribute("idExist", idExist);
@@ -49,11 +49,11 @@ public class MemberRestController
 		return idExist;
 	}
 	
-	//닉네임 체크
+	//�땳�꽕�엫 泥댄겕
 	@RequestMapping(value="/ajax/nickNameCheck", method=RequestMethod.POST)
 	public boolean nickNameCheck(@RequestBody String memberNickname, ModelMap model){
-		logger.info("nickname체크");
-		logger.info("nickname값 확인");
+		logger.info("nickname泥댄겕");
+		logger.info("nickname媛� �솗�씤");
 		logger.info("memberNickname"+memberNickname);
 		
 		boolean nicknameExist = service.nicknameCheck(memberNickname);
@@ -62,11 +62,11 @@ public class MemberRestController
 		
 	}
 	
-	//업데이트시 닉네임체크 현재 사용자가 쓰고 있는 닉네임도 사용가능으로 해야 한다
+	//�뾽�뜲�씠�듃�떆 �땳�꽕�엫泥댄겕 �쁽�옱 �궗�슜�옄媛� �벐怨� �엳�뒗 �땳�꽕�엫�룄 �궗�슜媛��뒫�쑝濡� �빐�빞 �븳�떎
 	@RequestMapping(value="/ajax/nickNameCheckForUpdate", method=RequestMethod.POST)
 	public boolean nickNameCheckForUpdate(@RequestBody String memberNickname, ModelMap model){
-		logger.info("nickname체크");
-		logger.info("nickname값 확인");
+		logger.info("nickname泥댄겕");
+		logger.info("nickname媛� �솗�씤");
 		logger.info("memberNickname"+memberNickname);
 		
 		boolean nicknameExist = service.nicknameCheckForUpdate(memberNickname);
@@ -75,7 +75,7 @@ public class MemberRestController
 		
 	}
 	
-	//회원(학생) 업데이트시 셀렉트
+	//�쉶�썝(�븰�깮) �뾽�뜲�씠�듃�떆 ���젆�듃
 	@RequestMapping(value="/ajax/selectForUpdateMemberForStudent", method=RequestMethod.GET)
 	public MemberAndAddressVo selectForUpdateMemberForStudent()
 	{
@@ -85,7 +85,7 @@ public class MemberRestController
 		return memberAndAddressVo;
 	}
 	
-	//회원(강사) 주소 추가 insert
+	//�쉶�썝(媛뺤궗) 二쇱냼 異붽� insert
 	@RequestMapping(value="/ajax/insertAddressForTeacher", method=RequestMethod.POST)
 	public int insertAddressForTeacher(@RequestBody AddressAndClassificationVo addressAndClassificationVo)
 	{
@@ -95,7 +95,7 @@ public class MemberRestController
 		return service.insertAddressForTeacher(addressAndClassificationVo);
 	}
 	
-	//회원(강사) 주소리스트 select
+	//�쉶�썝(媛뺤궗) 二쇱냼由ъ뒪�듃 select
 	@RequestMapping(value="/ajax/selectAddressListForTeacher", method=RequestMethod.GET)
 	public Map<String, Object> selectAddressListForTeacher()
 	{
@@ -105,7 +105,7 @@ public class MemberRestController
 		return addressListMap;
 	}
 	
-	//회원(강사) 주소 업데이트
+	//�쉶�썝(媛뺤궗) 二쇱냼 �뾽�뜲�씠�듃
 	@RequestMapping(value="/ajax/updateAddressForTeacher", method=RequestMethod.POST)
 	public int updateAddressForTeacher(@RequestBody AddressAndClassificationVo addressAndClassificationVo)
 	{
@@ -115,7 +115,7 @@ public class MemberRestController
 		return service.updateAddressForTeacher(addressAndClassificationVo);
 	}
 	
-	//회원(강사) 주소 삭제
+	//�쉶�썝(媛뺤궗) 二쇱냼 �궘�젣
 	@RequestMapping(value="/ajax/deleteAddressForTeacher", method=RequestMethod.POST)
 	public int deleteAddressForTeacher(@RequestBody int addressNo)
 	{
@@ -124,7 +124,7 @@ public class MemberRestController
 		return service.deleteAddressForTeacher(addressNo);
 	}
 
-	//맴버포인트 가지고 오기
+	//留대쾭�룷�씤�듃 媛�吏�怨� �삤湲�
 	@RequestMapping(value="/ajax/selectMemberPoint", method=RequestMethod.GET)
 	public int selectMemberPoint() 
 	{
@@ -134,7 +134,7 @@ public class MemberRestController
 		return memberPoint;
 	}
 	
-	//회원 포인트 충전 내역 리스트 select
+	//�쉶�썝 �룷�씤�듃 異⑹쟾 �궡�뿭 由ъ뒪�듃 select
 	@RequestMapping(value="/ajax/selectPointHistoryList", method=RequestMethod.GET)
 	public Map<String, Object> selectPointHistoryList()
 	{
@@ -145,14 +145,27 @@ public class MemberRestController
 		return pointListMap;
 	}
 	
-	//포인트 환전 내역 insert
+	//�룷�씤�듃 �솚�쟾 �궡�뿭 insert
 	@RequestMapping(value="/ajax/insertPointExchangeHistory", method=RequestMethod.POST)
-	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
+	public int insertPointExchangeHistory(@RequestBody MemberPointExchangeVo memberPointExchangeVo)
 	{
 		logger.info("insertPointExchangeHistory");
 		logger.info(memberPointExchangeVo.toString());
 		int result = service.insertPointExchangeHistory(memberPointExchangeVo);
 		return result;
+	}
+	
+	//최근한달 포인트 환전내역 select
+	@RequestMapping(value="/ajax/selectPointExchangeList", method=RequestMethod.GET)
+	public Map<String, Object> selectPointExchangeList()
+	{
+		logger.info("selectPointExchangeList 호출");
+		logger.info("RestController 포인트 환전내역 select");
+		
+		//서비스 호출후 리턴 받은 맵 뷰에 리턴
+		Map<String, Object> pointExchangeListMap = service.selectPointExchangeList();
+		logger.info(pointExchangeListMap.toString());
+		return pointExchangeListMap;
 	}
 	
 }

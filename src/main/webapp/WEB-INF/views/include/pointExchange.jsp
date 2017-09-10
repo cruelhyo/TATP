@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="col-sm-10">
 	<input type="hidden" id="ajaxInsertPointExchangeHistory" value="<c:url value='/ajax/insertPointExchangeHistory'/>">
+	<input type="hidden" id="ajaxSelectPointExchangeList" value="<c:url value='/ajax/selectPointExchangeList'/>">
 	<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 	<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 	<div class="step_21">
@@ -50,8 +51,8 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>환전금액</th>
-										<th>환전 포인트</th>
+										<th>환전한 포인트</th>
+										<th>환전된 금액</th>
 										<th>환전일</th>
 									</tr>
 								</thead>

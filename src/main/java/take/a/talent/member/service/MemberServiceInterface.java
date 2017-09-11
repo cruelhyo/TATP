@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import take.a.talent.member.vo.AddressAndClassificationVo;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
@@ -65,5 +66,9 @@ public interface MemberServiceInterface {
 		
 		//회원(강사) 주소 삭제
 		int deleteAddressForTeacher(int addressNo);
+		
+		//회원가입 
+		int addMember(JoinMemberVo joinMemberVo);
+	
 	
 }

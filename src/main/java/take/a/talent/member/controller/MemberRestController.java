@@ -35,7 +35,7 @@ public class MemberRestController
 			logger.info("join액션");
 			logger.info("VO값 확인"+joinMemberVo.toString());
 			
-			/*service.addMember(memberVo);*/
+			service.addMember(joinMemberVo);
 			
 			
 			return "redirect:/";

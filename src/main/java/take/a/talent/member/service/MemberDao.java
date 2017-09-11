@@ -17,6 +17,7 @@ import com.mysql.fabric.xmlrpc.base.Member;
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberVo;
@@ -37,17 +38,16 @@ public class MemberDao implements MemberDaoInterface{
 	//로그인 후 스프링 시큐리티 세션에서 저장되는 username, userpassword, authority를 가져올수 있게 user를 지정
 	//private User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
-	//회원정보 입력을 위한 메서드 선언
+	//회원가입
 	@Override
-	public int insertMember(MemberVo memberVo) {
+	public int insertMember(JoinMemberVo joinMemberVo) {
 		logger.info("DAO insertMember 호출");
-				
-		String encryptPassword = passwordEncoder.encode(memberVo.getMemberPassword());
+
+		//입력된 password를 db저장 전에 암호화 시킴
+		String encryptPassword = passwordEncoder.encode(joinMemberVo.getMemberPassword());
+		joinMemberVo.setMemberPassword(encryptPassword);
 		
-		memberVo.setMemberPassword(encryptPassword);
-		
-		
-		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);
+		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", joinMemberVo);
 		return row;
 	}
 

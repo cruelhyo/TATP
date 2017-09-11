@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="take.a.talent.member.service.MemberMapper">
-
-	 <resultMap	type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
+	
+	<resultMap	type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
 		<result property="memberNo" column="member_no "/>
 		<result property="memberId" column="member_id" />
 		<result property="memberPassword" column="member_password" />
@@ -190,6 +190,22 @@
 		AND point_exchange_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH);
 	</select>
 	
+	<!-- teacher_account_no 가져오는 쿼리 -->
+	<select id="selectTeacherAccountNo" parameterType="int" resultType="int">
+		SELECT teacher_account_no
+		FROM teacher
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	<!-- 계좌 수정시 select -->
+	<select id="selectTeacherAccountForUpdate" parameterType="int" resultMap="MemberAccountVo">
+		SELECT bank_no
+		, account_number
+		, account_holder_name
+		FROM teacher_account
+		WHERE teacher_account_no = #{teacherAccountNo};
+	</select>
+	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
 		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
@@ -198,6 +214,7 @@
 			
 	</insert>
 	
+	<!-- 회원(강사) 주소 insert -->
 	<insert id="insertAddressForTeacher" parameterType="take.a.talent.member.vo.AddressAndClassificationVo">
 		INSERT INTO 
 		address(address_no, member_no, address_classification_no, address_mailnumber, member_address)
@@ -210,20 +227,20 @@
 			, #{memberAddress}
 		)
 	</insert>
-	
 
 	<!-- 계좌 입력 정보 -->
 	<insert id="insertAccount" parameterType="take.a.talent.member.vo.MemberAccountVo">
 		INSERT INTO teacher_account 
-		(teacher_account_no
-		, bank_no
+		(bank_no
 		, account_number
 		, account_holder_name)
 		 VALUES 
-		 (#{teacherAccountNo}
-		 , #{bankNo}
+		 (#{bankNo}
 		 , #{accountNumber}
-		 ,#{accountHolderName});
+		 ,#{accountHolderName})
+		 <selectKey keyProperty="teacherAccountNo" resultType="int" order="AFTER">
+		 	SELECT LAST_INSERT_ID()
+		 </selectKey>
 	</insert>
 	
 	<!-- 포인트 입력(충전) -->
@@ -299,6 +316,22 @@
 		, address_mailnumber = #{addressMailNumber}
 		, member_address = #{memberAddress}
 		WHERE address_no = #{addressNo};
+	</update>
+	
+	<!-- 계좌등록시 teacher테이블 업데이트 -->
+	<update id="updateTeacherWhenInsertAccount" parameterType="take.a.talent.member.vo.TeacherVo">
+		UPDATE teacher
+		SET teacher_account_no = #{teacherAccountNo}
+		WHERE member_no = #{memberNo};
+	</update>
+	
+	<!-- 계좌 업데이트 -->
+	<update id="updateTeacherAccount" parameterType="take.a.talent.member.vo.MemberAccountVo">
+		UPDATE teacher_account
+		SET bank_no = #{bankNo}
+		, account_number = #{accountNumber}
+		, account_holder_name = #{accountHolderName}
+		WHERE teacher_account_no = #{teacherAccountNo};
 	</update>
 	
 	<!-- 회원(강사) 주소 삭제 -->

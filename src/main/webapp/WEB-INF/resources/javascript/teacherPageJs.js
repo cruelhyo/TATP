@@ -114,12 +114,6 @@ $(document).ready(function()
 		selectMemberPoint();
 	});
 	
-	//계좌관리
-	$('#myAccountShow').click(function(){
-		$('.includePage').hide();
-		$('#myAccount').show();
-	});
-	
 	//내 정보 전체보기
 	$('#modifiedMypageShow').click(function(){
 		$('.includePage').hide();
@@ -614,11 +608,42 @@ $(document).ready(function()
 			success : function(result)
 			{
 				console.log(result);
+				if(result == 0) {
+					alert('환전에 실패하였습니다. 숫자만 입력하시거나 고객센터에 문의해주세요.')
+					$('#pointExchangePoint').val('');
+				}
+				alert('환전이 완료되었습니다.')
+				$('#pointExchangePoint').val('');
 			}
 		});
 	});
 	
+	//-----------------------------myAccount js -----------------------------------------
 	
+	//계좌관리
+	$('#myAccountShow').click(function(){
+		$('.includePage').hide();
+		
+		var ajaxSelectTeacherAccountNo = $('#ajaxSelectTeacherAccountNo').val();
+		$.ajax(
+		{
+			url : ajaxSelectTeacherAccountNo,
+			success : function(result)
+			{
+				if(result == null)
+				{
+					$('#updateAccount').hide();
+					$('#insertAccount').show();
+				}
+				$('.bankNoUpdate').val(result.bankNo);
+				$('.accountHolderNameUpdate').val(result.accountHolderName);
+				$('.accountNumberUpdate').val(result.accountNumber);
+				$('#insertAccount').hide();
+				$('#updateAccount').show();
+			}
+		});
+		
+		$('#myAccount').show();
+	});
 	
-
 });

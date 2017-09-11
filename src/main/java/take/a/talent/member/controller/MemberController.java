@@ -46,6 +46,16 @@ public class MemberController
 		//model.addAttribute("updateMemberResult", updateMemberResult);
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
+	//계좌 업데이트
+	@RequestMapping(value ="/teacher/teacherPage/updateAccount", method=RequestMethod.POST)
+	public String updateTeacherAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("updateTeacherAccount");
+		logger.info(memberAccountVo.toString());
+		int updateResult = service.updateTeacherAccount(memberAccountVo);
+		
+		return "redirect:/teacher/teacherPage?updateSuccess="+ updateResult;
+	}
 	
 	//회원(강사) 계좌 insert
 	@RequestMapping(value ="/teacher/teacherPage/insertAccount", method=RequestMethod.POST)
@@ -54,7 +64,7 @@ public class MemberController
 		logger.info("insertAccount");
 		logger.info(memberAccountVo.toString());
 		int insertAccountResult = service.insertAccount(memberAccountVo);
-		return "redirect:/teacher/teacherPage?updateSuccess="+ insertAccountResult;
+		return "redirect:/teacher/teacherPage?insertSuccess="+ insertAccountResult;
 		
 	}
 	

@@ -18,6 +18,7 @@ import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherVo;
 
 
 @Service // service�씪怨� 紐낆떆�빐以�
@@ -28,6 +29,7 @@ public class MemberService implements MemberServiceInterface{
 	@Autowired
 	MemberDao memberDao;
 
+	//회원가입시 아이디 중복검사  
 	@Override
 	public boolean idCheck(String memberId)
 	{
@@ -38,7 +40,7 @@ public class MemberService implements MemberServiceInterface{
 		return ck;
 	}
 	
-	//�쉶�썝 �뾽�뜲�씠�듃 dao�샇異�
+	//회원 업데이트 dao호출
 	@Override
 	public int updateMember(MemberVo memberVo)
 	{
@@ -47,7 +49,7 @@ public class MemberService implements MemberServiceInterface{
 		return updateMemberResult;
 		 
 	}
-	//�쉶�썝 �뾽�뜲�씠�듃 �떆 ���뀓�듃 dao�샇異�
+	//회원 업데이트 시 셀텍트 dao호출
 	@Override
 	public MemberVo selectForUpdateMember()
 	{
@@ -71,7 +73,7 @@ public class MemberService implements MemberServiceInterface{
 	@Override
 	public boolean nicknameCheckForUpdate(String memberNickname) {
 		
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
@@ -90,7 +92,7 @@ public class MemberService implements MemberServiceInterface{
 		return nicknameCheckResult;
 	}
 	
-	//�쉶�썝(�븰�깮) �뾽�뜲�씠�듃
+	//회원(학생) 업데이트
 	@Override
 	public int updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
 	{
@@ -100,7 +102,7 @@ public class MemberService implements MemberServiceInterface{
 		return memberDao.updateMemberForStudent(memberAndAddressVo);
 	}
 	
-	//�쉶�썝(�븰�깮) �뾽�뜲�씠�듃�떆 ���젆�듃
+	//회원(학생) 업데이트시 셀렉트
 	@Override
 	public MemberAndAddressVo selectForUpdateMemberForStudent()
 	{
@@ -109,67 +111,68 @@ public class MemberService implements MemberServiceInterface{
 		return memberDao.selectForUpdateMemberForStudent();
 	}
 	
-	//�쉶�썝(媛뺤궗) 二쇱냼 insert
+	//회원(강사) 주소 insert
 	public int insertAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
 	{
 		logger.info("selectForUpdateMemberForStudent");
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
-		//�뤌�뿉�꽌 �젣��濡� �엯�젰 �븞�뻽�쓣 �븣 0�쓣 由ы꽩
+		//폼에서 제대로 입력 안했을 때 0을 리턴
 		int addressMailNumber = addressAndClassificationVo.getAddressMailNumber();
 		String memberAddress = addressAndClassificationVo.getMemberAddress();
 		if(addressMailNumber == 0 || memberAddress.equals(""))
 		{
 			return 0;
 		}
-		//�쉶�썝 memberNo select vo媛앹껜�뿉 �꽭�똿
+		//회원 memberNo select vo객체에 세팅
 		int memberNo = memberDao.selectMemberNo(memberId);
 		addressAndClassificationVo.setMemberNo(memberNo);
 		
 		return memberDao.insertAddressForTeacher(addressAndClassificationVo);
 	}
 	
-	//�룷�씤�듃 異⑹쟾 insert �� 留대쾭�뀒�씠釉� �룷�씤�듃 �뾽�뜲�씠�듃
+	//포인트 충전하기
 	public int pointCharge(MemberPointVo memberPointVo)
 	{
-		//MemberVo �깉濡쒖슫 媛앹껜瑜� �깮�꽦
+		//MemberVo 객체를 생성한다
 		MemberVo memberVo = new MemberVo();
 		
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
-		//memberNo select�썑 媛� vo�뿉 �꽭�똿
+		//memberNo select한 후 각 vo에 세팅
 		int memberNo = memberDao.selectMemberNo(memberId);
 		memberVo.setMemberNo(memberNo);
 		memberPointVo.setMemberNo(memberNo);
 		
-		//異⑹쟾 湲덉븸�쓣 �룷�씤�듃濡� 蹂��솚怨� �쉶�썝�씠 媛�吏�怨� �엳�뒗 �룷�씤�듃瑜� select�썑 �빀�궛�븯�뿬 vo�뿉 �꽭�똿
+		//추가되는 포인트는 money의 1000분의 1이고 
+		//memberVo에 추가되는 포인트는 현재 가지고 있는 포인트에 충전되는 포인트를 더한 값이다
 		int money = memberPointVo.getPointChargeMoney();
 		int memberPoint = memberDao.selectMemberPoint(memberNo);
 		int point = money/1000;
 		memberPointVo.setPointChargePoint(point);
 		memberVo.setMemberPoint(memberPoint + point);
 		
-		//�빀�궛�븳 �룷�씤�듃媛� member �뀒�씠釉붿뿉 �뾽�뜲�씠�듃媛� �븞�릺�뿀�쓣�떆 0�쓣 由ы꽩
+		//member에 update가 되지 않았다면 0을 리턴한다
 		int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
 		if(memberPointUpdateResult == 0) 
 		{
 			return 0;
 		}
 		
-		//�뾽�뜲�씠�듃 dao�샇異쒗썑 由ы꽩
+		//dao호출후 결과 리턴
 		int pointUpdateResult = memberDao.insertPointCharge(memberPointVo);
 		return pointUpdateResult;
 		
 	}
 	
-	//留대쾭 �룷�씤�듃 媛��졇�삤湲�
+	//현재 가지고 있는 포인트를 가져온다
 	public int selectMemberPoint()
 	{
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삩 �썑 memberNo 媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져와서 memberNo 가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		int memberNo = memberDao.selectMemberNo(memberId);
@@ -178,51 +181,75 @@ public class MemberService implements MemberServiceInterface{
 	}
 	
 	
-	//�쉶�썝(媛뺤궗) 二쇱냼由ъ뒪�듃 select
+	//회원(강사) 주소리스트 select
 	@Override
 	public Map<String, Object> selectAddressListForTeacher()
 	{
 		logger.info("selectAddressListForTeacher");
 		
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
-		//�쉶�썝 memberNo select 
+		//회원 memberNo select 
 		int memberNo = memberDao.selectMemberNo(memberId);
 		Map<String, Object> addressListMap = new HashMap<String, Object>();
 		addressListMap.put("addressList", memberDao.selectAddressListForTeacher(memberNo));
 		return addressListMap;
 	}
 	
-	//�쉶�썝(媛뺤궗) 二쇱냼 �뾽�뜲�씠�듃
+	//회원(강사) 주소 업데이트
 	@Override
 	public int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo)
 	{
 		logger.info("updateAddressForTeacher");
 		logger.info(addressAndClassificationVo.toString());
 		
-		//�뤌�뿉�꽌 �젣��濡� �엯�젰 �븞�뻽�쓣 �븣 0�쓣 由ы꽩
+		//폼에서 제대로 입력 안했을 때 0을 리턴
 		int addressMailNumber = addressAndClassificationVo.getAddressMailNumber();
 		String memberAddress = addressAndClassificationVo.getMemberAddress();
 		if(addressMailNumber == 0 || memberAddress.equals(""))
 		{
 			return 0;
 		}
-		//�뾽�뜲�씠�듃 dao vo瑜� �엯�젰媛믪쑝濡� �샇異� �썑 由ы꽩
+		//업데이트 dao vo를 입력값으로 호출 후 리턴
 		return memberDao.updateAddressForTeacher(addressAndClassificationVo);
 	}
 
-	//�쉶�썝(媛뺤궗) 怨꾩쥖 insert
+	//회원(강사) 계좌 insert
 	@Override
 	public int insertAccount(MemberAccountVo memberAccountVo) 
 	{
 		logger.info("insertAccount");
 		logger.info(memberAccountVo.toString());
-		return memberDao.insertAccount(memberAccountVo);
+		
+		//로그인 되어있는 회원 id가져와서 memberNo 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		//dao호출후 리턴 받은 값이 0일때 0을 리턴
+		memberDao.insertAccount(memberAccountVo);
+		int teacherAccountNo = memberAccountVo.getTeacherAccountNo();
+		if(teacherAccountNo == 0) 
+		{
+			return 0;
+		}
+		//객체 생성후 dao호출후 리턴 받은 값들을 세팅
+		TeacherVo teacherVo = new TeacherVo();
+		teacherVo.setTeacherAccountNo(teacherAccountNo);
+		teacherVo.setMemberNo(memberNo);
+		
+		//세팅된 vo객체로 dao호출후 리턴 값이 0이면 0을 리턴
+		int updateResult = memberDao.updateTeacherWhenInsertAccount(teacherVo);
+		if(updateResult == 0) 
+		{
+			return 0;
+		}
+		return 1;
 	}
 	
-	//�쉶�썝(媛뺤궗) 二쇱냼 �궘�젣
+	//회원(강사) 주소 삭제
 	@Override
 	public int deleteAddressForTeacher(int addressNo)
 	{
@@ -231,26 +258,26 @@ public class MemberService implements MemberServiceInterface{
 		return memberDao.deleteAddressForTeacher(addressNo);
 	}
 	
-	//�쉶�썝 �룷�씤�듃 異⑹쟾 �궡�뿭 由ъ뒪�듃 select
+	//포인트 충전 내역 가져오기
 	public Map<String, Object> selectPointHistoryList()
 	{
 		logger.info("selectPointHistoryList");
 		
-		//濡쒓렇�씤 �릺�뼱�엳�뒗 �쉶�썝 id媛��졇�삤湲�
+		//로그인 되어있는 회원 id가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
 		//memberNo select
 		int memberNo = memberDao.selectMemberNo(memberId);
 		
-		//dao�샇異� 由ы꽩 list 留듯븨
+		//dao호출후 리턴된 list 맵핑
 		Map<String, Object> pointListMap = new HashMap<String, Object>();
 		pointListMap.put("pointList", memberDao.selectPointHistoryList(memberNo));
 		
 		return pointListMap;
 	}
 	
-	//�룷�씤�듃 �솚�쟾 �궡�뿭 insert
+	//포인트 환전 내역 insert
 	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
 	{
 		logger.info("insertPointExchangeHistory");
@@ -260,7 +287,7 @@ public class MemberService implements MemberServiceInterface{
 		{
 			return 0;
 		}
-		//�깉濡쒖슫 媛앹껜瑜� �깮�꽦
+		//새로운 객체 생성
 		MemberVo memberVo = new MemberVo();
 		
 		
@@ -268,32 +295,32 @@ public class MemberService implements MemberServiceInterface{
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
 		
-		//memberNo select�썑 媛� vo�뿉 �꽭�똿
+		//memberNo select해서 각 vo에 세팅
 		int memberNo = memberDao.selectMemberNo(memberId);
 		memberVo.setMemberNo(memberNo);
 		memberPointExchangeVo.setMemberNo(memberNo);
 		
-		//�엯�젰�븳 �솚�쟾 �룷�씤�듃 �솚�쟾 湲덉븸�쑝濡� 諛붽씀怨� �꽭�똿
+		//memberPointExchangeVo에서 포인트를 가져와 exchangeMoney의 값을 지정해주고 세팅한다
 		int pointExchangePoint = memberPointExchangeVo.getPointExchangePoint();
 		int exchangeMoney = pointExchangePoint * 700;
 		memberPointExchangeVo.setPointExchangeMoney(exchangeMoney);
-		//�쁽�옱 媛�吏�怨� �엳�뜕 �룷�씤�듃 媛��졇�삤湲�
+		//현재 가지고 있는 포인트를 가져온다
 		int memberPonit = memberDao.selectMemberPoint(memberNo);
 		
-		//媛�吏�怨� �엳�뜕 �룷�씤�듃媛� �솚�쟾�븷 湲덉븸蹂대떎 �겕嫄곕굹 媛숈쓣�떆
+		//현재 포인트가 환전할 포인트보다 크거나 같을때
 		if(memberPonit >= pointExchangePoint) {
-			//�썝�옒 �룷�씤�듃�뿉�꽌 �솚�쟾�븷 �룷�씤�듃 鍮쇨퀬 vo�뿉 �꽭�똿
+			//가지고 있는 포인트에서 환전할 포인트를 뺀후 세팅해준다
 			memberPonit = memberPonit - pointExchangePoint;
 			memberVo.setMemberPoint(memberPonit);
 			
-			//怨꾩궛�븳 �룷�씤�듃媛� member �뀒�씠釉붿뿉 �뾽�뜲�씠�듃媛� �븞�릺�뿀�쓣�떆 0�쓣 由ы꽩
+			//member update dao를 호출후 0이 리턴 되면 0을 리턴한다
 			int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
 			if(memberPointUpdateResult == 0) 
 			{
 				return 0;
 			}
 			
-			//�솚�쟾 �궡�뿭 insert 寃곌낵 由ы꽩
+			//dao호출후 결과 값 리턴
 			return memberDao.insertPointExchangeHistory(memberPointExchangeVo);
 		}
 		return 0;
@@ -318,6 +345,54 @@ public class MemberService implements MemberServiceInterface{
 		pointExchangeListMap.put("pointExchangeList", memberDao.selectPointExchangeList(memberNo));
 		
 		return pointExchangeListMap;
+	}
+	
+	//회원(강사) 계좌 유무 확인과 업데이트시 select
+	@Override
+	public MemberAccountVo selectTeacherAccountNo()
+	{
+		logger.info("selectTeacherAccountNo 호출");
+		logger.info("회원(강사) 계좌 유무 확인");
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져오기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		//가져온 memberNo로 dao호출후 리턴 값 if문으로 분기
+		int teacherAccountNo = memberDao.selectTeacherAccountNo(memberNo);
+		if(teacherAccountNo == 0)
+		{
+			return null;
+		}
+		return memberDao.selectTeacherAccountForUpdate(teacherAccountNo);
+	}
+	
+	//계좌 업데이트
+	@Override
+	public int updateTeacherAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("selectTeacherAccountNo 호출");
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져오기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		//가져온 memberNo로 teacherAccountNo 가져와서 vo에 세팅
+		int teacherAccountNo = memberDao.selectTeacherAccountNo(memberNo);
+		//만약에 0이면 리턴 0
+		if(teacherAccountNo == 0) {
+			return 0;
+		}
+		memberAccountVo.setTeacherAccountNo(teacherAccountNo);
+		
+		return memberDao.updateTeacherAccount(memberAccountVo);
+		
 	}
 
 }

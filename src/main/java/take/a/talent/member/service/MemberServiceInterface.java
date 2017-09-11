@@ -81,5 +81,11 @@ public interface MemberServiceInterface {
 		
 		//최근 한달 포인트 환전내역 select
 		Map<String, Object> selectPointExchangeList();
+		
+		//회원(강사) 계좌 유무 확인과 업데이트시 select
+		MemberAccountVo selectTeacherAccountNo();
+		
+		//계좌 업데이트
+		int updateTeacherAccount(MemberAccountVo memberAccountVo);
 	
 }

@@ -22,6 +22,7 @@ import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
 @Controller
@@ -45,6 +46,16 @@ public class MemberController
 		//model.addAttribute("updateMemberResult", updateMemberResult);
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
+	//계좌 업데이트
+	@RequestMapping(value ="/teacher/teacherPage/updateAccount", method=RequestMethod.POST)
+	public String updateTeacherAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("updateTeacherAccount");
+		logger.info(memberAccountVo.toString());
+		int updateResult = service.updateTeacherAccount(memberAccountVo);
+		
+		return "redirect:/teacher/teacherPage?updateSuccess="+ updateResult;
+	}
 	
 	//회원(강사) 계좌 insert
 	@RequestMapping(value ="/teacher/teacherPage/insertAccount", method=RequestMethod.POST)
@@ -53,7 +64,18 @@ public class MemberController
 		logger.info("insertAccount");
 		logger.info(memberAccountVo.toString());
 		int insertAccountResult = service.insertAccount(memberAccountVo);
-		return "redirect:/teacher/teacherPage?updateSuccess="+ insertAccountResult;
+		return "redirect:/teacher/teacherPage?insertSuccess="+ insertAccountResult;
+		
+	}
+	
+	//point 충전
+	@RequestMapping(value ="/teacher/teacherPage/insertPoint", method=RequestMethod.POST)
+	public String pointCharge(MemberPointVo memberPointVo)
+	{
+		logger.info("insertPoint");
+		logger.info(memberPointVo.toString());
+		int pointUpdateResult = service.pointCharge(memberPointVo);
+		return "redirect:/teacher/teacherPage?pointUpdateResult="+ pointUpdateResult;
 		
 	}
 	

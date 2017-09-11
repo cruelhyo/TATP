@@ -9,6 +9,8 @@ import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
 
 
@@ -42,6 +44,9 @@ public interface MemberServiceInterface {
 		//계좌 등록
 		int insertAccount(MemberAccountVo memberAccountVo);
 		
+		//포인트 충전
+		int pointCharge(MemberPointVo memberPointVo);
+		
 		//회원 업데이트 시 셀렉트
 		MemberVo selectForUpdateMember();
 		
@@ -61,6 +66,8 @@ public interface MemberServiceInterface {
 		//회원(강사) 주소리스트 select
 		Map<String, Object> selectAddressListForTeacher();
 		
+		//맴버 테이블 포인트 가져오기
+		int selectMemberPoint();
 		//회원(강사) 주소 업데이트
 		int updateAddressForTeacher(AddressAndClassificationVo addressAndClassificationVo);
 		
@@ -70,5 +77,19 @@ public interface MemberServiceInterface {
 		//회원가입 
 		int addMember(JoinMemberVo joinMemberVo);
 	
+		//회원 포인트 충전 내역 리스트 select
+		Map<String, Object> selectPointHistoryList();
+		
+		//포인트 환전 내역 insert
+		int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo);
+		
+		//최근 한달 포인트 환전내역 select
+		Map<String, Object> selectPointExchangeList();
+		
+		//회원(강사) 계좌 유무 확인과 업데이트시 select
+		MemberAccountVo selectTeacherAccountNo();
+		
+		//계좌 업데이트
+		int updateTeacherAccount(MemberAccountVo memberAccountVo);
 	
 }

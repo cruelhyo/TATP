@@ -1,7 +1,5 @@
 package take.a.talent.member.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,13 +9,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.JoinMemberVo;
+import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberVo;
 
 @RestController
@@ -138,4 +137,58 @@ public class MemberRestController
 		return service.deleteAddressForTeacher(addressNo);
 	}
 
+	//현재 가지고 있는 포인트 select
+	@RequestMapping(value="/ajax/selectMemberPoint", method=RequestMethod.GET)
+	public int selectMemberPoint() 
+	{
+		logger.info("selectMemberPoint");
+		int memberPoint = service.selectMemberPoint();
+		logger.info(Integer.toString(memberPoint));
+		return memberPoint;
+	}
+	
+	//포인트 충전 내역 리스트 select
+	@RequestMapping(value="/ajax/selectPointHistoryList", method=RequestMethod.GET)
+	public Map<String, Object> selectPointHistoryList()
+	{
+		logger.info("selectPointHistoryList");
+		Map<String, Object> pointListMap = service.selectPointHistoryList();
+		logger.info(pointListMap.toString());
+		
+		return pointListMap;
+	}
+	
+	//포인트 환전 내역 insert
+	@RequestMapping(value="/ajax/insertPointExchangeHistory", method=RequestMethod.POST)
+	public int insertPointExchangeHistory(@RequestBody MemberPointExchangeVo memberPointExchangeVo)
+	{
+		logger.info("insertPointExchangeHistory");
+		logger.info(memberPointExchangeVo.toString());
+		int result = service.insertPointExchangeHistory(memberPointExchangeVo);
+		return result;
+	}
+	
+	//최근한달 포인트 환전내역 select
+	@RequestMapping(value="/ajax/selectPointExchangeList", method=RequestMethod.GET)
+	public Map<String, Object> selectPointExchangeList()
+	{
+		logger.info("selectPointExchangeList 호출");
+		logger.info("RestController 포인트 환전내역 select");
+		
+		//서비스 호출후 리턴 받은 맵 뷰에 리턴
+		Map<String, Object> pointExchangeListMap = service.selectPointExchangeList();
+		logger.info(pointExchangeListMap.toString());
+		return pointExchangeListMap;
+	}
+	
+	//회원(강사) 계좌 유무 확인
+	@RequestMapping(value="/ajax/selectTeacherAccountNo", method=RequestMethod.GET)
+	public MemberAccountVo selectTeacherAccountNo()
+	{
+		logger.info("selectTeacherAccountNo 호출");
+		logger.info("RestController 회원(강사) 계좌 유무 확인");
+		
+		return service.selectTeacherAccountNo();
+	}
+	
 }

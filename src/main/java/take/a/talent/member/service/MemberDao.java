@@ -20,23 +20,23 @@ import take.a.talent.member.vo.IdChecker;
 import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointExchangeVo;
+import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherVo;
 
-@Repository // dao라고 명시해줌 
+@Repository // dao라고 명시해줌
 
 public class MemberDao implements MemberDaoInterface{
 		
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-	//sql문 작동시킬 sqlsession의 자동 객체화 
+	//sql문 작동시킬 sqlsession의 자동 객체화  
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	//로그인 후 스프링 시큐리티 세션에서 저장되는 username, userpassword, authority를 가져올수 있게 user를 지정
-	//private User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	
 	//회원가입
 	@Override
@@ -76,6 +76,16 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateMember", memberVo);
 	}
 	
+	//포인트 충전하기
+	@Override
+	public int insertPointCharge(MemberPointVo memberPointVo)
+	{
+		logger.info("DAO insertPoint 호출");
+		logger.info(memberPointVo.toString());
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertPoint", memberPointVo);
+	}
+	
+	//회원 업데이트시 셀렉트
 	@Override
 	public MemberVo selectForUpdateMember()
 	{
@@ -89,15 +99,12 @@ public class MemberDao implements MemberDaoInterface{
 		return memberVo;
 	}
 
-	//회원가입시 닉네임 중복체크 
+	//회원가입시 닉네임 중복체크
 	@Override
 	public boolean nicknameCheck(String memberNickname){
 		logger.info("DAO nicknameCheck 호출");
 		logger.info("memberNickname : "+memberNickname);
 		
-		/*IdChecker idChecker = sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idChecker", memberId);*/
-		/*logger.info("checkId : "+idChecker.getMember_id());*/
-		//sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.idCheck", memberId);
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.nicknameCheck", memberNickname);
 	}
 	
@@ -187,6 +194,23 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertAccount", memberAccountVo);
 	}
 	
+	//포인트 충전시 업데이트
+	public int updatePointForMember(MemberVo memberVo)
+	{
+		logger.info("DAO updatePointForMember 호출");
+		logger.info(memberVo.toString());
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updatePointForMember", memberVo);
+	}
+	
+	//현재 포인트 가져오기
+	public int selectMemberPoint(int memberNo) 
+	{
+		logger.info("DAO selectMemberPoint 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberPoint", memberNo);
+	}
+	
 	//회원(강사) 주소 삭제
 	@Override
 	public int deleteAddressForTeacher(int addressNo)
@@ -194,6 +218,72 @@ public class MemberDao implements MemberDaoInterface{
 		logger.info("DAO deleteAddressForTeacher 호출");
 		
 		return sqlSessionTemplate.delete("take.a.talent.member.service.MemberMapper.deleteAddressForTeacher", addressNo);
+	}
+	
+	//포인트 충전 내역 select
+	@Override
+	public List<MemberPointVo> selectPointHistoryList(int memberNo)
+	{
+		logger.info("DAO selectPointHistoryList 호출");
+		
+		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectPointHistoryList", memberNo);
+	}
+	
+	//포인트 환전 내역 insert
+	@Override
+	public int insertPointExchangeHistory(MemberPointExchangeVo memberPointExchangeVo)
+	{
+		logger.info("DAO insertPointExchangeHistory 호출");
+		logger.info(memberPointExchangeVo.toString());
+		
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertPointExchangHistory", memberPointExchangeVo);
+	}
+	
+	//최근 한달 포인트 환전 내역 select
+	@Override
+	public List<MemberPointExchangeVo> selectPointExchangeList(int memberNo)
+	{
+		logger.info("DAO selectPointExchangeList 호출");
+		logger.info("DAO 환전내역 리스트 select");
+		
+		return sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectPointExchangeList", memberNo);
+	}
+	
+	//teacher account no select
+	@Override
+	public int selectTeacherAccountNo(int memberNo)
+	{
+		logger.info("DAO selectTeacherAccountNo 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectTeacherAccountNo", memberNo);
+	}
+	
+	//계좌등록시 teacher테이블 업데이트
+	@Override
+	public int updateTeacherWhenInsertAccount(TeacherVo teacherVo)
+	{
+		logger.info("DAO selectTeacherAccountNo 호출");
+		logger.info(teacherVo.toString());
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateTeacherWhenInsertAccount", teacherVo);
+	}
+	
+	//계좌 업데이트시 select
+	@Override
+	public MemberAccountVo selectTeacherAccountForUpdate(int teacherAccountNo)
+	{
+		logger.info("DAO selectTeacherAccountForUpdate 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectTeacherAccountForUpdate", teacherAccountNo);
+	}
+	
+	//계좌 업데이트
+	@Override
+	public int updateTeacherAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("DAO updateTeacherAccount 호출");
+		
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateTeacherAccount", memberAccountVo);
 	}
 	
 }

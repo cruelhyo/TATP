@@ -1,26 +1,27 @@
 package take.a.talent.member.vo;
 
 public class MemberAccountVo {
-	private String teacherAccountNo;
-	private String bankNo;
-	private String accountNumber;
+	private int teacherAccountNo;
+	private int bankNo;
+	private int accountNumber;
 	private String accountHolderName;
-	public String getTeacherAccountNo() {
+	
+	public int getTeacherAccountNo() {
 		return teacherAccountNo;
 	}
-	public void setTeacherAccountNo(String teacherAccountNo) {
+	public void setTeacherAccountNo(int teacherAccountNo) {
 		this.teacherAccountNo = teacherAccountNo;
 	}
-	public String getBankNo() {
+	public int getBankNo() {
 		return bankNo;
 	}
-	public void setBankNo(String bankNo) {
+	public void setBankNo(int bankNo) {
 		this.bankNo = bankNo;
 	}
-	public String getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	public String getAccountHolderName() {

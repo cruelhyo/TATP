@@ -6,6 +6,7 @@ public class JoinMemberVo
 	private String memberPassword;
 	private String memberName;
 	private String memberGender;
+	private int memberAge;
 	private String memberBirthday;
 	private String memberAddress;
 	private String memberAddressDetail;
@@ -86,15 +87,19 @@ public class JoinMemberVo
 	public void setMemberHobby(String memberHobby) {
 		this.memberHobby = memberHobby;
 	}
+	public int getMemberAge() {
+		return memberAge;
+	}
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
+	}
 	@Override
 	public String toString() {
 		return "JoinMemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName="
-				+ memberName + ", memberGender=" + memberGender + ", memberBirthday=" + memberBirthday
-				+ ", memberAddress=" + memberAddress + ", memberAddressDetail=" + memberAddressDetail + ", memberPhone="
-				+ memberPhone + ", memberEmail=" + memberEmail + ", memberMailagreement=" + memberMailagreement
-				+ ", memberNickname=" + memberNickname + ", memberHobby=" + memberHobby + "]";
+				+ memberName + ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", memberBirthday="
+				+ memberBirthday + ", memberAddress=" + memberAddress + ", memberAddressDetail=" + memberAddressDetail
+				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberMailagreement="
+				+ memberMailagreement + ", memberNickname=" + memberNickname + ", memberHobby=" + memberHobby + "]";
 	}
 	
-	
-	
-	}
+}

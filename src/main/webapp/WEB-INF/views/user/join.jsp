@@ -178,7 +178,19 @@
 										</div>
 									</div>
 									<br>
-
+									<div class="row">
+										<div class="form-group">
+											<label class="control-label col-sm-4" for="birth">
+												<p align="right">
+													<stong>나이</stong>
+												</p>
+											</label>
+											<div class="col-sm-5">
+												<input type="text" class="form-control" id="memberAge" name="memberAge" placeholder="나이입력">
+											</div>
+										</div>
+									</div>
+									<br>
 									<div class="row">
 										<div class="form-group">
 											<label class="control-label col-sm-4" for="birth">

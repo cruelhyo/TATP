@@ -22,7 +22,7 @@ import take.a.talent.member.vo.MemberVo;
 import take.a.talent.member.vo.TeacherVo;
 
 
-@Service // service�씪怨� 紐낆떆�빐以�
+@Service // service라고 명시해줌
 public class MemberService implements MemberServiceInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
@@ -30,13 +30,7 @@ public class MemberService implements MemberServiceInterface{
 	@Autowired
 	MemberDao memberDao;
 	
-
-	public int addMember(JoinMemberVo joinMemberVo){
-		
-		logger.info("addmember");
-		logger.info(joinMemberVo.toString());
-		return memberDao.insertMember(joinMemberVo);
-	}
+	
 
 	//회원가입시 아이디 중복검사  
 	@Override
@@ -78,6 +72,21 @@ public class MemberService implements MemberServiceInterface{
 			
 		return nck;
 	}
+	
+	//회원가입
+		public int addMember(JoinMemberVo joinMemberVo){
+			
+			logger.info("addmember");
+			logger.info(joinMemberVo.toString());
+			int insertMemberResult = memberDao.insertMemberTb(joinMemberVo);
+			int insertMemberAddress = memberDao.insertMemberAdd(joinMemberVo);
+			
+			if(insertMemberResult != 0){
+				return insertMemberResult;			
+			}
+				return insertMemberAddress;		
+		} 
+		
 	
 	@Override
 	public boolean nicknameCheckForUpdate(String memberNickname) {

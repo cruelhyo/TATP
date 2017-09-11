@@ -38,9 +38,9 @@ public class MemberDao implements MemberDaoInterface{
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	
-	//회원가입
+	//회원가입시 memberTb insert
 	@Override
-	public int insertMember(JoinMemberVo joinMemberVo) {
+	public int insertMemberTb(JoinMemberVo joinMemberVo) {
 		logger.info("DAO insertMember 호출");
 
 		//입력된 password를 db저장 전에 암호화 시킴
@@ -49,6 +49,13 @@ public class MemberDao implements MemberDaoInterface{
 		
 		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", joinMemberVo);
 		return row;
+	}
+	
+	//회원가입시 addressTb insert
+	@Override
+	public int insertMemberAdd(JoinMemberVo joinMemberVo) {
+		
+		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMemberAddress", joinMemberVo);
 	}
 
 	//회원가입시 아이디 중복체크 
@@ -285,5 +292,7 @@ public class MemberDao implements MemberDaoInterface{
 		
 		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateTeacherAccount", memberAccountVo);
 	}
+
+	
 	
 }

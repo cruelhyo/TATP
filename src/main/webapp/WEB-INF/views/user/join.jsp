@@ -213,7 +213,7 @@
 												</p>
 											</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" name="memberAddress">
+												<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" name="memberMailNumber">
 											</div>
 											<div class="col-sm-2">
 												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
@@ -231,7 +231,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="sample6_address" placeholder="상세주소" name="memberAddressDetail">
+												<input type="text" class="form-control" id="sample6_address" placeholder="상세주소" name="memberAddress">
 											</div>
 										</div>
 									</div>

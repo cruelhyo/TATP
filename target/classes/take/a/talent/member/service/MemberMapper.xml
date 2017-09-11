@@ -41,6 +41,8 @@
 		<result property="memberMailagreement" column="member_agreement" />
 		<result property="memberNickname" column="member_nickname" />
 		<result property="memberHobby" column="member_hobby" />
+		<result property="memberAddress" column="member_address" /> 
+		<result property="memberMailNumber" column="address_mailnumber" />
 	</resultMap>
 	
 	<resultMap type="take.a.talent.member.vo.MemberAndAddressVo" id="MemberAndAddressVo">
@@ -226,7 +228,14 @@
 		INSERT INTO member(member_id, member_password, member_name, member_gender, member_age, member_birthday, member_phone,  member_email, member_agreement, member_hobby, member_nickname)
 			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberAge}, #{memberBirthday}, #{memberPhone}, 
 			#{memberEmail},#{memberMailagreement}, #{memberHobby}, #{memberNickname});
+	</insert>
+	
+	<!-- 회원가입 시 addressTb insert -->
+	<insert id="insertMemberAddress" parameterType="take.a.talent.member.vo.JoinMemberVo">
+		INSERT INTO address(address_mailnumber, member_address)
+			VALUES (#{memberMailNumber}, #{memberAddress});
 			
+			  
 	</insert>
 	
 	<!-- 회원(강사) 주소 insert -->

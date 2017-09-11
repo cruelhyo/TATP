@@ -5,11 +5,8 @@
 $(document).ready(function()
 {
 	
-	
-	
-	
-	$('.includePage').hide();
-	$('#modifiedMypage').show();
+	$('.includePage').css('display', 'none');
+	$('#modifiedMypage').css('display', '');
 	$(function () 
 	{
 	  	$('.navbar-toggle-sidebar').click(function () 
@@ -47,15 +44,15 @@ $(document).ready(function()
 	
 	//회원 정보 수정
 	$('#myPageShow').click(function(){
-		$('.includePage').hide();
-		$('#myPage').show();
+		$('.includePage').css('display', 'none');
+		$('#myPage').css('display', '');
 		selectForUpdateMember();
 	});
 	
 	// 포인트 충전 내역
 	$('#myPointHistoryShow').click(function(){
-		$('.includePage').hide();
-		$('#myPointHistory').show();
+		$('.includePage').css('display', 'none');
+		$('#myPointHistory').css('display', '');
 		
 		//url
 		var ajaxSelectPointHistoryList = $('#ajaxSelectPointHistoryList').val();
@@ -87,59 +84,59 @@ $(document).ready(function()
 	
 	//내 주소록 보기
 	$('#myAddressShow').click(function(){
-		$('.includePage').hide();
-		$('#myAddress').show();
+		$('.includePage').css('display', 'none');
+		$('#myAddress').css('display', '');
 		selectAddressListForTeacher();
 	});
 	
 	//포인트 충전하기
 	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
+		$('.includePage').css('display', 'none');
+		$('#myPoint').css('display', '');
 		// 현재 포인트 가져오기 함수
 		selectMemberPoint();
 	});
 	
 	//비밀번호 변경
 	$('#myChangePWShow').click(function(){
-		$('.includePage').hide();
-		$('#myChangePW').show();
+		$('.includePage').css('display', 'none');
+		$('#myChangePW').css('display', '');
 	});
 	
 	//환전하기
 	$('#myExchangeShow').click(function(){
-		$('.includePage').hide();
-		$('#myExchange').show();
+		$('.includePage').css('display', 'none');
+		$('#myExchange').css('display', '');
 		// 현재 포인트 가져오기 함수
 		selectMemberPoint();
 	});
 	
 	//내 정보 전체보기
 	$('#modifiedMypageShow').click(function(){
-		$('.includePage').hide();
-		$('#modifiedMypage').show();
+		$('.includePage').css('display', 'none');
+		$('#modifiedMypage').css('display', '');
 	});
 
 	//포트폴리오 보기
 	$('#portfolioShow').click(function(){
-		$('.includePage').hide();
-		$('#portfolio').show();
+		$('.includePage').css('display', 'none');
+		$('#portfolio').css('display', '');
 	});
 	
 	//이력서 등록
 	$('#resumeShow').click(function(){
-		$('.includePage').hide();
-		$('#resume').show();
+		$('.includePage').css('display', 'none');
+		$('#resume').css('display', '');
 	});
 	
 	//이력서 보기
 	$('#resumeViewShow').click(function(){
-		$('.includePage').hide();
-		$('#resumeView').show();
+		$('.includePage').css('display', 'none');
+		$('#resumeView').css('display', '');
 	});
 	
 	// 주소추가폼 숨기기
-	$('.add').hide();
+	$('.add').css('display', 'none');
 	
 	//---------------------- memberUpdateFormForTeacher js ----------------------------------------------------
 	
@@ -460,8 +457,8 @@ $(document).ready(function()
 	// 주소추가폼 보이기
 	$('div').on('click', '#plus', function(){
 		//폼 숨기기
-		$('.add').hide();
-		$('#address1').show();
+		$('.add').css('display', 'none');
+		$('#address1').css('display', '');
 		//포커싱
 		$('#addressClassificationNo').focus();
 		//추가하기 버튼 보이기
@@ -475,8 +472,8 @@ $(document).ready(function()
 		//value에 있는 addressNo를 가져온다
 		var addressNo = $(this).val();
 		$('.addressNoInForm').val(addressNo);
-		$('.add').hide();
-		$('#address1').show();
+		$('.add').css('display', 'none');
+		$('#address1').css('display', '');
 		//포커싱
 		$('#addressClassificationNo').focus();
 		//추가하기 버튼 숨기기
@@ -489,10 +486,10 @@ $(document).ready(function()
 	
 	//주소추가하기 버튼 누르면 폼 다시 사라짐
 	$('#plus2').click(function(){
-		$('.add').hide();
+		$('.add').css('display', 'none');
 	});
 	$('#plus3').click(function(){
-		$('.add').hide();
+		$('.add').css('display', 'none');
 	});
 
 	//-------------------------------- myPoint js ---------------------------------------
@@ -546,20 +543,20 @@ $(document).ready(function()
 	}
 	
 	// 환전내역 숨김과 동시에 환전 폼도 숨겨줍니다
-	$('.ExchangeHistory').hide();
-	$('.ExchangePointForm').hide();
+	$('.ExchangeHistory').css('display', 'none');
+	$('.ExchangePointForm').css('display', 'none');
 	
 	// 환전 내역 보이면서 환전 폼 숨기기
 	$('#ExchangeView').click(function(){
 		selectPontExchangeList();
-		$('#ExHistory').show();
-		$('.ExchangePointForm').hide();
+		$('#ExHistory').css('display', '');
+		$('.ExchangePointForm').css('display', 'none');
 	});
 	
 	//환전 폼 보이면서 환전 내역 숨기기
 	$('#Exchange').click(function(){
-		$('.ExchangePointForm').show();
-		$('#ExHistory').hide();
+		$('.ExchangePointForm').css('display', '');
+		$('#ExHistory').css('display', 'none');
 	});
 	
 	//포인트 환전하기 js
@@ -622,7 +619,7 @@ $(document).ready(function()
 	
 	//계좌관리
 	$('#myAccountShow').click(function(){
-		$('.includePage').hide();
+		$('.includePage').css('display', 'none');
 		
 		var ajaxSelectTeacherAccountNo = $('#ajaxSelectTeacherAccountNo').val();
 		$.ajax(
@@ -632,18 +629,18 @@ $(document).ready(function()
 			{
 				if(result == null)
 				{
-					$('#updateAccount').hide();
-					$('#insertAccount').show();
+					$('#updateAccount').css('display', 'none');
+					$('#insertAccount').css('display', '');
 				}
 				$('.bankNoUpdate').val(result.bankNo);
 				$('.accountHolderNameUpdate').val(result.accountHolderName);
 				$('.accountNumberUpdate').val(result.accountNumber);
-				$('#insertAccount').hide();
-				$('#updateAccount').show();
+				$('#insertAccount').css('display', 'none');
+				$('#updateAccount').css('display', '');
 			}
 		});
 		
-		$('#myAccount').show();
+		$('#myAccount').css('display', '');
 	});
 	
 });

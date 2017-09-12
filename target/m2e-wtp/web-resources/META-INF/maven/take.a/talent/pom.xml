@@ -116,9 +116,21 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>4.2.3.RELEASE</version>
 			</dependency>
-	
-	
 			
+		
+		<!--파일업로드시 사용할  CommonsMultipartResolver(내장객체) 를 위한 의존성 추가 1 -->		
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        
+        <!--파일업로드시 사용할  CommonsMultipartResolver(내장객체) 를 위한 의존성 추가 2 -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
 		
 		
 				

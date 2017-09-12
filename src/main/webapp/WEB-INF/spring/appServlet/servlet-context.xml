@@ -41,20 +41,26 @@
 		<property name="contentType" value="text/html; charset=UTF-8" />
 	</bean>
 	
-	   <!-- Multipart/form-data를 사용하기 위한 multipartResolver설정 // 파일업로드 관련 -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    	<!-- 최대용량을 10메가로 설정해둠. 넘을시 에러가 뜸. -->
+	  
+	  
+	   <!-- Multipart/form-data를 사용하기 위한 multipartResolver설정 //아래 2개 bean 파일업로드 관련 -->
+	   
+	   
+   <!--   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	최대용량을 10메가로 설정해둠. 넘을시 에러가 뜸.
 		<property name="maxUploadSize" value="10000000" />
 		<property name="maxInMemorySize" value="10000000" />
 		<property name="defaultEncoding" value="UTF-8"/>
-	</bean>
+	</bean>  -->
 	
 	
-	<!-- 파일 다운로드 요청의 응답을 뷰로 리턴할 클래스를 빈으로 지정  -->
-	<bean id="fileDownloadView" class="take.a.talent.util.FileDownloadView"/>
+	<!-- 파일 다운로드 요청의 응답을 뷰로 리턴할 클래스를 빈으로 지정  요거 추가시 500에러남 잘 볼것-->
+	<!-- <bean id="fileDownloadView" class="take.a.talent.util.FileDownloadView"/>
 	<bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	    <property name="order" value="0"/>
-	</bean>
+	</bean> -->
+	
+	
 	
 	
 

@@ -116,7 +116,7 @@
 											<div id="dropdown-lvl2" class="panel-collapse collapse">
 												<div class="panel-body">
 													<ul class="nav navbar-nav">
-														<li><a href="#">class 1</a></li>
+														<li><a href="#" id="myClassShow">강좌개설</a></li>
 														<li><a href="#">class 2</a></li>
 														<li><a href="#">class 3</a></li>
 													</ul>
@@ -179,6 +179,10 @@
 		<!-- 이력서 보기-->
 		<div role="tabpanel" class="tab-pane face in active includePage" id="resumeView">
 			<jsp:include page="../include/resumeView.jsp" flush="true"></jsp:include>
+		</div>
+		<!-- 이력서 보기-->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="myClass">
+			<jsp:include page="../include/myClass.jsp" flush="true"></jsp:include>
 		</div>
 	</div>
 </div>

@@ -138,6 +138,13 @@ $(document).ready(function()
 		$('#resumeView').show();
 	});
 	
+	//강좌개설 보기
+	$('#myClassShow').click(function(){
+		$('.includePage').hide();
+		$('#myClass').show();
+	});
+	
+	
 	// 주소추가폼 숨기기
 	$('.add').hide();
 	

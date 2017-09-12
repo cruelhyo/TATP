@@ -87,7 +87,7 @@
 							</p>
 						</label>
 						<div class="col-sm-6 wdth">
-							<select name="bankNo" class="bankNoUpdate" id="bankNo" class="dropselects100">
+							<select name="bankNo" class="bankNoUpdate dropselects100" id="bankNo">
 								<option value="">은행선택</option>
 								<option value="1">국민은행</option>
 								<option value="2">KEB하나은행</option>

@@ -2,19 +2,26 @@ package take.a.talent.member.vo;
 
 public class JoinMemberVo
 {
+	private int memberNo;
 	private String memberId;
 	private String memberPassword;
 	private String memberName;
 	private String memberGender;
 	private int memberAge;
 	private String memberBirthday;
-	private String memberMailNumber;
+	private int memberMailNumber;
 	private String memberAddress;
 	private String memberPhone;
 	private String memberEmail;
 	private String memberMailagreement;
 	private String memberNickname;
 	private String memberHobby;
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -51,10 +58,10 @@ public class JoinMemberVo
 	public void setMemberBirthday(String memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
-	public String getMemberMailNumber() {
+	public int getMemberMailNumber() {
 		return memberMailNumber;
 	}
-	public void setMemberMailNumber(String memberMailNumber) {
+	public void setMemberMailNumber(int memberMailNumber) {
 		this.memberMailNumber = memberMailNumber;
 	}
 	public String getMemberAddress() {
@@ -95,12 +102,14 @@ public class JoinMemberVo
 	}
 	@Override
 	public String toString() {
-		return "JoinMemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName="
-				+ memberName + ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", memberBirthday="
-				+ memberBirthday + ", memberMailNumber=" + memberMailNumber + ", memberAddress=" + memberAddress
-				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberMailagreement="
-				+ memberMailagreement + ", memberNickname=" + memberNickname + ", memberHobby=" + memberHobby + "]";
+		return "JoinMemberVo [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
+				+ ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberAge=" + memberAge
+				+ ", memberBirthday=" + memberBirthday + ", memberMailNumber=" + memberMailNumber + ", memberAddress="
+				+ memberAddress + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail
+				+ ", memberMailagreement=" + memberMailagreement + ", memberNickname=" + memberNickname
+				+ ", memberHobby=" + memberHobby + "]";
 	}
-
+	
+	
 	
 }

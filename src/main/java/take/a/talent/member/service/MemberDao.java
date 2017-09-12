@@ -55,6 +55,7 @@ public class MemberDao implements MemberDaoInterface{
 	@Override
 	public int insertMemberAdd(JoinMemberVo joinMemberVo) {
 		
+		
 		return sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMemberAddress", joinMemberVo);
 	}
 

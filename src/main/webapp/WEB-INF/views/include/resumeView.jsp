@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="col-sm-10">
+	<input type="hidden" id="ajaxSelectTeacherEduCrList" value="<c:url value='/ajax/selectTeacherEducationAndCareerList'/>">
 	<div class="step_21">
 		<h2 align="left" >&nbsp;&nbsp;
 			<font color="#5F5F5F">이력사항 관리</font>
@@ -22,18 +22,8 @@
 						<th></th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>대학교</td>
-						<td>졸업</td>
-						<td>단국대학교</td>
-						<td>시각디자인과</td>
-						<td>2004.3</td>
-						<td>2009.2</td>
-						<td><button type="button" class="btn btn-depault btn-sm" id="modi">수정</button>
-						<button type="button" class="btn btn-depault btn-sm" id="del">삭제</button>
-						</td>
-					</tr>
+				<tbody id="teacherEduTbody">
+					
 				</tbody>
 			</table>  
 			<br>
@@ -49,7 +39,7 @@
 						<th></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="teacherCareerTbody">
 					<tr>
 						<td>samsung
 						</td>

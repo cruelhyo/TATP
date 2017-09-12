@@ -90,6 +90,28 @@
 		<result property="pointExchangeDate" column="point_exchange_date"/>
 	</resultMap>
 	
+	<resultMap type="take.a.talent.member.vo.TeacherCareerVo" id="TeacherCareerVo">
+		<result property="teacherCareerNo" column="teacher_career_no"/>
+		<result property="teacherNo" column="teacher_no"/>
+		<result property="teacherCareerCompany" column="teacher_career_company"/>
+		<result property="teacherCareerDepartment" column="teacher_career_department"/>
+		<result property="teacherCareerPosition" column="teacher_career_position"/>
+		<result property="teacherCareerEmploymentDate" column="teacher_career_employment_date"/>
+		<result property="teacherCareerLeaveDate" column="teacher_career_leave_date"/>
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.TeacherEducationVo" id="TeacherEducationVo">
+		<result property="teacherEducationNo" column="teacher_education_no"/>
+		<result property="teacherNo" column="teacher_no"/>
+		<result property="teacherEducationClassificationNo" column="teacher_education_classification_no"/>
+		<result property="teacherEducationClassificationName" column="teacher_education_classification_name"/>
+		<result property="teacherEducationStatusNo" column="teacher_education_status_no"/>
+		<result property="teacherEducationStatusName" column="teacher_education_status_name"/>
+		<result property="teacherEducationSchoolName" column="teacher_education_school_name"/>
+		<result property="teacherEducationMajor" column="teacher_education_major"/>
+		<result property="teacherEducationAdmission" column="teacher_education_admission"/>
+		<result property="teacherEducationGraduation" column="teacher_education_graduation"/>
+	</resultMap>
 	
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
@@ -221,6 +243,49 @@
 		WHERE teacher_account_no = #{teacherAccountNo};
 	</select>
 	
+	<!-- 비밀번호 체크시 비밀번호 select -->
+	<select id="selectMemberPassword" parameterType="int" resultType="String">
+		SELECT member_password
+		FROM member
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	<!-- 학력 list 가져오기 -->
+	<select id="selectTeacherEducationList" parameterType="int" resultMap="TeacherEducationVo">
+		SELECT te.teacher_education_no
+		, tec.teacher_education_classification_name
+		, tes.teacher_education_status_name
+		, te.teacher_education_school_name
+		, te.teacher_education_major
+		, te.teacher_education_admission
+		, te.teacher_education_graduation
+		FROM teacher_education te
+		INNER JOIN teacher_education_classification tec
+		ON te.teacher_education_classification_no = tec.teacher_education_classification_no
+		INNER JOIN teacher_education_status tes
+		ON te.teacher_education_status_no = tes.teacher_education_status_no
+		WHERE te.teacher_no = #{teacherNo};
+	</select>
+	
+	<!-- 경력 list 가져오기 -->
+	<select id="selectTeacherCareerList" parameterType="int" resultMap="TeacherCareerVo">
+		SELECT teacher_career_no
+		, teacher_career_company
+		, teacher_career_department
+		, teacher_career_position
+		, teacher_career_employment_date
+		, teacher_career_leave_date
+		FROM teacher_career
+		WHERE teacher_no = #{teacherNo};
+	</select>
+	
+	<!-- teacher_no 가져오기 -->
+	<select id="selectTeacherNo" parameterType="int" resultType="int">
+		SELECT teacher_no
+		FROM teacher
+		WHERE member_no = #{memberNo}
+	</select>
+	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.JoinMemberVo">
 		INSERT INTO member(member_id, member_password, member_name, member_gender, member_birthday, member_phone,  member_email, member_agreement, member_hobby, member_nickname)
@@ -347,6 +412,13 @@
 		, account_number = #{accountNumber}
 		, account_holder_name = #{accountHolderName}
 		WHERE teacher_account_no = #{teacherAccountNo};
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member
+		SET member_password = #{memberPassword}
+		WHERE member_no = #{memberNo};
 	</update>
 	
 	<!-- 회원(강사) 주소 삭제 -->

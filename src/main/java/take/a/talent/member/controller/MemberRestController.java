@@ -191,4 +191,29 @@ public class MemberRestController
 		return service.selectTeacherAccountNo();
 	}
 	
+	//비밀번호 체크
+	@RequestMapping(value="/ajax/checkMemberPassword", method=RequestMethod.POST)
+	public boolean checkMemberPassword(@RequestBody String pw)
+	{
+		logger.info("checkMemberPassword 호출");
+		logger.info("RestController 비밀번호 체크");
+		logger.info("pw : " + pw);
+		
+		boolean checkResult = service.checkMemberPassword(pw);
+		
+		return checkResult;
+	}
+	
+	//학력, 경력 리스트 가져오기
+	@RequestMapping(value="/ajax/selectTeacherEducationAndCareerList", method=RequestMethod.GET)
+	public Map<String, Object> selectTeacherEducationAndCareerList()
+	{
+		logger.info("selectTeacherEducationAndCareerList 호출");
+		
+		//리스트 가져오는 서비스 호출 후 결과 리턴
+		Map<String, Object> teacherCrEduListMap = service.selectTeacherEducationAndCareerList();
+		logger.info("teacherCrEduListMap : " + teacherCrEduListMap.toString());
+		
+		return teacherCrEduListMap;
+	}
 }

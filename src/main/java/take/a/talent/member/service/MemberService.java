@@ -88,16 +88,17 @@ public class MemberService implements MemberServiceInterface{
 		} */
 		
 	//회원가입
-		public int addMember(JoinMemberVo joinMemberVo){
+	public int addMember(JoinMemberVo joinMemberVo){
 		logger.info("addmember");
 		logger.info(joinMemberVo.toString());
 		/*int insertMemberResult = memberDao.insertMemberTb(joinMemberVo);*/
-		int insertMemberAddress = memberDao.insertMemberAdd(joinMemberVo);
+		
 		
 		//memberTb에 회원가입후 그 값을 리턴받아서 생성된 memberNo를 받아옴 
 		memberDao.insertMemberTb(joinMemberVo);
-		
 		int memberNo = joinMemberVo.getMemberNo();
+		int insertMemberAddress = memberDao.insertMemberAdd(joinMemberVo);
+	
 		logger.info("생성된increament값 확인");
 		logger.info(joinMemberVo.toString());
 		if(memberNo == 0) 

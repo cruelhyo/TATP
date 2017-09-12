@@ -251,7 +251,12 @@
 			, #{memberEmail}
 			, #{memberMailagreement}
 			, #{memberHobby}
-			, #{memberNickname});
+			, #{memberNickname})
+			
+		<selectKey keyProperty="memberNo" resultType="int" order="AFTER">
+		 	SELECT LAST_INSERT_ID() <!--마지막으로 입력된 auto_increament가져옴 sql자체제공 -->
+		</selectKey>
+			  
 	</insert>
 	
 	<!-- 회원가입 시 addressTb insert -->
@@ -266,10 +271,7 @@
 			, #{memberMailNumber}
 			, #{memberAddress})
 			
-		<selectKey keyProperty="memberNo" resultType="int" order="AFTER">
-		 	SELECT LAST_INSERT_ID() <!--마지막으로 입력된 auto_increament가져옴 sql자체제공 -->
-		</selectKey>
-			  
+
 	</insert>
 	
 	<!-- 회원(강사) 주소 insert -->

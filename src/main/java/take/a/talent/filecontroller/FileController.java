@@ -1,9 +1,12 @@
 package take.a.talent.filecontroller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.Locale;
 
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -14,8 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import take.a.talent.file.service.FileService;
 import take.a.talent.member.controller.MemberRestController;
@@ -27,45 +32,49 @@ public class FileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
 	
-	@Autowired
-    private FileUtil fileutil;
-	private FileService fileService;
 	
-	// 펀딩 보고서 업로드 
-		@RequestMapping(value = "/addfundingfile.pms", method = RequestMethod.POST)
-		public void portfolioUpload(Model model, Locale locale, MultipartHttpServletRequest request
-				, MultipartFile uploadFile, @RequestParam("fileFdCode") int fdCode, HttpServletResponse response) throws IOException {
-			
-			logger.info("컨트롤러 portfolioUpload 호출 ");
-			logger.info("fileFdCode : "+fdCode);
-			logger.info("filename : "+uploadFile.getOriginalFilename());
-			logger.debug("filesize : "+uploadFile.getSize());
-			
-			
-			// 용량 제한을 10MB로 해줘서 튕겨낸다
-			if(uploadFile.getSize() > 83886080){
-	    		// 10MB 이상
-				
-	    		 response.setCharacterEncoding("UTF-8");
-	             PrintWriter writer = response.getWriter();
-	             writer.println("<script type='text/javascript'>");
-	             writer.println("alert('용량이 10MB를 초과하였습니다');");
-	             writer.println("history.back();");
-	             writer.println("</script>");
-	             writer.flush();
-	    		 /*return "pms/companyuser/myfundingposterimg";*/
-	             
-	             
-			} else {
-				// 10MB 이하
-				
-				//리턴값으로 업로드된 경로+파일명을 가져온다.
-				String result = fileutil.fileUpload(request, uploadFile);
-				logger.info("result:"+result);
-				//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-				fileService.addPortFolioFile(uploadFile, result, fdCode);
-				return /*"redirect:/fundingfilelistpage.pms"*/; //여기는 포트폴리오 이미지 수정 요청한 페이지 나오면 경로 재설정
-			}
-		}
+	
+	
+	
+	
+	@RequestMapping(value = "/fileUpload")
+    public String fileUp(MultipartHttpServletRequest multi) {
+         
+		
+		
+		
+        // 저장 경로 설정
+        String root = multi.getSession().getServletContext().getRealPath("/"); // 테스트 후 D:\\TATProject\resource 로 절대경로 변경 
+        String path = root+"resources/upload/";
+         
+        String newFileName = ""; // 업로드 되는 파일명
+         
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdir();
+        }
+         
+        Iterator<String> files = multi.getFileNames();
+        while(files.hasNext()){
+            String uploadFile = files.next();
+                         
+            MultipartFile mFile = multi.getFile(uploadFile);
+            String fileName = mFile.getOriginalFilename();
+            System.out.println("실제 파일 이름 : " +fileName);
+            newFileName = System.currentTimeMillis()+"."
+                    +fileName.substring(fileName.lastIndexOf(".")+1);
+             
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+         
+        System.out.println("id : " + multi.getParameter("id"));
+        System.out.println("pw : " + multi.getParameter("pw"));
+         
+        return "ajaxUpload";
+    }
 	
 }

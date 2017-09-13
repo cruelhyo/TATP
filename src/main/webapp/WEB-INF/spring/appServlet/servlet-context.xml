@@ -41,7 +41,13 @@
 		<property name="contentType" value="text/html; charset=UTF-8" />
 	</bean>
 	
-	  
+	    <!-- MultipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000000"/>
+        <property name="maxInMemorySize" value="100000000"/>
+    </bean>
+
+
 	  
 	   <!-- Multipart/form-data를 사용하기 위한 multipartResolver설정 //아래 2개 bean 파일업로드 관련 -->
 	   

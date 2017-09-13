@@ -21,6 +21,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="#">무료강좌</a></li>
 						<li><a href="<c:url value='/anonymous/classSearch'/>">유료강좌</a></li>
+						<li><a href="<c:url value='/anonymous/fileuploadform'/>">파일업로드</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"

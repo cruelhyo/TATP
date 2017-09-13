@@ -37,30 +37,35 @@ $(document).ready(function(){
 		$('.includePage').hide();
 		$('#myPage2').show();
 	});
-	
+	//포인트 충전내역보기
 	$('#myPointHistoryShow').click(function(){
 		$('.includePage').hide();
 		$('#myPointHistory').show();
 	});
-
+	//주소수정 보기
 	$('#myAddressShow').click(function(){
 		$('.includePage').hide();
 		$('#myAddress').show();
 	});
-	
+	//내 포인트 보기
 	$('#myPointShow').click(function(){
 		$('.includePage').hide();
 		$('#myPoint').show();
 	});
-	
+	//비밀번호 바꾸기
 	$('#myChangePWShow').click(function(){
 		$('.includePage').hide();
 		$('#myChangePW').show();
 	});
-	
+	//수정된 페이지 보기
 	$('#modifiedMypageShow').click(function(){
 		$('.includePage').hide();
 		$('#modifiedMypage').show();
+	});
+	//강사신청 폼 보기
+	$('#applyFormShow').click(function(){
+		$('.includePage').hide();
+		$('#applyForm').show();
 	});
 	
 	//memberUpdateFormForStuden js

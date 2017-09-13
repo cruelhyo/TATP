@@ -109,4 +109,16 @@ public interface MemberDaoInterface {
 	//teacher_no 가져오기
 	int selectTeacherNo(int memberNo);
 	
+	//학력 정보 insert
+	int insertTeacherEducation(TeacherEducationVo teacherEducationVo);
+	
+	//경력 정보 insert
+	int insertTeacherCareer(TeacherCareerVo teacherCareerVo);
+	
+	//학력 정보 update
+	int updateTeacherEducation(TeacherEducationVo teacherEducationVo);
+	
+	//경력 정보 update
+	int updateTeacherCareer(TeacherCareerVo teacherCareerVo);
+	
 }

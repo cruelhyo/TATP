@@ -343,4 +343,48 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectTeacherNo", memberNo);
 	}
 	
+	//학력 정보 insert
+	@Override
+	public int insertTeacherEducation(TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("DAO insertTeacherEducation 호출");
+		int insertResult = 
+				sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertTeacherEducation", teacherEducationVo);
+		logger.info("insertResult : " + Integer.toString(insertResult));
+		return insertResult;
+	}
+		
+	//경력 정보 insert
+	@Override
+	public int insertTeacherCareer(TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("DAO insertTeacherCarrer 호출");
+		int insertResult = 
+				sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertTeacherCareer", teacherCareerVo);
+		logger.info("insertResult : " + Integer.toString(insertResult));
+		return insertResult;
+	}
+	
+	//학력 정보 update
+	@Override
+	public int updateTeacherEducation(TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("DAO updateTeacherEducation 호출");
+		int updateResult = 
+				sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateTeacherEducation", teacherEducationVo);
+		logger.info("updateResult : " + Integer.toString(updateResult));
+		return updateResult;
+	}
+	
+	//경력 정보 update
+	@Override
+	public int updateTeacherCareer(TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("DAO updateTeacherEducation 호출");
+		int updateResult = 
+				sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updateTeacherCareer", teacherCareerVo);
+		logger.info("updateResult : " + Integer.toString(updateResult));
+		return updateResult;
+	}
+	
 }

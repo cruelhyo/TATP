@@ -353,6 +353,43 @@
 		, SYSDATE());
 	</insert>
 	
+	<!-- 학력 정보 insert -->
+	<insert id="insertTeacherEducation" parameterType="take.a.talent.member.vo.TeacherEducationVo">
+		INSERT INTO teacher_education (
+		teacher_no
+		,teacher_education_classification_no
+		,teacher_education_status_no
+		,teacher_education_school_name
+		,teacher_education_major
+		,teacher_education_admission
+		,teacher_education_graduation)
+		VALUES
+		(#{teacherNo}
+		, #{teacherEducationClassificationNo}
+		, #{teacherEducationStatusNo}
+		, #{teacherEducationSchoolName}
+		, #{teacherEducationMajor}
+		, #{teacherEducationAdmission}
+		, #{teacherEducationGraduation});
+	</insert>
+	
+	<!-- 경력 정보 insert -->
+	<insert id="insertTeacherCareer" parameterType="take.a.talent.member.vo.TeacherCareerVo">
+		INSERT INTO teacher_career(
+		teacher_no
+		, teacher_career_company
+		, teacher_career_department
+		, teacher_career_position
+		, teacher_career_employment_date
+		, teacher_career_leave_date)
+		VALUES(#{teacherNo}
+		, #{teacherCareerCompany}
+		, #{teacherCareerDepartment}
+		, #{teacherCareerPosition}
+		, #{teacherCareerEmploymentDate}
+		, #{teacherCareerLeaveDate});
+	</insert>
+	
 	<!-- 충전한 포인트 기존포인트와 계산하여 업데이트 -->
 	<update id="updatePointForMember" parameterType="take.a.talent.member.vo.MemberVo">
 		UPDATE member
@@ -420,6 +457,31 @@
 		SET member_password = #{memberPassword}
 		WHERE member_no = #{memberNo};
 	</update>
+	
+	<!-- 학력 정보 update -->
+	<update id="updateTeacherEducation" parameterType="take.a.talent.member.vo.TeacherEducationVo">
+		UPDATE teacher_education
+		SET teacher_education_classification_no = #{teacherEducationClassificationNo}
+		, teacher_education_status_no = #{teacherEducationStatusNo}
+		, teacher_education_school_name = #{teacherEducationSchoolName}
+		, teacher_education_major = #{teacherEducationMajor}
+		, teacher_education_admission = #{teacherEducationAdmission}
+		, teacher_education_graduation = #{teacherEducationGraduation}
+		WHERE teacher_education_no = #{teacherEducationNo};
+	</update>
+	
+	<!-- 경력 정보 update -->
+	<update id="updateTeacherCareer" parameterType="take.a.talent.member.vo.TeacherCareerVo">
+		UPDATE teacher_career
+		SET teacher_career_company = #{teacherCareerCompany}
+		, teacher_career_department = #{teacherCareerDepartment}
+		, teacher_career_position = #{teacherCareerPosition}
+		, teacher_career_employment_date = #{teacherCareerEmploymentDate}
+		, teacher_career_leave_date = #{teacherCareerLeaveDate}
+		WHERE teacher_career_no = #{teacherCareerNo}
+	</update>
+	
+	<!-- 학력 정보 delete -->
 	
 	<!-- 회원(강사) 주소 삭제 -->
 	<delete id="deleteAddressForTeacher" parameterType="int">

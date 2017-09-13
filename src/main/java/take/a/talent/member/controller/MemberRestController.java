@@ -18,6 +18,8 @@ import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherCareerVo;
+import take.a.talent.member.vo.TeacherEducationVo;
 
 @RestController
 public class MemberRestController
@@ -215,5 +217,41 @@ public class MemberRestController
 		logger.info("teacherCrEduListMap : " + teacherCrEduListMap.toString());
 		
 		return teacherCrEduListMap;
+	}
+	
+	//학력 정보 insert
+	@RequestMapping(value="/ajax/insertTeacherEducation", method=RequestMethod.POST)
+	public int insertTeacherEducation(@RequestBody TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("insertTeacherEducation 호출");
+		
+		return service.insertTeacherEducation(teacherEducationVo);
+	}
+	
+	//경력 정보 insert
+	@RequestMapping(value="/ajax/insertTeacherCareer", method=RequestMethod.POST)
+	public int insertTeacherCareer(@RequestBody TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("insertTeacherCareer 호출");
+		
+		return service.insertTeacherCareer(teacherCareerVo);
+	}
+	
+	//학력 정보 update
+	@RequestMapping(value="/ajax/updateTeacherEducation", method=RequestMethod.POST)
+	public int updateTeacherEducation(@RequestBody TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("updateTeacherEducation 호출");
+		
+		return service.updateTeacherEducation(teacherEducationVo);
+	}
+	
+	//경력 정보 update
+	@RequestMapping(value="/ajax/updateTeacherCareer", method=RequestMethod.POST)
+	public int updateTeacherCareer(@RequestBody TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("updateTeacherCareer 호출");
+		
+		return service.updateTeacherCareer(teacherCareerVo);
 	}
 }

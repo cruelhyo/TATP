@@ -599,6 +599,8 @@ $(document).ready(function()
 		//폼 초기화
 		$('#addressForm')[0].reset();
 	});
+	
+	//주소수정폼 보이기
 	$('div').on('click', '#edit', function(){
 		//value에 있는 addressNo를 가져온다
 		var addressNo = $(this).val();
@@ -776,11 +778,9 @@ $(document).ready(function()
 	
 	//---------------------- resumeView js -----------------------------------------------------------
 	
-	//이력서 보기
-	$('#resumeViewShow').click(function(){
-		$('.includePage').css('display', 'none');
-		$('#resumeView').css('display', '');
-		
+	//학력, 경력 리스트 select하는 함수
+	function selectTeacherEduCrList()
+	{
 		//url
 		var ajaxSelectTeacherEduCrList = $('#ajaxSelectTeacherEduCrList').val();
 		
@@ -808,10 +808,10 @@ $(document).ready(function()
 							'</td><td>' + value.teacherEducationMajor + 
 							'</td><td>' + value.teacherEducationAdmission +
 							'</td><td>' + value.teacherEducationGraduation +
-							'</td><td><button type="button" class="btn btn-default btn-sm" id="modiEduList"' + 
-							'value="'+ value.teacherEducationNo +'">수정</button>' +
-							'</td><td><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
-							'value="'+ value.teacherEducationNo +'">삭제</button></td></tr>'
+							'</td><td><div><ul class="list-inline"><li><button type="button" class="btn btn-default btn-sm" id="modiEduList"' + 
+							'value="'+ value.teacherEducationNo +'">수정</button></li></ul></div>' +
+							'</td><td><div><ul class="list-inline"><li><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
+							'value="'+ value.teacherEducationNo +'">삭제</button></li></ul></div></td></tr>'
 					);
 				});
 				
@@ -831,6 +831,218 @@ $(document).ready(function()
 				});
 			}
 		});
+	}
+	
+	$('.resumeForm').css('display', 'none');
+	
+	//학력 추가하기 버튼을 눌렀을때
+	$('#addTeacherEduBtn').click(function()
+	{
+		if($('#addTeacherEduBtn').val() == 0) 
+		{
+			$('#teacherEduForm').css('display', '');
+			$('.submitInsertTeacherEdu').css('display', '');
+			$('.submitUpdateTeacherEdu').css('display', 'none');
+			$('#teacherEduForm')[0].reset();
+			$('#addTeacherEduBtn').val(1);
+		}
+		else
+		{
+			$('#teacherEduForm').css('display', 'none');
+			$('#addTeacherEduBtn').val(0);
+		}
+		
 	});
 	
+	//학력 수정하기 버튼을 눌렀을때
+	$('div').on('click', '#modiEduList', function()
+	{
+		var teacherEduNo = $(this).val();
+		$('#teacherEducationNo').val(teacherEduNo);
+		$('#teacherEduForm').css('display', '');
+		$('.submitInsertTeacherEdu').css('display', 'none');
+		$('.submitUpdateTeacherEdu').css('display', '');
+		$('#teacherEduForm')[0].reset();
+	});
+	
+	// 경력 추가하기 버튼을 눌렀을때
+	$('#addTeacherCrBtn').click(function()
+	{
+		if($('#addTeacherCrBtn').val() == 0)
+		{
+			$('#teacherCrForm').css('display', '');
+			$('.submitTeacherCr').text('입력완료');
+			$('#addTeacherCrBtn').text('입력폼 닫기');
+			$('#teacherCrForm')[0].reset();
+			$('#addTeacherCrBtn').val(1);
+			$('#teacherCrSubmit').val(1);
+		}
+		else
+		{
+			$('#teacherCrForm').css('display', 'none');
+			$('#addTeacherCrBtn').val(0);
+			$('#teacherCrSubmit').val(0);
+		}
+	});
+	
+	//경력 수정하기 버튼 눌었을때
+	$('div').on('click', '#modiCrList', function()
+	{
+		var teacherCrNo = $(this).val();
+		$('#teacherCareerNo').val(teacherCrNo);
+		$('#teacherCrForm').css('display', '');
+		$('.submitTeacherCr').text('수정완료');
+		$('#addTeacherCrBtn').text('입력폼 닫기');
+		$('#teacherCrForm')[0].reset();
+		$('#teacherCrSubmit').val(0);
+	});
+	
+	//이력서 보기
+	$('#resumeViewShow').click(function(){
+		$('.includePage').css('display', 'none');
+		$('#resumeView').css('display', '');
+		
+		selectTeacherEduCrList();
+	});
+	
+	//학력 정보 insert
+	$('#insertTeacherEdu').click(function()
+	{
+		//url
+		var ajaxInsertTeacherEducation = $('#ajaxInsertTeacherEducation').val();
+		//csrf token
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		
+		console.log($('#teacherEducationStatusNo').val());
+		
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		
+		//폼에서 입력한 값들 object화
+		var formData = $("#teacherEduForm").serializeObject();
+		console.log(formData);
+
+		$.ajax({
+			type : 'POST',
+			url : ajaxInsertTeacherEducation,
+			//formData를 json규격에 맞춤
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			//성공하면 result값을 따져서 alert창을 띄운다
+			success : function(result)
+			{
+				
+				console.log(result);
+				
+				if(result == 0)
+				{
+					alert('각 항목을 제대로 입력해주세요.');
+				}
+				$('#teacherEduForm').css('display', 'none');
+				$('#addTeacherEduBtn').val(0);
+				// 학력, 경력 리스트 셀렉트 함수를 날려 결과를 보여준다
+				selectTeacherEduCrList();
+			}
+		});
+	});
+	
+	//경력 정보 insert or update
+	$('#teacherCrSubmit').click(function()
+	{
+		//url
+		var url = null;
+		if($(this).val() == 1)
+		{
+			url = $('#ajaxInsertTeacherCareer').val();
+		}
+		else
+		{
+			url = $('#ajaxUpdateTeacherCareer').val();
+		}
+		//csrf token
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		
+		//폼에서 입력한 값들 object화
+		var formData = $("#teacherCrForm").serializeObject();
+		console.log(formData);
+
+		$.ajax({
+			type : 'POST',
+			url : url,
+			//formData를 json규격에 맞춤
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			//성공하면 result값을 따져서 alert창을 띄운다
+			success : function(result)
+			{
+				
+				console.log(result);
+				
+				if(result == 0)
+				{
+					alert('각 항목을 제대로 입력해주세요.');
+				}
+				$('#teacherCrForm').css('display', 'none');
+				$('#addTeacherCrBtn').val(0);
+				$(this).val(0);
+				// 학력, 경력 리스트 셀렉트 함수를 날려 결과를 보여준다
+				selectTeacherEduCrList();
+			}
+		});
+	});
 });

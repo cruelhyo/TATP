@@ -462,6 +462,8 @@ public class MemberService implements MemberServiceInterface{
 	//학력, 경력 리스트 가져오기
 	public Map<String, Object> selectTeacherEducationAndCareerList()
 	{
+		logger.info("selectTeacherEducationAndCareerList 호출");
+		
 		//현재 로그인한 회원 정보 가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memberId = user.getUsername();
@@ -479,8 +481,94 @@ public class MemberService implements MemberServiceInterface{
 		teacherCrEduListMap.put("teacherCrList", teacherCrList);
 		teacherCrEduListMap.put("teacherEduList", teacherEduList);
 		
-		return teacherCrEduListMap;
+		return teacherCrEduListMap;	
+	}
+	
+	//학력 정보 insert
+	@Override
+	public int insertTeacherEducation(TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("insertTeacherEducation 호출");
 		
+		//입력을 재데로 안했을시 0을 리턴
+		String admission =  teacherEducationVo.getTeacherEducationAdmission();
+		int classificationNo = teacherEducationVo.getTeacherEducationClassificationNo();
+		String graduation = teacherEducationVo.getTeacherEducationGraduation();
+		String major = teacherEducationVo.getTeacherEducationMajor();
+		String schoolName = teacherEducationVo.getTeacherEducationSchoolName();
+		int statusNo = teacherEducationVo.getTeacherEducationStatusNo();
+		if(admission == "" || classificationNo == 0 || graduation == "" || major == "" || schoolName == "" || statusNo == 0)
+		{
+			return 0;
+		}
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져와서 teacher_no가져와서 vo에 세팅
+		int memberNo = memberDao.selectMemberNo(memberId);
+		int teacherNo = memberDao.selectTeacherNo(memberNo);
+		teacherEducationVo.setTeacherNo(teacherNo);
+		logger.info("teacherEducationVo : " + teacherEducationVo.toString());
+		
+		int insertResult = memberDao.insertTeacherEducation(teacherEducationVo);
+		logger.info("insertResult : " + Integer.toString(insertResult));
+		
+		return insertResult;
+	}
+			
+	//경력 정보 insert
+	@Override
+	public int insertTeacherCareer(TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("insertTeacherCareer 호출");
+		
+		//입력을 재데로 안했을시 0을 리턴
+		String company = teacherCareerVo.getTeacherCareerCompany();
+		String department = teacherCareerVo.getTeacherCareerDepartment();
+		String employmentDate = teacherCareerVo.getTeacherCareerEmploymentDate();
+		String leaveDate = teacherCareerVo.getTeacherCareerLeaveDate();
+		String position = teacherCareerVo.getTeacherCareerPosition();
+		if(company == "" || department == "" || employmentDate == "" || leaveDate == "" || position == "")
+		{
+			return 0;
+		}
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져와서 teacher_no가져오기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		int teacherNo = memberDao.selectTeacherNo(memberNo);
+		teacherCareerVo.setTeacherNo(teacherNo);
+		logger.info("teacherCareerVo : " + teacherCareerVo.toString());
+		
+		int insertResult = memberDao.insertTeacherCareer(teacherCareerVo);
+		logger.info("insertResult : " + Integer.toString(insertResult));
+		
+		return insertResult;
+	}
+	
+	//학력 정보 update
+	@Override
+	public int updateTeacherEducation(TeacherEducationVo teacherEducationVo)
+	{
+		logger.info("updateTeacherEducation 호출");
+		int updateResult = memberDao.updateTeacherEducation(teacherEducationVo);
+		logger.info("updateResult : " + Integer.toString(updateResult));
+		return updateResult;
+	}
+	
+	//경력 정보 update
+	@Override
+	public int updateTeacherCareer(TeacherCareerVo teacherCareerVo)
+	{
+		logger.info("updateTeacherCareer 호출");
+		int updateResult = memberDao.updateTeacherCareer(teacherCareerVo);
+		logger.info("updateResult : " + Integer.toString(updateResult));
+		return updateResult;
 	}
 
 }

@@ -26,7 +26,8 @@
 	</div>
 	<!-- 회원가입폼 -->
 	<input type="hidden" id="ajaxIdCheck" value="<c:url value='/ajax/idCheck'/>">
-	<input type="hidden" id="ajaxnicknameCheck" value="<c:url value='/ajax/nicknameCheck'/>">
+	<input type="hidden" id="ajaxnickNameCheck" value="<c:url value='/ajax/nickNameCheck'/>">
+	<input type="hidden" id="ajaxinsertMember" value="<c:url value='/ajax/insertMember'/>">
 	<div class="container">
 		<div class="row">
 			<section>
@@ -67,7 +68,7 @@
 					</ul>
 				</div>
 				
-				<form role="form" >
+	<form role="form" name="insertfrom" id="insertfrom" action="" method="post" >
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="step1">
@@ -124,7 +125,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="password" class="form-control PW" id="PW" placeholder="비밀번호 입력" name="memberPw">
+												<input type="password" class="form-control PW" id="PW" placeholder="비밀번호 입력" name="memberPassword">
 												<input type="hidden" value="0" id="use_pw" name="use_pw">
 												<span id="pwch1"></span>
 												<br>
@@ -141,7 +142,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="password" class="form-control PW2" id="PW2" placeholder="비밀번호 재입력" name="memberPw2">
+												<input type="password" class="form-control PW2" id="PW2" placeholder="비밀번호 재입력" name="memberPasswordre">
 												<input type="hidden" value="0" id="use_pw2" name="use_pw2">
 												<span id="pwch3"></span>
 											</div>
@@ -172,7 +173,7 @@
 											<div class="col-sm-8">
 												<input type="radio" id="memberGender" name="memberGender" value="male"> Male
 												&nbsp;&nbsp; 
-												<input type="radio" id="memberGender" name="memberGender" value="female">Female
+												<input type="radio" id="memberGender" name="memberGender" value="female"> feMale
 											</div>       
 										</div>
 									</div>
@@ -204,7 +205,7 @@
 											</div>
 											<div class="col-sm-2">
 												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
-												<input type="button"  class="btn btn-default"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+												<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 											</div>
 										</div>
 									</div>
@@ -262,8 +263,8 @@
 											<div class="col-sm-5">
 												<stong>다음 사이트에서 제공하는 메일을 받아보시겠습니까?</stong>
 												&nbsp; 
-												<input type="radio" name="mailagreement" value="y">예 
-												<input type="radio" name="mailagreement" value="n">아니오<br>
+												<input type="radio" id="mailagreement" name="memberMailagreement" value="y">예 
+												<input type="radio" id="mailagreement" name="memberMailagreement" value="n">아니오<br>
 											</div>
 										</div>
 									</div>
@@ -273,7 +274,7 @@
 							</div>
 								<ul class="list-inline pull-right">
 									<li><button type="button" class="btn btn-default prev-step">이전 단계</button></li>
-									<li><button type="button" class="btn btn-primary next-step">다음 단계</button></li>
+									<li><button type="button" class="btn btn-primary next-step" >다음 단계</button></li>
 								</ul>
 								
 								
@@ -294,7 +295,12 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control memberNickname " id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
-													
+												<span id="nkch1"></span>
+												<br>
+												<span id="nkch2"></span>
+												<input type="hidden" value="0" id="use_nickname" name="use_nickname">
+												<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+												<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>			
 											</div>
 											
 											<div class="col-sm-2">
@@ -313,11 +319,11 @@
 												</p>
 											</label>
 											<div class="col-sm-8">
-												<input type="radio" name="hobby" value="hobby"> 외국어&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 운동&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 독서&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 예술&nbsp;&nbsp;
-												<input type="radio" name="hobby" value="hobby"> 기타&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="외국어"> 외국어&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="운동"> 운동&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="독서"> 독서&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="예술"> 예술&nbsp;&nbsp;
+												<input type="radio" name="memberHobby" value="기타"> 기타&nbsp;&nbsp;
 												<p>(선택사항입니다.)</p>
 											</div>       
 										</div>
@@ -329,10 +335,16 @@
 									<div class="row mar_ned"></div>
 								</div>
 								<ul class="list-inline pull-right">
+									
 									<li><button type="button"
 											class="btn btn-default prev-step">이전 단계</button></li>
 
-									<li><button type="button" class="btn btn-primary btn-info-full next-step">계속하기</button></li>
+									<li>
+									<button type="button" id ="submitBtn"class="btn btn-primary btn-info-full next-step submit">계속하기</button>
+									<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+									<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+									</li>
+								
 								</ul>
 							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">

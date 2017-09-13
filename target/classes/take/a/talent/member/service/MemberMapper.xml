@@ -28,6 +28,21 @@
 		<result property="memberMemo" column="member_memo" />
 	</resultMap>
 	
+	 <resultMap	type="take.a.talent.member.vo.JoinMemberVo" id="JoinMemberVo"> 
+		<result property="memberId" column="member_id" />
+		<result property="memberPassword" column="member_password" />
+		<result property="memberName" column="member_name" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberPhone" column="member_phone" />
+		<result property="memberBirthday" column="member_birthday" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberMailagreement" column="member_agreement" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberHobby" column="member_hobby" />
+		<result property="memberMemo" column="member_memo" />
+	</resultMap>
+	
 	<resultMap type="take.a.talent.member.vo.MemberAndAddressVo" id="MemberAndAddressVo">
 		<result property="memberId" column="member_id"/>
 		<result property="memberPassword" column="member_pw"/>
@@ -207,10 +222,10 @@
 	</select>
 	
 	<!-- 회원가입  수정중!!!!! -->
-	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
-		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
-		, member_address_detail, member_email, member_agreement)
-			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberPhone}, #{memberAddress}, #{memberAddressDetail},#{memberEmail},#{memberAgreement});
+	<insert id="insertMember" parameterType="take.a.talent.member.vo.JoinMemberVo">
+		INSERT INTO member(member_id, member_password, member_name, member_gender, member_birthday, member_phone,  member_email, member_agreement, member_hobby, member_nickname)
+			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberBirthday}, #{memberPhone}, 
+			#{memberEmail},#{memberMailagreement}, #{memberHobby}, #{memberNickname});
 			
 	</insert>
 	

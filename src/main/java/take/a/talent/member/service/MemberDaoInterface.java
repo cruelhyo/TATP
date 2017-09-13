@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
@@ -20,7 +21,7 @@ import take.a.talent.member.vo.TeacherVo;
 @Transactional
 public interface MemberDaoInterface {
 	//회원가입
-	int insertMember(MemberVo memberVo);
+	int insertMember(JoinMemberVo joinMemberVo);
 
 	//회원가입시 아이디 중복체크
 	boolean idCheck(String memberId);

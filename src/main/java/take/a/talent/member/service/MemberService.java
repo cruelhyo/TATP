@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
@@ -28,6 +29,14 @@ public class MemberService implements MemberServiceInterface{
 	
 	@Autowired
 	MemberDao memberDao;
+	
+
+	public int addMember(JoinMemberVo joinMemberVo){
+		
+		logger.info("addmember");
+		logger.info(joinMemberVo.toString());
+		return memberDao.insertMember(joinMemberVo);
+	}
 
 	//회원가입시 아이디 중복검사  
 	@Override

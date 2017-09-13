@@ -17,6 +17,7 @@ import com.mysql.fabric.xmlrpc.base.Member;
 import take.a.talent.member.controller.MemberController;
 import take.a.talent.member.vo.AddressAndClassificationVo;
 import take.a.talent.member.vo.IdChecker;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
@@ -37,17 +38,16 @@ public class MemberDao implements MemberDaoInterface{
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	
-	//회원정보 입력을 위한 메서드 선언
+	//회원가입
 	@Override
-	public int insertMember(MemberVo memberVo) {
+	public int insertMember(JoinMemberVo joinMemberVo) {
 		logger.info("DAO insertMember 호출");
-				
-		String encryptPassword = passwordEncoder.encode(memberVo.getMemberPassword());
+
+		//입력된 password를 db저장 전에 암호화 시킴
+		String encryptPassword = passwordEncoder.encode(joinMemberVo.getMemberPassword());
+		joinMemberVo.setMemberPassword(encryptPassword);
 		
-		memberVo.setMemberPassword(encryptPassword);
-		
-		
-		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", memberVo);
+		int row = sqlSessionTemplate.insert("take.a.talent.member.service.MemberMapper.insertMember", joinMemberVo);
 		return row;
 	}
 

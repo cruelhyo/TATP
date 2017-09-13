@@ -1,7 +1,5 @@
 package take.a.talent.member.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,11 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.vo.AddressAndClassificationVo;
+import take.a.talent.member.vo.JoinMemberVo;
 import take.a.talent.member.vo.MemberAccountVo;
 import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
@@ -28,6 +26,20 @@ public class MemberRestController
 	
 	@Autowired
     private MemberServiceInterface service;
+	
+	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다.  
+		//serializeObject에 의해서 input태그 안의 입력값들이 자동으로 배열형식으로 넘어오므로, VO의 프로퍼티명과 input태그의 name을 똑같이 써야한다.
+		@RequestMapping(value ="/ajax/insertMember**", method=RequestMethod.POST)
+		public String insertjoin(@RequestBody JoinMemberVo joinMemberVo) {
+			logger.info("join액션");
+			logger.info("VO값 확인"+joinMemberVo.toString());
+			
+			service.addMember(joinMemberVo);
+			
+			
+			return "redirect:/";
+		}
+	
 	
 	//회원(강사) 업데이트시 셀렉트
 	@RequestMapping(value ="/ajax/teacherPage/selectForUpdateMember", method=RequestMethod.GET)

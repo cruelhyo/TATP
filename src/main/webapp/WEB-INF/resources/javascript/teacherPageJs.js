@@ -5,11 +5,8 @@
 $(document).ready(function()
 {
 	
-	
-	
-	
-	$('.includePage').hide();
-	$('#modifiedMypage').show();
+	$('.includePage').css('display', 'none');
+	$('#modifiedMypage').css('display', '');
 	$(function () 
 	{
 	  	$('.navbar-toggle-sidebar').click(function () 
@@ -47,15 +44,15 @@ $(document).ready(function()
 	
 	//회원 정보 수정
 	$('#myPageShow').click(function(){
-		$('.includePage').hide();
-		$('#myPage').show();
+		$('.includePage').css('display', 'none');
+		$('#myPage').css('display', '');
 		selectForUpdateMember();
 	});
 	
 	// 포인트 충전 내역
 	$('#myPointHistoryShow').click(function(){
-		$('.includePage').hide();
-		$('#myPointHistory').show();
+		$('.includePage').css('display', 'none');
+		$('#myPointHistory').css('display', '');
 		
 		//url
 		var ajaxSelectPointHistoryList = $('#ajaxSelectPointHistoryList').val();
@@ -87,56 +84,54 @@ $(document).ready(function()
 	
 	//내 주소록 보기
 	$('#myAddressShow').click(function(){
-		$('.includePage').hide();
-		$('#myAddress').show();
+		$('.includePage').css('display', 'none');
+		$('#myAddress').css('display', '');
 		selectAddressListForTeacher();
 	});
 	
 	//포인트 충전하기
 	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
+		$('.includePage').css('display', 'none');
+		$('#myPoint').css('display', '');
 		// 현재 포인트 가져오기 함수
 		selectMemberPoint();
 	});
 	
 	//비밀번호 변경
 	$('#myChangePWShow').click(function(){
-		$('.includePage').hide();
-		$('#myChangePW').show();
+		$('.includePage').css('display', 'none');
+		$('#myChangePW').css('display', '');
+		// 변경버튼 disabled
+		$('.submitChangePW').prop('disabled', true);
 	});
 	
 	//환전하기
 	$('#myExchangeShow').click(function(){
-		$('.includePage').hide();
-		$('#myExchange').show();
+		$('.includePage').css('display', 'none');
+		$('#myExchange').css('display', '');
 		// 현재 포인트 가져오기 함수
 		selectMemberPoint();
 	});
 	
 	//내 정보 전체보기
 	$('#modifiedMypageShow').click(function(){
-		$('.includePage').hide();
-		$('#modifiedMypage').show();
+		$('.includePage').css('display', 'none');
+		$('#modifiedMypage').css('display', '');
 	});
 
 	//포트폴리오 보기
 	$('#portfolioShow').click(function(){
-		$('.includePage').hide();
-		$('#portfolio').show();
+		$('.includePage').css('display', 'none');
+		$('#portfolio').css('display', '');
 	});
 	
 	//이력서 등록
 	$('#resumeShow').click(function(){
-		$('.includePage').hide();
-		$('#resume').show();
+		$('.includePage').css('display', 'none');
+		$('#resume').css('display', '');
 	});
 	
-	//이력서 보기
-	$('#resumeViewShow').click(function(){
-		$('.includePage').hide();
-		$('#resumeView').show();
-	});
+	
 	
 	//강좌개설 보기
 	$('#myClassShow').click(function(){
@@ -146,7 +141,7 @@ $(document).ready(function()
 	
 	
 	// 주소추가폼 숨기기
-	$('.add').hide();
+	$('.add').css('display', 'none');
 	
 	//---------------------- memberUpdateFormForTeacher js ----------------------------------------------------
 	
@@ -225,7 +220,7 @@ $(document).ready(function()
 			beforeSend : function(xhr) 
 			{
 				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 				xhr.setRequestHeader(csrfHeader, csrfToken);
 			},
 			success : function(idExist)
@@ -268,7 +263,133 @@ $(document).ready(function()
 	$('#updateMemberBtn').click(function(){
 		$('#updateForm').submit();
 	});
+	//-------------------- memberChangePassword js -----------------------------------------------
 	
+	//입력해야할 것을 입력하면 submit 버튼 활성화 함수
+	function checksubmit() 
+	{
+		var pwcheck1 = $('#pwcheck1').val();
+		var pwcheck3 = $('#pwcheck3').val();
+		var checkResult = $('#checkResult').val();
+		if(pwcheck1 == 0 || pwcheck3 == 0 || checkResult == 0)
+		{
+			$('.submitChangePW').prop('disabled', true);
+		}
+		else
+		{
+			$('.submitChangePW').prop('disabled', false);
+		}
+	}
+	
+	// pw입력시 유효성 검사
+	$('.changePW1').keyup(function()
+	{
+		var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+		var in_pw = $('.changePW1').val();
+		if(!check.test(in_pw))
+		{
+			//비번이 유효하지 않을때
+			$('#pwcheck1').css('color', '#FF0000');
+			$('#pwcheck2').css('color', '#FF0000');
+			$('#pwcheck1').text('비밀번호가 유효하지 않습니다.');
+			$('#pwcheck2').text('영문,숫자,특수문자조합 8자이상 20이내입니다');
+			$('#pwcheck1').val(0);
+			$(".next-step").prop('disabled', true);
+			checksubmit();
+		}
+		else
+		{
+			//비번이 유효할때
+			$('#pwcheck1').css('color', '#008000');
+			$('#pwcheck1').text('비밀번호를 사용 가능합니다');
+			$('#pwcheck1').val(1);
+			$('#pwcheck2').css('display', 'none');
+			checksubmit();
+		}
+	});
+	
+	//비밀번호 일치여부
+	$('.changePW2').keyup(function()
+			{
+				var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+				var in_pw = $('.changePW1').val();
+				var in_pw2 = $('.changePW2').val();
+				var temp = 0;
+				if(!check.test(in_pw2))
+				{
+					temp = 0; //비번이 유효하지 않을때
+				} 
+				else 
+				{
+					temp = 1; //비번이 유효할때
+				}
+				
+				if(temp == 1)
+				{
+					if(in_pw == in_pw2)
+					{
+	            		$('#pwcheck3').css('color', '#008000');
+	            		$('#pwcheck3').text('비밀번호가 일치합니다');
+	            		$('#pwcheck3').val(1);
+	            		checksubmit();
+	            	}
+					else
+					{
+	            		$('#pwcheck3').css('color', '#FF0000');
+	            		$('#pwcheck3').text('비밀번호가 불일치합니다');
+	            		$('#pwcheck3').val(0);
+	        			$('#pwcheck3').focus();
+	        			checksubmit();
+	            	}
+				}
+				else
+				{
+					$('#pwcheck3').css('color', '#FF0000');
+					$('#pwcheck3').text('비밀번호가 유효하지 않습니다');
+					$('#pwcheck3').val(0);
+					checksubmit();
+					
+				}
+					
+				// 비밀번호 1,2 일치여부 확인 
+			});
+	
+	$('.passwordCheck').click(function()
+	{
+		var ajaxCheckMemberPassword = $('#ajaxCheckMemberPassword').val();
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		$.ajax(
+		{
+			type : 'POST',
+			url : ajaxCheckMemberPassword,
+			data : $('#nowPW').val(),
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(checkResult)
+			{
+				console.log(checkResult);
+				if(checkResult)
+				{
+					$('#checkResult').text('비밀번호 검사를 통과하셨습니다');
+					$('#checkResult').val(1);
+					checksubmit();
+				}
+				else
+				{
+					$('#checkResult').text('비밀번호가 정확하지 않습니다');
+					$('#checkResult').val(0);
+					checksubmit();
+				}
+				
+				
+			}
+		});
+	});
 	
 	//-------------------- address js ------------------------------------------------------------
 	
@@ -467,8 +588,8 @@ $(document).ready(function()
 	// 주소추가폼 보이기
 	$('div').on('click', '#plus', function(){
 		//폼 숨기기
-		$('.add').hide();
-		$('#address1').show();
+		$('.add').css('display', 'none');
+		$('#address1').css('display', '');
 		//포커싱
 		$('#addressClassificationNo').focus();
 		//추가하기 버튼 보이기
@@ -482,8 +603,8 @@ $(document).ready(function()
 		//value에 있는 addressNo를 가져온다
 		var addressNo = $(this).val();
 		$('.addressNoInForm').val(addressNo);
-		$('.add').hide();
-		$('#address1').show();
+		$('.add').css('display', 'none');
+		$('#address1').css('display', '');
 		//포커싱
 		$('#addressClassificationNo').focus();
 		//추가하기 버튼 숨기기
@@ -496,10 +617,10 @@ $(document).ready(function()
 	
 	//주소추가하기 버튼 누르면 폼 다시 사라짐
 	$('#plus2').click(function(){
-		$('.add').hide();
+		$('.add').css('display', 'none');
 	});
 	$('#plus3').click(function(){
-		$('.add').hide();
+		$('.add').css('display', 'none');
 	});
 
 	//-------------------------------- myPoint js ---------------------------------------
@@ -553,20 +674,20 @@ $(document).ready(function()
 	}
 	
 	// 환전내역 숨김과 동시에 환전 폼도 숨겨줍니다
-	$('.ExchangeHistory').hide();
-	$('.ExchangePointForm').hide();
+	$('.ExchangeHistory').css('display', 'none');
+	$('.ExchangePointForm').css('display', 'none');
 	
 	// 환전 내역 보이면서 환전 폼 숨기기
 	$('#ExchangeView').click(function(){
 		selectPontExchangeList();
-		$('#ExHistory').show();
-		$('.ExchangePointForm').hide();
+		$('#ExHistory').css('display', '');
+		$('.ExchangePointForm').css('display', 'none');
 	});
 	
 	//환전 폼 보이면서 환전 내역 숨기기
 	$('#Exchange').click(function(){
-		$('.ExchangePointForm').show();
-		$('#ExHistory').hide();
+		$('.ExchangePointForm').css('display', '');
+		$('#ExHistory').css('display', 'none');
 	});
 	
 	//포인트 환전하기 js
@@ -629,7 +750,7 @@ $(document).ready(function()
 	
 	//계좌관리
 	$('#myAccountShow').click(function(){
-		$('.includePage').hide();
+		$('.includePage').css('display', 'none');
 		
 		var ajaxSelectTeacherAccountNo = $('#ajaxSelectTeacherAccountNo').val();
 		$.ajax(
@@ -639,18 +760,77 @@ $(document).ready(function()
 			{
 				if(result == null)
 				{
-					$('#updateAccount').hide();
-					$('#insertAccount').show();
+					$('#updateAccount').css('display', 'none');
+					$('#insertAccount').css('display', '');
 				}
 				$('.bankNoUpdate').val(result.bankNo);
 				$('.accountHolderNameUpdate').val(result.accountHolderName);
 				$('.accountNumberUpdate').val(result.accountNumber);
-				$('#insertAccount').hide();
-				$('#updateAccount').show();
+				$('#insertAccount').css('display', 'none');
+				$('#updateAccount').css('display', '');
 			}
 		});
 		
-		$('#myAccount').show();
+		$('#myAccount').css('display', '');
+	});
+	
+	//---------------------- resumeView js -----------------------------------------------------------
+	
+	//이력서 보기
+	$('#resumeViewShow').click(function(){
+		$('.includePage').css('display', 'none');
+		$('#resumeView').css('display', '');
+		
+		//url
+		var ajaxSelectTeacherEduCrList = $('#ajaxSelectTeacherEduCrList').val();
+		
+		$.ajax(
+		{
+			url : ajaxSelectTeacherEduCrList,
+			dataType : 'json',
+			success : function(result)
+			{
+				console.log(result);
+				//tbody 초기화
+				$('#teacherEduTbody').empty();
+				$('#teacherCareerTbody').empty();
+				
+				//맵핑된 객체 변수 지정
+				educationList = result.teacherEduList;
+				careerList = result.teacherCrList;
+				
+				$.each(educationList, function(index, value)
+				{
+					$('#teacherEduTbody').append(
+							'<tr><td>' + value.teacherEducationClassificationName +
+							'</td><td>' + value.teacherEducationStatusName +
+							'</td><td>' + value.teacherEducationSchoolName +
+							'</td><td>' + value.teacherEducationMajor + 
+							'</td><td>' + value.teacherEducationAdmission +
+							'</td><td>' + value.teacherEducationGraduation +
+							'</td><td><button type="button" class="btn btn-default btn-sm" id="modiEduList"' + 
+							'value="'+ value.teacherEducationNo +'">수정</button>' +
+							'</td><td><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
+							'value="'+ value.teacherEducationNo +'">삭제</button></td></tr>'
+					);
+				});
+				
+				$.each(careerList, function(index, value)
+				{
+					$('#teacherCareerTbody').append(
+							'<tr><td>' + value.teacherCareerCompany +
+							'</td><td>' + value.teacherCareerDepartment + 
+							'</td><td>' + value.teacherCareerPosition +
+							'</td><td>' + value.teacherCareerEmploymentDate +
+							'</td><td>' + value.teacherCareerLeaveDate +
+							'</td><td><button type="button" class="btn btn-default btn-sm" id="modiCrList"' +
+							'value="'+ value.teacherCareerNo +'">수정</button>' +
+							'</td><td><button type="button" class="btn btn-default btn-sm" id="delCrList"' +
+							'value="'+ value.teacherCareerNo +'">삭제</button></td></tr>'
+					);
+				});
+			}
+		});
 	});
 	
 });

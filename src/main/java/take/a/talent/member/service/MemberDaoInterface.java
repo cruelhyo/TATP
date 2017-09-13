@@ -15,6 +15,8 @@ import take.a.talent.member.vo.MemberPointVo;
 //import com.mysql.fabric.xmlrpc.base.Member;
 
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherCareerVo;
+import take.a.talent.member.vo.TeacherEducationVo;
 import take.a.talent.member.vo.TeacherVo;
 
 
@@ -91,5 +93,20 @@ public interface MemberDaoInterface {
 	
 	//계좌 업데이트
 	int updateTeacherAccount(MemberAccountVo memberAccountVo);
+	
+	//비밀번호 체크시 비밀번호 select
+	String selectMemberPassword(int memberNo);
+	
+	//비밀번호 변경
+	int updatePassword(MemberVo memberVo);
+	
+	//학력 list 가져오기
+	List<TeacherEducationVo> selectTeacherEducationList(int teacherNo);
+	
+	//경력 list 가져오기
+	List<TeacherCareerVo> selectTeacherCareerList(int teacherNo);
+	
+	//teacher_no 가져오기
+	int selectTeacherNo(int memberNo);
 	
 }

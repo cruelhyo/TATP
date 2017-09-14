@@ -8,21 +8,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
+<%-- <script type="text/javascript" src="<c:url value='/resources/javascript/fileupload.js'/>"></script> --%>
+  <script>
     function fileSubmit() {
-    	var csrfToken = $('#csrfToken').val();
-		var csrfHeader = $('#csrfHeader').val();
+    	 var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val(); 
     	var formData = new FormData($("#fileForm")[0]);
         $.ajax({
             type : 'post',
-            url : 'fileUpload',
+            url : '/fileupload',
             data : formData,
-            beforeSend : function(xhr) 
+             beforeSend : function(xhr) 
 			{
+            	alert("ajax호출");
 				xhr.setRequestHeader("Accept", "application/json");
 				xhr.setRequestHeader("Content-Type", "application/json");
 				xhr.setRequestHeader(csrfHeader, csrfToken);
-			}, 
+			},  
             processData : false,
             contentType : false,
             success : function(html) {
@@ -36,18 +38,30 @@
         });
     }
 </script>
+
+ 
 </head>
  <body>
-<%--  ${pageContext.servletContext.contextPath}/multipleUpload?${_csrf.parameterName}=${_csrf.token} --%>
-
-    <form id="fileForm" action="/fileUpload?" method="post"
-        enctype="multipart/form-data">
+ 
+ 
+ <input type="hidden" id="fileupurl" value="<c:url value='/fileupload'/>">
+ 
+<%--  ${pageContext.servletContext.contextPath}/talent/test-upload?${_csrf.parameterName}=${_csrf.token} --%>
+/fileUpload?
+     <form id="fileForm" class="fileForm" action="${pageContext.servletContext.contextPath}/fileUpload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
         <input type="file" id="fileUp" name="fileUp"/><br/><br/>
         <input type="file" id="fileUp2" name="fileUp2"/><br/><br/>
-       	<input type="button" value="전송하기" onClick="fileSubmit();">
+          아이디 : <input type="text" name="id" />
+        비밀번호 : <input type="password" name="pw" /><br/><br/>
       	<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
-		<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+		<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/> 
+		
+       	 <input type="button" value="전송하기" onClick="fileSubmit();">
+       	<!-- <input type="submit" value="전송하기" class="btn fileup" id="fileup"> -->
+
     </form>
+    
+    
 </body>    
     
  

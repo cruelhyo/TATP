@@ -6,6 +6,10 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Locale;
 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,14 +37,10 @@ public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
 	
 	
-	
-	
-	
-	
-	@RequestMapping(value = "/fileUpload")
+	@RequestMapping(value = "/fileupload" , method=RequestMethod.POST)
     public String fileUp(MultipartHttpServletRequest multi) {
          
-		
+		logger.info("컨트롤러 호출 맨 ");
 		
 		
         // 저장 경로 설정
@@ -74,7 +74,7 @@ public class FileController {
         System.out.println("id : " + multi.getParameter("id"));
         System.out.println("pw : " + multi.getParameter("pw"));
          
-        return "ajaxUpload";
+        return "form";
     }
 	
 }

@@ -1,5 +1,7 @@
 package take.a.talent.member.controller;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
@@ -35,7 +39,10 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
-		
+	
+	
+	
+	
 
 	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
 	public String updateMember(MemberVo memberVo)

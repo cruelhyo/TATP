@@ -57,7 +57,7 @@ public class MainController
 	@RequestMapping(value = "/anonymous/fileuploadform", method = RequestMethod.GET)
 	public String fileupload()
 	{
-		return "user/fileuploadform";
+		return "file/simplefileuploadform";
 	}
 	
 }

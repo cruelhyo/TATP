@@ -482,6 +482,12 @@
 	</update>
 	
 	<!-- 학력 정보 delete -->
+	<delete id="deleteTeacherEducation" parameterType="int">
+		DELETE
+		FROM
+		teacher_education
+		WHERE teacher_education_no = #{teacherEducationNo};
+	</delete>
 	
 	<!-- 회원(강사) 주소 삭제 -->
 	<delete id="deleteAddressForTeacher" parameterType="int">

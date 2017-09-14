@@ -387,4 +387,13 @@ public class MemberDao implements MemberDaoInterface{
 		return updateResult;
 	}
 	
+	//학력 정보 delete
+	@Override
+	public int deleteTeacherEducation(int teacherEducationNo) 
+	{
+		logger.info("DAO deleteTeacherEducation 호출");
+		
+		return sqlSessionTemplate.delete("take.a.talent.member.service.MemberMapper.deleteTeacherEducation", teacherEducationNo);
+	};
+	
 }

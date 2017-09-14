@@ -570,5 +570,13 @@ public class MemberService implements MemberServiceInterface{
 		logger.info("updateResult : " + Integer.toString(updateResult));
 		return updateResult;
 	}
-
+	
+	//학력정보 삭제
+		@Override
+		public int deleteTeacherEducation(int teacherEducationNo)
+		{
+			logger.info("deleteTeacherEducation");
+			
+			return memberDao.deleteTeacherEducation(teacherEducationNo);
+		}
 }

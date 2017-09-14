@@ -121,4 +121,7 @@ public interface MemberDaoInterface {
 	//경력 정보 update
 	int updateTeacherCareer(TeacherCareerVo teacherCareerVo);
 	
+	//학력 정보 delete
+	int deleteTeacherEducation(int teacherEducationNo);
+	
 }

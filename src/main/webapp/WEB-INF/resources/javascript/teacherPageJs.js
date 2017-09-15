@@ -139,6 +139,13 @@ $(document).ready(function()
 		$('#myClass').show();
 	});
 	
+	//개설된 강좌 보기
+	$('#classShowForStudentShow').click(function(){
+		$('.includePage').hide();
+		$('#classShowForStudent').show();
+	});
+	
+	
 	
 	// 주소추가폼 숨기기
 	$('.add').css('display', 'none');
@@ -918,7 +925,8 @@ $(document).ready(function()
 	});
 	
 	
-	//학력 정보 update 만들어야 해. 수정form id="modiTeacherEduForm" 수정버튼 id="modiCrList" 수정완료 id="updateTeacherEdu"
+	//코드 작성해야 해요.
+	//학력 정보 update 만들어야 함. 수정form id="modiTeacherEduForm" 수정버튼 id="modiCrList" 수정완료 id="updateTeacherEdu"
 	//수정처리 ajax - id="ajaxUpdateTeacherEducation"
 	//모달창에 폼뜰때 폼 안에 수정하기 전 정보 들어가있는 상태로 만들어야함.
 	
@@ -954,8 +962,8 @@ $(document).ready(function()
 				ajaxSelectTeacherEduCrList();
 			});
 	
-	//경력 정보 insert or update -
-	//경력 insert form id = 
+	//경력 정보 insert or update - 수정해주세요
+	//경력 insert form id = "addTeacherCrForm"
 	
 	$('#teacherCrSubmit').click(function()
 	{

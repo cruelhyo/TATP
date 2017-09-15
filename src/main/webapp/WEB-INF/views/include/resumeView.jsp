@@ -278,7 +278,7 @@
 			
 <!------------------------------------------------ addTeacherCrModal시작부분 ------------------------------------------------>			
 			<!-- modal btn -->
-						<div id="addTeacherCr">  
+				<div id="addTeacherCr">  
 				<div class="control-label col-sm-12">
 					<p align="right">
 						<button type="button" class="btn btn-default" id="addTeacherCrBtn" 
@@ -289,7 +289,7 @@
 			<br>
 			<br>
 			
-			<form id="addTeacherCrForm">
+		<form id="addTeacherCrForm">
 			<!-- 경력추가 Modal시작부분-->
   			<div class="modal fade" id="addTeacherCrModal" role="dialog">
     			<div class="modal-dialog">

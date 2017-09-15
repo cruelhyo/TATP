@@ -100,7 +100,6 @@
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li><a href="#" id="portfolioShow">My Portfolio</a></li>
-												<li><a href="#" id="resumeShow">이력사항 관리</a></li>
 												<li><a href="#" id="resumeViewShow">내 이력보기</a></li>	
 											</ul>
 										</div>
@@ -117,7 +116,7 @@
 												<div class="panel-body">
 													<ul class="nav navbar-nav">
 														<li><a href="#" id="myClassShow">강좌개설</a></li>
-														<li><a href="#">class 2</a></li>
+														<li><a href="#" id="classShowForStudentShow">강좌보기</a></li>
 														<li><a href="#">class 3</a></li>
 													</ul>
 												</div>
@@ -176,10 +175,15 @@
 		<div role="tabpanel" class="tab-pane face in active includePage" id="resumeView">
 			<jsp:include page="../include/resumeView.jsp" flush="true"></jsp:include>
 		</div>
-		<!-- 이력서 보기-->
+		<!-- 강의오픈하기-->
 		<div role="tabpanel" class="tab-pane face in active includePage" id="myClass">
 			<jsp:include page="../include/myClass.jsp" flush="true"></jsp:include>
 		</div>
+		<!-- 내 수업 보기 -->
+		<div role="tabpanel" class="tab-pane face in active includePage" id="classShowForStudent">
+			<jsp:include page="../include/classShowForStudent.jsp" flush="true"></jsp:include>
+		</div>
+		
 	</div>
 </div>
 </body>

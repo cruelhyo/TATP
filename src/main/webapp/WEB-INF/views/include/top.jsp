@@ -16,13 +16,11 @@
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li> -->
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">무료강좌</a></li>
-						<li><a href="<c:url value='/anonymous/classSearch'/>">유료강좌</a></li>
+				
 						
-					</ul></li>
+				<li><a href="<c:url value='/anonymous/classSearch'/>">강좌찾기</a></li>
+						
+					
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
 					<ul class="dropdown-menu">

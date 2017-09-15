@@ -41,7 +41,8 @@ String fileName = "";
             byte[] bytes = uploadFile.getBytes();    // 유니코드 문자열을 인자로 지정된 캐릭터셋의 바이트 배열로 반환하는 메서드        
             
             //배포할때에
-            /* path = getSaveLocation(request);*/
+            /* path = getSaveLocation(request); // db에 저장될 이름을 만들때 저장되는 경로를 받아온다. */            
+            
             
             //로컬에서 테스트할때에
             path = "D:/TATProject/resource/";

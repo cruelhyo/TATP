@@ -1,4 +1,4 @@
-package take.a.talent.filecontroller;
+package take.a.talent.file.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import take.a.talent.file.service.FileServiceInterface;
 import take.a.talent.member.controller.MemberRestController;
@@ -39,9 +41,9 @@ public class FileUploadController {
 	
  
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String addFundingFile(Model model, Locale locale, MultipartHttpServletRequest request
+	public String UploadFile(Model model, Locale locale, MultipartHttpServletRequest request
 			, MultipartFile uploadFile, HttpServletResponse response) throws IOException {
-		logger.info("업로드 컨트롤러 호출 완료  ");
+		logger.info("FileUploadContorller UploadFile 호출완료  ");
 		logger.info("filename : "+uploadFile.getOriginalFilename());
 		logger.info("filesize : "+uploadFile.getSize());
 		
@@ -56,7 +58,7 @@ public class FileUploadController {
              writer.println("history.back();");
              writer.println("</script>");
              writer.flush();
-    		 /*return "pms/companyuser/myfundingposterimg";*/
+    		 /*return "pms/companyuser/myfundingposterimg";*/ //merge후 페이지 변경
              return "redirect:/";
 		} else {
 			// 10MB 이하
@@ -66,67 +68,26 @@ public class FileUploadController {
 			logger.info("result : "+result);
 			//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
 			fileServiceInterface.addPortfolioFile(uploadFile, result);
-			/*return "redirect:/fundingfilelistpage.pms";*/
+			/*return "redirect:/fundingfilelistpage.pms";*/ //merge후 페이지 변경
 			
 			return "redirect:/";
 		}
 	}
 	
 	
-	
-	
-	
-	// simplefileuploadform으로 받아와서 로컬저장만 되는 상태
-	/*@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(MultipartHttpServletRequest request, ModelMap model, HttpServletResponse response ) throws IllegalStateException, IOException{
-	Map<String, MultipartFile> files = request.getFileMap();
-	CommonsMultipartFile cmf = (CommonsMultipartFile) files.get("uploadFile");
-	// 경로
-	String path ="D:/TATProject/resource/"+cmf.getOriginalFilename(); //업로드 파일 저장경로 지정
+	// 펀딩파일 다운로드 요청
+		@RequestMapping(value = "/calldownload.pms")
+		public ModelAndView fileDownload(@RequestParam("fileFullPath") String fileFullPath, 
+		            HttpServletRequest request, HttpServletResponse response) throws Exception {
+			logger.info("FileUploadContorller addFundingFile 호출완료  ");
+			logger.info("fileFullPath : "+ fileFullPath);
+		    File downloadFile = new File(fileFullPath);
+		    if(!downloadFile.canRead()){
+		        throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+		    }
+		    return new ModelAndView("fileDownloadView", "downloadFile",downloadFile);
+		}
 
-	File file = new File(path);
-
-	
-	
-	logger.info("업로드 컨트롤러 호출 완료  ");
-
-	try {
-	// insert method
-		logger.info("try 실행완료  ");
-	
-	if(files.size() > 838860800 ){
-	// 10MB 이상
-		logger.info("if 실행완료  ");
-		model.addAttribute("resMessage", "업로드 실패");  
-		 response.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
-     writer.println("<script type='text/javascript'>");
-     writer.println("alert('용량이 10MB를 초과하였습니다');");
-     writer.println("history.back();");
-     writer.println("</script>");
-     writer.flush();
-	 return "redirect:/";
-} else {
-	// 10MB 이하일 경우 업로드한다.
-	
-	// 파일 업로드 처리 완료.
-	cmf.transferTo(file);
-	
-	logger.info("else 실행완료  ");
-	model.addAttribute("resMessage", "업로드 성공"); 
-	//리턴값으로 업로드된 경로+파일명을 가져온다.
-		String result = fileUtil.fileUpload(request, files);
-		logger.info("result : "+result);
-		//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-		service.addFundingFile(uploadFile, result, fdCode);
-		return "redirect:/";
-}
-	
-	} catch (Exception e) {
-	
-	}
-	return "url";
-	}*/
 
 	
 }

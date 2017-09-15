@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -22,13 +23,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import take.a.talent.member.controller.MemberRestController;
+import take.a.talent.util.FileUtil;
 
 @RestController
 public class FileUploadController {
  
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
 	
-	
+	@Autowired
+	private FileUtil fileUtil ;
 	
  
 	// simplefileuploadform으로 받아와서 로컬저장만 되는 상태
@@ -70,11 +73,11 @@ public class FileUploadController {
 	logger.info("else 실행완료  ");
 	model.addAttribute("resMessage", "업로드 성공"); 
 	//리턴값으로 업로드된 경로+파일명을 가져온다.
-/*	String result = fileutil.fileUpload(request, uploadFile);
-	log.debug("result : "+result);
-	//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-	service.addFundingFile(uploadFile, result, fdCode);*/
-	return "redirect:/";
+		String result = fileUtil.fileUpload(request, files);
+		logger.info("result : "+result);
+		//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
+		/*service.addFundingFile(uploadFile, result, fdCode);*/
+		return "redirect:/";
 }
 	
 	} catch (Exception e) {

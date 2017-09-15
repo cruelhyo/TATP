@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -25,8 +26,7 @@ String fileName = "";
 
 // 파일 업로드 기능을 갖는 메서드   
 // 리턴값으로 지정한 경로에 저장한 (path + uuid로 생성한 파일명) 을 리턴해줌
-    public String fileUpload(MultipartHttpServletRequest request,
-                                        MultipartFile uploadFile) {
+    public String fileUpload(MultipartHttpServletRequest request, Map<String, MultipartFile> files ) {
     	log.debug("FileUtil의 fileUpload 메소드 호출 성공");
     	String path = "";
         String fileName = "";
@@ -35,8 +35,8 @@ String fileName = "";
         PrintWriter printWriter = null;
         
         try {
-            fileName = uploadFile.getOriginalFilename();
-            byte[] bytes = uploadFile.getBytes();            
+            fileName = ((MultipartFile) files).getOriginalFilename();
+            byte[] bytes = ((MultipartFile) files).getBytes();            
             
             //배포할때에
              path = getSaveLocation(request);
@@ -71,7 +71,7 @@ String fileName = "";
             out.write(bytes);
             
             // 마임 타입은 image/jpg 형식이니 '/' 로 잘라서 [0]번째 배열의 값이 image인 것을 썸네일로 만들 것. 
-            String filetype = uploadFile.getContentType();
+            String filetype = ((MultipartFile) files).getContentType();
     		String[] searchfiletype = filetype.split("/");
     		log.debug("filetype : " + searchfiletype[0]);
             // 이미지파일일때 -> 펀딩이미지 밖에 없으므로 모두 크기를 조절해서 썸네일로 만들어줌

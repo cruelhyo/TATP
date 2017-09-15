@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileServiceInterface {
 
-	void addPortFolioFile(MultipartFile uploadFile, String result, int fdCode);
+	void addPortfolioFile(MultipartFile uploadFile, String result);
 
 }

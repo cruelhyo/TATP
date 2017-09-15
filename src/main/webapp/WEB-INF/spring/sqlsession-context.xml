@@ -24,7 +24,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:take/a/talent/member/service/MemberMapper.xml</value>
-
+				<value>classpath:take/a/talent/file/service/FileUploadMapper.xml</value>
 			</list>
 		</property>
 	</bean>

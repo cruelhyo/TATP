@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import take.a.talent.file.service.FileServiceInterface;
 import take.a.talent.member.controller.MemberRestController;
 import take.a.talent.util.FileUtil;
 
@@ -29,6 +30,9 @@ import take.a.talent.util.FileUtil;
 public class FileUploadController {
  
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
+	
+	@Autowired
+	private FileServiceInterface fileServiceInterface ;
 	
 	@Autowired
 	private FileUtil fileUtil ;
@@ -61,8 +65,10 @@ public class FileUploadController {
 			String result = fileUtil.fileUpload(request, uploadFile);
 			logger.info("result : "+result);
 			//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-			/*service.addFundingFile(uploadFile, result, fdCode);*/
-			return "redirect:/fundingfilelistpage.pms";
+			fileServiceInterface.addPortfolioFile(uploadFile, result);
+			/*return "redirect:/fundingfilelistpage.pms";*/
+			
+			return "redirect:/";
 		}
 	}
 	

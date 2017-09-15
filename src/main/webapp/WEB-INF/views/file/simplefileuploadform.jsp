@@ -16,33 +16,14 @@
 
 </head>
 <body>
-	<
-	<!--simple form  -->
-	<%-- <form method="POST" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath}/test-upload?${_csrf.parameterName}=${_csrf.token}">
-		<div>
-			<input type="file" name="file" />
-			<input type="submit" value="Upload" />
-			<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
-			<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
-		</div>
-	</form> --%>
-
-
-<%-- <form method="POST" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath}/test-upload?${_csrf.parameterName}=${_csrf.token}">--%>
-
 	<!--simple form2  ${pageContext.servletContext.contextPath}/insert?${_csrf.parameterName}=${_csrf.token}--> 
-	
+	<!-- local에는 저장되는 업로드 폼  -->
 	<form id="inserForm" action="${pageContext.servletContext.contextPath}/insert?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="POST">
 		<input type="file" id="uploadFile" name="uploadFile"><br> <br>
-		<input type="file" id="uploadFile2" name="uploadFile2">
 		<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 			<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 			<input type="submit" value="Upload" />
 	</form>
-
-
-
-
 </body>
 
 

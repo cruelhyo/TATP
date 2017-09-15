@@ -58,10 +58,10 @@ public class FileUploadController {
 			// 10MB 이하
 			logger.info("else문 실행  ");
 			//리턴값으로 업로드된 경로+파일명을 가져온다.
-			/*String result = fileutil.fileUpload(request, uploadFile);
-			log.debug("result : "+result);
+			String result = fileUtil.fileUpload(request, uploadFile);
+			logger.info("result : "+result);
 			//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-			service.addFundingFile(uploadFile, result, fdCode);*/
+			/*service.addFundingFile(uploadFile, result, fdCode);*/
 			return "redirect:/fundingfilelistpage.pms";
 		}
 	}

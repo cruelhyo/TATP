@@ -12,22 +12,28 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import take.a.talent.member.controller.MemberRestController;
+
 @Component
 public class FileUtil {
-private Logger log = Logger.getLogger(this.getClass());
-String fileName = "";
+
+	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
+	
+	
+	String fileName = "";
     
 
 
 // 파일 업로드 기능을 갖는 메서드   
 // 리턴값으로 지정한 경로에 저장한 (path + uuid로 생성한 파일명) 을 리턴해줌
     public String fileUpload(MultipartHttpServletRequest request, Map<String, MultipartFile> files ) {
-    	log.debug("FileUtil의 fileUpload 메소드 호출 성공");
+    	logger.info("FileUtil의 fileUpload 메소드 호출 성공");
     	String path = "";
         String fileName = "";
         
@@ -39,12 +45,12 @@ String fileName = "";
             byte[] bytes = ((MultipartFile) files).getBytes();            
             
             //배포할때에
-             path = getSaveLocation(request);
-            /*//로컬에서 테스트할때에
-            path = "C:/Users/Administrator/git/pineapplefunding/pineapple/src/main/webapp/resources/files/";*/
+             /*path = getSaveLocation(request);*/
+            //로컬에서 테스트할때에
+            path = "D:/TATProject/inserver/";
             
-            log.debug("UtilFile fileUpload fileName : " + fileName);
-            log.debug("UtilFile fileUpload uploadPath : " + path);
+             logger.info("UtilFile fileUpload fileName : " + fileName);
+             logger.info("UtilFile fileUpload uploadPath : " + path);
             
             File file = new File(path);
             
@@ -61,11 +67,11 @@ String fileName = "";
                 }
             }
             
-            log.debug("UtilFile fileUpload final fileName : " + fileName);
-            log.debug("UtilFile fileUpload file : " + file);
+            logger.info("UtilFile fileUpload final fileName : " + fileName);
+            logger.info("UtilFile fileUpload file : " + file);
             
             out = new FileOutputStream(file);
-            log.debug("UtilFile fileUpload out : " + out);
+            logger.info("UtilFile fileUpload out : " + out);
 
             // 업로드를 마무리 해주는 write메서드 // 이후에 이미지일때는 썸네일로 만들어줌
             out.write(bytes);
@@ -73,10 +79,10 @@ String fileName = "";
             // 마임 타입은 image/jpg 형식이니 '/' 로 잘라서 [0]번째 배열의 값이 image인 것을 썸네일로 만들 것. 
             String filetype = ((MultipartFile) files).getContentType();
     		String[] searchfiletype = filetype.split("/");
-    		log.debug("filetype : " + searchfiletype[0]);
+    		logger.info("filetype : " + searchfiletype[0]);
             // 이미지파일일때 -> 펀딩이미지 밖에 없으므로 모두 크기를 조절해서 썸네일로 만들어줌
             if(searchfiletype[0].equals("image")){
-            	log.debug("업로드한 파일이 이미지파일로 인식되었습니다");
+            	logger.info("업로드한 파일이 이미지파일로 인식되었습니다");
             	
             	//썸네일 가로사이즈
                 int thumbnail_width = 300;
@@ -89,7 +95,7 @@ String fileName = "";
                 graphic.drawImage(bfimage, 0, 0, thumbnail_width, thumbnail_height, null);
                 // 다시 원본의 경로에 만들어준 썸네일을 덮어쓴다
                 ImageIO.write(bfthumbnailimage, "jpg", file);
-                log.debug("썸네일 생성완료");
+                logger.info("썸네일 생성완료");
 
             }
       
@@ -118,7 +124,7 @@ String fileName = "";
         String uploadPath = request.getSession().getServletContext().getRealPath("/");
         String attachPath = "resources/files/";
        
-        log.debug("UtilFile getSaveLocation path : " + uploadPath + attachPath);
+        logger.info("UtilFile getSaveLocation path : " + uploadPath + attachPath);
         return uploadPath + attachPath;
 	}
     
@@ -126,8 +132,8 @@ String fileName = "";
 // 		파일 삭제 메소드
     
     public String deleteFile(String fileFullPath){
-    	log.debug("FileUtil의 deleteFile호출 성공");
-    	log.debug("fileFullPath : " + fileFullPath);
+    	logger.info("FileUtil의 deleteFile호출 성공");
+    	logger.info("fileFullPath : " + fileFullPath);
     	File file = new File(fileFullPath);
     	if(file.exists()) {
     	      file.delete();

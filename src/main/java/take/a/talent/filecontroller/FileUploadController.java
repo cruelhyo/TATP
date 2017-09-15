@@ -25,7 +25,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import take.a.talent.member.controller.MemberRestController;
 import take.a.talent.util.FileUtil;
 
-@RestController
+@Controller
 public class FileUploadController {
  
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
@@ -34,8 +34,44 @@ public class FileUploadController {
 	private FileUtil fileUtil ;
 	
  
-	// simplefileuploadform으로 받아와서 로컬저장만 되는 상태
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String addFundingFile(Model model, Locale locale, MultipartHttpServletRequest request
+			, MultipartFile uploadFile, HttpServletResponse response) throws IOException {
+		logger.info("업로드 컨트롤러 호출 완료  ");
+		logger.info("filename : "+uploadFile.getOriginalFilename());
+		logger.info("filesize : "+uploadFile.getSize());
+		
+		// 용량 제한을 10MB로 해줘서 튕겨낸다
+		if(uploadFile.getSize() > 83886080){
+    		// 10MB 이상
+			logger.info("if문 실행  ");
+    		 response.setCharacterEncoding("UTF-8");
+             PrintWriter writer = response.getWriter();
+             writer.println("<script type='text/javascript'>");
+             writer.println("alert('용량이 10MB를 초과하였습니다');");
+             writer.println("history.back();");
+             writer.println("</script>");
+             writer.flush();
+    		 /*return "pms/companyuser/myfundingposterimg";*/
+             return "redirect:/";
+		} else {
+			// 10MB 이하
+			logger.info("else문 실행  ");
+			//리턴값으로 업로드된 경로+파일명을 가져온다.
+			/*String result = fileutil.fileUpload(request, uploadFile);
+			log.debug("result : "+result);
+			//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
+			service.addFundingFile(uploadFile, result, fdCode);*/
+			return "redirect:/fundingfilelistpage.pms";
+		}
+	}
+	
+	
+	
+	
+	
+	// simplefileuploadform으로 받아와서 로컬저장만 되는 상태
+	/*@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(MultipartHttpServletRequest request, ModelMap model, HttpServletResponse response ) throws IllegalStateException, IOException{
 	Map<String, MultipartFile> files = request.getFileMap();
 	CommonsMultipartFile cmf = (CommonsMultipartFile) files.get("uploadFile");
@@ -57,12 +93,12 @@ public class FileUploadController {
 		logger.info("if 실행완료  ");
 		model.addAttribute("resMessage", "업로드 실패");  
 		 response.setCharacterEncoding("UTF-8");
-	/*	PrintWriter writer = response.getWriter();
+		PrintWriter writer = response.getWriter();
      writer.println("<script type='text/javascript'>");
      writer.println("alert('용량이 10MB를 초과하였습니다');");
      writer.println("history.back();");
      writer.println("</script>");
-     writer.flush();*/
+     writer.flush();
 	 return "redirect:/";
 } else {
 	// 10MB 이하일 경우 업로드한다.
@@ -76,7 +112,7 @@ public class FileUploadController {
 		String result = fileUtil.fileUpload(request, files);
 		logger.info("result : "+result);
 		//업로드된 경로+파일명 그리고 나머지 정보를 DB에 저장해줌
-		/*service.addFundingFile(uploadFile, result, fdCode);*/
+		service.addFundingFile(uploadFile, result, fdCode);
 		return "redirect:/";
 }
 	
@@ -84,7 +120,7 @@ public class FileUploadController {
 	
 	}
 	return "url";
-	}
+	}*/
 
 	
 }

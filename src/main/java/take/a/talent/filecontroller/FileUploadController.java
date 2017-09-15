@@ -24,7 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import take.a.talent.member.controller.MemberRestController;
 
 @RestController
-public class Simple {
+public class FileUploadController {
  
 	private static final Logger logger = LoggerFactory.getLogger(MemberRestController.class);
 	

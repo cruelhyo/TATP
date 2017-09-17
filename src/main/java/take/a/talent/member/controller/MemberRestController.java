@@ -224,6 +224,7 @@ public class MemberRestController
 	public int insertTeacherEducation(@RequestBody TeacherEducationVo teacherEducationVo)
 	{
 		logger.info("insertTeacherEducation 호출");
+		logger.info("teacherEducationVo : " + teacherEducationVo.toString());
 		
 		return service.insertTeacherEducation(teacherEducationVo);
 	}
@@ -233,6 +234,7 @@ public class MemberRestController
 	public int insertTeacherCareer(@RequestBody TeacherCareerVo teacherCareerVo)
 	{
 		logger.info("insertTeacherCareer 호출");
+		logger.info("teacherEducationVo : " + teacherCareerVo.toString());
 		
 		return service.insertTeacherCareer(teacherCareerVo);
 	}
@@ -242,6 +244,7 @@ public class MemberRestController
 	public int updateTeacherEducation(@RequestBody TeacherEducationVo teacherEducationVo)
 	{
 		logger.info("updateTeacherEducation 호출");
+		logger.info("teacherEducationVo : " + teacherEducationVo.toString());
 		
 		return service.updateTeacherEducation(teacherEducationVo);
 	}
@@ -251,16 +254,17 @@ public class MemberRestController
 	public int updateTeacherCareer(@RequestBody TeacherCareerVo teacherCareerVo)
 	{
 		logger.info("updateTeacherCareer 호출");
+		logger.info("teacherEducationVo : " + teacherCareerVo.toString());
 		
 		return service.updateTeacherCareer(teacherCareerVo);
 	}
 	
 	//학력 정보 삭제
-		@RequestMapping(value="/ajax/deleteTeacherEducation", method=RequestMethod.POST)
-		public int deleteTeacherEducation(@RequestBody int teacherEducationNo)
-		{
-			logger.info("deleteTeacherEducation");
-			
-			return service.deleteTeacherEducation(teacherEducationNo);
-		}
+	@RequestMapping(value="/ajax/deleteTeacherEducation", method=RequestMethod.POST)
+	public int deleteTeacherEducation(@RequestBody int teacherEducationNo)
+	{
+		logger.info("deleteTeacherEducation");
+		
+		return service.deleteTeacherEducation(teacherEducationNo);
+	}
 }

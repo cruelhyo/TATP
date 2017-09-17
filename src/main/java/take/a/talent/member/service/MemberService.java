@@ -497,7 +497,7 @@ public class MemberService implements MemberServiceInterface{
 		String major = teacherEducationVo.getTeacherEducationMajor();
 		String schoolName = teacherEducationVo.getTeacherEducationSchoolName();
 		int statusNo = teacherEducationVo.getTeacherEducationStatusNo();
-		if(admission == "" || classificationNo == 0 || graduation == "" || major == "" || schoolName == "" || statusNo == 0)
+		if(admission == null || classificationNo == 0 || graduation == null || major == null || schoolName == null || statusNo == 0)
 		{
 			return 0;
 		}
@@ -530,7 +530,7 @@ public class MemberService implements MemberServiceInterface{
 		String employmentDate = teacherCareerVo.getTeacherCareerEmploymentDate();
 		String leaveDate = teacherCareerVo.getTeacherCareerLeaveDate();
 		String position = teacherCareerVo.getTeacherCareerPosition();
-		if(company == "" || department == "" || employmentDate == "" || leaveDate == "" || position == "")
+		if(company == null || department == null || employmentDate == null || leaveDate == null || position == null)
 		{
 			return 0;
 		}
@@ -556,6 +556,19 @@ public class MemberService implements MemberServiceInterface{
 	public int updateTeacherEducation(TeacherEducationVo teacherEducationVo)
 	{
 		logger.info("updateTeacherEducation 호출");
+		
+		//입력을 재데로 안했을시 0을 리턴
+		String admission =  teacherEducationVo.getTeacherEducationAdmission();
+		int classificationNo = teacherEducationVo.getTeacherEducationClassificationNo();
+		String graduation = teacherEducationVo.getTeacherEducationGraduation();
+		String major = teacherEducationVo.getTeacherEducationMajor();
+		String schoolName = teacherEducationVo.getTeacherEducationSchoolName();
+		int statusNo = teacherEducationVo.getTeacherEducationStatusNo();
+		if(admission == null || classificationNo == 0 || graduation == null || major == null || schoolName == null || statusNo == 0)
+		{
+			return 0;
+		}
+		
 		int updateResult = memberDao.updateTeacherEducation(teacherEducationVo);
 		logger.info("updateResult : " + Integer.toString(updateResult));
 		return updateResult;
@@ -566,6 +579,18 @@ public class MemberService implements MemberServiceInterface{
 	public int updateTeacherCareer(TeacherCareerVo teacherCareerVo)
 	{
 		logger.info("updateTeacherCareer 호출");
+		
+		//입력을 재데로 안했을시 0을 리턴
+		String company = teacherCareerVo.getTeacherCareerCompany();
+		String department = teacherCareerVo.getTeacherCareerDepartment();
+		String employmentDate = teacherCareerVo.getTeacherCareerEmploymentDate();
+		String leaveDate = teacherCareerVo.getTeacherCareerLeaveDate();
+		String position = teacherCareerVo.getTeacherCareerPosition();
+		if(company == null || department == null || employmentDate == null || leaveDate == null || position == null)
+		{
+			return 0;
+		}
+		
 		int updateResult = memberDao.updateTeacherCareer(teacherCareerVo);
 		logger.info("updateResult : " + Integer.toString(updateResult));
 		return updateResult;

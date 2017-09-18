@@ -822,7 +822,20 @@ $(document).ready(function()
 					);
 					
 					$('#modiEduList').click(function()
-							{ $('#modiEduListModal').css('display','')});
+					{
+						//폼초기화
+						$('#modiTeacherEduForm')[0].reset();
+						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
+						var teacherEduNo = $(this).val();
+						$('#teacherEduNo').val(teacherEduNo);
+						console.log(teacherCrNo);
+						
+						$('#modiEduListModal').css('display','');
+						
+						//submit 버튼의 val값을 변경해준다
+						$('.submitBtn').val(0);
+						$('#updateTeacherEdu').val(1);
+					});
 					
 				});
 				
@@ -841,16 +854,25 @@ $(document).ready(function()
 					);
 					
 					$('#modiCrList').click(function()
-							{ $('#modiTeacherCrModal').css('display','')});
+					{ 
+						//폼초기화
+						$('#modiTeacherCrForm')[0].reset();
+						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
+						var teacherCrNo = $(this).val();
+						$('#teacherCrNo').val(teacherCrNo);
+						console.log(teacherCrNo);
+						
+						$('#modiTeacherCrModal').css('display','');
+						
+						//submit 버튼의 val값을 변경해준다
+						$('.submitBtn').val(0);
+						$('#updateTeacherCr').val(1);
+					});
 
 				});
 			}
 		});
 	};
-	
-	
-	
-	
 	
 	//이력서 보기
 	$('#resumeViewShow').click(function(){
@@ -860,153 +882,94 @@ $(document).ready(function()
 		selectTeacherEduCrList();
 	});
 	
-	//학력 정보 insert
-	$('#insertTeacherEdu').click(function()
+	// 추가하기 버튼이나 수정 버튼을 클릭하면 submit 버튼의 val값을 바꿔서 ajax실행전 if문을 이용해 url을 구분해서 실행한다
+	
+	//학력추가하기 버튼 클릭시
+	$('#addTeacherEduBtn').click(function()
 	{
-		//url
-		var ajaxInsertTeacherEducation = $('#ajaxInsertTeacherEducation').val();
+		$('.submitBtn').val(0);
+		$('#insertTeacherEdu').val(1);
+		$('#addTeacherEduForm')[0].reset();
+	});
+	
+	//경력 추가하기 버튼 클릭시
+	$('#addTeacherCrBtn').click(function()
+	{
+		$('.submitBtn').val(0);
+		$('#insertTeacherCr').val(1);
+		$('#addTeacherCrForm')[0].reset();
+	});
+	
+	
+	//폼 submit 클릭시 실행하는 함수
+	$('.submitBtn').click(function()
+	{
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		
+		var url = null
+		var formData = null
+		
+		//버튼의 val 값을 비교하여 url과 formData를 지정한다
+		if($('#insertTeacherEdu').val() == 1)
+		{
+			console.log('학력 정보 입력');
+			//url
+			url = $('#ajaxInsertTeacherEducation').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#addTeacherEduForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#insertTeacherCr').val() == 1)
+		{
+			console.log('경력 정보 입력');
+			//url
+			url = $('#ajaxInsertTeacherCareer').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#addTeacherCrForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#updateTeacherEdu').val() == 1)
+		{
+			console.log('학력 정보 수정');
+			//url
+			url = $('#ajaxUpdateTeacherEducation').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#modiTeacherEduForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#updateTeacherCr').val() == 1)
+		{
+			console.log('경력 정보 수정');
+			//url
+			url = $('#ajaxUpdateTeacherCareer').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#modiTeacherCrForm").serializeObject();
+			console.log(formData);
+		}
+		
 		//csrf token
 		var csrfToken = $('#csrfToken').val();
 		var csrfHeader = $('#csrfHeader').val();
 		
-		console.log($('#teacherEducationStatusNo').val());
-		
-		//폼에서 입력한 값들을 name을 기준으로 맵핑
-		$.fn.serializeObject = function()
-		{
-		    var o = {};
-		    var a = this.serializeArray();
-		    $.each(a, function() {
-		    	var name = $.trim(this.name),
-		    		value = $.trim(this.value);
-		    	
-		        if (o[name]) {
-		            if (!o[name].push) {
-		                o[name] = [o[name]];
-		            }
-		            o[name].push(value || '');
-		        } else {
-		            o[name] = value || '';
-		        }
-		    });
-		    return o;
-		};
-		
-		//폼에서 입력한 값들 object화
-		var formData = $("#addTeacherEduForm").serializeObject();
-		console.log(formData);
-
-		$.ajax({
-			type : 'POST',
-			url : ajaxInsertTeacherEducation,
-			//formData를 json규격에 맞춤
-			data : JSON.stringify(formData),
-			dataType : 'json',
-			//header에 accept, context type그리고 csrf를 먼저 보낸다
-			beforeSend : function(xhr) 
-			{
-				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-				xhr.setRequestHeader(csrfHeader, csrfToken);
-			},
-			//성공하면 result값을 따져서 alert창을 띄운다
-			success : function(result)
-			{
-				
-				console.log(result);
-				
-				if(result == 0)
-				{
-					alert('각 항목을 제대로 입력해주세요.');
-				}
-				$('#addTeacherEduForm').css('display', 'none');
-				$('#addTeacherEduBtn').val(0);
-				// 학력, 경력 리스트 셀렉트 함수를 날려 결과를 보여준다
-				selectTeacherEduCrList();
-			}
-		});
-	});
-	
-	
-	//코드 작성해야 해요.
-	//학력 정보 update 만들어야 함. 수정form id="modiTeacherEduForm" 수정버튼 id="modiCrList" 수정완료 id="updateTeacherEdu"
-	//수정처리 ajax - id="ajaxUpdateTeacherEducation"
-	//모달창에 폼뜰때 폼 안에 수정하기 전 정보 들어가있는 상태로 만들어야함.
-	
-	
-	//학력 정보 삭제
-	$('#delEduList').click(function()
-			{
-				//url
-				var ajaxDeleteTeacherEducation = $('#ajaxDeleteTeacherEducation').val();
-				//csrf
-				var csrfToken = $('#csrfToken').val();
-				var csrfHeader = $('#csrfHeader').val();
-				//value에 담겨있는 addressNo를 가져온다
-				var teacherEducationNo = $(this).val();
-				
-				$.ajax({
-					type : 'POST',
-					url : ajaxDeleteTeacherEducation,
-					data : teacherEducationNo,
-					//header에 accept, context type그리고 csrf를 먼저 보낸다
-					beforeSend : function(xhr) 
-					{
-						xhr.setRequestHeader("Accept", "application/json");
-						xhr.setRequestHeader("Content-Type", "application/json");
-						xhr.setRequestHeader(csrfHeader, csrfToken);
-					},
-					success : function(result)
-					{
-						console.log(result);
-					}
-				});
-				// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
-				ajaxSelectTeacherEduCrList();
-			});
-	
-	//경력 정보 insert or update - 수정해주세요
-	//경력 insert form id = "addTeacherCrForm"
-	
-	$('#teacherCrSubmit').click(function()
-	{
-		//url
-		var url = null;
-		if($(this).val() == 1)
-		{
-			//url
-			var ajaxInsertTeacherEducation = $('#ajaxInsertTeacherCareer').val();
-			//csrf token
-			var csrfToken = $('#csrfToken').val();
-			var csrfHeader = $('#csrfHeader').val();
-			
-			console.log($('#teacherCareerCompany').val());
-		}
-			
-		
-		//폼에서 입력한 값들을 name을 기준으로 맵핑
-		$.fn.serializeObject = function()
-		{
-		    var o = {};
-		    var a = this.serializeArray();
-		    $.each(a, function() {
-		    	var name = $.trim(this.name),
-		    		value = $.trim(this.value);
-		    	
-		        if (o[name]) {
-		            if (!o[name].push) {
-		                o[name] = [o[name]];
-		            }
-		            o[name].push(value || '');
-		        } else {
-		            o[name] = value || '';
-		        }
-		    });
-		    return o;
-		};
-		
-		//폼에서 입력한 값들 object화
-		var formData = $("#addTeacherCrForm").serializeObject();
 		console.log(formData);
 
 		$.ajax({
@@ -1032,12 +995,50 @@ $(document).ready(function()
 				{
 					alert('각 항목을 제대로 입력해주세요.');
 				}
-				$('#addTeacherCrForm').css('display', 'none');
-				$('#addTeacherCrBtn').val(0);
-				$(this).val(0);
+				$('#addTeacherEduForm').css('display', 'none');
+				$('.submitBtn').val(0);
 				// 학력, 경력 리스트 셀렉트 함수를 날려 결과를 보여준다
 				selectTeacherEduCrList();
 			}
 		});
 	});
+	
+	
+	//코드 작성해야 해요.
+	//학력 정보 update 만들어야 함. 수정form id="modiTeacherEduForm" 수정버튼 id="modiCrList" 수정완료 id="updateTeacherEdu"
+	//수정처리 ajax - id="ajaxUpdateTeacherEducation"
+	//모달창에 폼뜰때 폼 안에 수정하기 전 정보 들어가있는 상태로 만들어야함.
+	
+	
+	//학력 정보 삭제
+	$('#delEduList').click(function()
+	{
+		//url
+		var ajaxDeleteTeacherEducation = $('#ajaxDeleteTeacherEducation').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		//value에 담겨있는 addressNo를 가져온다
+		var teacherEducationNo = $(this).val();
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxDeleteTeacherEducation,
+			data : teacherEducationNo,
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+		ajaxSelectTeacherEduCrList();
+	});
+	
 });

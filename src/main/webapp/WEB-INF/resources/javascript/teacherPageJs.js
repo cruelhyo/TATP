@@ -823,6 +823,8 @@ $(document).ready(function()
 					
 					$('#modiEduList').click(function()
 					{
+						//폼초기화
+						$('#modiTeacherEduForm')[0].reset();
 						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
 						var teacherEduNo = $(this).val();
 						$('#teacherEduNo').val(teacherEduNo);
@@ -853,6 +855,8 @@ $(document).ready(function()
 					
 					$('#modiCrList').click(function()
 					{ 
+						//폼초기화
+						$('#modiTeacherCrForm')[0].reset();
 						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
 						var teacherCrNo = $(this).val();
 						$('#teacherCrNo').val(teacherCrNo);
@@ -885,6 +889,7 @@ $(document).ready(function()
 	{
 		$('.submitBtn').val(0);
 		$('#insertTeacherEdu').val(1);
+		$('#addTeacherEduForm')[0].reset();
 	});
 	
 	//경력 추가하기 버튼 클릭시
@@ -892,6 +897,7 @@ $(document).ready(function()
 	{
 		$('.submitBtn').val(0);
 		$('#insertTeacherCr').val(1);
+		$('#addTeacherCrForm')[0].reset();
 	});
 	
 	

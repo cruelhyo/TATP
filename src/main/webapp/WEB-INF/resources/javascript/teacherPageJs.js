@@ -849,6 +849,9 @@ $(document).ready(function()
 	};
 	
 	
+	
+	
+	
 	//이력서 보기
 	$('#resumeViewShow').click(function(){
 		$('.includePage').css('display', 'none');

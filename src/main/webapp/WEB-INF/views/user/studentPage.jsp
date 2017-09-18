@@ -83,7 +83,7 @@ p.footer-text1 {
 													회원정보수정</a>
 												</li>
 												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
-												<li><a href="#" id="">강사 신청하기</a></li>		
+												<li><a href="#" id="applyFormShow">강사 신청하기</a></li>		
 											</ul>
 										</div>
 									</div>
@@ -184,6 +184,10 @@ p.footer-text1 {
 			<!-- 내정보 전체 보기-->
 			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
 				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 강사신청하기 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="applyForm">
+				<jsp:include page="../include/applyForm.jsp" flush="true"></jsp:include>
 			</div>
 			
 		</div>

@@ -91,5 +91,16 @@ public interface MemberServiceInterface {
 		
 		//계좌 업데이트
 		int updateTeacherAccount(MemberAccountVo memberAccountVo);
+		
+		//비밀번호 체크
+		boolean checkMemberPassword(String pw);
+		
+		//비밀번호 변경
+		int updatePassword(MemberVo memberVo);
+		
+		//학력, 경력 리스트 가져오기
+		Map<String, Object> selectTeacherEducationAndCareerList();
+		
+		
 	
 }

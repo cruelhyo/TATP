@@ -38,7 +38,8 @@
 						</div>
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-primary nickNameCheck">
-								중복 검사</button>
+								중복 검사
+							</button>
 						</div>
 					</div>
 				</div>

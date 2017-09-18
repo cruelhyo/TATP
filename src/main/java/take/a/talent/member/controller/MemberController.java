@@ -53,6 +53,19 @@ public class MemberController
 		//model.addAttribute("updateMemberResult", updateMemberResult);
 		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
+	
+	//비밀번호 변경
+	@RequestMapping(value ="/teacher/teacherPage/updatePassword", method=RequestMethod.POST)
+	public String updatePassword(MemberVo memberVo)
+	{
+		logger.info("updateMember");
+		logger.info(memberVo.toString());
+		
+		int updateResult = service.updatePassword(memberVo);
+		
+		return "redirect:/teacher/teacherPage?updateSuccess=" + updateResult;
+	}
+	
 	//계좌 업데이트
 	@RequestMapping(value ="/teacher/teacherPage/updateAccount", method=RequestMethod.POST)
 	public String updateTeacherAccount(MemberAccountVo memberAccountVo)

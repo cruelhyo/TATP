@@ -3,7 +3,13 @@
 <body>
 	<div class="col-sm-8">
 		<div class="step_21">
-			<h2 align="center">회원 정보 수정</h2>
+		<div class="control-label col-sm-3">
+				<p align="right">
+					<h2 align="center">회원 정보 수정</h2>
+		</div>
+		<br>
+		<br>
+		<br>
 			<hr>
 			<form action="<c:url value='/student/studentPage/updateMemberForStudent'/>" method="post">
 				<input type="hidden" id="ajaxSelectForUpdateMemberForStudent" value="<c:url value='/ajax/selectForUpdateMemberForStudent'/>">

@@ -23,6 +23,8 @@ import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherCareerVo;
+import take.a.talent.member.vo.TeacherEducationVo;
 import take.a.talent.member.vo.TeacherVo;
 
 @Repository // dao라고 명시해줌
@@ -295,5 +297,60 @@ public class MemberDao implements MemberDaoInterface{
 	}
 
 	
+	
+	//비밀번호 체크시 비밀번호 select
+	@Override
+	public String selectMemberPassword(int memberNo)
+	{
+		logger.info("DAO selectMemberPassword 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberPassword", memberNo);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public int updatePassword(MemberVo memberVo)
+	{
+		logger.info("DAO updatePassword 호출");
+		logger.info("MemberVo : " + memberVo.toString());
+		return sqlSessionTemplate.update("take.a.talent.member.service.MemberMapper.updatePassword", memberVo);
+	}
+	
+	//학력 list 가져오기
+	@Override
+	public List<TeacherEducationVo> selectTeacherEducationList(int teacherNo)
+	{
+		logger.info("DAO selectTeacherEducationList 호출");
+		
+		List<TeacherEducationVo> teacherEduList = 
+				sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectTeacherEducationList", teacherNo);
+		
+		logger.info("teacherEduList : " + teacherEduList.toString());
+		
+		return teacherEduList;
+	}
+	
+	//경력 list 가져오기
+	@Override
+	public List<TeacherCareerVo> selectTeacherCareerList(int teacherNo)
+	{
+		logger.info("DAO selectTeacherCareerList 호출");
+		
+		List<TeacherCareerVo> teacherCrList = 
+				sqlSessionTemplate.selectList("take.a.talent.member.service.MemberMapper.selectTeacherCareerList", teacherNo);
+		
+		logger.info("teacherCrList : " + teacherCrList.toString());
+		
+		return teacherCrList;
+	}
+	
+	//teacher_no 가져오기
+	@Override
+	public int selectTeacherNo(int memberNo)
+	{
+		logger.info("DAO selectTeacherNo 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectTeacherNo", memberNo);
+	}
 	
 }

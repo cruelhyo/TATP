@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import take.a.talent.member.controller.MemberController;
@@ -19,6 +20,8 @@ import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherCareerVo;
+import take.a.talent.member.vo.TeacherEducationVo;
 import take.a.talent.member.vo.TeacherVo;
 
 
@@ -30,7 +33,18 @@ public class MemberService implements MemberServiceInterface{
 	@Autowired
 	MemberDao memberDao;
 	
+
+	@Autowired
+	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+
+/*	public int addMember(JoinMemberVo joinMemberVo){
+		
+		logger.info("addmember");
+		logger.info(joinMemberVo.toString());
+		return memberDao.insertMember(joinMemberVo);
+	}*/
+
 
 	//회원가입시 아이디 중복검사  
 	@Override
@@ -73,20 +87,7 @@ public class MemberService implements MemberServiceInterface{
 		return nck;
 	}
 	
-	//회원가입
-		/*public int addMember(JoinMemberVo joinMemberVo){
-			
-			logger.info("addmember");
-			logger.info(joinMemberVo.toString());
-			int insertMemberResult = memberDao.insertMemberTb(joinMemberVo);
-			int insertMemberAddress = memberDao.insertMemberAdd(joinMemberVo);
-			
-			if(insertMemberResult != 0){
-				return insertMemberResult;			
-			}
-				return insertMemberAddress;		
-		} */
-		
+
 	//회원가입
 	public int addMember(JoinMemberVo joinMemberVo){
 		logger.info("addmember");
@@ -432,6 +433,79 @@ public class MemberService implements MemberServiceInterface{
 		memberAccountVo.setTeacherAccountNo(teacherAccountNo);
 		
 		return memberDao.updateTeacherAccount(memberAccountVo);
+		
+	}
+	
+	//비밀번호 체크
+	@Override
+	public boolean checkMemberPassword(String pw)
+	{
+		logger.info("checkMemberPassword 호출");
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져오기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		
+		//가져온 memberNo로 인코딩된 비밀번호 가져오기
+		String memberPassword = memberDao.selectMemberPassword(memberNo);
+		
+		//인코딩된 비밀번호와 입력받은 비밀번호를 matches매서드로 비교
+		boolean checkResult = bcryptPasswordEncoder.matches(pw, memberPassword);
+		logger.info(Boolean.toString(checkResult));
+		
+		return checkResult;
+	}
+	
+	//비밀번호 변경
+	@Override
+	public int updatePassword(MemberVo memberVo)
+	{
+		logger.info("updatePassword 호출");
+		
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져와서 vo에 세팅하기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		memberVo.setMemberNo(memberNo);
+		
+		//비밀번호를 인코딩해서 다시 세팅하기
+		String memberPassword = memberVo.getMemberPassword();
+		memberPassword = bcryptPasswordEncoder.encode(memberPassword);
+		memberVo.setMemberPassword(memberPassword);
+		logger.info("memberVo : " + memberVo.toString());
+		
+		int updateResult = memberDao.updatePassword(memberVo);
+		logger.info("updateResult : " + Integer.toString(updateResult));
+		
+		return updateResult;
+	}
+	
+	//학력, 경력 리스트 가져오기
+	public Map<String, Object> selectTeacherEducationAndCareerList()
+	{
+		//현재 로그인한 회원 정보 가져오기
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memberId = user.getUsername();
+		
+		//가져온 아이디로 memberNo 가져와서 teacher_no가져오기
+		int memberNo = memberDao.selectMemberNo(memberId);
+		int teacherNo = memberDao.selectTeacherNo(memberNo);
+		
+		//각 리스트 가져오는 dao호출
+		List<TeacherCareerVo> teacherCrList = memberDao.selectTeacherCareerList(teacherNo);
+		List<TeacherEducationVo> teacherEduList = memberDao.selectTeacherEducationList(teacherNo);
+		
+		//Map 객체를 생성하고 그 객체에 각 리스트를 맵핑한다
+		Map<String, Object> teacherCrEduListMap = new HashMap<String, Object>();
+		teacherCrEduListMap.put("teacherCrList", teacherCrList);
+		teacherCrEduListMap.put("teacherEduList", teacherEduList);
+		
+		return teacherCrEduListMap;
 		
 	}
 

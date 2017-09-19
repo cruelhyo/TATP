@@ -815,27 +815,11 @@ $(document).ready(function()
 							'</td><td>' + value.teacherEducationMajor + 
 							'</td><td>' + value.teacherEducationAdmission +
 							'</td><td>' + value.teacherEducationGraduation +
-							'</td><td><div><ul class="list-inline"><li><button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modiEduListModal" "id="modiEduList"' + 
-							'value="'+ value.teacherEducationNo +'">수정</button></li></ul></div>' +
-							'</td><td><div><ul class="list-inline"><li><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
-							'value="'+ value.teacherEducationNo +'">삭제</button></li></ul></div></td></tr>'
+							'</td><td><button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modiEduListModal" id="modiEduList"' + 
+							'value="'+ value.teacherEducationNo +'">수정</button>' +
+							'</td><td><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
+							'value="'+ value.teacherEducationNo +'">삭제</button></td></tr>'
 					);
-					
-					$('#modiEduList').click(function()
-					{
-						//폼초기화
-						$('#modiTeacherEduForm')[0].reset();
-						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
-						var teacherEduNo = $(this).val();
-						$('#teacherEduNo').val(teacherEduNo);
-						console.log(teacherCrNo);
-						
-						$('#modiEduListModal').css('display','');
-						
-						//submit 버튼의 val값을 변경해준다
-						$('.submitBtn').val(0);
-						$('#updateTeacherEdu').val(1);
-					});
 					
 				});
 				
@@ -852,34 +836,54 @@ $(document).ready(function()
 							'</td><td><button type="button" class="btn btn-default btn-sm" id="delCrList"' +
 							'value="'+ value.teacherCareerNo +'">삭제</button></td></tr>'
 					);
-					
-					$('#modiCrList').click(function()
-					{ 
-						//폼초기화
-						$('#modiTeacherCrForm')[0].reset();
-						//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
-						var teacherCrNo = $(this).val();
-						$('#teacherCrNo').val(teacherCrNo);
-						console.log(teacherCrNo);
-						
-						$('#modiTeacherCrModal').css('display','');
-						
-						//submit 버튼의 val값을 변경해준다
-						$('.submitBtn').val(0);
-						$('#updateTeacherCr').val(1);
-					});
-
 				});
 			}
 		});
 	};
 	
-	//이력서 보기
+	//경력 보기
 	$('#resumeViewShow').click(function(){
 		$('.includePage').css('display', 'none');
 		$('#resumeView').css('display', '');
 		
 		selectTeacherEduCrList();
+	});
+	//학력보기teacherEduMadal
+	$('#teacherEduMadalShow').click(function(){
+		$('.includePage').css('display', 'none');
+		$('#teacherEduMadal').css('display', '');
+		
+		selectTeacherEduCrList();
+	});
+	
+	$('div').on('click', '#modiEduList', function()
+	{
+		console.log('학력 수정');
+		//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
+		var teacherEduNo = $(this).val();
+		$('#teacherEduNo').val(teacherEduNo);
+		console.log(teacherCrNo);
+		
+		$('#modiEduListModal').css('display','');
+		
+		//submit 버튼의 val값을 변경해준다
+		$('.submitBtn').val(0);
+		$('#updateTeacherEdu').val(1);
+	});
+	
+	$('div').on('click', '#modiCrList', function()
+	{
+		console.log('경력 수정');
+		//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히든박스의 val로 지정해준다
+		var teacherCrNo = $(this).val();
+		$('#teacherCrNo').val(teacherCrNo);
+		console.log(teacherCrNo);
+		
+		$('#modiTeacherCrModal').css('display','');
+		
+		//submit 버튼의 val값을 변경해준다
+		$('.submitBtn').val(0);
+		$('#updateTeacherCr').val(1);
 	});
 	
 	// 추가하기 버튼이나 수정 버튼을 클릭하면 submit 버튼의 val값을 바꿔서 ajax실행전 if문을 이용해 url을 구분해서 실행한다
@@ -1004,14 +1008,11 @@ $(document).ready(function()
 	});
 	
 	
-	//코드 작성해야 해요.
-	//학력 정보 update 만들어야 함. 수정form id="modiTeacherEduForm" 수정버튼 id="modiCrList" 수정완료 id="updateTeacherEdu"
-	//수정처리 ajax - id="ajaxUpdateTeacherEducation"
-	//모달창에 폼뜰때 폼 안에 수정하기 전 정보 들어가있는 상태로 만들어야함.
+
 	
 	
 	//학력 정보 삭제
-	$('#delEduList').click(function()
+	$('div').on('click', '#delEduList', function()
 	{
 		//url
 		var ajaxDeleteTeacherEducation = $('#ajaxDeleteTeacherEducation').val();
@@ -1038,7 +1039,38 @@ $(document).ready(function()
 			}
 		});
 		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
-		ajaxSelectTeacherEduCrList();
+		selectTeacherEduCrList();
+	});
+	
+	//경력 정보 삭제
+	$('div').on('click', '#delCrList', function()
+	{
+		//url
+		var ajaxDeleteTeacherCareer = $('#ajaxDeleteTeacherCareer').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		//value에 담겨있는 addressNo를 가져온다
+		var teacherCareerNo = $(this).val();
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxDeleteTeacherCareer,
+			data : teacherCareerNo,
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+		selectTeacherEduCrList();
 	});
 	
 });

@@ -267,4 +267,14 @@ public class MemberRestController
 		
 		return service.deleteTeacherEducation(teacherEducationNo);
 	}
+	
+	//경력 정보 삭제
+	@RequestMapping(value="/ajax/deleteTeacherCareer", method=RequestMethod.POST)
+	public int deleteTeacherCareer(@RequestBody int teacherCareerNo)
+	{
+		logger.info("deleteTeacherCareer");
+		logger.info("teacherCareerNo : " + Integer.toString(teacherCareerNo));
+		
+		return service.deleteTeacherCareer(teacherCareerNo);
+	}
 }

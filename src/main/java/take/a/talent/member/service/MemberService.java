@@ -597,11 +597,20 @@ public class MemberService implements MemberServiceInterface{
 	}
 	
 	//학력정보 삭제
-		@Override
-		public int deleteTeacherEducation(int teacherEducationNo)
-		{
-			logger.info("deleteTeacherEducation");
-			
-			return memberDao.deleteTeacherEducation(teacherEducationNo);
-		}
+	@Override
+	public int deleteTeacherEducation(int teacherEducationNo)
+	{
+		logger.info("deleteTeacherEducation");
+		
+		return memberDao.deleteTeacherEducation(teacherEducationNo);
+	}
+	
+	//경력 정보 delete
+	@Override
+	public int deleteTeacherCareer(int teacherCareerNo)
+	{
+		logger.info("deleteTeacherCareer");
+		
+		return memberDao.deleteTeacherCareer(teacherCareerNo);
+	}
 }

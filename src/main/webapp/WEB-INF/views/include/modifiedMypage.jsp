@@ -18,7 +18,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberName" name="memberName" readonly="readonly">
+							<p class="form-control-static" id="memberName" name="memberName"></p>
 						</div>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control nickName NICKNAME" id="memberNickname" placeholder="닉네임 입력" name="memberNickname">
+							<p class="form-control-static" id="memberNickname" name="memberNickname">닉네임</p>
 						</div>
 						
 					</div>
@@ -46,11 +46,8 @@
 							</p>
 						</label>
 						<div class="col-sm-8">
-							<input type="radio" name="memberGender" class="male" id="memberGender" value="male" readonly="readonly">
-							Male 
-							&nbsp;&nbsp; 
-							<input type="radio" name="memberGender" class="female" id="memberGender" value="female"readonly="readonly">
-							Female
+							<p class="form-control-static" name="memberGender"id="memberGender" value="male" readonly="readonly">
+							남자</p>
 						</div>
 					</div>
 				</div>
@@ -63,7 +60,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="memberBirthday" name="memberBirthday" placeholder="ex) 1994-11-08" readonly="readonly">
+							<p class="form-control-static" id="memberBirthday" name="memberBirthday" readonly="readonly">생일</p>
 						</div>
 					</div>
 				</div>
@@ -76,7 +73,7 @@
 							</p>
 						</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control phone" id="memberPhone" name="memberPhone" placeholder="ex) 01012345678">
+							<p class="form-control-static" id="memberPhone" name="memberPhone" readonly="readonly">000</p>
 							<span id="phch1"></span>
 						</div>
 					</div>
@@ -92,7 +89,7 @@
 						</label>
 						<div class="row">
 							<div class="col-sm-7 ">
-								<input type="text" class="dropselectsec1" id="memberEmail" name="memberEmail" placeholder="ex) abc123@naver.com">
+								<p class="form-control-static" id="memberEmail" name="memberEmail" readonly="readonly">1</p>
 							</div>
 					</div>
 					</div>

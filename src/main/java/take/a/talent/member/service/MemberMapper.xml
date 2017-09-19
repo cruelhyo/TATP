@@ -481,6 +481,13 @@
 		WHERE teacher_career_no = #{teacherCareerNo}
 	</update>
 	
+	<!-- 회원(강사) 주소 삭제 -->
+	<delete id="deleteAddressForTeacher" parameterType="int">
+		DELETE 
+		FROM address
+		WHERE address_no = #{addressNo};
+	</delete>
+	
 	<!-- 학력 정보 delete -->
 	<delete id="deleteTeacherEducation" parameterType="int">
 		DELETE
@@ -489,11 +496,12 @@
 		WHERE teacher_education_no = #{teacherEducationNo};
 	</delete>
 	
-	<!-- 회원(강사) 주소 삭제 -->
-	<delete id="deleteAddressForTeacher" parameterType="int">
+	<!-- 경력 정보 delete -->
+	<delete id="deleteTeacherCareer" parameterType="int">
 		DELETE
-		FROM address
-		WHERE address_no = #{addressNo};
+		FROM
+		teacher_career
+		WHERE teacher_career_no = #{teacherCareerNo};
 	</delete>
 
 </mapper>

@@ -1,5 +1,33 @@
 @charset "UTF-8";
 
+	.list_example > li {
+		
+		display:none;
+		
+	}
+	
+	.list_example > li.on {
+		
+		display:list-item; 
+		line-height:30px; 
+		border-bottom:1px solid #ccc;
+		
+	}
+	
+	.list_example + div {
+	
+		margin-top:20px; 
+		text-align:center;
+	
+	}
+	.list_example + div p {
+	
+		display:inline-block;
+	
+	}
+
+
+
 	.searchBox {
    		 
       margin-bottom: 0;
@@ -10,8 +38,8 @@
       
     }
     
-    .treeUl{ 
-    	none;
+    Ul.tree{ 
+    	list-style:none;
     	list-style-position : inside;
     
 

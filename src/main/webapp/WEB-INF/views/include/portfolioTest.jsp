@@ -25,23 +25,16 @@
 		</div>
 	</div>
 </div>
-
-<form action="<%=request.getContextPath() %>/test/test.do" method="post" enctype="multipart/form-data">
 <div class="container">
     <div id="container" class="row">
 		<div class="col-sm-4 mix category-a">
-
-		    <div class="single-portfolio">
-				<a class="gallery-item" href=""><img class="img-responsive" src="" alt="One" /></a>
-
 		    <div class="single-portfolio ">
 				<a class="gallery-item" href="https://static.pexels.com/photos/402023/pexels-photo-402023.jpeg"><img class="img-responsive" src="https://static.pexels.com/photos/402023/pexels-photo-402023.jpeg" alt="One" /></a>
-
 			</div>
 		</div>
 		<div class="col-sm-4 mix category-b">
 		    <div class="single-portfolio">
-				<a class="gallery-item" href=""><img class="img-responsive" src="https://static.pexels.com/photos/402023/pexels-photo-402023.jpeg" alt="One" /></a>
+				<a class="gallery-item" href="https://static.pexels.com/photos/402023/pexels-photo-402023.jpeg"><img class="img-responsive" src="https://static.pexels.com/photos/402023/pexels-photo-402023.jpeg" alt="One" /></a>
 			</div>
 		</div>
 		<div class="col-sm-4 mix category-c">
@@ -66,7 +59,6 @@
 		</div>
 	</div>
 </div>
-</form>
 <br>
 <br>
 <hr>

@@ -47,7 +47,7 @@ p.footer-text1 {
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active" >
-						<img src="<c:url value='/resources/img/tatP0.png'/>" alt=" "
+						<img src="<c:url value='/resources/img/tatP2.png'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
 							
@@ -55,7 +55,7 @@ p.footer-text1 {
 					</div>
 
 					<div class="item">
-						<img src="<c:url value='/resources/img/tatP2.png'/>" alt=""
+						<img src="<c:url value='/resources/img/tatp3.png'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
 							
@@ -64,7 +64,7 @@ p.footer-text1 {
 					</div>
 
 					<div class="item">
-						<img src="<c:url value='/resources/img/tatp3.png'/>" alt=""
+						<img src="<c:url value='/resources/img/tatP0.png'/>" alt=""
 							style="width: 100%">
 						<div class="carousel-caption">
 							

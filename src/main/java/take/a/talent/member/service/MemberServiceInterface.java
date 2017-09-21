@@ -12,6 +12,8 @@ import take.a.talent.member.vo.MemberAndAddressVo;
 import take.a.talent.member.vo.MemberPointExchangeVo;
 import take.a.talent.member.vo.MemberPointVo;
 import take.a.talent.member.vo.MemberVo;
+import take.a.talent.member.vo.TeacherCareerVo;
+import take.a.talent.member.vo.TeacherEducationVo;
 
 
 
@@ -101,6 +103,22 @@ public interface MemberServiceInterface {
 		//학력, 경력 리스트 가져오기
 		Map<String, Object> selectTeacherEducationAndCareerList();
 		
+		//학력 정보 insert
+		int insertTeacherEducation(TeacherEducationVo teacherEducationVo);
 		
+		//경력 정보 insert
+		int insertTeacherCareer(TeacherCareerVo teacherCareerVo);
+		
+		//학력 정보 update
+		int updateTeacherEducation(TeacherEducationVo teacherEducationVo);
+		
+		//경력 정보 update
+		int updateTeacherCareer(TeacherCareerVo teacherCareerVo);
+		
+		//학력 정보 delete
+		int deleteTeacherEducation(int teacherEducationNo);
+		
+		//경력 정보 delete
+		int deleteTeacherCareer(int teacherCareerNo);
 	
 }

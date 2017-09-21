@@ -139,6 +139,13 @@ $(document).ready(function()
 		$('#myClass').show();
 	});
 	
+	//개설된 강좌 보기
+	$('#classShowForStudentShow').click(function(){
+		$('.includePage').hide();
+		$('#classShowForStudent').show();
+	});
+	
+	
 	
 	// 주소추가폼 숨기기
 	$('.add').css('display', 'none');
@@ -599,6 +606,8 @@ $(document).ready(function()
 		//폼 초기화
 		$('#addressForm')[0].reset();
 	});
+	
+	//주소수정폼 보이기
 	$('div').on('click', '#edit', function(){
 		//value에 있는 addressNo를 가져온다
 		var addressNo = $(this).val();
@@ -776,11 +785,9 @@ $(document).ready(function()
 	
 	//---------------------- resumeView js -----------------------------------------------------------
 	
-	//이력서 보기
-	$('#resumeViewShow').click(function(){
-		$('.includePage').css('display', 'none');
-		$('#resumeView').css('display', '');
-		
+	//학력, 경력 리스트 select하는 함수
+	function selectTeacherEduCrList()
+	{
 		//url
 		var ajaxSelectTeacherEduCrList = $('#ajaxSelectTeacherEduCrList').val();
 		
@@ -808,11 +815,12 @@ $(document).ready(function()
 							'</td><td>' + value.teacherEducationMajor + 
 							'</td><td>' + value.teacherEducationAdmission +
 							'</td><td>' + value.teacherEducationGraduation +
-							'</td><td><button type="button" class="btn btn-default btn-sm" id="modiEduList"' + 
+							'</td><td><button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modiEduListModal" id="modiEduList"' + 
 							'value="'+ value.teacherEducationNo +'">수정</button>' +
 							'</td><td><button type="button" class="btn btn-default btn-sm" id="delEduList"' +
 							'value="'+ value.teacherEducationNo +'">삭제</button></td></tr>'
 					);
+					
 				});
 				
 				$.each(careerList, function(index, value)
@@ -823,7 +831,7 @@ $(document).ready(function()
 							'</td><td>' + value.teacherCareerPosition +
 							'</td><td>' + value.teacherCareerEmploymentDate +
 							'</td><td>' + value.teacherCareerLeaveDate +
-							'</td><td><button type="button" class="btn btn-default btn-sm" id="modiCrList"' +
+							'</td><td><button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modiTeacherCrModal" id="modiCrList"' +
 							'value="'+ value.teacherCareerNo +'">수정</button>' +
 							'</td><td><button type="button" class="btn btn-default btn-sm" id="delCrList"' +
 							'value="'+ value.teacherCareerNo +'">삭제</button></td></tr>'
@@ -831,6 +839,238 @@ $(document).ready(function()
 				});
 			}
 		});
+	};
+	
+	//경력 보기
+	$('#resumeViewShow').click(function(){
+		$('.includePage').css('display', 'none');
+		$('#resumeView').css('display', '');
+		
+		selectTeacherEduCrList();
+	});
+	//학력보기teacherEduMadal
+	$('#teacherEduMadalShow').click(function(){
+		$('.includePage').css('display', 'none');
+		$('#teacherEduMadal').css('display', '');
+		
+		selectTeacherEduCrList();
+	});
+	
+	$('div').on('click', '#modiEduList', function()
+	{
+		console.log('학력 수정');
+		//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히튼박스의 val로 지정해준다
+		var teacherEduNo = $(this).val();
+		$('#teacherEduNo').val(teacherEduNo);
+		console.log(teacherCrNo);
+		
+		$('#modiEduListModal').css('display','');
+		
+		//submit 버튼의 val값을 변경해준다
+		$('.submitBtn').val(0);
+		$('#updateTeacherEdu').val(1);
+	});
+	
+	$('div').on('click', '#modiCrList', function()
+	{
+		console.log('경력 수정');
+		//수정 버튼에 지정한 teacherEducationNo를 가져와서 폼안에 있는 히든박스의 val로 지정해준다
+		var teacherCrNo = $(this).val();
+		$('#teacherCrNo').val(teacherCrNo);
+		console.log(teacherCrNo);
+		
+		$('#modiTeacherCrModal').css('display','');
+		
+		//submit 버튼의 val값을 변경해준다
+		$('.submitBtn').val(0);
+		$('#updateTeacherCr').val(1);
+	});
+	
+	// 추가하기 버튼이나 수정 버튼을 클릭하면 submit 버튼의 val값을 바꿔서 ajax실행전 if문을 이용해 url을 구분해서 실행한다
+	
+	//학력추가하기 버튼 클릭시
+	$('#addTeacherEduBtn').click(function()
+	{
+		$('.submitBtn').val(0);
+		$('#insertTeacherEdu').val(1);
+		$('#addTeacherEduForm')[0].reset();
+	});
+	
+	//경력 추가하기 버튼 클릭시
+	$('#addTeacherCrBtn').click(function()
+	{
+		$('.submitBtn').val(0);
+		$('#insertTeacherCr').val(1);
+		$('#addTeacherCrForm')[0].reset();
+	});
+	
+	
+	//폼 submit 클릭시 실행하는 함수
+	$('.submitBtn').click(function()
+	{
+		//폼에서 입력한 값들을 name을 기준으로 맵핑
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		    	var name = $.trim(this.name),
+		    		value = $.trim(this.value);
+		    	
+		        if (o[name]) {
+		            if (!o[name].push) {
+		                o[name] = [o[name]];
+		            }
+		            o[name].push(value || '');
+		        } else {
+		            o[name] = value || '';
+		        }
+		    });
+		    return o;
+		};
+		
+		var url = null
+		var formData = null
+		
+		//버튼의 val 값을 비교하여 url과 formData를 지정한다
+		if($('#insertTeacherEdu').val() == 1)
+		{
+			console.log('학력 정보 입력');
+			//url
+			url = $('#ajaxInsertTeacherEducation').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#addTeacherEduForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#insertTeacherCr').val() == 1)
+		{
+			console.log('경력 정보 입력');
+			//url
+			url = $('#ajaxInsertTeacherCareer').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#addTeacherCrForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#updateTeacherEdu').val() == 1)
+		{
+			console.log('학력 정보 수정');
+			//url
+			url = $('#ajaxUpdateTeacherEducation').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#modiTeacherEduForm").serializeObject();
+			console.log(formData);
+		}
+		else if($('#updateTeacherCr').val() == 1)
+		{
+			console.log('경력 정보 수정');
+			//url
+			url = $('#ajaxUpdateTeacherCareer').val();
+			//폼에서 입력한 값들 object화
+			formData = $("#modiTeacherCrForm").serializeObject();
+			console.log(formData);
+		}
+		
+		//csrf token
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		
+		console.log(formData);
+
+		$.ajax({
+			type : 'POST',
+			url : url,
+			//formData를 json규격에 맞춤
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			//성공하면 result값을 따져서 alert창을 띄운다
+			success : function(result)
+			{
+				
+				console.log(result);
+				
+				if(result == 0)
+				{
+					alert('각 항목을 제대로 입력해주세요.');
+				}
+				$('#addTeacherEduForm').css('display', 'none');
+				$('.submitBtn').val(0);
+				// 학력, 경력 리스트 셀렉트 함수를 날려 결과를 보여준다
+				selectTeacherEduCrList();
+			}
+		});
+	});
+	
+	
+
+	
+	
+	//학력 정보 삭제
+	$('div').on('click', '#delEduList', function()
+	{
+		//url
+		var ajaxDeleteTeacherEducation = $('#ajaxDeleteTeacherEducation').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		//value에 담겨있는 addressNo를 가져온다
+		var teacherEducationNo = $(this).val();
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxDeleteTeacherEducation,
+			data : teacherEducationNo,
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+		selectTeacherEduCrList();
+	});
+	
+	//경력 정보 삭제
+	$('div').on('click', '#delCrList', function()
+	{
+		//url
+		var ajaxDeleteTeacherCareer = $('#ajaxDeleteTeacherCareer').val();
+		//csrf
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		//value에 담겨있는 addressNo를 가져온다
+		var teacherCareerNo = $(this).val();
+		
+		$.ajax({
+			type : 'POST',
+			url : ajaxDeleteTeacherCareer,
+			data : teacherCareerNo,
+			//header에 accept, context type그리고 csrf를 먼저 보낸다
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(result)
+			{
+				console.log(result);
+			}
+		});
+		// 주소리스트 셀렉트 함수를 날려 결과를 보여준다
+		selectTeacherEduCrList();
 	});
 	
 });

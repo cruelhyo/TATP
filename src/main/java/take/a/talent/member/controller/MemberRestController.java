@@ -41,17 +41,17 @@ public class MemberRestController
 	
 	
 	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다.  
-		//serializeObject에 의해서 input태그 안의 입력값들이 자동으로 배열형식으로 넘어오므로, VO의 프로퍼티명과 input태그의 name을 똑같이 써야한다.
-		@RequestMapping(value ="/ajax/insertMember**", method=RequestMethod.POST)
-		public String insertjoin(@RequestBody JoinMemberVo joinMemberVo) {
-			logger.info("join액션");
-			logger.info("VO값 확인"+joinMemberVo.toString());
-			
-			service.addMember(joinMemberVo);
-			
-			
-			return "redirect:/";
-		}
+	//serializeObject에 의해서 input태그 안의 입력값들이 자동으로 배열형식으로 넘어오므로, VO의 프로퍼티명과 input태그의 name을 똑같이 써야한다.
+	@RequestMapping(value ="/ajax/insertMember**", method=RequestMethod.POST)
+	public String insertjoin(@RequestBody JoinMemberVo joinMemberVo) {
+		logger.info("join액션");
+		logger.info("VO값 확인"+joinMemberVo.toString());
+		
+		service.addMember(joinMemberVo);
+		
+		
+		return "redirect:/";
+	}
 	
 	
 	//회원(강사) 업데이트시 셀렉트

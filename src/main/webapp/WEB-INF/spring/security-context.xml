@@ -14,18 +14,28 @@
 		<!-- 각 url 패턴을 인터셉트해 access에 지정된 권한을 가진 사용자만 접근할 수 있다 -->
 		<security:intercept-url pattern="/" 
 			access="permitAll" />
+		<!-- 회원 로그인 요청 -->
 		<security:intercept-url pattern="/userlogin"
 			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<!-- 회원 공통으로 쓰는 url -->
+		<security:intercept-url pattern="/user/**"
+			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<!-- 관리자 -->
 		<security:intercept-url pattern="/admin/**"
 			access="hasAnyRole('ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<!-- 강사 -->
 		<security:intercept-url pattern="/teacher/**"
 			access="hasRole('ROLE_TEACHER')" />
+		<!-- 학생 -->
 		<security:intercept-url pattern="/member/**"
 			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<!-- ajax요청 -->
+		<security:intercept-url pattern="/ajax/**"	
+			access="hasAnyRole('ROLE_REGULAR_MEM','ROLE_ASSOCIATE_MEM','ROLE_TEACHER','ROLE_SYSTEM_ADMIN','ROLE_OPERATION_ADMIN')" />
+		<!-- 비회원 -->
 		<security:intercept-url pattern="/anonymous/**"	
 			access="permitAll" />
-		<security:intercept-url pattern="/ajax/**"	
-			access="permitAll" />	
+			
 
 
 		<!-- 

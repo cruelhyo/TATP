@@ -4,6 +4,8 @@
 
 $(document).ready(function(){
 	$('.includePage').hide();
+	$('#modifiedMypage').show();
+	selectForUpdateMember();
 	$(function () {
 	  	$('.navbar-toggle-sidebar').click(function () {
 	  		$('.navbar-nav').toggleClass('slide-in');
@@ -33,56 +35,11 @@ $(document).ready(function(){
 	});
 	
 	//숨긴 includepage 해당 버튼 클릭시 보여주기
+	
+	//회원정보수정
 	$('#myPageShow').click(function(){
 		$('.includePage').hide();
 		$('#myPage2').show();
-	});
-	//포인트 충전내역보기
-	$('#myPointHistoryShow').click(function(){
-		$('.includePage').hide();
-		$('#myPointHistory').show();
-	});
-	//주소수정 보기
-	$('#myAddressShow').click(function(){
-		$('.includePage').hide();
-		$('#myAddress').show();
-	});
-	//내 포인트 보기
-	$('#myPointShow').click(function(){
-		$('.includePage').hide();
-		$('#myPoint').show();
-	});
-	//비밀번호 바꾸기
-	$('#myChangePWShow').click(function(){
-		$('.includePage').hide();
-		$('#myChangePW').show();
-	});
-	//수정된 페이지 보기
-	$('#modifiedMypageShow').click(function(){
-		$('.includePage').hide();
-		$('#modifiedMypage').show();
-	});
-	//강사신청 폼 보기
-	$('#applyFormShow').click(function(){
-		$('.includePage').hide();
-		$('#applyForm').show();
-	});
-	
-	//memberUpdateFormForStuden js
-	
-	// 수정완료 버튼 비활성화 함수
-	$('#updateMemberBtn').prop('disabled', true);
-	
-	$('#nkch1').text('닉네임 중복검사를 해주세요.');
-	$('#nkch2').text('특수문자를 제외한 2-10자의 닉네임이 유효합니다.');
-	$('#phch1').text(' - 를 제외하고 입력해주세요.');
-	
-	/* 
-	 * 회원 정보 수정을 클릭시 나오는 인크루드 패이지 안에 있는 태그에 
-	 * 회원 정보를 DB에서 가져와 뿌리는 함수
-	 */
-	function selectForUpdateMemberForStudent()
-	{
 		console.log("select for update member");
 		// jsp에 히든으로 되어있는 input에 value값(jstl을 사용한 url)을 가져온다
 		var ajaxSelectForUpdateMemberForStudent = $('#ajaxSelectForUpdateMemberForStudent').val();
@@ -112,8 +69,73 @@ $(document).ready(function(){
 				$('.memberAddress').val(result.memberAddress);
 			}
 		});
-	}
-	selectForUpdateMemberForStudent();
+	});
+	//포인트 충전내역보기
+	$('#myPointHistoryShow').click(function(){
+		$('.includePage').hide();
+		$('#myPointHistory').show();
+		
+		//url
+		var ajaxSelectPointHistoryList = $('#ajaxSelectPointHistoryList').val();
+		
+		$.ajax(
+		{
+			url : ajaxSelectPointHistoryList,
+			dataType : 'json',
+			success : function(result)
+			{
+				console.log(result);
+				//tbody 초기화
+				$('#pointTBody').empty();
+				//맵핑된 객체 가져오기
+				resultList = result.pointList;
+				//객체의 숫자 만큼 돌린다
+				$.each(resultList, function(index, value)
+				{
+					$('#pointTBody').append(
+							'<tr><td></td><td>' + value.pointChargeMoney +
+							'</td><td>' + value.pointChargePoint +
+							'</td><td>' + value.pointChargeDate +
+							'</td></tr>'
+					);
+				});
+			}
+		});
+	});
+	
+	//포인트 충전하기
+	$('#myPointShow').click(function(){
+		$('.includePage').hide();
+		$('#myPoint').show();
+		//현재포인트 가져오는 함수 호출
+		selectMemberPoint();
+	});
+	
+	//비밀번호 바꾸기
+	$('#myChangePWShow').click(function(){
+		$('.includePage').hide();
+		$('#myChangePW').show();
+	});
+	//내 기본 정보 보기
+	$('#modifiedMypageShow').click(function(){
+		$('.includePage').hide();
+		$('#modifiedMypage').show();
+		selectForUpdateMember();
+	});
+	//강사신청 보기
+	$('#applyFormShow').click(function(){
+		$('.includePage').hide();
+		$('#applyForm').show();
+	});
+	
+//------------------------------ memberUpdateFormForStuden js ------------------------------------------------
+	
+	// 수정완료 버튼 비활성화 함수
+	$('#updateMemberBtn').prop('disabled', true);
+	
+	$('#nkch1').text('닉네임 중복검사를 해주세요.');
+	$('#nkch2').text('특수문자를 제외한 2-10자의 닉네임이 유효합니다.');
+	$('#phch1').text(' - 를 제외하고 입력해주세요.');
 	
 	// 닉네임 입력창에 글자 입력될때마다 닉네임 유효성 검사
 	$(".nickName").keyup(function()
@@ -193,5 +215,182 @@ $(document).ready(function(){
 		}
 	 });
 	
+//------------------------ memberChangePassword js ------------------------------------
+	
+	//입력해야할 것을 입력하면 submit 버튼 활성화 함수
+	function checksubmit() 
+	{
+		var pwcheck1 = $('#pwcheck1').val();
+		var pwcheck3 = $('#pwcheck3').val();
+		var checkResult = $('#checkResult').val();
+		if(pwcheck1 == 0 || pwcheck3 == 0 || checkResult == 0)
+		{
+			$('.submitChangePW').prop('disabled', true);
+		}
+		else
+		{
+			$('.submitChangePW').prop('disabled', false);
+		}
+	}
+	
+	// pw입력시 유효성 검사
+	$('.changePW1').keyup(function()
+	{
+		var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+		var in_pw = $('.changePW1').val();
+		if(!check.test(in_pw))
+		{
+			//비번이 유효하지 않을때
+			$('#pwcheck1').css('color', '#FF0000');
+			$('#pwcheck2').css('color', '#FF0000');
+			$('#pwcheck1').text('비밀번호가 유효하지 않습니다.');
+			$('#pwcheck2').text('영문,숫자,특수문자조합 8자이상 20이내입니다');
+			$('#pwcheck1').val(0);
+			$(".next-step").prop('disabled', true);
+			checksubmit();
+		}
+		else
+		{
+			//비번이 유효할때
+			$('#pwcheck1').css('color', '#008000');
+			$('#pwcheck1').text('비밀번호를 사용 가능합니다');
+			$('#pwcheck1').val(1);
+			$('#pwcheck2').css('display', 'none');
+			checksubmit();
+		}
+	});
+	
+	// 새 비밀번호 확인 일치여부 및 유효성 검사
+	$('.changePW2').keyup(function()
+	{
+		var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+		var in_pw = $('.changePW1').val();
+		var in_pw2 = $('.changePW2').val();
+		var temp = 0;
+		if(!check.test(in_pw2))
+		{
+			temp = 0; //비번이 유효하지 않을때
+		} 
+		else 
+		{
+			temp = 1; //비번이 유효할때
+		}
 		
+		if(temp == 1)
+		{
+			if(in_pw == in_pw2)
+			{
+        		$('#pwcheck3').css('color', '#008000');
+        		$('#pwcheck3').text('비밀번호가 일치합니다');
+        		$('#pwcheck3').val(1);
+        		checksubmit();
+        	}
+			else
+			{
+        		$('#pwcheck3').css('color', '#FF0000');
+        		$('#pwcheck3').text('비밀번호가 불일치합니다');
+        		$('#pwcheck3').val(0);
+    			$('#pwcheck3').focus();
+    			checksubmit();
+        	}
+		}
+		else
+		{
+			$('#pwcheck3').css('color', '#FF0000');
+			$('#pwcheck3').text('비밀번호가 유효하지 않습니다');
+			$('#pwcheck3').val(0);
+			checksubmit();
+			
+		}
+	});
+	
+	// 현재 비밀번호 일치여부
+	$('.passwordCheck').click(function()
+	{
+		var ajaxCheckMemberPassword = $('#ajaxCheckMemberPassword').val();
+		var csrfToken = $('#csrfToken').val();
+		var csrfHeader = $('#csrfHeader').val();
+		$.ajax(
+		{
+			type : 'POST',
+			url : ajaxCheckMemberPassword,
+			data : $('#nowPW').val(),
+			beforeSend : function(xhr) 
+			{
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+				xhr.setRequestHeader(csrfHeader, csrfToken);
+			},
+			success : function(checkResult)
+			{
+				console.log(checkResult);
+				if(checkResult)
+				{
+					$('#checkResult').text('비밀번호 검사를 통과하셨습니다');
+					$('#checkResult').val(1);
+					checksubmit();
+				}
+				else
+				{
+					$('#checkResult').text('비밀번호가 정확하지 않습니다');
+					$('#checkResult').val(0);
+					checksubmit();
+				}
+				
+				
+			}
+		});
+	});
+
+//------------------------------------- myPoint js ---------------------------------------
+	
+	
+	function selectMemberPoint()
+	{
+		//url
+		var ajaxSelectMemberPoint = $('#ajaxSelectMemberPoint').val();
+		//현재 포인트 가져오는 함수
+		$.ajax(
+		{
+			url : ajaxSelectMemberPoint,
+			success : function(result)
+			{
+				console.log(result);
+				$('#memberPoint').val(result);
+				$('.memberExchange').val(result);
+			}
+		});
+	}
+	
+//--------------------------- modifiedMypage js --------------------------------------------
+	
+	function selectForUpdateMember()
+	{
+		console.log("select for update member");
+		var ajaxSelectForUpdateMember = $('#ajaxSelectForUpdateMember').val();
+		$.ajax(
+		{
+			url : ajaxSelectForUpdateMember,
+			
+			success : function(result)
+			{
+				console.log(result);
+				$('.memberName').text(result.memberName);
+				$('.memberNickname').text(result.memberNickname);
+				$('.memberGender').text(result.memberGender);
+				if(result.memberGender == 'male')
+				{
+					$('.memberGender').text('남성');
+				}
+				else
+				{
+					$('.memberGender').text('여성');
+				}
+				$('.memberBirthday').text(result.memberBirthday);
+				$('.memberPhone').text(result.memberPhone);
+				$('.memberEmail').text(result.memberEmail);
+			}
+			
+		});
+	}
 });

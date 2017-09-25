@@ -415,4 +415,13 @@ public class MemberDao implements MemberDaoInterface{
 		return sqlSessionTemplate.delete("take.a.talent.member.service.MemberMapper.deleteTeacherCareer", teacherCareerNo);
 	}
 	
+	//회원 권한 select
+	@Override
+	public String selectMemberAuthority(String memberId)
+	{
+		logger.info("DAO selectMemberAuthority 호출");
+		
+		return sqlSessionTemplate.selectOne("take.a.talent.member.service.MemberMapper.selectMemberAuthority", memberId);
+	}
+	
 }

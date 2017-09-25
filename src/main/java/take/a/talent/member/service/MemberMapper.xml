@@ -246,6 +246,14 @@
 		WHERE teacher_account_no = #{teacherAccountNo};
 	</select>
 	
+	<!-- 회원 권한 select -->
+	<select id="selectMemberAuthority" parameterType="String" resultType="String">
+		SELECT member_authority_name
+		FROM member m
+		INNER JOIN member_authority ma
+		ON m.member_authority_no =  ma.member_authority_no
+		WHERE m.member_id = #{memberId};
+	</select>
 
 	<!-- 회원가입  memberTb insert -->
 

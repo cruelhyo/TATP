@@ -130,4 +130,6 @@ public interface MemberDaoInterface {
 	//경력 정보 delete
 	int deleteTeacherCareer(int teacherCareerNo);
 	
+	//회원 권한 select
+	String selectMemberAuthority(String memberId);
 }

@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/join.css'/>" type="text/css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Take A Talent</title>
@@ -27,6 +28,17 @@ footer {
 p.footer-text1 {
 	color: #D8D8D8;
 }
+
+.step_21a {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 50px;
+	
+}
+
 </style>
 </head>
 <body>
@@ -91,25 +103,35 @@ p.footer-text1 {
 		<h3>등록된 강의</h3>
 		<br>
 		<div class="row">
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>Oil Oneday Class/cost- 50Point</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 5명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>클래식 기타 4주완성/cost- 50Point/1day</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수강인원 3명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>인문학 읽기/cost- 20Point</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 6명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>Flower Oneday Class/cost- 50Point</p>
+				<p>수업일/2017년 10월 23일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 7명</p> 
+			</div>
+			<div class="col-sm-2 step_21a">
+				<p>프라모델 커스텀/cost- 30Point</p>
+				<p>수업일/ 2017년 10월 25일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 5명</p> 
 			</div>
 		</div>
 	</div>
@@ -117,25 +139,35 @@ p.footer-text1 {
 
 	<div class="container-fluid bg-3 text-center">
 		<div class="row">
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>Oil Oneday Class/cost- 50Point</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 5명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>클래식 기타 4주완성/cost- 50Point/1day</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수강인원 3명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>인문학 읽기/cost- 20Point</p>
+				<p>수업일/2017년 10월 21일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 6명</p> 
 			</div>
-			<div class="col-sm-3">
-				<p>Some text..</p>
-				<img src="https://placehold.it/150x80?text=IMAGE"
-					class="img-responsive" style="width: 100%" alt="Image">
+			<div class="col-sm-2 step_21a">
+				<p>Flower Oneday Class/cost- 50Point</p>
+				<p>수업일/2017년 10월 23일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 7명</p> 
+			</div>
+			<div class="col-sm-2 step_21a">
+				<p>프라모델 커스텀/cost- 30Point</p>
+				<p>수업일/ 2017년 10월 25일</p>
+				<p>수업시간/Pm 3:00-5:00</p>
+				<p>수강인원 5명</p> 
 			</div>
 		</div>
 	</div>

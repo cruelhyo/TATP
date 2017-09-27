@@ -36,7 +36,8 @@
 		<div class="st1">
 		
 		<h2>Member Login</h2>
-
+		<span>회원(학생) id : id001   pw : 1q2w3e4r!</span><br>
+		<span>회원(강사) id : id002   pw : 1q2w3e4r!</span>
 		<hr>
 		<form class="form-horizontal" action="${loginUrl}" method="post">
 			<div style="margin: 0; padding: 0;">

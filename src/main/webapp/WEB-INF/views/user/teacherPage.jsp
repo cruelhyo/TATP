@@ -6,136 +6,35 @@
 
 <html>
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<c:url value='/resources/css/mapage.css'/>" type="text/css">
 <link rel="stylesheet" href="<c:url value='/resources/css/join.css'/>" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/portfolio.css'/>" type="text/css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>Take A Talent</title>
+
 <!-- mypage 자바스크립트 -->
-<script>
-
-
-
-$(document).ready(function(){
-	$('.includePage').hide();
-	$(function () {
-	  	$('.navbar-toggle-sidebar').click(function () {
-	  		$('.navbar-nav').toggleClass('slide-in');
-	  		$('.side-body').toggleClass('body-slide-in');
-	  		$('#search').removeClass('in').addClass('collapse').slideUp(200);
-	  	});
-	
-	  	$('#search-trigger').click(function () {
-	  		$('.navbar-nav').removeClass('slide-in');
-	  		$('.side-body').removeClass('body-slide-in');
-	  		$('.search-input').focus();
-	  	});
-	  });
-	  
-	$('#myTab a').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('hide')
-		});
-		
-	$('#myTab a[href="#mypage"]').tab('show'); // Select tab by name
-	$('#myTab a:first').tab('show'); // Select first tab
-	$('#myTab a:last').tab('show'); // Select last tab
-	$('#myTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
-	
-	$(function () {
-	  $('#myTab a:last').tab('show')
-	});
-	
-	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
-			$('.includePage').hide();
-			$('#myPage').show();
-		});
-		
-		$('#myPointHistoryShow').click(function(){
-			$('.includePage').hide();
-			$('#myPointHistory').show();
-		});
-	
-		$('#myAddressShow').click(function(){
-			$('.includePage').hide();
-			$('#myAddress').show();
-		});
-		
-		$('#myPointShow').click(function(){
-			$('.includePage').hide();
-			$('#myPoint').show();
-		});
-		
-		$('#myChangePWShow').click(function(){
-			$('.includePage').hide();
-			$('#myChangePW').show();
-		});
-		
-		$('#myExchangeShow').click(function(){
-			$('.includePage').hide();
-			$('#myExchange').show();
-		});
-		
-		$('#myAccountShow').click(function(){
-			$('.includePage').hide();
-			$('#myAccount').show();
-		});
-		
-		$('#modifiedMypageShow').click(function(){
-			$('.includePage').hide();
-			$('#modifiedMypage').show();
-		});
-		
-		
-	// 주소추가폼 숨기기
-		$('.add').hide();
-		$('#plus').click(function(){
-			$('.add').hide();
-			$('#address1').show();
-		});
-	//주소추가하기 버튼 누르면 폼 다시 사라짐
-		$('#plus2').click(function(){
-			$('.add').hide();
-		});
-
-		// 환전내역 숨기기
-		$('.ExchangeHistory').hide();
-		$('#ExchangeView').click(function(){
-			$('.ExchangeHistory').hide();
-			$('#ExHistory').show();
-		});
-	
-});
-
-
-	
-</script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/teacherPageJs.js'/>"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/findAddressJs.js'/>"></script>
 
 </head>
 <body>
-	
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-	
-	<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<hr>
+	<!-- /.container-fluid -->
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
-				<!-- uncomment code for absolute positioning tweek see top comment in css -->
 				<div class="absolute-wrapper"></div>
 				<!-- Menu -->
 				<div class="side-menu">
@@ -143,7 +42,6 @@ $(document).ready(function(){
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<!-- Dropdown1-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl4">
@@ -156,11 +54,10 @@ $(document).ready(function(){
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li role="presentation" class="active">
-													<a href="#mypage" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
+													<a href="" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
 												</li>
 												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
 												<li><a href="#" id ="myAddressShow">내주소록 보기</a></li>
-												
 											</ul>
 										</div>
 									</div>
@@ -172,7 +69,6 @@ $(document).ready(function(){
 										My Point
 										<span class="caret"></span>
 									</a> 
-								
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl1" class="panel-collapse collapse">
 										<div class="panel-body">
@@ -186,26 +82,18 @@ $(document).ready(function(){
 										</div>
 									</div>
 								</li>
-								<li>
-									<a href="#">
-										<span class="glyphicon glyphicon-cloud"></span>
-										My Favorit
-									</a>
-								</li>
-								
 								<!-- Dropdown-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl3"> 
 										<span class="glyphicon glyphicon-user"></span> 
 										My Profile <span class="caret"></span></a> 
-										
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl3" class="panel-collapse collapse">
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
-												<li><a href="#">My Portfolio</a></li>
-												<li><a href="#">이력사항 관리</a></li>
-												<li><a href="#">Link</a></li>	
+												<li><a href="#" id="portfolioShow">My Portfolio</a></li>
+												<li><a href="#" id="resumeViewShow">경력관리</a></li>
+												<li><a href="#" id="teacherEduMadalShow">학력관리</a></li>	
 											</ul>
 										</div>
 									</div>
@@ -217,36 +105,33 @@ $(document).ready(function(){
 											My Class 
 										<span class="caret"></span>
 									</a>
-											<div id="dropdown-lvl2" class="panel-collapse collapse">
-												<div class="panel-body">
-													<ul class="nav navbar-nav">
-														<li><a href="#">class 1</a></li>
-														<li><a href="#">class 2</a></li>
-														<li><a href="#">class 3</a></li>
-													</ul>
-												</div>
-											</div>
+									<div id="dropdown-lvl2" class="panel-collapse collapse">
+										<div class="panel-body">
+											<ul class="nav navbar-nav">
+												<li><a href="#" id="myClassShow">강좌개설</a></li>
+												<li><a href="#" id="classShowForStudentShow">강좌보기</a></li>
+											</ul>
+										</div>
+									</div>
 								</li>
-
-								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
-										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
-
+								<li>
+									<a href="#modifiedMypage" id="modifiedMypageShow">
+										<span class="glyphicon glyphicon-signal"></span>
+										내 기본 정보 보기
+									</a>
+								</li>
 							</ul>
 						</div>
 						<!-- /.navbar-collapse -->
 					</nav>
-
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		<!-- 내정보수정 -->
+		<!-- 인클루드 페이지 -->
 		<div class="tab-content">
 			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
-				<jsp:include page="../include/memberUpdateForm.jsp" flush="true"></jsp:include>
+	  		<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage">
+				<jsp:include page="../include/memberUpdateFormForTeacher.jsp" flush="true"></jsp:include>
 			</div>
 			<!--내포인트 충전 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
@@ -276,9 +161,27 @@ $(document).ready(function(){
 			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
 				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
 			</div>
+			<!-- 포트폴리오-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="portfolio">
+				<jsp:include page="../include/portfolio.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 경력 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="resumeView">
+				<jsp:include page="../include/resumeView.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 학력 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="teacherEduMadal">
+				<jsp:include page="../include/teacherEduMadal.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 강의오픈하기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="myClass">
+				<jsp:include page="../include/myClass.jsp" flush="true"></jsp:include>
+			</div>
+			<!-- 내 수업 보기 -->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="classShowForStudent">
+				<jsp:include page="../include/classShowForStudent.jsp" flush="true"></jsp:include>
+			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>

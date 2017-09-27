@@ -1,5 +1,7 @@
 package take.a.talent.member.controller;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,12 +14,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
+import take.a.talent.member.vo.MemberAccountVo;
+import take.a.talent.member.vo.MemberAndAddressVo;
+import take.a.talent.member.vo.MemberPointVo;
+import take.a.talent.member.vo.MemberVo;
 
 @Controller
 public class MemberController
@@ -29,31 +39,59 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
-	
-	
-	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
-	@RequestMapping(value ="/ajax/idCheck", method=RequestMethod.POST)
-	public @ResponseBody boolean idCheck(String memberId, ModelMap model) {
-		logger.info("id체크");
-		logger.info("VO값 확인");
-		logger.info("memberId"+memberId);
-		boolean idExist = service.idCheck(memberId);
-		model.addAttribute("idExist", idExist);
-		
-		return idExist;
+
+	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
+	public String updateMember(MemberVo memberVo)
+	{
+		logger.info("updateMember");
+		logger.info(memberVo.toString());
+		int updateMemberResult = service.updateMember(memberVo);
+		//model.addAttribute("updateMemberResult", updateMemberResult);
+		return "redirect:/teacher/teacherPage?updateSuccess="+updateMemberResult;
 	}
 	
-	
-	@RequestMapping(value="/ajax/nickNameCheck",method=RequestMethod.POST)
-	public @ResponseBody boolean nickNameCheck(String memberNickname, ModelMap model){
-		logger.info("nickname체크");
-		logger.info("nickname값 확인");
-		logger.info("memberNickname"+memberNickname);
+	//비밀번호 변경
+	@RequestMapping(value ="/user/updatePassword", method=RequestMethod.POST)
+	public String updatePassword(MemberVo memberVo)
+	{
+		logger.info("updateMember");
+		logger.info(memberVo.toString());
 		
-		boolean nicknameExist = service.nicknameCheck(memberNickname);
-		model.addAttribute("nicknameExist",nicknameExist);
-		return false;
+		String updateResult = service.updatePassword(memberVo);
+		
+		return updateResult;
+	}
+	
+	//계좌 업데이트
+	@RequestMapping(value ="/teacher/teacherPage/updateAccount", method=RequestMethod.POST)
+	public String updateTeacherAccount(MemberAccountVo memberAccountVo)
+	{
+		logger.info("updateTeacherAccount");
+		logger.info(memberAccountVo.toString());
+		int updateResult = service.updateTeacherAccount(memberAccountVo);
+		
+		return "redirect:/teacher/teacherPage?updateSuccess="+ updateResult;
+	}
+	
+	//회원(강사) 계좌 insert
+	@RequestMapping(value ="/teacher/teacherPage/insertAccount", method=RequestMethod.POST)
+	public String accountMember(MemberAccountVo memberAccountVo)
+	{
+		logger.info("insertAccount");
+		logger.info(memberAccountVo.toString());
+		int insertAccountResult = service.insertAccount(memberAccountVo);
+		return "redirect:/teacher/teacherPage?insertSuccess="+ insertAccountResult;
+		
+	}
+	
+	//point 충전
+	@RequestMapping(value ="/user/insertPoint", method=RequestMethod.POST)
+	public String pointCharge(MemberPointVo memberPointVo)
+	{
+		logger.info("insertPoint");
+		logger.info(memberPointVo.toString());
+		String pointUpdateResult = service.pointCharge(memberPointVo);
+		return pointUpdateResult;
 		
 	}
 	
@@ -64,43 +102,21 @@ public class MemberController
 		return "user/join";
 	}
 	
-		
-	
-	
 	@RequestMapping(value = { "/anonymous/userjoin"}, method = RequestMethod.GET)
 	public String join()
 	{
 		return "user/join";
 	}
 	
-	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
-/*	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
-	public String insertjoin(MemberVo memberVo) {
-		logger.info("join액션");
-		logger.info("VO값 확인"+memberVo.toString());
-		service.addMember(memberVo);
-		
-		
-		return "redirect:/";
-	}
-	*/
-	
-	
-	
-	
-	
-	/*//join에서 입력한 정보를가지고 service를 호출함. 
-	@RequestMapping(value = {"/anonymous/insertjoin"}, method = RequestMethod.GET)
-	public String insertMember(MemberVo memberVo)
+	@RequestMapping(value = { "/student/studentPage/updateMemberForStudent"}, method = RequestMethod.POST)
+	public String updateMemberForStudent(MemberAndAddressVo memberAndAddressVo)
 	{
-		logger.info("insertMember service.addMember호출");
-		
-		return "redirect:/";
-	}*/
+		logger.info("updateMemberForStudent");
+		logger.info(memberAndAddressVo.toString());
+		int updateMemberForStudentResult = service.updateMemberForStudent(memberAndAddressVo);
+		return "redirect:/member/studentPage?updateSuccess="+updateMemberForStudentResult;
+	}
 	
-	/*@RequestMapping(value="/" , method = {RequestMethod.GET, RequestMethod.POST})*/
-
 	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{
@@ -117,6 +133,13 @@ public class MemberController
 
 	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.GET)
 	public String teacherPage(ModelMap model)
+	{
+		model.addAttribute("user", userAuthenticationService.getUserName());
+		return "user/teacherPage";
+	}
+	
+	@RequestMapping(value = "/teacher/teacherPage", method = RequestMethod.POST)
+	public String teacherPagep(ModelMap model)
 	{
 		model.addAttribute("user", userAuthenticationService.getUserName());
 		return "user/teacherPage";
@@ -153,8 +176,5 @@ public class MemberController
 		}
 		return "redirect:/login?logout";
 	}
-
-	
-	
 
 }

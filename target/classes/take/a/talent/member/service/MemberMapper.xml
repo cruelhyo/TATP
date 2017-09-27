@@ -4,7 +4,118 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="take.a.talent.member.service.MemberMapper">
-
+	
+	<resultMap	type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
+		<result property="memberNo" column="member_no "/>
+		<result property="memberId" column="member_id" />
+		<result property="memberPassword" column="member_password" />
+		<result property="memberName" column="member_name" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberAge" column="member_age" />
+		<result property="memberPhone" column="member_phone" />
+		<result property="memberBirthday" column="member_birthday" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberPoint" column="member_point" />
+		<result property="memberAuthority_no" column="member_authority_no" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberAgreement" column="member_agreement" />
+		<result property="memberSns" column="member_sns" />
+		<result property="memberStudentExp" column="member_student_exp" />
+		<result property="memberStudentLevel" column="member_student_level" />
+		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
+		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
+		<result property="memberLoginState" column="member_login_state" />
+		<result property="memberMemo" column="member_memo" />
+	</resultMap>
+	
+	 <resultMap	type="take.a.talent.member.vo.JoinMemberVo" id="JoinMemberVo"> 
+		<result property="memberNo" column="member_no "/>
+		<result property="memberId" column="member_id" />
+		<result property="memberPassword" column="member_password" />
+		<result property="memberName" column="member_name" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberPhone" column="member_phone" />
+		<result property="memberAge" column="member_age" />
+		<result property="memberBirthday" column="member_birthday" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberMailagreement" column="member_agreement" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberHobby" column="member_hobby" />
+		<result property="memberAddress" column="member_address" /> 
+		<result property="memberMailNumber" column="address_mailnumber" />
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.MemberAndAddressVo" id="MemberAndAddressVo">
+		<result property="memberId" column="member_id"/>
+		<result property="memberPassword" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberNickname" column="member_nickname"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberBirthday" column="member_birthday"/>
+		<result property="memberMailNumber" column="address_mailnumber"/>
+		<result property="memberAddress" column="member_address"/>
+		<result property="memberPhone" column="member_phone"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberAgreement" column="member_agreement"/>
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.AddressAndClassificationVo" id="AddressAndClassificationVo">
+		<result property="addressNo" column="address_no"/>
+		<result property="memberNo" column="member_no"/>
+		<result property="addressClassificationNo" column="address_classification_no"/>
+		<result property="addressMailNumber" column="address_mailnumber"/>
+		<result property="memberAddress" column="member_address"/>
+		<result property="addressClassificationName" column="address_classification_name"/>
+	</resultMap>
+	
+	<resultMap	type="take.a.talent.member.vo.MemberAccountVo" id="MemberAccountVo">
+		<result property="teacherAccountNo" column="teacher_account_no"/>
+		<result property="bankNo" column="bank_no"/>
+		<result property="accountNumber" column="account_number"/>
+		<result property="accountHolderName" column="account_holder_name"/>
+	</resultMap>
+	
+	<resultMap	type="take.a.talent.member.vo.MemberPointVo" id="MemberPointVo">
+		<result property="memberNo" column="member_no"/>
+		<result property="pointChargeNo"  column="point_charge_no"/>
+		<result property="pointChargeMoney"  column="point_charge_money"/>
+		<result property="pointChargePoint"  column="point_charge_point"/>
+		<result property="pointChargeDate"  column="point_charge_date"/>
+		<result property="pointChargeShape"  column="point_charge_shape"/>
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.MemberPointExchangeVo" id="MemberPointExchangeVo">
+		<result property="pointExchangeNo" column="point_exchange_no"/>
+		<result property="memberNo" column="member_no"/>
+		<result property="pointExchangeMoney" column="point_exchange_money"/>
+		<result property="pointExchangePoint" column="point_exchange_point"/>
+		<result property="pointExchangeDate" column="point_exchange_date"/>
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.TeacherCareerVo" id="TeacherCareerVo">
+		<result property="teacherCareerNo" column="teacher_career_no"/>
+		<result property="teacherNo" column="teacher_no"/>
+		<result property="teacherCareerCompany" column="teacher_career_company"/>
+		<result property="teacherCareerDepartment" column="teacher_career_department"/>
+		<result property="teacherCareerPosition" column="teacher_career_position"/>
+		<result property="teacherCareerEmploymentDate" column="teacher_career_employment_date"/>
+		<result property="teacherCareerLeaveDate" column="teacher_career_leave_date"/>
+	</resultMap>
+	
+	<resultMap type="take.a.talent.member.vo.TeacherEducationVo" id="TeacherEducationVo">
+		<result property="teacherEducationNo" column="teacher_education_no"/>
+		<result property="teacherNo" column="teacher_no"/>
+		<result property="teacherEducationClassificationNo" column="teacher_education_classification_no"/>
+		<result property="teacherEducationClassificationName" column="teacher_education_classification_name"/>
+		<result property="teacherEducationStatusNo" column="teacher_education_status_no"/>
+		<result property="teacherEducationStatusName" column="teacher_education_status_name"/>
+		<result property="teacherEducationSchoolName" column="teacher_education_school_name"/>
+		<result property="teacherEducationMajor" column="teacher_education_major"/>
+		<result property="teacherEducationAdmission" column="teacher_education_admission"/>
+		<result property="teacherEducationGraduation" column="teacher_education_graduation"/>
+	</resultMap>
+	
 	<!-- 폼에서 입력한 id를 where절에 넣고 DB에 있는 해당 id, pw, 권한을 가져오는 쿼리이다 resultType은 map이다 -->
 	<select id="selectMemberTest" resultType="map">
 		SELECT 
@@ -28,58 +139,426 @@
 		
 	</select> 
 	
+	<!-- 업데이트시 셀렉트(강사) -->
+	<select id="selectForUpdateMember" resultMap="MemberVo">
+		SELECT member_name 
+		, member_nickname 
+		, member_gender 
+		, member_birthday 
+		, member_phone 
+		, member_email
+		FROM member
+		WHERE member_id = #{memberId};
+	</select>
 	
 	<!--회원가입시 닉네임 중복체크  -->
 	<select id ="nicknameCheck" parameterType="String" resultType="boolean">
 		SELECT EXISTS(
 		SELECT member_nickname
 		FROM member
-		WHERE member_id=#{member_id});
+		WHERE member_nickname=#{memberNickname});
 		
-	</select> 
-
+	</select>
 	
+	<!-- 업데이트시 닉네임 중복체크 --> 
+	<select id ="nicknameCheckForUpdate" parameterType="String" resultType="String">
+		SELECT member_nickname
+		FROM member
+		WHERE member_id=#{memberId};
+	</select>
+	
+	<!-- 회원(학생)업데이트시 셀렉트 -->
+	<select id="selectForUpdateMemberForStudent" parameterType="String" resultMap="MemberAndAddressVo">
+		SELECT m.member_name
+		, m.member_nickname
+		, m.member_gender
+		, m.member_birthday
+		, m.member_phone
+		, m.member_email
+		, a.address_mailnumber
+		, a.member_address
+		FROM member m
+		INNER JOIN address a
+		ON m.member_no = a.member_no
+		WHERE m.member_id = #{memberId};
+	</select>
+	
+	<!-- member_no 가져오기 -->
+	<select id="selectMemberNo" parameterType="String" resultType="int">
+		SELECT member_no
+		FROM member
+		WHERE member_id = #{memberId};
+	</select>
+	
+	<!-- 회원(강사) 주소리스트 select -->
+	<select id="selectAddressListForTeacher" parameterType="int" resultMap="AddressAndClassificationVo">
+		SELECT ac.address_classification_name
+		, a.address_no
+		, a.address_mailnumber
+		, a.member_address
+		FROM address a
+		INNER JOIN address_classification ac
+		ON a.address_classification_no = ac.address_classification_no
+		WHERE a.member_no = #{memberNo}
+		ORDER BY a.address_no DESC;
+	</select>
+	
+	<!-- 회원이 가지고 있는 포인트 가져오기 -->
+	<select id="selectMemberPoint" parameterType="int" resultType="int">
+		SELECT member_point
+		FROM member
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	<!-- 최근 한달 회원 포인트 충전 내역 리스트 -->
+	<select id="selectPointHistoryList" parameterType="int" resultMap="MemberPointVo">
+		SELECT point_charge_money
+		, point_charge_point
+		, point_charge_date
+		FROM point_charge
+		WHERE member_no = #{memberNo} 
+		AND point_charge_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH);
+	</select>
+	
+	<!-- 최근 한달 포인트 환전 내역 select -->
+	<select id="selectPointExchangeList" parameterType="int" resultMap="MemberPointExchangeVo">
+		SELECT point_exchange_money
+		, point_exchange_point
+		, point_exchange_date
+		FROM point_exchange
+		WHERE member_no = #{memberNo}
+		AND point_exchange_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH);
+	</select>
+	
+	<!-- teacher_account_no 가져오는 쿼리 -->
+	<select id="selectTeacherAccountNo" parameterType="int" resultType="int">
+		SELECT teacher_account_no
+		FROM teacher
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	<!-- 계좌 수정시 select -->
+	<select id="selectTeacherAccountForUpdate" parameterType="int" resultMap="MemberAccountVo">
+		SELECT bank_no
+		, account_number
+		, account_holder_name
+		FROM teacher_account
+		WHERE teacher_account_no = #{teacherAccountNo};
+	</select>
+	
+	<!-- 회원 권한 select -->
+	<select id="selectMemberAuthority" parameterType="String" resultType="String">
+		SELECT member_authority_name
+		FROM member m
+		INNER JOIN member_authority ma
+		ON m.member_authority_no =  ma.member_authority_no
+		WHERE m.member_id = #{memberId};
+	</select>
+
+	<!-- 회원가입  memberTb insert -->
+
+	<!-- 비밀번호 체크시 비밀번호 select -->
+	<select id="selectMemberPassword" parameterType="int" resultType="String">
+		SELECT member_password
+		FROM member
+		WHERE member_no = #{memberNo};
+	</select>
+	
+	<!-- 학력 list 가져오기 -->
+	<select id="selectTeacherEducationList" parameterType="int" resultMap="TeacherEducationVo">
+		SELECT te.teacher_education_no
+		, tec.teacher_education_classification_name
+		, tes.teacher_education_status_name
+		, te.teacher_education_school_name
+		, te.teacher_education_major
+		, te.teacher_education_admission
+		, te.teacher_education_graduation
+		FROM teacher_education te
+		INNER JOIN teacher_education_classification tec
+		ON te.teacher_education_classification_no = tec.teacher_education_classification_no
+		INNER JOIN teacher_education_status tes
+		ON te.teacher_education_status_no = tes.teacher_education_status_no
+		WHERE te.teacher_no = #{teacherNo};
+	</select>
+	
+	<!-- 경력 list 가져오기 -->
+	<select id="selectTeacherCareerList" parameterType="int" resultMap="TeacherCareerVo">
+		SELECT teacher_career_no
+		, teacher_career_company
+		, teacher_career_department
+		, teacher_career_position
+		, teacher_career_employment_date
+		, teacher_career_leave_date
+		FROM teacher_career
+		WHERE teacher_no = #{teacherNo};
+	</select>
+	
+	<!-- teacher_no 가져오기 -->
+	<select id="selectTeacherNo" parameterType="int" resultType="int">
+		SELECT teacher_no
+		FROM teacher
+		WHERE member_no = #{memberNo}
+	</select>
 	
 	<!-- 회원가입  수정중!!!!! -->
-	<insert id="insertMember" parameterType="take.a.talent.member.vo.MemberVo">
-		INSERT INTO member(member_id, member_password, member_name, meber_gender, member_social_number, member_phone, member_address
-		, member_address_detail, member_email, member_agreement)
-			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberPhone}, #{memberAddress}, #{memberAddressDetail},#{memberEmail},#{memberAgreement});
+	<insert id="insertMember" parameterType="take.a.talent.member.vo.JoinMemberVo">
+		INSERT INTO member
+		(member_no
+		, member_id
+		, member_password
+		, member_name
+		, member_gender
+		, member_age
+		, member_birthday
+		, member_phone
+		, member_email
+		, member_agreement
+		, member_hobby
+		, member_nickname)
 			
+			VALUES (#{memberNo}
+			, #{memberId}			
+			, #{memberPassword}
+			, #{memberName}
+			, #{memberGender}
+			, #{memberAge}
+			, #{memberBirthday}
+			, #{memberPhone} 
+			, #{memberEmail}
+			, #{memberMailagreement}
+			, #{memberHobby}
+			, #{memberNickname})
+			
+		<selectKey keyProperty="memberNo" resultType="int" order="AFTER">
+		 	SELECT LAST_INSERT_ID() <!--마지막으로 입력된 auto_increament가져옴 sql자체제공 -->
+		</selectKey>
+			  
 	</insert>
 	
-	
-	
-	
+	<!-- 회원가입 시 addressTb insert -->
+	<insert id="insertMemberAddress" parameterType="take.a.talent.member.vo.JoinMemberVo">
+		INSERT INTO address
+		(member_no
+		,address_mailnumber
+		, member_address)
+			
+			VALUES 
+			 (#{memberNo}
+			, #{memberMailNumber}
+			, #{memberAddress})
+			
 
+	</insert>
 	
+	<!-- 회원(강사) 주소 insert -->
+	<insert id="insertAddressForTeacher" parameterType="take.a.talent.member.vo.AddressAndClassificationVo">
+		INSERT INTO 
+		address(address_no, member_no, address_classification_no, address_mailnumber, member_address)
+		VALUES 
+		(
+			#{addressNo}
+			, #{memberNo}
+			, #{addressClassificationNo}
+			, #{addressMailNumber}
+			, #{memberAddress}
+		)
+	</insert>
 
-	 <resultMap
-		type="take.a.talent.member.vo.MemberVo" id="MemberVo"> 
-		
-		<result property="memberId" column="member_id" />
-		<result property="memberPassword" column="member_password" />
-		<result property="memberName" column="member_name" />
-		<result property="memberGender" column="member_gender" />
-		<result property="memberAge" column="member_age" />
-		<result property="memberPhone" column="member_phone" />
-		<result property="memberSocial_number" column="member_social_number" />
-		<result property="memberNickname" column="member_nickname" />
-		<result property="memberPoint" column="member_point" />
-		<result property="memberAuthority_no" column="member_authority_no" />
-		<result property="memberEmail" column="member_email" />
-		<result property="memberAgreement" column="member_agreement" />
-		<result property="memberSns" column="member_sns" />
-		<result property="memberStudentExp" column="member_student_exp" />
-		<result property="memberStudentLevel" column="member_student_level" />
-		<result property="memberTotalClassApplicationDate" column="member_total_class_application_date" />
-		<result property="memberStudentComplimentCard" column="member_student_compliment_card" />
-		<result property="memberLoginState" column="member_login_state" />
-		<result property="memberAddress" column="member_address" />
-		<result property="memberMemo" column="member_memo" />
-		
-		
-	</resultMap>
+	<!-- 계좌 입력 정보 -->
+	<insert id="insertAccount" parameterType="take.a.talent.member.vo.MemberAccountVo">
+		INSERT INTO teacher_account 
+		(bank_no
+		, account_number
+		, account_holder_name)
+		 VALUES 
+		 (#{bankNo}
+		 , #{accountNumber}
+		 ,#{accountHolderName})
+		 <selectKey keyProperty="teacherAccountNo" resultType="int" order="AFTER">
+		 	SELECT LAST_INSERT_ID()
+		 </selectKey>
+	</insert>
+	
+	<!-- 포인트 입력(충전) -->
+	<insert id ="insertPoint" parameterType="take.a.talent.member.vo.MemberPointVo">
+		INSERT INTO point_charge 
+		(member_no
+		, point_charge_money
+		, point_charge_point
+		, point_charge_date
+		, point_charge_shape)
+		VALUES 
+		(#{memberNo}
+		, #{pointChargeMoney}
+		, #{pointChargePoint}
+		, SYSDATE()
+		, #{pointChargeShape});
+	</insert>
+	
+	<!-- 포인트 환전 내역 insert -->
+	<insert id="insertPointExchangHistory" parameterType="take.a.talent.member.vo.MemberPointExchangeVo">
+		INSERT INTO point_exchange
+		(member_no
+		, point_exchange_money
+		, point_exchange_point
+		, point_exchange_date)
+		VALUES
+		(#{memberNo}
+		, #{pointExchangeMoney}
+		, #{pointExchangePoint}
+		, SYSDATE());
+	</insert>
+	
+	<!-- 학력 정보 insert -->
+	<insert id="insertTeacherEducation" parameterType="take.a.talent.member.vo.TeacherEducationVo">
+		INSERT INTO teacher_education (
+		teacher_no
+		,teacher_education_classification_no
+		,teacher_education_status_no
+		,teacher_education_school_name
+		,teacher_education_major
+		,teacher_education_admission
+		,teacher_education_graduation)
+		VALUES
+		(#{teacherNo}
+		, #{teacherEducationClassificationNo}
+		, #{teacherEducationStatusNo}
+		, #{teacherEducationSchoolName}
+		, #{teacherEducationMajor}
+		, #{teacherEducationAdmission}
+		, #{teacherEducationGraduation});
+	</insert>
+	
+	<!-- 경력 정보 insert -->
+	<insert id="insertTeacherCareer" parameterType="take.a.talent.member.vo.TeacherCareerVo">
+		INSERT INTO teacher_career(
+		teacher_no
+		, teacher_career_company
+		, teacher_career_department
+		, teacher_career_position
+		, teacher_career_employment_date
+		, teacher_career_leave_date)
+		VALUES(#{teacherNo}
+		, #{teacherCareerCompany}
+		, #{teacherCareerDepartment}
+		, #{teacherCareerPosition}
+		, #{teacherCareerEmploymentDate}
+		, #{teacherCareerLeaveDate});
+	</insert>
+	
+	<!-- 충전한 포인트 기존포인트와 계산하여 업데이트 -->
+	<update id="updatePointForMember" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member
+		SET member_point = #{memberPoint}
+		WHERE member_no = #{memberNo};
+	</update>
+	
+	<!-- 회원(강사) 정보 수정(비밀번호, 주소 제외) -->	
+	<update id="updateMember" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member 
+		SET member_name = #{memberName}
+		, member_nickname = #{memberNickname}
+		, member_gender = #{memberGender}
+		, member_birthday = #{memberBirthday}
+		, member_phone = #{memberPhone}
+		, member_email = #{memberEmail}
+		WHERE member_id = #{memberId}; 
+	</update>
+
+	<!-- 회원(학생) 정보 수정(비밀번호 제외) -->
+	<update id="updateMemberForStudent" parameterType="take.a.talent.member.vo.MemberAndAddressVo">
+		UPDATE member m
+		INNER JOIN address a
+		ON  m.member_no = a.member_no
+		SET 
+		m.member_name = #{memberName}
+		, m.member_nickname = #{memberNickname}
+		, m.member_gender = #{memberGender}
+		, m.member_birthday = #{memberBirthday}
+		, m.member_phone = #{memberPhone}
+		, m.member_email = #{memberEmail}
+		, a.address_mailnumber = #{memberMailNumber}
+		, a.member_address = #{memberAddress}
+		WHERE m.member_id = #{memberId};
+	</update>
+	
+	<!-- 회원(강사) 주소 업데이트 -->
+	<update id="updateAddressForTeacher" parameterType="take.a.talent.member.vo.AddressAndClassificationVo">
+		UPDATE address
+		SET address_classification_no = #{addressClassificationNo}
+		, address_mailnumber = #{addressMailNumber}
+		, member_address = #{memberAddress}
+		WHERE address_no = #{addressNo};
+	</update>
+	
+	<!-- 계좌등록시 teacher테이블 업데이트 -->
+	<update id="updateTeacherWhenInsertAccount" parameterType="take.a.talent.member.vo.TeacherVo">
+		UPDATE teacher
+		SET teacher_account_no = #{teacherAccountNo}
+		WHERE member_no = #{memberNo};
+	</update>
+	
+	<!-- 계좌 업데이트 -->
+	<update id="updateTeacherAccount" parameterType="take.a.talent.member.vo.MemberAccountVo">
+		UPDATE teacher_account
+		SET bank_no = #{bankNo}
+		, account_number = #{accountNumber}
+		, account_holder_name = #{accountHolderName}
+		WHERE teacher_account_no = #{teacherAccountNo};
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword" parameterType="take.a.talent.member.vo.MemberVo">
+		UPDATE member
+		SET member_password = #{memberPassword}
+		WHERE member_no = #{memberNo};
+	</update>
+	
+	<!-- 학력 정보 update -->
+	<update id="updateTeacherEducation" parameterType="take.a.talent.member.vo.TeacherEducationVo">
+		UPDATE teacher_education
+		SET teacher_education_classification_no = #{teacherEducationClassificationNo}
+		, teacher_education_status_no = #{teacherEducationStatusNo}
+		, teacher_education_school_name = #{teacherEducationSchoolName}
+		, teacher_education_major = #{teacherEducationMajor}
+		, teacher_education_admission = #{teacherEducationAdmission}
+		, teacher_education_graduation = #{teacherEducationGraduation}
+		WHERE teacher_education_no = #{teacherEducationNo};
+	</update>
+	
+	<!-- 경력 정보 update -->
+	<update id="updateTeacherCareer" parameterType="take.a.talent.member.vo.TeacherCareerVo">
+		UPDATE teacher_career
+		SET teacher_career_company = #{teacherCareerCompany}
+		, teacher_career_department = #{teacherCareerDepartment}
+		, teacher_career_position = #{teacherCareerPosition}
+		, teacher_career_employment_date = #{teacherCareerEmploymentDate}
+		, teacher_career_leave_date = #{teacherCareerLeaveDate}
+		WHERE teacher_career_no = #{teacherCareerNo}
+	</update>
+	
+	<!-- 회원(강사) 주소 삭제 -->
+	<delete id="deleteAddressForTeacher" parameterType="int">
+		DELETE 
+		FROM address
+		WHERE address_no = #{addressNo};
+	</delete>
+	
+	<!-- 학력 정보 delete -->
+	<delete id="deleteTeacherEducation" parameterType="int">
+		DELETE
+		FROM
+		teacher_education
+		WHERE teacher_education_no = #{teacherEducationNo};
+	</delete>
+	
+	<!-- 경력 정보 delete -->
+	<delete id="deleteTeacherCareer" parameterType="int">
+		DELETE
+		FROM
+		teacher_career
+		WHERE teacher_career_no = #{teacherCareerNo};
+	</delete>
 
 </mapper>
   

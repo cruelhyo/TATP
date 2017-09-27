@@ -20,75 +20,9 @@
 
 
 <!-- mypage 자바스크립트 -->
-<script>
-$(document).ready(function(){
-	$('.includePage').hide();
-	$(function () {
-	  	$('.navbar-toggle-sidebar').click(function () {
-	  		$('.navbar-nav').toggleClass('slide-in');
-	  		$('.side-body').toggleClass('body-slide-in');
-	  		$('#search').removeClass('in').addClass('collapse').slideUp(200);
-	  	});
-	
-	  	$('#search-trigger').click(function () {
-	  		$('.navbar-nav').removeClass('slide-in');
-	  		$('.side-body').removeClass('body-slide-in');
-	  		$('.search-input').focus();
-	  	});
-	  });
-	  
-	$('#myTab a').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('hide')
-		});
-		
-	$('#myTab a[href="#mypage"]').tab('show'); // Select tab by name
-	$('#myTab a:first').tab('show'); // Select first tab
-	$('#myTab a:last').tab('show'); // Select last tab
-	$('#myTab li:eq(2) a').tab('show'); // Select third tab (0-indexed)
-	
-	$(function () {
-	  $('#myTab a:last').tab('show')
-	});
-	
-	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
-			$('.includePage').hide();
-			$('#myPage2').show();
-		});
-		
-		$('#myPointHistoryShow').click(function(){
-			$('.includePage').hide();
-			$('#myPointHistory').show();
-		});
-	
-		$('#myAddressShow').click(function(){
-			$('.includePage').hide();
-			$('#myAddress').show();
-		});
-		
-		$('#myPointShow').click(function(){
-			$('.includePage').hide();
-			$('#myPoint').show();
-		});
-		
-		$('#myChangePWShow').click(function(){
-			$('.includePage').hide();
-			$('#myChangePW').show();
-		});
-		
-		$('#modifiedMypageShow').click(function(){
-			$('.includePage').hide();
-			$('#modifiedMypage').show();
-		});
-		
-		
-	
-});
-
-
-	
-</script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/studentPageJs.js'/>"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/javascript/findAddressJs.js'/>"></script>
 
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -113,14 +47,10 @@ p.footer-text1 {
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-
-<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<hr>
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<!-- /.navbar-collapse -->
+	<!-- /.container-fluid -->
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
@@ -132,7 +62,6 @@ p.footer-text1 {
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<!-- Dropdown1-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl4">
@@ -145,9 +74,11 @@ p.footer-text1 {
 										<div class="panel-body">
 											<ul class="nav navbar-nav">
 												<li role="presentation" class="active">
-													<a href="#mypage2" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">회원정보수정</a>
+													<a href="#mypage2" aria-controls="home" role="tab" data-toggle="tab" id="myPageShow">
+													회원정보수정</a>
 												</li>
-												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>	
+												<li><a href="#" id="myChangePWShow">내 비밀번호 변경하기</a></li>
+												<li><a href="#" id="applyFormShow">강사 신청하기</a></li>		
 											</ul>
 										</div>
 									</div>
@@ -159,7 +90,6 @@ p.footer-text1 {
 										My Point
 										<span class="caret"></span>
 									</a> 
-								
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl1" class="panel-collapse collapse">
 										<div class="panel-body">
@@ -172,65 +102,22 @@ p.footer-text1 {
 									</div>
 								</li>
 								<li>
-									<a href="#">
-										<span class="glyphicon glyphicon-cloud"></span>
-										My Favorit
+									<a href="#modifiedMypage" id="modifiedMypageShow">
+										<span class="glyphicon glyphicon-signal"></span>
+										내 기본 정보 보기
 									</a>
 								</li>
-								
-								<!-- Dropdown-->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl3"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										My Q&A <span class="caret"></span></a> 
-										
-									<!-- Dropdown level 1 -->
-									<div id="dropdown-lvl3" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul class="nav navbar-nav">
-												<li><a href="#">문의사항</a></li>
-												
-
-												
-												
-											</ul>
-										</div>
-									</div>
-								</li>
-								<!-- Dropdown level 2 -->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl2"> 
-										<span class="glyphicon glyphicon-off"></span>
-											My Class 
-										<span class="caret"></span>
-									</a>
-										<div id="dropdown-lvl2" class="panel-collapse collapse">
-											<div class="panel-body">
-												<ul class="nav navbar-nav">
-													<li><a href="#">class 1</a></li>
-														<li><a href="#">class 2</a></li>
-														<li><a href="#">class 3</a></li>
-												</ul>
-											</div>
-										</div>
-									</li>
-
-								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
-										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
-
 							</ul>
 						</div>
-						<!-- /.navbar-collapse -->
 					</nav>
-
 				</div>
 			</div>
 		</div>
-		<!-- 내정보수정 -->
+		<!-- 인클루드 페이지 -->
 		<div class="tab-content">
 			<!--기본정보 수정  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateForm2.jsp" flush="true"></jsp:include>
+				<jsp:include page="../include/memberUpdateFormForStudent.jsp" flush="true"></jsp:include>
 			</div>
 			<!--내포인트 충전 -->
 			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
@@ -249,10 +136,11 @@ p.footer-text1 {
 			<div role="tabpanel" class="tab-pane face in active includePage" id="modifiedMypage">
 				<jsp:include page="../include/modifiedMypage.jsp" flush="true"></jsp:include>
 			</div>
-			
+			<!-- 강사신청하기 보기-->
+			<div role="tabpanel" class="tab-pane face in active includePage" id="applyForm">
+				<jsp:include page="../include/applyForm.jsp" flush="true"></jsp:include>
+			</div>
 		</div>
 	</div>
-	 
-   
 </body>
 </html>

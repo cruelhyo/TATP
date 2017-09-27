@@ -15,11 +15,10 @@
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="<c:url value='/resources/javascript/usePageJs.js'/>"></script>
 <title>이용방법</title>
 
-
-<!-- mypage 자바스크립트 -->
+<!--  
 <script>
 $(document).ready(function(){
 	$('.includePage').hide();
@@ -52,24 +51,24 @@ $(document).ready(function(){
 	});
 	
 	//숨긴 includepage 해당 버튼 클릭시 보여주기
-		$('#myPageShow').click(function(){
+		$('#usePageserviceShow').click(function(){
 			$('.includePage').hide();
-			$('#myPage2').show();
+			$('#usePageservice').show();
 		});
 		
-		$('#myPointHistoryShow').click(function(){
+		$('#openClassUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myPointHistory').show();
+			$('#openClassUse').show();
 		});
 	
-		$('#myAddressShow').click(function(){
+		$('#classUseShow').click(function(){
 			$('.includePage').hide();
-			$('#myAddress').show();
+			$('#classUse').show();
 		});
 		
-		$('#myPointShow').click(function(){
+		$('#qnaShow').click(function(){
 			$('.includePage').hide();
-			$('#myPoint').show();
+			$('#qna').show();
 		});
 		
 		$('#myChangePWShow').click(function(){
@@ -82,8 +81,7 @@ $(document).ready(function(){
 
 
 	
-</script>
-
+</script>-->
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -104,21 +102,15 @@ p.footer-text1 {
 
 </head>
 <body>
+	<!-- top nav include -->
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-
-<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<!-- side menu -->
+	<hr>
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
-				<!-- uncomment code for absolute positioning tweek see top comment in css -->
 				<div class="absolute-wrapper"></div>
 				<!-- Menu -->
 				<div class="side-menu">
@@ -126,21 +118,20 @@ p.footer-text1 {
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<li>
-									<a href="#" id="">
+									<a href="#" id="usePageserviceShow">
 										<span class="glyphicon glyphicon-user"></span>
 										서비스소개
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="openClassUseShow">
 										<span class="glyphicon glyphicon-cloud"></span>
 										수업개설 이용방법
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="classUseShow">
 										<span class="glyphicon glyphicon-signal"></span>
 										수업듣기 이용방법
 									</a>
@@ -152,7 +143,7 @@ p.footer-text1 {
 									</a>
 								</li>
 								<li>
-									<a href="#" id="">
+									<a href="#" id="qnaShow">
 										<span class="glyphicon glyphicon-user"></span>
 										자주묻는 질문
 									</a>
@@ -166,29 +157,42 @@ p.footer-text1 {
 				</div>
 			</div>
 		</div>
-		<!-- 내정보수정 -->
-		<div class="tab-content">
-			<!--기본정보 수정  -->
-  			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
-				<jsp:include page="../include/memberUpdateForm2.jsp" flush="true"></jsp:include>
-			</div>
-			<!--내포인트 충전 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPoint">
-				<jsp:include page="../include/myPoint.jsp" flush="true"></jsp:include>
-			</div>
-			<!--비밀번호 변경 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myChangePW">
-				<jsp:include page="../include/memberChangePassword.jsp" flush="true"></jsp:include>
-			</div>
-			
-			<!-- 내 결제내역 보기 -->
-			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPointHistory">
-				<jsp:include page="../include/myPointHistory.jsp" flush="true"></jsp:include>
-			</div>
-			
-		</div>
-	</div>
+	
+		
 	 
+		<!-- 이용방법 -->
+		<div class="tab-content">
+			<!--서비스소개  -->
+  			<div role="tabpanel" class="tab-pane fade in active includePage" id="usePageservice">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS.png'/>" style="width: 100%" >
+	 				</div>
+				</div>
+			</div>
+			<!--수업오픈 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="openClassUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS2.png'/>" style="width: 100%" >
+	 				</div>
+				</div>
+			</div>
+			<!--수업듣기 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="classUse">
+				<div class="col-sm-6">
+					<div class="step_21">
+	 					<img src="<c:url value='/resources/img/tatS3.png'/>" style="width: 100%" >
+	 				</div>
+				</div>
+			</div>
+			
+			<!-- 자주묻는 질문 -->
+			<div role="tabpanel" class="tab-pane fade in active includePage" id="qna">
+				<jsp:include page="../include/qnaPage.jsp" flush="true"></jsp:include>
+			</div>
+		</div>
+	 </div>
    
 </body>
 </html>

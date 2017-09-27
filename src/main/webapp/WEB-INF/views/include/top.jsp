@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand"  href="<c:url value='/anonymous/mainform'/>">Take a Talent</a>
+			<div class="navbar-header" >
+				<a class="navbar-brand"  href="<c:url value='/anonymous/mainform'/>" style="padding: 0px;">
+					<img src="<c:url value='/resources/img/tat2.png'/>" 
+							 class="img-responsive" width="150"></a>
 			</div>
 			<ul class="nav navbar-nav">
 			<!-- <li class="dropdown"><a class="dropdown-toggle"
@@ -14,13 +16,20 @@
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li> -->
+
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> 강좌찾기 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">무료강좌</a></li>
 						<li><a href="<c:url value='/anonymous/classSearch'/>">유료강좌</a></li>
+					 <%-- <li><a href="<c:url value='/anonymous/fileuploadform'/>">파일업로드</a></li> --%>
+						<li><a href="<c:url value='/anonymous/classSearch'/>">강좌찾기</a></li>
+					</ul>
+
 						
-					</ul></li>
+				
+						
+					
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> my page <span class="caret"></span></a>
 					<ul class="dropdown-menu">

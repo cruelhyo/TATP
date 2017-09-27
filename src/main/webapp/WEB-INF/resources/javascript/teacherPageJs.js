@@ -7,6 +7,7 @@ $(document).ready(function()
 	
 	$('.includePage').css('display', 'none');
 	$('#modifiedMypage').css('display', '');
+	selectForUpdateMember();
 	$(function () 
 	{
 	  	$('.navbar-toggle-sidebar').click(function () 
@@ -46,7 +47,30 @@ $(document).ready(function()
 	$('#myPageShow').click(function(){
 		$('.includePage').css('display', 'none');
 		$('#myPage').css('display', '');
-		selectForUpdateMember();
+		var ajaxSelectForUpdateMember = $('#ajaxSelectForUpdateMember').val();
+		$.ajax(
+		{
+			url : ajaxSelectForUpdateMember,
+			
+			success : function(result)
+			{
+				console.log(result);
+				$('#memberName').val(result.memberName);
+				$('#memberNickname').val(result.memberNickname);
+				if(result.memberGender == 'male')
+				{
+					$('.male').prop("checked", true);
+				}
+				else
+				{
+					$('.female').prop("checked", true);
+				}
+				$('#memberBirthday').val(result.memberBirthday);
+				$('#memberPhone').val(result.memberPhone);
+				$('#memberEmail').val(result.memberEmail);
+			}
+			
+		});
 	});
 	
 	// 포인트 충전 내역
@@ -117,6 +141,8 @@ $(document).ready(function()
 	$('#modifiedMypageShow').click(function(){
 		$('.includePage').css('display', 'none');
 		$('#modifiedMypage').css('display', '');
+		$('#memberNickname').text('test');
+		selectForUpdateMember();
 	});
 
 	//포트폴리오 보기
@@ -170,19 +196,20 @@ $(document).ready(function()
 			success : function(result)
 			{
 				console.log(result);
-				$('#memberName').val(result.memberName);
-				$('#memberNickname').val(result.memberNickname);
+				$('.memberName').text(result.memberName);
+				$('.memberNickname').text(result.memberNickname);
+				$('.memberGender').text(result.memberGender);
 				if(result.memberGender == 'male')
 				{
-					$('.male').prop("checked", true);
+					$('.memberGender').text('남성');
 				}
 				else
 				{
-					$('.female').prop("checked", true);
+					$('.memberGender').text('여성');
 				}
-				$('#memberBirthday').val(result.memberBirthday);
-				$('#memberPhone').val(result.memberPhone);
-				$('#memberEmail').val(result.memberEmail);
+				$('.memberBirthday').text(result.memberBirthday);
+				$('.memberPhone').text(result.memberPhone);
+				$('.memberEmail').text(result.memberEmail);
 			}
 			
 		});
@@ -315,52 +342,51 @@ $(document).ready(function()
 		}
 	});
 	
-	//비밀번호 일치여부
+	//새 비밀번호 확인 일치여부 및 유효성 검사
 	$('.changePW2').keyup(function()
+	{
+		var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
+		var in_pw = $('.changePW1').val();
+		var in_pw2 = $('.changePW2').val();
+		var temp = 0;
+		if(!check.test(in_pw2))
+		{
+			temp = 0; //비번이 유효하지 않을때
+		} 
+		else 
+		{
+			temp = 1; //비번이 유효할때
+		}
+		
+		if(temp == 1)
+		{
+			if(in_pw == in_pw2)
 			{
-				var check = /^(?=.*[a-z])(?=.*[0-9])(?=.*[~!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/i;
-				var in_pw = $('.changePW1').val();
-				var in_pw2 = $('.changePW2').val();
-				var temp = 0;
-				if(!check.test(in_pw2))
-				{
-					temp = 0; //비번이 유효하지 않을때
-				} 
-				else 
-				{
-					temp = 1; //비번이 유효할때
-				}
-				
-				if(temp == 1)
-				{
-					if(in_pw == in_pw2)
-					{
-	            		$('#pwcheck3').css('color', '#008000');
-	            		$('#pwcheck3').text('비밀번호가 일치합니다');
-	            		$('#pwcheck3').val(1);
-	            		checksubmit();
-	            	}
-					else
-					{
-	            		$('#pwcheck3').css('color', '#FF0000');
-	            		$('#pwcheck3').text('비밀번호가 불일치합니다');
-	            		$('#pwcheck3').val(0);
-	        			$('#pwcheck3').focus();
-	        			checksubmit();
-	            	}
-				}
-				else
-				{
-					$('#pwcheck3').css('color', '#FF0000');
-					$('#pwcheck3').text('비밀번호가 유효하지 않습니다');
-					$('#pwcheck3').val(0);
-					checksubmit();
-					
-				}
-					
-				// 비밀번호 1,2 일치여부 확인 
-			});
+        		$('#pwcheck3').css('color', '#008000');
+        		$('#pwcheck3').text('비밀번호가 일치합니다');
+        		$('#pwcheck3').val(1);
+        		checksubmit();
+        	}
+			else
+			{
+        		$('#pwcheck3').css('color', '#FF0000');
+        		$('#pwcheck3').text('비밀번호가 불일치합니다');
+        		$('#pwcheck3').val(0);
+    			$('#pwcheck3').focus();
+    			checksubmit();
+        	}
+		}
+		else
+		{
+			$('#pwcheck3').css('color', '#FF0000');
+			$('#pwcheck3').text('비밀번호가 유효하지 않습니다');
+			$('#pwcheck3').val(0);
+			checksubmit();
+			
+		}
+	});
 	
+	// 현재 비밀번호 일치여부
 	$('.passwordCheck').click(function()
 	{
 		var ajaxCheckMemberPassword = $('#ajaxCheckMemberPassword').val();

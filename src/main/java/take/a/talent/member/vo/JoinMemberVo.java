@@ -2,18 +2,26 @@ package take.a.talent.member.vo;
 
 public class JoinMemberVo
 {
+	private int memberNo;
 	private String memberId;
 	private String memberPassword;
 	private String memberName;
 	private String memberGender;
+	private int memberAge;
 	private String memberBirthday;
+	private int memberMailNumber;
 	private String memberAddress;
-	private String memberAddressDetail;
 	private String memberPhone;
 	private String memberEmail;
 	private String memberMailagreement;
 	private String memberNickname;
 	private String memberHobby;
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -38,23 +46,29 @@ public class JoinMemberVo
 	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
+	public int getMemberAge() {
+		return memberAge;
+	}
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
+	}
 	public String getMemberBirthday() {
 		return memberBirthday;
 	}
 	public void setMemberBirthday(String memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
+	public int getMemberMailNumber() {
+		return memberMailNumber;
+	}
+	public void setMemberMailNumber(int memberMailNumber) {
+		this.memberMailNumber = memberMailNumber;
+	}
 	public String getMemberAddress() {
 		return memberAddress;
 	}
 	public void setMemberAddress(String memberAddress) {
 		this.memberAddress = memberAddress;
-	}
-	public String getMemberAddressDetail() {
-		return memberAddressDetail;
-	}
-	public void setMemberAddressDetail(String memberAddressDetail) {
-		this.memberAddressDetail = memberAddressDetail;
 	}
 	public String getMemberPhone() {
 		return memberPhone;
@@ -88,13 +102,14 @@ public class JoinMemberVo
 	}
 	@Override
 	public String toString() {
-		return "JoinMemberVo [memberId=" + memberId + ", memberPassword=" + memberPassword + ", memberName="
-				+ memberName + ", memberGender=" + memberGender + ", memberBirthday=" + memberBirthday
-				+ ", memberAddress=" + memberAddress + ", memberAddressDetail=" + memberAddressDetail + ", memberPhone="
-				+ memberPhone + ", memberEmail=" + memberEmail + ", memberMailagreement=" + memberMailagreement
-				+ ", memberNickname=" + memberNickname + ", memberHobby=" + memberHobby + "]";
+		return "JoinMemberVo [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
+				+ ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberAge=" + memberAge
+				+ ", memberBirthday=" + memberBirthday + ", memberMailNumber=" + memberMailNumber + ", memberAddress="
+				+ memberAddress + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail
+				+ ", memberMailagreement=" + memberMailagreement + ", memberNickname=" + memberNickname
+				+ ", memberHobby=" + memberHobby + "]";
 	}
 	
 	
 	
-	}
+}

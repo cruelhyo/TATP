@@ -11,7 +11,7 @@ input.underline {border:0;border-bottom:1 solid #FF0000;}
 			<h2 align="left" >&nbsp;&nbsp;&nbsp;&nbsp;
 				<font color="#5F5F5F">My Point 충전하기</font></h2>
 			<hr>
-			<form action="<c:url value='/teacher/teacherPage/insertPoint'/>" id="insertPoint" method="post">			
+			<form action="<c:url value='/user/insertPoint'/>" id="insertPoint" method="post">			
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />				
 				<div class="row">
 					<div class="form-group">

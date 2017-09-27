@@ -22,8 +22,11 @@ import take.a.talent.member.vo.TeacherVo;
 
 @Transactional
 public interface MemberDaoInterface {
-	//회원가입
-	int insertMember(JoinMemberVo joinMemberVo);
+	//회원가입 memberTb
+	int insertMemberTb(JoinMemberVo joinMemberVo);
+	
+	//회원가입 memberTb
+	int insertMemberAdd(JoinMemberVo joinMemberVo);
 
 	//회원가입시 아이디 중복체크
 	boolean idCheck(String memberId);
@@ -127,4 +130,6 @@ public interface MemberDaoInterface {
 	//경력 정보 delete
 	int deleteTeacherCareer(int teacherCareerNo);
 	
+	//회원 권한 select
+	String selectMemberAuthority(String memberId);
 }

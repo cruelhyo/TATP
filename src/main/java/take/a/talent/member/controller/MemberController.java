@@ -1,5 +1,7 @@
 package take.a.talent.member.controller;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import take.a.talent.member.service.MemberServiceInterface;
 import take.a.talent.member.service.UserAuthenticationService;
@@ -35,7 +39,6 @@ public class MemberController
 	
 	@Autowired
     private MemberServiceInterface service;
-		
 
 	@RequestMapping(value ="/teacher/teacherPage/updateMember", method=RequestMethod.POST)
 	public String updateMember(MemberVo memberVo)
@@ -48,15 +51,15 @@ public class MemberController
 	}
 	
 	//비밀번호 변경
-	@RequestMapping(value ="/teacher/teacherPage/updatePassword", method=RequestMethod.POST)
+	@RequestMapping(value ="/user/updatePassword", method=RequestMethod.POST)
 	public String updatePassword(MemberVo memberVo)
 	{
 		logger.info("updateMember");
 		logger.info(memberVo.toString());
 		
-		int updateResult = service.updatePassword(memberVo);
+		String updateResult = service.updatePassword(memberVo);
 		
-		return "redirect:/teacher/teacherPage?updateSuccess=" + updateResult;
+		return updateResult;
 	}
 	
 	//계좌 업데이트
@@ -82,13 +85,13 @@ public class MemberController
 	}
 	
 	//point 충전
-	@RequestMapping(value ="/teacher/teacherPage/insertPoint", method=RequestMethod.POST)
+	@RequestMapping(value ="/user/insertPoint", method=RequestMethod.POST)
 	public String pointCharge(MemberPointVo memberPointVo)
 	{
 		logger.info("insertPoint");
 		logger.info(memberPointVo.toString());
-		int pointUpdateResult = service.pointCharge(memberPointVo);
-		return "redirect:/teacher/teacherPage?pointUpdateResult="+ pointUpdateResult;
+		String pointUpdateResult = service.pointCharge(memberPointVo);
+		return pointUpdateResult;
 		
 	}
 	
@@ -114,33 +117,6 @@ public class MemberController
 		return "redirect:/member/studentPage?updateSuccess="+updateMemberForStudentResult;
 	}
 	
-	//join form에서 입력한 값들을 MemberController에서 memberVo타입으로 전달한다. 
-/*	@RequestMapping(value ="/anonymous/insertjoin", method=RequestMethod.POST)
-	public String insertjoin(MemberVo memberVo) {
-		logger.info("join액션");
-		logger.info("VO값 확인"+memberVo.toString());
-		service.addMember(memberVo);
-		
-		
-		return "redirect:/";
-	}
-	*/
-	
-	
-	
-	
-	
-	/*//join에서 입력한 정보를가지고 service를 호출함. 
-	@RequestMapping(value = {"/anonymous/insertjoin"}, method = RequestMethod.GET)
-	public String insertMember(MemberVo memberVo)
-	{
-		logger.info("insertMember service.addMember호출");
-		
-		return "redirect:/";
-	}*/
-	
-	/*@RequestMapping(value="/" , method = {RequestMethod.GET, RequestMethod.POST})*/
-
 	@RequestMapping(value = { "/userlogin", "/adminlogin", "/teacherlogin" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model)
 	{

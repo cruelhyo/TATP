@@ -178,7 +178,19 @@
 										</div>
 									</div>
 									<br>
-
+									<div class="row">
+										<div class="form-group">
+											<label class="control-label col-sm-4" for="birth">
+												<p align="right">
+													<stong>나이</stong>
+												</p>
+											</label>
+											<div class="col-sm-5">
+												<input type="text" class="form-control" id="memberAge" name="memberAge" placeholder="나이입력">
+											</div>
+										</div>
+									</div>
+									<br>
 									<div class="row">
 										<div class="form-group">
 											<label class="control-label col-sm-4" for="birth">
@@ -201,7 +213,7 @@
 												</p>
 											</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" name="memberAddress">
+												<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" name="memberMailNumber">
 											</div>
 											<div class="col-sm-2">
 												<!-- <button type="button" class="btn btn-default mailNumberSearch">우편번호 검색</button> -->
@@ -219,7 +231,7 @@
 												</p>
 											</label>
 											<div class="col-sm-5">
-												<input type="text" class="form-control" id="sample6_address" placeholder="상세주소" name="memberAddressDetail">
+												<input type="text" class="form-control" id="sample6_address" placeholder="상세주소" name="memberAddress">
 											</div>
 										</div>
 									</div>

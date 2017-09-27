@@ -33,20 +33,16 @@
 				<h3>팀 멤버 소개</h3><br>
 				<div class="panel-group">
 					<div class="panel panel-default">
-						<div class="panel-heading">이종효</div>
-						<div class="panel-body">프로젝트 기획 및 총괄</div>
+						<div class="panel-heading">김상훈</div>
+						<div class="panel-body">프로젝트 기획 및 총괄/웹기획/퍼블리싱/강좌시스템관리</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">한재희</div>
-						<div class="panel-body">웹기획/디자인/퍼블리싱</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">김상훈</div>
-						<div class="panel-body">고객응대 시스템/거래시스템관리</div>
+						<div class="panel-body">프로젝트 기획/웹기획/디자인/퍼블리싱/거래시스템관리</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">최기람</div>
-						<div class="panel-body">회원관리/강좌관리 시스템</div>
+						<div class="panel-body">프로젝트 기획/웹기획/퍼블리싱/회원관리</div>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 package take.a.talent.member.service;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +27,7 @@ import take.a.talent.member.vo.TeacherEducationVo;
 import take.a.talent.member.vo.TeacherVo;
 
 
-@Service // service�씪怨� 紐낆떆�빐以�
+@Service // service라고 명시해줌
 public class MemberService implements MemberServiceInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
@@ -33,16 +35,9 @@ public class MemberService implements MemberServiceInterface{
 	@Autowired
 	MemberDao memberDao;
 	
+
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
-	
-
-	public int addMember(JoinMemberVo joinMemberVo){
-		
-		logger.info("addmember");
-		logger.info(joinMemberVo.toString());
-		return memberDao.insertMember(joinMemberVo);
-	}
 
 	//회원가입시 아이디 중복검사  
 	@Override
@@ -84,6 +79,28 @@ public class MemberService implements MemberServiceInterface{
 			
 		return nck;
 	}
+	
+
+	//회원가입
+	public int addMember(JoinMemberVo joinMemberVo){
+		logger.info("addmember");
+		logger.info(joinMemberVo.toString());
+		/*int insertMemberResult = memberDao.insertMemberTb(joinMemberVo);*/
+		
+		
+		//memberTb에 회원가입후 그 값을 리턴받아서 생성된 memberNo를 받아옴 
+		memberDao.insertMemberTb(joinMemberVo);
+		int memberNo = joinMemberVo.getMemberNo();
+		int insertMemberAddress = memberDao.insertMemberAdd(joinMemberVo);
+	
+		logger.info("생성된increament값 확인");
+		logger.info(joinMemberVo.toString());
+		if(memberNo == 0) 
+		{
+			return 0;
+		}
+		return insertMemberAddress;		
+	} 
 	
 	@Override
 	public boolean nicknameCheckForUpdate(String memberNickname) {
@@ -149,7 +166,7 @@ public class MemberService implements MemberServiceInterface{
 	}
 	
 	//포인트 충전하기
-	public int pointCharge(MemberPointVo memberPointVo)
+	public String pointCharge(MemberPointVo memberPointVo)
 	{
 		//MemberVo 객체를 생성한다
 		MemberVo memberVo = new MemberVo();
@@ -171,17 +188,20 @@ public class MemberService implements MemberServiceInterface{
 		memberPointVo.setPointChargePoint(point);
 		memberVo.setMemberPoint(memberPoint + point);
 		
+		//가져온 아이디에 따라 리다이이렉트 경로 설정
+		String re = returnRedirect(memberId);
+		
 		//member에 update가 되지 않았다면 0을 리턴한다
 		int memberPointUpdateResult = memberDao.updatePointForMember(memberVo);
 		if(memberPointUpdateResult == 0) 
 		{
-			return 0;
+			return re + 0;
 		}
 		
-		//dao호출후 결과 리턴
+		//dao호출
 		int pointUpdateResult = memberDao.insertPointCharge(memberPointVo);
-		return pointUpdateResult;
 		
+		return re + pointUpdateResult;
 	}
 	
 	//현재 가지고 있는 포인트를 가져온다
@@ -435,16 +455,18 @@ public class MemberService implements MemberServiceInterface{
 	
 	//비밀번호 변경
 	@Override
-	public int updatePassword(MemberVo memberVo)
+	public String updatePassword(MemberVo memberVo)
 	{
 		logger.info("updatePassword 호출");
 		
 		//현재 로그인한 회원 정보 가져오기
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//회원 아이디
 		String memberId = user.getUsername();
 		
 		//가져온 아이디로 memberNo 가져와서 vo에 세팅하기
 		int memberNo = memberDao.selectMemberNo(memberId);
+		logger.info("memberNo : " + memberNo);
 		memberVo.setMemberNo(memberNo);
 		
 		//비밀번호를 인코딩해서 다시 세팅하기
@@ -456,7 +478,10 @@ public class MemberService implements MemberServiceInterface{
 		int updateResult = memberDao.updatePassword(memberVo);
 		logger.info("updateResult : " + Integer.toString(updateResult));
 		
-		return updateResult;
+		//가져온 아이디에 따라 리다이이렉트 경로 설정
+		String re = returnRedirect(memberId);
+		
+		return re + updateResult;
 	}
 	
 	//학력, 경력 리스트 가져오기
@@ -612,5 +637,28 @@ public class MemberService implements MemberServiceInterface{
 		logger.info("deleteTeacherCareer");
 		
 		return memberDao.deleteTeacherCareer(teacherCareerNo);
+	}
+	
+	//회원 아이디를 입력받아 권한별 리다이렉트 경로 리턴 해주는 매서드
+	@Override
+	public String returnRedirect(String memberId)
+	{
+		logger.info("returnRedirect 매서드 호출");
+		
+		String memberAuth = memberDao.selectMemberAuthority(memberId);
+		logger.info("memberAuth : " + memberAuth);
+		
+		//가져온 권한에 따라 리다이이렉트 경로 설정
+		String re = null;
+		if(memberAuth.equals("ROLE_TEACHER"))
+		{
+			re = "redirect:/teacher/teacherPage?updateSuccess=";
+		}
+		else if(memberAuth.equals("ROLE_REGULAR_MEM") || memberAuth.equals("ROLE_ASSOCIATE_MEM"))
+		{
+			re = "redirect:/member/studentPage?updateSuccess=";
+		}
+		
+		return re;
 	}
 }

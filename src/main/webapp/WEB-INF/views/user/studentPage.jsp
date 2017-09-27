@@ -47,14 +47,10 @@ p.footer-text1 {
 	<div>
 		<jsp:include page="../include/top.jsp" flush="true"></jsp:include>
 	</div>
-
-<!-- mypage폼 -->
-<hr>
-	
-			<!-- Brand and toggle get grouped for better mobile display -->
-			
-			<!-- /.navbar-collapse -->
-		<!-- /.container-fluid -->
+	<hr>
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<!-- /.navbar-collapse -->
+	<!-- /.container-fluid -->
 	<div class="container-fluid main-container">
 		<div class="col-md-2 sidebar">
 			<div class="row">
@@ -66,7 +62,6 @@ p.footer-text1 {
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								
 								<!-- Dropdown1-->
 								<li class="panel panel-default" id="dropdown">
 									<a data-toggle="collapse" href="#dropdown-lvl4">
@@ -95,7 +90,6 @@ p.footer-text1 {
 										My Point
 										<span class="caret"></span>
 									</a> 
-								
 									<!-- Dropdown level 1 -->
 									<div id="dropdown-lvl1" class="panel-collapse collapse">
 										<div class="panel-body">
@@ -108,61 +102,18 @@ p.footer-text1 {
 									</div>
 								</li>
 								<li>
-									<a href="#">
-										<span class="glyphicon glyphicon-cloud"></span>
-										My Favorit
+									<a href="#modifiedMypage" id="modifiedMypageShow">
+										<span class="glyphicon glyphicon-signal"></span>
+										내 기본 정보 보기
 									</a>
 								</li>
-								
-								<!-- Dropdown-->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl3"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										My Q&A <span class="caret"></span></a> 
-										
-									<!-- Dropdown level 1 -->
-									<div id="dropdown-lvl3" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul class="nav navbar-nav">
-												<li><a href="#">문의사항</a></li>
-												
-
-												
-												
-											</ul>
-										</div>
-									</div>
-								</li>
-								<!-- Dropdown level 2 -->
-								<li class="panel panel-default" id="dropdown">
-									<a data-toggle="collapse" href="#dropdown-lvl2"> 
-										<span class="glyphicon glyphicon-off"></span>
-											My Class 
-										<span class="caret"></span>
-									</a>
-										<div id="dropdown-lvl2" class="panel-collapse collapse">
-											<div class="panel-body">
-												<ul class="nav navbar-nav">
-													<li><a href="#">class 1</a></li>
-														<li><a href="#">class 2</a></li>
-														<li><a href="#">class 3</a></li>
-												</ul>
-											</div>
-										</div>
-									</li>
-
-								<li><a href="#modifiedMypage" id="modifiedMypageShow"><span
-										class="glyphicon glyphicon-signal"></span>내 정보 전체보기</a></li>
-
 							</ul>
 						</div>
-						<!-- /.navbar-collapse -->
 					</nav>
-
 				</div>
 			</div>
 		</div>
-		<!-- 내정보수정 -->
+		<!-- 인클루드 페이지 -->
 		<div class="tab-content">
 			<!--기본정보 수정  -->
   			<div role="tabpanel" class="tab-pane fade in active includePage" id="myPage2">
@@ -189,10 +140,7 @@ p.footer-text1 {
 			<div role="tabpanel" class="tab-pane face in active includePage" id="applyForm">
 				<jsp:include page="../include/applyForm.jsp" flush="true"></jsp:include>
 			</div>
-			
 		</div>
 	</div>
-	 
-   
 </body>
 </html>

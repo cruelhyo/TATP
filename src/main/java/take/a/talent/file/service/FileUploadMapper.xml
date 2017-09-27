@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="take.a.talent.file.service.FileUploadMapper">
+	
+	<resultMap	type="take.a.talent.file.service.FileUploadVo" id="FileUploadVo"> 
+		<result property="oriFileName" column="ori_filename "/>
+		<result property="oirFileExtension" column="oir_file_extension" />
+		<result property="fileSize" column="file_size" />
+		<result property="fileUploadName" column="file_uploadname" />
+	</resultMap>
+	
+	<!--회원가입시 아이디 중복체크  -->
+	<!-- SELECT EXISTS를 사용하여 중복되는 아이디가 있으면 TRUE, 없으면 FALSE를 반환하므로 resultType도 boolean   -->
+	<select id ="fileUpload" parameterType="take.a.talent.file.service.FileUploadVo">
+		INSERT INTO fileupload
+			(ori_filename, oir_file_extension, file_size, file_uploadname)
+		VALUES (#{oriFileName}, #{oirFileExtension}, #{fileSize}, #{fileUploadName})
+	</select> 
+	
+
+</mapper>
+  

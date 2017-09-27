@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<br>
-		<form id="updatePasswordForm" action="<c:url value='/teacher/teacherPage/updatePassword'/>" method="post">
+		<form id="updatePasswordForm" action="<c:url value='/user/updatePassword'/>" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="row">
 				<div class="form-group">

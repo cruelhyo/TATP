@@ -29,18 +29,21 @@
 	</resultMap>
 	
 	 <resultMap	type="take.a.talent.member.vo.JoinMemberVo" id="JoinMemberVo"> 
+		<result property="memberNo" column="member_no "/>
 		<result property="memberId" column="member_id" />
 		<result property="memberPassword" column="member_password" />
 		<result property="memberName" column="member_name" />
 		<result property="memberGender" column="member_gender" />
 		<result property="memberPhone" column="member_phone" />
+		<result property="memberAge" column="member_age" />
 		<result property="memberBirthday" column="member_birthday" />
 		<result property="memberNickname" column="member_nickname" />
 		<result property="memberEmail" column="member_email" />
 		<result property="memberMailagreement" column="member_agreement" />
 		<result property="memberNickname" column="member_nickname" />
 		<result property="memberHobby" column="member_hobby" />
-		<result property="memberMemo" column="member_memo" />
+		<result property="memberAddress" column="member_address" /> 
+		<result property="memberMailNumber" column="address_mailnumber" />
 	</resultMap>
 	
 	<resultMap type="take.a.talent.member.vo.MemberAndAddressVo" id="MemberAndAddressVo">
@@ -243,6 +246,17 @@
 		WHERE teacher_account_no = #{teacherAccountNo};
 	</select>
 	
+	<!-- 회원 권한 select -->
+	<select id="selectMemberAuthority" parameterType="String" resultType="String">
+		SELECT member_authority_name
+		FROM member m
+		INNER JOIN member_authority ma
+		ON m.member_authority_no =  ma.member_authority_no
+		WHERE m.member_id = #{memberId};
+	</select>
+
+	<!-- 회원가입  memberTb insert -->
+
 	<!-- 비밀번호 체크시 비밀번호 select -->
 	<select id="selectMemberPassword" parameterType="int" resultType="String">
 		SELECT member_password
@@ -288,10 +302,52 @@
 	
 	<!-- 회원가입  수정중!!!!! -->
 	<insert id="insertMember" parameterType="take.a.talent.member.vo.JoinMemberVo">
-		INSERT INTO member(member_id, member_password, member_name, member_gender, member_birthday, member_phone,  member_email, member_agreement, member_hobby, member_nickname)
-			VALUES (#{memberId}, #{memberPassword}, #{memberName},#{memberGender}, #{memberBirthday}, #{memberPhone}, 
-			#{memberEmail},#{memberMailagreement}, #{memberHobby}, #{memberNickname});
+		INSERT INTO member
+		(member_no
+		, member_id
+		, member_password
+		, member_name
+		, member_gender
+		, member_age
+		, member_birthday
+		, member_phone
+		, member_email
+		, member_agreement
+		, member_hobby
+		, member_nickname)
 			
+			VALUES (#{memberNo}
+			, #{memberId}			
+			, #{memberPassword}
+			, #{memberName}
+			, #{memberGender}
+			, #{memberAge}
+			, #{memberBirthday}
+			, #{memberPhone} 
+			, #{memberEmail}
+			, #{memberMailagreement}
+			, #{memberHobby}
+			, #{memberNickname})
+			
+		<selectKey keyProperty="memberNo" resultType="int" order="AFTER">
+		 	SELECT LAST_INSERT_ID() <!--마지막으로 입력된 auto_increament가져옴 sql자체제공 -->
+		</selectKey>
+			  
+	</insert>
+	
+	<!-- 회원가입 시 addressTb insert -->
+	<insert id="insertMemberAddress" parameterType="take.a.talent.member.vo.JoinMemberVo">
+		INSERT INTO address
+		(member_no
+		,address_mailnumber
+		, member_address)
+			
+			VALUES 
+			 (#{memberNo}
+			, #{memberMailNumber}
+			, #{memberAddress})
+			
+
 	</insert>
 	
 	<!-- 회원(강사) 주소 insert -->
